@@ -1,24 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Character : MonoBehaviour
 {
     CharacterController controller;
     public GameObject LookPoint;
+    public Animator anim;
+    public static bool ActionProhibit = false;
     void Start()
     {
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
         LookpointOriginY = LookPoint.transform.position.y;
+        StartCoroutine(GrabThrowfunction());
     }
 
     void FixedUpdate()
     {
-        SquatFunction();
-        MoveFunction();
+        if (ActionProhibit == false)
+        {
+            SquatFunction();
+            MoveFunction();
+        }
+        else move = Vector3.zero;
         GravityFunction();
         controller.Move(move * Time.deltaTime);
+        if (Input.GetKey(KeyCode.L))
+        {
+            anim.SetInteger("HandState", 2);
+        }
     }
 
     #region MoveFunction
@@ -112,4 +124,76 @@ public class Character : MonoBehaviour
         move.y = move.y - v1 * 5 * Time.deltaTime;
     }
     #endregion
+    #region GrabThrowFunction
+    public static bool GrabbableItemTouch = false;
+    private BoxCollider GrabRange;
+    public Transform Cm1;
+    private IEnumerator GrabThrowfunction()
+    {
+        GrabRange = GetChildComponentByName<BoxCollider>("GrabRange");
+        while (true)
+        {
+            if(GrabbableItemTouch == true)
+            {
+                anim.SetInteger("HandState", 2);
+                GrabbableItemTouch = false;
+            }
+            if(anim.GetInteger("HandState") == 1)
+            {
+                anim.SetInteger("HandState", 0);
+                ActionProhibit = false;
+                yield return new WaitForSecondsRealtime(0.5f); //after this delay ,collider enable
+                GrabRange.enabled = false;
+                yield return new WaitForSecondsRealtime(0.3f);
+            }
+            else if (anim.GetInteger("HandState") == 3)
+            {
+                anim.SetInteger("HandState", 0);
+                yield return new WaitForSecondsRealtime(0.3f);
+                ActionProhibit = false;
+                yield return new WaitForSecondsRealtime(0.5f);
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                if(anim.GetInteger("HandState") == 0)
+                {
+                    float AngleX = Cm1.eulerAngles.x;
+                    if (AngleX > 180) AngleX -= 360;
+                    AngleX = Mathf.Clamp(AngleX, 0, 45);
+                    anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
+
+                    ActionProhibit = true;
+                    anim.SetInteger("HandState", 1);
+                    yield return new WaitForSecondsRealtime(0.2f);
+                    GrabRange.enabled = true;
+                }
+                else if(anim.GetInteger("HandState") == 2)
+                {
+                    ActionProhibit = true;
+                    anim.SetInteger("HandState", 3);
+                    GrabItem.ThrowItem = true;
+                    yield return new WaitForSecondsRealtime(0.5f);
+                }
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+
+
+
+    }
+    #endregion
+
+
+    private T GetChildComponentByName<T>(string name) where T : Component
+    {
+        foreach (T component in GetComponentsInChildren<T>(true))
+        {
+            if (component.gameObject.name == name)
+            {
+                return component;
+            }
+        }
+        return null;
+    }
 }

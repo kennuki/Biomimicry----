@@ -13,11 +13,12 @@ public class PromptBox : MonoBehaviour
         Dialog = GetChildComponentByName<Transform>("PromptBox");
     }
 
-
+    public float ShowDistance = 5;
     void Update()
     {
+        Dialog.position = this.transform.position + new Vector3(0, 0.4f, 0);
         Angle = FaceAngleToItem(CharacterPos, ItemPos);
-        if(DistanceOfItemToCharacter() < 5)
+        if (DistanceOfItemToCharacter() < ShowDistance && MoveDetect() == false)
         {
             if (Mathf.Abs(Angle) < 30 || Mathf.Abs(Angle + 360) < 30)
             {
@@ -46,6 +47,22 @@ public class PromptBox : MonoBehaviour
         return Vector3.Distance(CharacterTransform.position, this.transform.position);
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (GrabItem.ThrowItem == true&&other.gameObject.layer!=7)
+        {
+            transform.SetParent(null);
+        }
+    }
+
+    Vector3 Pos;
+    private bool MoveDetect()
+    {
+        Vector3 CachePos = Pos;
+        Pos = transform.position;
+        if (Pos != CachePos) return true;
+        else return false;
+    }
 
     private T GetChildComponentByName<T>(string name) where T : Component
     {
