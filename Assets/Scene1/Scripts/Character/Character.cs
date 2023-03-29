@@ -153,7 +153,7 @@ public class Character : MonoBehaviour
                 ActionProhibit = false;
                 yield return new WaitForSecondsRealtime(0.5f);
             }
-            else if (Input.GetKey(KeyCode.E))
+            else if (Input.GetKey(KeyCode.F))
             {
                 if(anim.GetInteger("HandState") == 0)
                 {
