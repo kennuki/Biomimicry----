@@ -8,21 +8,25 @@ public class Character : MonoBehaviour
     CharacterController controller;
     public GameObject LookPoint;
     public Animator anim;
-    public static bool ActionProhibit = false;
+    public static bool ActionProhibit = false, MoveProhibit = false, AllProhibit = false;       //ActionProhibt effect squat
     void Start()
     {
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
-        LookpointOriginY = LookPoint.transform.position.y;
+        OffsetLookpointToCharacterY = transform.position.y-LookPoint.transform.position.y;
         StartCoroutine(GrabThrowfunction());
     }
 
     void FixedUpdate()
     {
-        if (ActionProhibit == false)
+        if (AllProhibit == false)
         {
-            SquatFunction();
+            if (ActionProhibit == false)
+            {
+                SquatFunction();
+            }
             MoveFunction();
+            JumpFunction();
         }
         else move = Vector3.zero;
         GravityFunction();
@@ -61,7 +65,7 @@ public class Character : MonoBehaviour
     float count = 0;
     bool stay = false;
     float CdHeight;
-    float LookpointOriginY;
+    float OffsetLookpointToCharacterY;
     private void SquatFunction()
     {
 
@@ -93,36 +97,54 @@ public class Character : MonoBehaviour
         }
         if (SquatState == 1)
         {
+
             controller.height = Mathf.Clamp(controller.height - Time.deltaTime, CdHeight / 2, CdHeight);
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y - Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y-Time.deltaTime,LookpointOriginY- CdHeight * 0.25f, LookpointOriginY), LookPoint.transform.position.z);
+            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y - Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
-        else if(SquatState == 0)
+        else if (SquatState == 0)
         {
             controller.height = Mathf.Clamp(controller.height + Time.deltaTime, CdHeight / 2, CdHeight);
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, LookpointOriginY - CdHeight * 0.25f, LookpointOriginY), LookPoint.transform.position.z);
+            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
+        Debug.Log(new Vector3(transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.y));
     }
 
 
     #endregion
     #region GravityFunction
-    float g = 1f, v1 = 10, c = 0;
+    float g = 1f, v1 = 5, c = 0;
     private void GravityFunction()
     {
         c += Time.deltaTime;
         if (!controller.isGrounded)
         {
+            ActionProhibit = true;
             v1 = v1 + g;
             c = 0;
         }
         else if (controller.isGrounded && c > 0.05f)
         {
-            v1 = 10;
+            ActionProhibit = false;
+            v1 = 5;
         }
         move.y = move.y - v1 * 5 * Time.deltaTime;
     }
+    #endregion
+    #region JumpGunction
+    private void JumpFunction()
+    {
+        if (Input.GetKey(KeyCode.Space)&&controller.isGrounded == true)
+        {
+            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
+            SquatState = 0;
+            c = 0;
+            v1 = -50;
+        }
+    }
+
+
     #endregion
     #region GrabThrowFunction
     public static bool GrabbableItemTouch = false;
@@ -138,44 +160,44 @@ public class Character : MonoBehaviour
                 anim.SetInteger("HandState", 2);
                 GrabbableItemTouch = false;
             }
-            if(anim.GetInteger("HandState") == 1)
+            if (anim.GetInteger("HandState") == 1)
             {
                 anim.SetInteger("HandState", 0);
-                ActionProhibit = false;
-                yield return new WaitForSecondsRealtime(0.5f); //after this delay ,collider enable
+                AllProhibit = false;
+                yield return new WaitForSeconds(0.5f); //after this delay ,collider enable
                 GrabRange.enabled = false;
-                yield return new WaitForSecondsRealtime(0.3f);
+                yield return new WaitForSeconds(0.3f);
             }
             else if (anim.GetInteger("HandState") == 3)
             {
                 anim.SetInteger("HandState", 0);
-                yield return new WaitForSecondsRealtime(0.3f);
-                ActionProhibit = false;
-                yield return new WaitForSecondsRealtime(0.5f);
+                yield return new WaitForSeconds(0.3f);
+                AllProhibit = false;
+                yield return new WaitForSeconds(0.5f);
             }
-            else if (Input.GetKey(KeyCode.F))
+            else if (Input.GetKey(KeyCode.F) && AllProhibit == false)
             {
-                if(anim.GetInteger("HandState") == 0)
+                if (anim.GetInteger("HandState") == 0)
                 {
                     float AngleX = Cm1.eulerAngles.x;
                     if (AngleX > 180) AngleX -= 360;
                     AngleX = Mathf.Clamp(AngleX, 0, 45);
                     anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
 
-                    ActionProhibit = true;
+                    AllProhibit = true;
                     anim.SetInteger("HandState", 1);
-                    yield return new WaitForSecondsRealtime(0.2f);
+                    yield return new WaitForSeconds(0.2f);
                     GrabRange.enabled = true;
                 }
-                else if(anim.GetInteger("HandState") == 2)
+                else if (anim.GetInteger("HandState") == 2)
                 {
-                    ActionProhibit = true;
+                    AllProhibit = true;
                     anim.SetInteger("HandState", 3);
                     GrabItem.ThrowItem = true;
-                    yield return new WaitForSecondsRealtime(0.5f);
+                    yield return new WaitForSeconds(0.5f);
                 }
             }
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(Time.deltaTime);
         }
 
 
