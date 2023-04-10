@@ -49,7 +49,7 @@ public class PromptBox : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (GrabItem.ThrowItem == true&&other.gameObject.layer!=7)
+        if (GrabItem.ThrowItem == false&&other.gameObject.layer!=7)
         {
             transform.SetParent(null);
         }

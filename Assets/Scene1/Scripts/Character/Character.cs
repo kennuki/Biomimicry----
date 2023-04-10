@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public GameObject LookPoint;
     public Animator anim;
     public static bool ActionProhibit = false, MoveProhibit = false, AllProhibit = false;       //ActionProhibt effect squat
+    public static bool GrabAllow = false;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -108,13 +109,12 @@ public class Character : MonoBehaviour
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
-        Debug.Log(new Vector3(transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.y));
     }
 
 
     #endregion
     #region GravityFunction
-    float g = 1f, v1 = 5, c = 0;
+    float g = 3f, v1 = 5, c = 0;
     private void GravityFunction()
     {
         c += Time.deltaTime;
@@ -140,14 +140,13 @@ public class Character : MonoBehaviour
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
             SquatState = 0;
             c = 0;
-            v1 = -50;
+            v1 = -65;
         }
     }
 
 
     #endregion
     #region GrabThrowFunction
-    public static bool GrabbableItemTouch = false;
     private BoxCollider GrabRange;
     public Transform Cm1;
     private IEnumerator GrabThrowfunction()
@@ -155,46 +154,29 @@ public class Character : MonoBehaviour
         GrabRange = GetChildComponentByName<BoxCollider>("GrabRange");
         while (true)
         {
-            if(GrabbableItemTouch == true)
-            {
-                anim.SetInteger("HandState", 2);
-                GrabbableItemTouch = false;
-            }
             if (anim.GetInteger("HandState") == 1)
             {
-                anim.SetInteger("HandState", 0);
-                AllProhibit = false;
-                yield return new WaitForSeconds(0.5f); //after this delay ,collider enable
-                GrabRange.enabled = false;
-                yield return new WaitForSeconds(0.3f);
+                anim.SetInteger("HandState", 2);
             }
             else if (anim.GetInteger("HandState") == 3)
             {
                 anim.SetInteger("HandState", 0);
-                yield return new WaitForSeconds(0.3f);
-                AllProhibit = false;
-                yield return new WaitForSeconds(0.5f);
             }
-            else if (Input.GetKey(KeyCode.F) && AllProhibit == false)
+            else if (GrabAllow == true)
             {
                 if (anim.GetInteger("HandState") == 0)
                 {
+                    GrabAllow = false;
                     float AngleX = Cm1.eulerAngles.x;
                     if (AngleX > 180) AngleX -= 360;
                     AngleX = Mathf.Clamp(AngleX, 0, 45);
                     anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
-
-                    AllProhibit = true;
                     anim.SetInteger("HandState", 1);
-                    yield return new WaitForSeconds(0.2f);
-                    GrabRange.enabled = true;
                 }
                 else if (anim.GetInteger("HandState") == 2)
                 {
-                    AllProhibit = true;
+                    GrabAllow = false;
                     anim.SetInteger("HandState", 3);
-                    GrabItem.ThrowItem = true;
-                    yield return new WaitForSeconds(0.5f);
                 }
             }
             yield return new WaitForSeconds(Time.deltaTime);
