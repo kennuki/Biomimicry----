@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GrabItem : MonoBehaviour
 {
-    public Animator AnimL,AnimR;
     BoxCollider Range;
     public static bool ThrowItem = false;
     void Start()
@@ -43,8 +42,6 @@ public class GrabItem : MonoBehaviour
         }
         else if (other.tag == "Pushable" && Range.size.x < 0.4f)
         {
-            AnimL.SetInteger("PushPull", 1);
-            AnimR.SetInteger("PushPull", 1);
             Range.enabled = false;
             PushedItem = other.gameObject;
             PushedItemRb = PushedItem.GetComponent<Rigidbody>();
@@ -122,10 +119,8 @@ public class GrabItem : MonoBehaviour
         while (true)
         {
             DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 1.8f)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 2f)
             {
-                AnimL.SetInteger("PushPull", 0);
-                AnimR.SetInteger("PushPull", 0);
                 Character.AllProhibit = false;
                 Character.MoveOnly = false;
                 CameraRotate.cameratotate = true;
@@ -154,8 +149,6 @@ public class GrabItem : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                AnimL.SetInteger("PushPull", 2);
-                AnimR.SetInteger("PushPull", 2);
                 Vector3 Force = Vector3.zero;
                 DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
                 float maxSpeed = 1;
@@ -176,10 +169,8 @@ public class GrabItem : MonoBehaviour
                 {
                     PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
-                if(DistanceToPushedItem > 1.8f)
+                if(DistanceToPushedItem > 1.5f)
                 {
-                    AnimL.SetInteger("PushPull", 0);
-                    AnimR.SetInteger("PushPull", 0);
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
                     CameraRotate.cameratotate = true;
