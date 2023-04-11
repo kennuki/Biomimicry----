@@ -38,6 +38,7 @@ public class GrabItem : MonoBehaviour
             GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
             Character.GrabAllow = true;
             ThrowItem = true;
+<<<<<<< Updated upstream
             StartCoroutine(Grab());
 
         }
@@ -52,6 +53,9 @@ public class GrabItem : MonoBehaviour
             Character.MoveOnly = true;
             CameraRotate.cameratotate = false;
             StartCoroutine(PushObject());
+=======
+            StartCoroutine(Grab());      
+>>>>>>> Stashed changes
         }
     }
 
