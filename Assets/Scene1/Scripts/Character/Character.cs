@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     CharacterController controller;
     public GameObject LookPoint;
     public Animator anim;
-    public static bool ActionProhibit = false, MoveProhibit = false, AllProhibit = false;       //ActionProhibt effect squat
+    public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
     public static bool GrabAllow = false;
     void Start()
     {
@@ -29,6 +29,10 @@ public class Character : MonoBehaviour
             MoveFunction();
             JumpFunction();
         }
+        else if(MoveOnly == true)
+        {
+            MoveFunction();
+        }
         else move = Vector3.zero;
         GravityFunction();
         controller.Move(move * Time.deltaTime);
@@ -39,7 +43,7 @@ public class Character : MonoBehaviour
     }
 
     #region MoveFunction
-    public static float speed = 5f;
+    public static float speed = 4f;
     public static float imaangle;
     Vector3 move;
     private Vector3 dir;
@@ -62,52 +66,44 @@ public class Character : MonoBehaviour
     }
     #endregion
     #region SquatFunction
-    int SquatState; //0 = stand, 1 = Squat, 2 = Lie down and look
+    int SquatState = 0; //0 = stand, 1 = Squat, 2 = Lie down and look
     float count = 0;
-    bool stay = false;
     float CdHeight;
     float OffsetLookpointToCharacterY;
     private void SquatFunction()
     {
-
+        count += Time.deltaTime;
         if (Input.GetKey(KeyCode.C))
         {
-            count += Time.deltaTime;
-            if (count > 0.5f)
-            {
-                SquatState = 2;
-            }
-            else if (count > 0.1f && SquatState == 1)
-            {
-                SquatState = 2;
-            }
-            else if (stay == false)
+            if(count > 0.5f)
             {
                 SquatState = Mathf.Abs(SquatState - 1);
-                stay = true;
+                count = 0;
             }
+        }
+        if (count <= 0.5f)
+        {
+            GrabProhibit = true;
+            MoveOnly = true;
         }
         else
         {
-            if (SquatState == 2)
-            {
-                SquatState = 1;
-            }
-            count = 0;
-            stay = false;
+            GrabProhibit = false;
+            MoveOnly = false;
         }
         if (SquatState == 1)
         {
-
+            speed = 2;
             controller.height = Mathf.Clamp(controller.height - Time.deltaTime, CdHeight / 2, CdHeight);
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y - Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y - Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
         else if (SquatState == 0)
         {
-            controller.height = Mathf.Clamp(controller.height + Time.deltaTime, CdHeight / 2, CdHeight);
-            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
+            speed = 4;
+            controller.height = Mathf.Clamp(controller.height + Time.deltaTime * 1.5f, CdHeight / 2, CdHeight);
+            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.75f, 0 - CdHeight * 0.375f, 0), 0);
+            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.375f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
     }
 
@@ -120,12 +116,17 @@ public class Character : MonoBehaviour
         c += Time.deltaTime;
         if (!controller.isGrounded)
         {
+            MoveOnly = true;
             ActionProhibit = true;
             v1 = v1 + g;
             c = 0;
         }
         else if (controller.isGrounded && c > 0.05f)
         {
+            if (anim.GetInteger("HandState") == 0 || anim.GetInteger("HandState") == 3)
+                MoveOnly = true;
+            else
+                MoveOnly = false;
             ActionProhibit = false;
             v1 = 5;
         }
@@ -147,11 +148,9 @@ public class Character : MonoBehaviour
 
     #endregion
     #region GrabThrowFunction
-    private BoxCollider GrabRange;
     public Transform Cm1;
     private IEnumerator GrabThrowfunction()
     {
-        GrabRange = GetChildComponentByName<BoxCollider>("GrabRange");
         while (true)
         {
             if (anim.GetInteger("HandState") == 1)
