@@ -47,6 +47,7 @@ BlendTree:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of d35fc4a (Revert "0.0")
@@ -88,6 +89,8 @@ AnimatorState:
 >>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of d7f53f9 (0.0)
 --- !u!1101 &-6045200715029645909
@@ -190,6 +193,7 @@ AnimatorStateTransition:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_EventTreshold: 0
 =======
 >>>>>>> parent of 026f6c6 (test)
@@ -197,6 +201,11 @@ AnimatorStateTransition:
     m_ConditionEvent: HandState
 =======
 >>>>>>> parent of d35fc4a (Revert "0.0")
+=======
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: HandState
+>>>>>>> parent of d7f53f9 (0.0)
 =======
     m_EventTreshold: 0
   - m_ConditionMode: 6
@@ -293,6 +302,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -410,6 +420,8 @@ AnimatorStateTransition:
 >>>>>>> parent of 026f6c6 (test)
 =======
 >>>>>>> parent of d7f53f9 (0.0)
+=======
+>>>>>>> parent of d7f53f9 (0.0)
 --- !u!1102 &2421930309564841979
 AnimatorState:
   serializedVersion: 6
@@ -436,6 +448,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -472,6 +485,8 @@ AnimatorStateTransition:
 >>>>>>> parent of 026f6c6 (test)
 =======
 >>>>>>> parent of d35fc4a (Revert "0.0")
+=======
+>>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of d7f53f9 (0.0)
 =======
@@ -536,6 +551,7 @@ AnimatorStateMachine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Position: {x: 280, y: 350, z: 0}
 =======
 =======
@@ -545,6 +561,9 @@ AnimatorStateMachine:
 =======
     m_Position: {x: 280, y: 170, z: 0}
 >>>>>>> parent of d35fc4a (Revert "0.0")
+=======
+    m_Position: {x: 280, y: 350, z: 0}
+>>>>>>> parent of d7f53f9 (0.0)
 =======
     m_Position: {x: 280, y: 350, z: 0}
 >>>>>>> parent of d7f53f9 (0.0)
@@ -566,6 +585,7 @@ AnimatorStateMachine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   - {fileID: 639416023597901633}
   - {fileID: 1608992238750992351}
@@ -581,6 +601,8 @@ AnimatorStateMachine:
 >>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of d7f53f9 (0.0)
   m_EntryTransitions: []
@@ -595,6 +617,7 @@ AnimatorStateMachine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DefaultState: {fileID: 2421930309564841979}
 =======
   m_DefaultState: {fileID: 9012531021608547086}
@@ -608,6 +631,9 @@ AnimatorStateMachine:
 =======
   m_DefaultState: {fileID: 9012531021608547086}
 >>>>>>> parent of 026f6c6 (test)
+=======
+  m_DefaultState: {fileID: 2421930309564841979}
+>>>>>>> parent of d7f53f9 (0.0)
 =======
   m_DefaultState: {fileID: 2421930309564841979}
 >>>>>>> parent of d7f53f9 (0.0)
@@ -626,6 +652,7 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -696,5 +723,7 @@ AnimatorStateTransition:
 >>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d7f53f9 (0.0)
 =======
 >>>>>>> parent of d7f53f9 (0.0)
