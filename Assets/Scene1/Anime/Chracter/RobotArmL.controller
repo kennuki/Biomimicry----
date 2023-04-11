@@ -43,7 +43,10 @@ BlendTree:
   m_NormalizedBlendValues: 0
   m_BlendType: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1102 &-6915513687703303506
 AnimatorState:
   serializedVersion: 6
@@ -71,7 +74,10 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+<<<<<<< HEAD
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1101 &-6045200715029645909
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -166,11 +172,14 @@ AnimatorStateTransition:
 <<<<<<< HEAD
   - m_ConditionMode: 6
     m_ConditionEvent: HandState
+<<<<<<< HEAD
     m_EventTreshold: 0
 =======
 >>>>>>> parent of 026f6c6 (test)
   - m_ConditionMode: 6
     m_ConditionEvent: HandState
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2421930309564841979}
@@ -200,25 +209,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: HandState
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Blend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: AngleX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: PushPull
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -258,7 +273,10 @@ AnimatorStateTransition:
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1101 &639416023597901633
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -358,7 +376,10 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1102 &2421930309564841979
 AnimatorState:
   serializedVersion: 6
@@ -386,7 +407,10 @@ AnimatorState:
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1101 &4745603819378209330
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -409,7 +433,10 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1101 &5340986220785381923
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -466,27 +493,46 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 2421930309564841979}
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Position: {x: 280, y: 350, z: 0}
 =======
     m_Position: {x: 280, y: 170, z: 0}
 >>>>>>> parent of 026f6c6 (test)
+=======
+    m_Position: {x: 280, y: 170, z: 0}
+>>>>>>> parent of d35fc4a (Revert "0.0")
   - serializedVersion: 1
     m_State: {fileID: -7826841283953348472}
-    m_Position: {x: 160.12622, y: -220.94708, z: 0}
+    m_Position: {x: 270, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3716949414362832312}
     m_Position: {x: 260, y: 30, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 727091124950440213}
+    m_Position: {x: 280, y: -210, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6915513687703303506}
+    m_Position: {x: 270, y: -330, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 9012531021608547086}
+    m_Position: {x: 210, y: 290, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -13615462955699246}
   - {fileID: -6045200715029645909}
   - {fileID: 530855606070744728}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   - {fileID: 639416023597901633}
   - {fileID: 1608992238750992351}
   - {fileID: 9041444571791950723}
 >>>>>>> parent of 026f6c6 (test)
+=======
+  - {fileID: 639416023597901633}
+  - {fileID: 1608992238750992351}
+  - {fileID: 9041444571791950723}
+>>>>>>> parent of d35fc4a (Revert "0.0")
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -495,10 +541,14 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_DefaultState: {fileID: 2421930309564841979}
 =======
   m_DefaultState: {fileID: 9012531021608547086}
 >>>>>>> parent of 026f6c6 (test)
+=======
+  m_DefaultState: {fileID: 9012531021608547086}
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!206 &7902487665358210409
 BlendTree:
   m_ObjectHideFlags: 1
@@ -515,7 +565,10 @@ BlendTree:
   m_NormalizedBlendValues: 0
   m_BlendType: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
 --- !u!1102 &9012531021608547086
 AnimatorState:
   serializedVersion: 6
@@ -567,4 +620,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+<<<<<<< HEAD
 >>>>>>> parent of 026f6c6 (test)
+=======
+>>>>>>> parent of d35fc4a (Revert "0.0")
