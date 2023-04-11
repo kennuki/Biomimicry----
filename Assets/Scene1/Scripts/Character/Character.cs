@@ -110,7 +110,7 @@ public class Character : MonoBehaviour
 
     #endregion
     #region GravityFunction
-    float g = 3f, v1 = 5, c = 0;
+    float g = 3.5f, v1 = 5, c = 0;
     private void GravityFunction()
     {
         c += Time.deltaTime;
@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
             SquatState = 0;
             c = 0;
-            v1 = -65;
+            v1 = -55;
         }
     }
 
