@@ -119,7 +119,7 @@ public class GrabItem : MonoBehaviour
         while (true)
         {
             DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 2f)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 1.8f)
             {
                 Character.AllProhibit = false;
                 Character.MoveOnly = false;
@@ -169,7 +169,7 @@ public class GrabItem : MonoBehaviour
                 {
                     PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
-                if(DistanceToPushedItem > 1.5f)
+                if(DistanceToPushedItem > 1.8f)
                 {
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
