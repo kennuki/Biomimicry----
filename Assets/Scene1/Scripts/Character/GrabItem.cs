@@ -70,6 +70,21 @@ public class GrabItem : MonoBehaviour
             InteractFix1.maxspeed = 1.5f;
             StartCoroutine(PushObject2());
         }
+        else if (other.tag == "Rod" && Range.size.y < 5f)
+        {
+            PushedItem = other.gameObject;
+            DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+            Debug.Log(DistanceToPushedItem);
+            if (DistanceToPushedItem < 1f)
+            {
+                Range.enabled = false;
+                Character.AllProhibit = true;
+                GrabbedItem = other.gameObject;
+                GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                StartCoroutine(DoorOpen1());
+            }
+            Range.enabled = false;
+        }
     }
 
     public GameObject cm1;
@@ -236,5 +251,13 @@ public class GrabItem : MonoBehaviour
         physicMaterialBox.dynamicFriction = 4000f;
         yield break;
 
+    }
+
+    public ElectricDoorOpen ElectricDoorOpen;
+    private IEnumerator DoorOpen1()
+    {
+        ElectricDoorOpen.enabled = true;
+        yield return new WaitForSeconds(1f);
+        Character.AllProhibit = false;
     }
 }
