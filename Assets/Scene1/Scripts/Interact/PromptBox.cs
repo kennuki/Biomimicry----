@@ -6,6 +6,7 @@ public class PromptBox : MonoBehaviour
 {
     Transform CharacterTransform, Dialog;
     private Vector3 CharacterPos, ItemPos;
+    public Vector3 offset = new Vector3(0, 0.4f, 0);
     float Angle;
     void Start()
     {
@@ -16,7 +17,7 @@ public class PromptBox : MonoBehaviour
     public float ShowDistance = 5;
     void Update()
     {
-        Dialog.position = this.transform.position + new Vector3(0, 0.4f, 0);
+        Dialog.position = this.transform.position + offset;
         Angle = FaceAngleToItem(CharacterPos, ItemPos);
         if (DistanceOfItemToCharacter() < ShowDistance && MoveDetect() == false)
         {

@@ -27,6 +27,7 @@ public class GrabItem : MonoBehaviour
     public Transform LeftHand;
     private GameObject GrabbedItem, PushedItem;
     private Rigidbody GrabbedItemRb, PushedItemRb;
+    public PhysicMaterial physicMaterialBox;
     private void OnTriggerEnter(Collider other)
     {
 
@@ -51,7 +52,23 @@ public class GrabItem : MonoBehaviour
             Character.AllProhibit = true;
             Character.MoveOnly = true;
             CameraRotate.cameratotate = false;
+            physicMaterialBox.dynamicFriction = 0.2f;
+            InteractFix1.maxspeed = 1.5f;
             StartCoroutine(PushObject());
+        }
+        else if (other.tag == "PushOnly" && Range.size.x < 0.2f)
+        {
+            AnimL.SetInteger("PushPull", 1);
+            AnimR.SetInteger("PushPull", 1);
+            Range.enabled = false;
+            PushedItem = other.gameObject;
+            PushedItemRb = PushedItem.GetComponent<Rigidbody>();
+            Character.AllProhibit = true;
+            Character.MoveOnly = true;
+            CameraRotate.cameratotate = false;
+            physicMaterialBox.dynamicFriction = 0.2f;
+            InteractFix1.maxspeed = 1.5f;
+            StartCoroutine(PushObject2());
         }
     }
 
@@ -119,36 +136,52 @@ public class GrabItem : MonoBehaviour
     public float PushForce = 10f;
     private IEnumerator PushObject()
     {
+        Vector3 Force = Vector3.zero;
+        DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+        for (float i = 0; i <= 0.25f; i += Time.deltaTime)
+        {
+            if(DistanceToPushedItem < 1.0f)
+            {
+                Force = transform.rotation * Vector3.forward * PushForce * 1.2f;
+                PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
         while (true)
         {
             DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 1.8f)
+            Debug.Log(DistanceToPushedItem);
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.F)|| DistanceToPushedItem > 1.5f)
             {
+                Range.enabled = false;
                 AnimL.SetInteger("PushPull", 0);
                 AnimR.SetInteger("PushPull", 0);
                 Character.AllProhibit = false;
                 Character.MoveOnly = false;
                 CameraRotate.cameratotate = true;
                 Cursor.lockState = CursorLockMode.Locked;
+                physicMaterialBox.dynamicFriction = 4000f;
                 yield break;
             }
             else if (Input.GetKey(KeyCode.W))
             {
-                Vector3 Force = Vector3.zero;
-                if (DistanceToPushedItem > 1.3f)
+                AnimL.SetInteger("PushPull", 1);
+                AnimR.SetInteger("PushPull", 1);
+
+                if (DistanceToPushedItem > 1.2f)
                 {
                     Character.speed = 1+DistanceToPushedItem-1f;
                 }
-                else if (DistanceToPushedItem < 1.2f)
+                else if (DistanceToPushedItem < 1.1f)
                 {
-                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 1.3f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.3f - DistanceToPushedItem)*1.2f);   
+                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 1.2f, 0, 1);
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem)*1.2f);   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.3f - DistanceToPushedItem));
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem));
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -156,14 +189,13 @@ public class GrabItem : MonoBehaviour
             {
                 AnimL.SetInteger("PushPull", 2);
                 AnimR.SetInteger("PushPull", 2);
-                Vector3 Force = Vector3.zero;
                 DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
                 float maxSpeed = 1;
                 Vector3 vel = PushedItemRb.velocity;
                 if (DistanceToPushedItem > 1.1f)
                 {
                     Character.speed = 1;
-                    Force = transform.rotation * Vector3.back * PushForce * (1 + (DistanceToPushedItem-1.1f) * 1f);
+                    Force = transform.rotation * Vector3.back * PushForce * (1 + (DistanceToPushedItem-1.1f) * 4f);
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
 
                 }
@@ -176,20 +208,33 @@ public class GrabItem : MonoBehaviour
                 {
                     PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
-                if(DistanceToPushedItem > 1.8f)
-                {
-                    AnimL.SetInteger("PushPull", 0);
-                    AnimR.SetInteger("PushPull", 0);
-                    Character.AllProhibit = false;
-                    Character.MoveOnly = false;
-                    CameraRotate.cameratotate = true;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    yield break;
-                }
-                Debug.Log(DistanceToPushedItem);
             }
             yield return new WaitForSeconds(Time.deltaTime);
             
         }
+    }
+    private IEnumerator PushObject2()
+    {
+        Vector3 Force = Vector3.zero;
+        DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+        for (float i = 0; i <= 0.25f; i += Time.deltaTime)
+        {
+            if (DistanceToPushedItem < 1.0f)
+            {
+                Force = transform.rotation * Vector3.forward * PushForce * 1.2f;
+                PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        Range.enabled = false;
+        AnimL.SetInteger("PushPull", 0);
+        AnimR.SetInteger("PushPull", 0);
+        Character.AllProhibit = false;
+        Character.MoveOnly = false;
+        CameraRotate.cameratotate = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        physicMaterialBox.dynamicFriction = 4000f;
+        yield break;
+
     }
 }

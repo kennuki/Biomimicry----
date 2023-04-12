@@ -62,6 +62,11 @@ public class Character : MonoBehaviour
         {
             dir /= Mathf.Sqrt(2);
         }
+        if(InteractFix == true)
+        {
+            speed = 0.5f;
+            InteractFix = false;
+        }
         move = dir * speed;
     }
     #endregion
@@ -186,8 +191,14 @@ public class Character : MonoBehaviour
 
     }
     #endregion
-
-
+    private bool InteractFix = false;
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Pushable")
+        {
+            InteractFix = true;
+        }
+    }
     private T GetChildComponentByName<T>(string name) where T : Component
     {
         foreach (T component in GetComponentsInChildren<T>(true))
