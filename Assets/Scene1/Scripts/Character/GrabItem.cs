@@ -190,13 +190,13 @@ public class GrabItem : MonoBehaviour
                 else if (DistanceToPushedItem < 1.1f)
                 {
                     Character.speed = Mathf.Clamp(DistanceToPushedItem- 1.2f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem)*1.2f);   
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem)*1.2f)*1.2f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem));
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.2f - DistanceToPushedItem)) * 1.2f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -224,7 +224,7 @@ public class GrabItem : MonoBehaviour
                     PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
             }
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
             
         }
     }

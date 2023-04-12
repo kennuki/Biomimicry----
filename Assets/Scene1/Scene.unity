@@ -26706,7 +26706,7 @@ MonoBehaviour:
   physicMaterialBox: {fileID: 13400000, guid: a90596d45771d324285e7bbb496c86f5, type: 2}
   cm1: {fileID: 1358561007}
   GrabOffset: {x: 0, y: 0, z: 0.21}
-  PushForce: 7
+  PushForce: 12
   ElectricDoorOpen: {fileID: 4356025620226261623}
 --- !u!65 &820593710
 BoxCollider:
