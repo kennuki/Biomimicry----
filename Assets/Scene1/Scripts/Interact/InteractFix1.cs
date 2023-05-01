@@ -12,17 +12,14 @@ public class InteractFix1 : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(maxspeed == 0)
+        if(rb.velocity.magnitude == 0)
         {
-            this.gameObject.isStatic = true;
+            rb.isKinematic = false;
         }
         else
         {
-            this.gameObject.isStatic = false;
+            rb.isKinematic = false;
         }
-        if (rb.velocity.magnitude > maxspeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxspeed;
-        }
+
     }
 }

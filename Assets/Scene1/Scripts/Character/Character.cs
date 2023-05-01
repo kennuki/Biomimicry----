@@ -199,6 +199,17 @@ public class Character : MonoBehaviour
             InteractFix = true;
         }
     }
+
+    private Rigidbody TouchedObjectRb;
+    private void OnTriggerEnter(Collider other)
+    {
+        TouchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
+        if (TouchedObjectRb != null)
+        {
+            TouchedObjectRb.AddForce(transform.rotation * move * 10f);
+        }
+    }
+
     private T GetChildComponentByName<T>(string name) where T : Component
     {
         foreach (T component in GetComponentsInChildren<T>(true))
