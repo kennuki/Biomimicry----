@@ -23,6 +23,7 @@ public class CameraRotate : MonoBehaviour
         {
             CameraRotateFunction();
         }
+        //Debug.LogFormat("{0:F4}, {1:F4}", va2.x, va2.y);
     }
 
     public bool state = false;
@@ -134,5 +135,21 @@ public class CameraRotate : MonoBehaviour
         }
         va2 = Vector2.zero;
         vt2 = v2;
+    }
+
+    public AnimationCurve Curve;
+    float ShakeDuration = 0.75f;
+    public IEnumerator CameraShake()
+    {
+        Vector3 OringinPos = LookPoint.transform.position;
+        float ShakeTime = 0;
+        while (ShakeTime < ShakeDuration)
+        {
+            ShakeTime += Time.deltaTime;
+            float strength = Curve.Evaluate(ShakeTime / ShakeDuration);
+            LookPoint.transform.position = OringinPos + Random.insideUnitSphere * strength;
+            yield return null;
+        }
+        LookPoint.transform.position = OringinPos;
     }
 }

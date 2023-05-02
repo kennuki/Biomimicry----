@@ -96,14 +96,14 @@ public class Character : MonoBehaviour
             GrabProhibit = false;
             MoveOnly = false;
         }
-        if (SquatState == 1)
+        if (SquatState == 1 && count < 1)
         {
             speed = 2;
             controller.height = Mathf.Clamp(controller.height - Time.deltaTime, CdHeight / 2, CdHeight);
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y - Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y - Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
-        else if (SquatState == 0)
+        else if (SquatState == 0 && count < 1)
         {
             speed = 4;
             controller.height = Mathf.Clamp(controller.height + Time.deltaTime * 1.5f, CdHeight / 2, CdHeight);

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PromptBox : MonoBehaviour
 {
+    public bool Reuse = true;
     Transform CharacterTransform, Dialog;
     private Vector3 CharacterPos, ItemPos;
     public Vector3 offset = new Vector3(0, 0.4f, 0);
     float Angle;
+    public Collider[] Cd;
     void Start()
     {
         CharacterTransform = GameObject.Find("Character").GetComponent<Transform>();
@@ -34,6 +36,17 @@ public class PromptBox : MonoBehaviour
         {
             Dialog.gameObject.SetActive(false);
         }
+        if(Reuse == false)
+        {
+            foreach(Collider collider in Cd)
+            {
+                if(collider.enabled == false)
+                {
+                    Dialog.gameObject.SetActive(false);
+                }
+            }
+        }
+
     }
 
     private float FaceAngleToItem(Vector3 _CharacterPos,Vector3 _ItemPos)
@@ -48,13 +61,7 @@ public class PromptBox : MonoBehaviour
         return Vector3.Distance(CharacterTransform.position, this.transform.position);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (GrabItem.ThrowItem == false && other.gameObject.layer != 7)
-        {
-            transform.SetParent(null);
-        }
-    }
+
 
     Vector3 Pos;
     private bool MoveDetect()
