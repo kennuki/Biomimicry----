@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(speed);
+
         if (AllProhibit == false)
         {
             if (ActionProhibit == false)
@@ -124,8 +124,8 @@ public class Character : MonoBehaviour
         }
         else if (controller.isGrounded && c > 0.05f)
         {
-            if (anim.GetInteger("HandState") == 0 || anim.GetInteger("HandState") == 3)
-                MoveOnly = true;
+            if (anim.GetInteger("HandState") == 0 || anim.GetInteger("HandState") == 3) ;
+            //MoveOnly = true;
             else
                 MoveOnly = false;
             ActionProhibit = false;

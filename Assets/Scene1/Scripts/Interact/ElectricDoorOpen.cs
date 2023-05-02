@@ -29,7 +29,7 @@ public class ElectricDoorOpen : MonoBehaviour
     }
     private IEnumerator Open(float second)
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.4f);
         StartCoroutine(CameraRotate.CameraShake());
         int layerIndex = LayerMask.NameToLayer("Character"); 
         Camera.main.cullingMask |= 1 << layerIndex;

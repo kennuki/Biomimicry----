@@ -138,18 +138,18 @@ public class CameraRotate : MonoBehaviour
     }
 
     public AnimationCurve Curve;
-    float ShakeDuration = 0.75f;
+    float ShakeDuration = 1.5f;
     public IEnumerator CameraShake()
     {
-        Vector3 OringinPos = LookPoint.transform.position;
+        Vector3 OringinPos = LookPoint.transform.localPosition;
         float ShakeTime = 0;
         while (ShakeTime < ShakeDuration)
         {
             ShakeTime += Time.deltaTime;
             float strength = Curve.Evaluate(ShakeTime / ShakeDuration);
-            LookPoint.transform.position = OringinPos + Random.insideUnitSphere * strength;
+            LookPoint.transform.localPosition = OringinPos + Random.insideUnitSphere * strength;
             yield return null;
         }
-        LookPoint.transform.position = OringinPos;
+        LookPoint.transform.localPosition = OringinPos;
     }
 }

@@ -32,7 +32,6 @@ public class GrabItem : MonoBehaviour
     private PhysicMaterial physicMaterialBox;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if (other.tag == "Grabbable")
         {
             Range.enabled = false;
@@ -86,6 +85,7 @@ public class GrabItem : MonoBehaviour
                 Range.enabled = false;
                 CameraRotate.cameratotate = false;
                 Character.AllProhibit = true;
+                Character.MoveOnly = false;
                 GrabbedItem = other.gameObject;
                 GrabbedItem.GetComponent<BoxCollider>().enabled = false;
                 StartCoroutine(DoorOpen1());
@@ -104,18 +104,18 @@ public class GrabItem : MonoBehaviour
         IfTriggerDetect = true;
         while (Range.size.z < 3f)
         {
-            Range.size = Range.size + new Vector3(0, 0, Time.deltaTime * 100);
-            Range.center = Range.center + new Vector3(0, 0, Time.deltaTime * 50);        
+            Range.size = Range.size + new Vector3(0, 0, Time.deltaTime * 150);
+            Range.center = Range.center + new Vector3(0, 0, Time.deltaTime * 75);        
             yield return new WaitForSeconds(Time.deltaTime);
         }
         while (Range.size.y < 8f)
         {
-            Range.size = Range.size + new Vector3(0, Time.deltaTime * 100, 0);
+            Range.size = Range.size + new Vector3(0, Time.deltaTime * 150, 0);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         while (Range.size.x < 3f)
         {
-            Range.size = Range.size + new Vector3(Time.deltaTime * 100, 0, 0);
+            Range.size = Range.size + new Vector3(Time.deltaTime * 150, 0, 0);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Range.center = Vector3.zero;
@@ -144,7 +144,7 @@ public class GrabItem : MonoBehaviour
             Character.GrabAllow = true;
             yield return new WaitForSeconds(0.05f);
             GrabbedItemRb.isKinematic = false;
-            yield return new WaitForSeconds(0.37f);
+            yield return new WaitForSeconds(0.3f);
             if (GrabbedItemRb.gameObject.transform.parent != null)
                 GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust);
             GrabbedItem.transform.SetParent(null);
@@ -300,8 +300,9 @@ public class GrabItem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         AnimR.SetInteger("Rod", 0);
         yield return new WaitForSeconds(1.8f);
-        Cursor.lockState = CursorLockMode.Locked;
         Character.AllProhibit = false;
+        Character.MoveOnly = true;
+        Cursor.lockState = CursorLockMode.Locked;
         CameraRotate.cameratotate = true;
     }
 }
