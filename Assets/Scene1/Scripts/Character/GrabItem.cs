@@ -299,7 +299,7 @@ public class GrabItem : MonoBehaviour
         ElectricDoorOpen.enabled = true;
         yield return new WaitForSeconds(1f);
         AnimR.SetInteger("Rod", 0);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.8f);
         Cursor.lockState = CursorLockMode.Locked;
         Character.AllProhibit = false;
         CameraRotate.cameratotate = true;

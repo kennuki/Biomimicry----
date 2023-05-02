@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(speed);
         if (AllProhibit == false)
         {
             if (ActionProhibit == false)
@@ -61,11 +62,6 @@ public class Character : MonoBehaviour
         if (j != 0 && h != 0)
         {
             dir /= Mathf.Sqrt(2);
-        }
-        if(InteractFix == true)
-        {
-            speed = 0.5f;
-            InteractFix = false;
         }
         move = dir * speed;
     }
@@ -191,14 +187,6 @@ public class Character : MonoBehaviour
 
     }
     #endregion
-    private bool InteractFix = false;
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Pushable")
-        {
-            InteractFix = true;
-        }
-    }
 
     private Rigidbody TouchedObjectRb;
     private void OnTriggerEnter(Collider other)
