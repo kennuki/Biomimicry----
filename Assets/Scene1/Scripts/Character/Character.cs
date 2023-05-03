@@ -16,11 +16,12 @@ public class Character : MonoBehaviour
         CdHeight = controller.height;
         OffsetLookpointToCharacterY = transform.position.y-LookPoint.transform.position.y;
         StartCoroutine(GrabThrowfunction());
+        Origin_speed = speed;
     }
 
     void FixedUpdate()
     {
-
+        //Debug.Log(speed);
         if (AllProhibit == false)
         {
             if (ActionProhibit == false)
@@ -37,14 +38,17 @@ public class Character : MonoBehaviour
         else move = Vector3.zero;
         GravityFunction();
         controller.Move(move * Time.deltaTime);
-        if (Input.GetKey(KeyCode.L))
-        {
-            anim.SetInteger("HandState", 2);
-        }
+    }
+    private void Update()
+    {
+        EnergyUseFunction();
     }
 
+
+
     #region MoveFunction
-    public static float speed = 4f;
+    public static float speed = 3f;
+    private float Origin_speed;
     public static float imaangle;
     Vector3 move;
     private Vector3 dir;
@@ -62,6 +66,16 @@ public class Character : MonoBehaviour
         if (j != 0 && h != 0)
         {
             dir /= Mathf.Sqrt(2);
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && Energy > 0 && dir.magnitude>0 && MoveOnly == false)
+        {
+            EnergyUse = true;
+            speed = Origin_speed + 1.5f;
+        }
+        else if(MoveOnly == false)
+        {
+            EnergyUse = false;
+            speed = Origin_speed;
         }
         move = dir * speed;
     }
@@ -101,7 +115,7 @@ public class Character : MonoBehaviour
         }
         else if (SquatState == 0 && count < 1)
         {
-            speed = 4;
+            speed = Origin_speed;
             controller.height = Mathf.Clamp(controller.height + Time.deltaTime * 1.5f, CdHeight / 2, CdHeight);
             controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.75f, 0 - CdHeight * 0.375f, 0), 0);
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.375f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
@@ -187,6 +201,36 @@ public class Character : MonoBehaviour
 
     }
     #endregion
+
+    public static bool NoEnergy = false;
+    public static bool EnergyUse = false;
+    private float EnergyUseRate = 12;
+    private float ChargeRate = 15;
+    public float MaxEnergy = 100;
+    public float Energy = 100;
+    private float ChargeDelay = 1f;
+    float ChargeCounter = 0;
+    private void EnergyUseFunction()
+    {
+        ChargeCounter += Time.deltaTime;
+        if (EnergyUse == true && Energy > 0)
+        {
+            Energy -= EnergyUseRate * Time.deltaTime;
+            ChargeCounter = 0;
+        }
+        else if (EnergyUse == false && ChargeCounter > ChargeDelay && Energy <= MaxEnergy)
+        {
+            Energy += ChargeRate * Time.deltaTime;
+        }
+        else if (Energy <= 0)
+        {
+            NoEnergy = true;
+        }
+        else
+        {
+            NoEnergy = false;
+        }
+    }
 
     private Rigidbody TouchedObjectRb;
     private void OnTriggerEnter(Collider other)

@@ -189,7 +189,7 @@ public class GrabItem : MonoBehaviour
         while (true)
         {
             DistanceToPushedItem = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PushedItem.transform.position.x, PushedItem.transform.position.z));
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.F)|| DistanceToPushedItem > 2f)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.F)|| DistanceToPushedItem > 2f||Character.NoEnergy == true)
             {
                 Range.enabled = false;
                 AnimL.SetInteger("PushPull", 0);
@@ -199,6 +199,7 @@ public class GrabItem : MonoBehaviour
                 CameraRotate.cameratotate = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Character.speed = OriginSpeed;
+                Character.EnergyUse = false;
                 yield return new WaitForSeconds(0.2f);
                 physicMaterialBox.dynamicFriction = 2f;
                 yield break;
@@ -224,6 +225,7 @@ public class GrabItem : MonoBehaviour
                     Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)) * 1.1f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
+                Character.EnergyUse = true;
             }
             else if (Input.GetKey(KeyCode.S))
             {
@@ -250,6 +252,8 @@ public class GrabItem : MonoBehaviour
                     AnimR.SetInteger("PushPull", 0);
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
+                    Character.EnergyUse = false;
+                    Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
                     Cursor.lockState = CursorLockMode.Locked;
                     physicMaterialBox.dynamicFriction = 2f;
@@ -259,6 +263,11 @@ public class GrabItem : MonoBehaviour
                 {
                     PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
+                Character.EnergyUse = true;
+            }
+            else
+            {
+                Character.EnergyUse = false;
             }
             yield return new WaitForSeconds(Time.fixedDeltaTime);
             
