@@ -26,7 +26,6 @@ public class EnergyBar : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(BarShine_fbx.localScale);
         EnergyRatio = character.Energy / character.MaxEnergy;
         energy_Black.localPosition = new Vector2(BlackOriginPosX - BarWidth * (1 - EnergyRatio), energy_Black.localPosition.y);
         energy_Bar.localPosition = new Vector2(BarOriginPosX + BarWidth * (1 - EnergyRatio), energy_Bar.localPosition.y);
