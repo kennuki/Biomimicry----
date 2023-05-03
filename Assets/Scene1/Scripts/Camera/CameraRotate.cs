@@ -138,7 +138,7 @@ public class CameraRotate : MonoBehaviour
     }
 
     public AnimationCurve Curve;
-    float ShakeDuration = 1.5f;
+    float ShakeDuration = 1.4f;
     public IEnumerator CameraShake()
     {
         Vector3 OringinPos = LookPoint.transform.localPosition;
