@@ -24,7 +24,6 @@ public class LightShine : MonoBehaviour
     private float intensity = 1;
     void Update()
     {
-        Debug.Log(Light_Origin_Emission);
         Counter += Time.deltaTime;
         if (Counter > RandomTime)
         {
@@ -56,7 +55,7 @@ public class LightShine : MonoBehaviour
                 Spotlight.intensity = 0.5f;
                 Pointlight.intensity = 0f;
                 intensity = 0.8f;
-                Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity);
+                Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity*0.5f);
                 FadeAllow = true;
             }
             Counter = 0;
