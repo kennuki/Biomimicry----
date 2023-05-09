@@ -9,6 +9,7 @@ TagManager:
   - PushOnly
   - Character
   - Rod
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -21,10 +22,10 @@ TagManager:
   - Camera
   - TextRender
   - Grabbable
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Wall
+  - Floor2
+  - Bubble
   - 
   - 
   - 
