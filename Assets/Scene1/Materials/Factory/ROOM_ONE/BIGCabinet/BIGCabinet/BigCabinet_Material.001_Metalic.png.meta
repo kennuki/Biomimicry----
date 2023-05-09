@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Scene1/Materials/Factory/ROOM_ONE/BIGCabinet/BIGCabinet/BigCabinet_Material.001_Metalic.png.meta
 guid: 5504086983b31644b8ccfda2f21001dd
-========
-guid: 9ecca2c311e2c0642b11ebeea4e320be
->>>>>>>> Stashed changes:Assets/Scene1/Materials/Factory/ROOM_ONE/Bench/Bench_Material_Albedo.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +65,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -81,7 +77,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -93,7 +89,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
