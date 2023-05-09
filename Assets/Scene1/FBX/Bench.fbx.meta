@@ -45,7 +45,11 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
+<<<<<<< Updated upstream
     generateSecondaryUV: 1
+=======
+    generateSecondaryUV: 0
+>>>>>>> Stashed changes
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

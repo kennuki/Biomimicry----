@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scene1/Materials/Factory/ROOM_ONE/Bench/Bench_Material_AO.png.meta
 guid: 4d64bcfbc2882d14da4d549b734c80e7
+========
+guid: 6438123fd0a05fd4ab02adaa4def72a4
+>>>>>>>> Stashed changes:Assets/Scene1/Materials/Factory/ROOM_ONE/Bench/Bench_Material_Emissive.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

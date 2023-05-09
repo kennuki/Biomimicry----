@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scene1/Materials/Factory/ROOM_ONE/Bench/Bench_Material_Albedo.png.meta
 guid: 9ecca2c311e2c0642b11ebeea4e320be
+========
+guid: 6765cf1def9136d49b94abfc60f41b3f
+>>>>>>>> Stashed changes:Assets/Scene1/Materials/Factory/ROOM_ONE/Bench/Bench_Material_Height.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
