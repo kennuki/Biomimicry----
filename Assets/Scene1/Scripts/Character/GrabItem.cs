@@ -92,6 +92,10 @@ public class GrabItem : MonoBehaviour
             }
             Range.enabled = false;
         }
+        else if (other.tag == "Obstacle")
+        {
+            Range.enabled = false;
+        }
     }
 
     public GameObject cm1;

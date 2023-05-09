@@ -161,7 +161,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.52
+    m_Value: -0.452
     min: -1
     max: 1
   xMultiplier:
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: -2.9
+    m_Value: 4
   contrast:
     m_OverrideState: 0
     m_Value: 0
