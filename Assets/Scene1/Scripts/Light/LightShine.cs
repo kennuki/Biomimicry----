@@ -54,8 +54,8 @@ public class LightShine : MonoBehaviour
 
                 Spotlight.intensity = 0.5f;
                 Pointlight.intensity = 0f;
-                intensity = 0.8f;
-                Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity*0.5f);
+                intensity = 0.4f;
+                Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity);
                 FadeAllow = true;
             }
             Counter = 0;
@@ -66,5 +66,6 @@ public class LightShine : MonoBehaviour
             intensity -= Time.deltaTime*1.5f;
             Light.material.SetVector("_EmissionColor", Light_Origin_Emission * (intensity));
         }
+        Debug.Log(Spotlight.intensity);
     }
 }

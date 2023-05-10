@@ -34,6 +34,7 @@ public class GrabItem : MonoBehaviour
     {
         if (other.tag == "Grabbable")
         {
+            grabbleItem = other.GetComponent<GrabbleItem>();
             Range.enabled = false;
             Character.AllProhibit = true;
             GrabbedItem = other.gameObject;
@@ -127,6 +128,7 @@ public class GrabItem : MonoBehaviour
         Range.enabled = false;
     }
 
+
     public Vector3 ThrowForce = new Vector3(60, 100, 200);
     private IEnumerator Throw()
     {
@@ -157,15 +159,20 @@ public class GrabItem : MonoBehaviour
         }
         yield return new WaitForSeconds(Time.deltaTime);
     }
-    public Vector3 GrabOffset = new Vector3(0.2f, -0.01f, 0.1f);
+
+    private GrabbleItem grabbleItem;
+    private Vector3 GrabOffset = new Vector3(0.2f, -0.01f, 0.1f);
+    private Vector3 AngleOffset = new Vector3(0, 90, 180);
     private IEnumerator Grab()
     {
+        AngleOffset = grabbleItem.Angle;
+        GrabOffset = grabbleItem.Offset;
         yield return new WaitForSeconds(0.32f);
         GrabbedItemRb.isKinematic = true;
         GrabbedItem.transform.SetParent(LeftHand);
         GrabbedItem.transform.position = LeftHand.position + transform.rotation * GrabOffset;
         GrabbedItem.transform.eulerAngles = LeftHand.eulerAngles;
-        GrabbedItem.transform.Rotate(new Vector3(0, 90, 180), Space.Self);
+        GrabbedItem.transform.Rotate(AngleOffset, Space.Self);
         yield return new WaitForSeconds(0.3f);
         Character.AllProhibit = false;
     }

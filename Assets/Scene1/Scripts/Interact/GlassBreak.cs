@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GlassBreak : MonoBehaviour
 {
+    public GameObject Card;
+    public PanicRed_PP panicRed_PP;
     public AudioSource audioSource;
-    private AudioClip audioClip;
+    public AudioClip[] audioClip;
     private Transform[] children;
     public BoxCollider colliders;
     bool IfBreak = false;
@@ -14,7 +16,6 @@ public class GlassBreak : MonoBehaviour
     void Start()
     {
         character = GameObject.Find("Character").transform;
-        audioClip = audioSource.clip;
         children = new Transform[GlassCaseBreak.transform.childCount];
         for (int i = 0; i < GlassCaseBreak.transform.childCount; i++)
         {
@@ -38,16 +39,32 @@ public class GlassBreak : MonoBehaviour
         yield return new WaitForSeconds(time);
         if(IfBreak == false)
         {
-            audioSource.PlayOneShot(audioClip);
+            panicRed_PP.State = 0;
+            panicRed_PP.RunTime = 2;
+            audioSource.PlayOneShot(audioClip[0]);
             GlassCaseOrigin.SetActive(false);
             GlassCaseBreak.SetActive(true);
-            doll.SetActive(false);
             IfBreak = true;
             foreach (Transform child in children)
             {
                 child.SetParent(null);
                 child.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(0, 3), 0, 0));
             }
+            doll.SetActive(false);
+            Card.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            audioSource.PlayOneShot(audioClip[1]);
+            yield return new WaitForSeconds(0.1f);
+            panicRed_PP.State = 0;
+            panicRed_PP.RunTime = 3f;
+            yield return new WaitForSeconds(0.4f);
+            doll.transform.position = character.position + character.rotation * new Vector3(0, -1f, 1.5f);
+            doll.transform.SetParent(character);
+            yield return new WaitForSeconds(Time.deltaTime);
+            doll.SetActive(true);
+            yield return new WaitForSeconds(Time.deltaTime * 1);
+            doll.SetActive(false);
+            doll.transform.SetParent(null);
         }
     }
     private IEnumerator GlassBreakCondition2()
@@ -58,16 +75,31 @@ public class GlassBreak : MonoBehaviour
             {
                 if (character.eulerAngles.y > 0 && character.eulerAngles.y < 20 || character.eulerAngles.y < 360 && character.eulerAngles.y > 340)
                 {
-                    audioSource.PlayOneShot(audioClip);
+                    yield return new WaitForSeconds(0.5f);
+                    audioSource.PlayOneShot(audioClip[0],1.5f);
                     GlassCaseOrigin.SetActive(false);
                     GlassCaseBreak.SetActive(true);
-                    doll.SetActive(false);
                     IfBreak = true;
                     foreach (Transform child in children)
                     {
                         child.SetParent(null);
                         child.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(0, 3), 0, 0));
                     }
+                    doll.SetActive(false);
+                    Card.SetActive(true);
+                    yield return new WaitForSeconds(0.1f);
+                    audioSource.PlayOneShot(audioClip[1]);
+                    yield return new WaitForSeconds(0.1f);
+                    panicRed_PP.State = 0;
+                    panicRed_PP.RunTime = 3f;
+                    yield return new WaitForSeconds(0.4f);
+                    doll.transform.position = character.position + character.rotation * new Vector3(0,-1f,1.5f);
+                    doll.transform.SetParent(character);
+                    yield return new WaitForSeconds(Time.deltaTime);
+                    doll.SetActive(true);
+                    yield return new WaitForSeconds(Time.deltaTime*1);
+                    doll.SetActive(false);
+                    doll.transform.SetParent(null);
                 }
             }
             yield return new WaitForSeconds(Time.deltaTime);
