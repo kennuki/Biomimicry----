@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3791022896878654625}
-    m_Position: {x: 142, y: 277, z: 0}
+    m_Position: {x: 140, y: 280, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -31,7 +31,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: Scene
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 1
   m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -42,7 +42,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -623603649343465320, guid: 0f42cd20246ef284e854ff8359b3c8cc, type: 3}
+  m_Motion: {fileID: 7400000, guid: 6b9a804e95b869e4d924e573ddfae870, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
