@@ -6,9 +6,11 @@ public class LookAtTarget : MonoBehaviour
 {
     private Transform target;
     public Transform lookat;
+    private Vector3 OriginTarget;
     private void Start()
     {
         target = GameObject.Find("Character").transform;
+        OriginTarget = target.position;
     }
 
     float AngleDifference;
@@ -19,11 +21,11 @@ public class LookAtTarget : MonoBehaviour
         {
             AngleDifference -= 360;
         }
-        lookat.LookAt(target);
+        lookat.LookAt(new Vector3(target.position.x,OriginTarget.y, target.position.z));
         if ((Mathf.Abs(AngleDifference) < 110))
         {
 
-            transform.LookAt(target);
+            transform.LookAt(new Vector3(target.position.x, OriginTarget.y, target.position.z));
         }
     }
 }

@@ -66,6 +66,6 @@ public class LightShine : MonoBehaviour
             intensity -= Time.deltaTime*1.5f;
             Light.material.SetVector("_EmissionColor", Light_Origin_Emission * (intensity));
         }
-        Debug.Log(Spotlight.intensity);
+
     }
 }
