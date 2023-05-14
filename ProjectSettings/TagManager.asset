@@ -10,6 +10,7 @@ TagManager:
   - Character
   - Rod
   - Obstacle
+  - Interacted
   layers:
   - Default
   - TransparentFX

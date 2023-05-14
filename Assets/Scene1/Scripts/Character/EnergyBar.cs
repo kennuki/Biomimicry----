@@ -37,8 +37,8 @@ public class EnergyBar : MonoBehaviour
     public RectTransform BarShine_fbx;
     float BarTransparent_Delay = 0.3f;
     float BarTransparent_Counter = 0;
-    float BarOrigin_Alpha = 1;
-    float BoardOrigin_Alpha = 0.4f;
+    float BarOrigin_Alpha = 0.8f;
+    float BoardOrigin_Alpha = 0.35f;
     float EnergyCache;
     Vector3 BrightBarOrigin_Scale;
     private void BarTransparentFunction()

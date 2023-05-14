@@ -9,13 +9,11 @@ public class Character : MonoBehaviour
     public GameObject LookPoint;
     public Animator anim;
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
-    public static bool GrabAllow = false;
     void Start()
     {
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
         OffsetLookpointToCharacterY = transform.position.y-LookPoint.transform.position.y;
-        StartCoroutine(GrabThrowfunction());
         Origin_speed = speed;
     }
 
@@ -162,45 +160,7 @@ public class Character : MonoBehaviour
 
 
     #endregion
-    #region GrabThrowFunction
-    public Transform Cm1;
-    private IEnumerator GrabThrowfunction()
-    {
-        while (true)
-        {
-            if (anim.GetInteger("HandState") == 1)
-            {
-                anim.SetInteger("HandState", 2);
-            }
-            else if (anim.GetInteger("HandState") == 3)
-            {
-                anim.SetInteger("HandState", 0);
-            }
-            else if (GrabAllow == true)
-            {
-                if (anim.GetInteger("HandState") == 0)
-                {
-                    GrabAllow = false;
-                    float AngleX = Cm1.eulerAngles.x;
-                    if (AngleX > 180) AngleX -= 360;
-                    AngleX = Mathf.Clamp(AngleX, 0, 45);
-                    anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
-                    anim.SetInteger("HandState", 1);
-                }
-                else if (anim.GetInteger("HandState") == 2)
-                {
-                    GrabAllow = false;
-                    anim.SetInteger("HandState", 3);
-                }
-            }
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
 
-
-
-
-    }
-    #endregion
 
     public static bool NoEnergy = false;
     public static bool EnergyUse = false;
