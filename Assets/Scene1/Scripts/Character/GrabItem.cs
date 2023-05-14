@@ -137,6 +137,7 @@ public class GrabItem : MonoBehaviour
                         {
                             case 1:
                                 {
+                                    PushedItem = Interacted_Item.gameObject;
                                     float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
                                     DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
                                     //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
@@ -258,7 +259,7 @@ public class GrabItem : MonoBehaviour
             GrabbedItemRb.isKinematic = false;
             yield return new WaitForSeconds(0.3f);
             if (GrabbedItemRb.gameObject.transform.parent != null)
-                GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust);
+                GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust*(GrabbedItemRb.mass+0.03f));
             GrabbedItem.transform.SetParent(null);
             yield return new WaitForSeconds(0.3f);
             Character.AllProhibit = false;

@@ -193,12 +193,32 @@ public class Character : MonoBehaviour
     }
 
     private Rigidbody TouchedObjectRb;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         TouchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
         if (TouchedObjectRb != null)
         {
-            TouchedObjectRb.AddForce(transform.rotation * move * 10f);
+
+            Vector2 toObject = new Vector2(other.transform.position.x, other.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
+            Vector2 move2 = new Vector2(move.x,move.z);
+            toObject.Normalize();
+            move2.Normalize();
+            float anglebias = 0;
+            float angleDifference = Vector2.SignedAngle(move2, toObject);
+            if (other.gameObject.GetComponent<GateRotate>() != null)
+            {
+                anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
+            }
+            if (angleDifference <= 60 + anglebias && angleDifference > -60 + anglebias)
+            {
+                TouchedObjectRb.AddForce(move * 4f);
+            }
+            else
+            {
+
+            }
+
+            
         }
     }
 
