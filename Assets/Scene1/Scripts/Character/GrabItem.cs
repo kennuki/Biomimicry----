@@ -32,9 +32,6 @@ public class GrabItem : MonoBehaviour
             else
                 StartCoroutine(Throw());
         }
-        if (Interacted_Item != null)
-        Debug.Log(Interacted_Item.gameObject.name);
-        //Debug.Log(ThrowItem);
     }
 
     public Transform LeftHand;
@@ -58,7 +55,6 @@ public class GrabItem : MonoBehaviour
                 GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
                 GrabAllow = true;
                 ThrowItem = true;
-
                 StartCoroutine(Grab());
                 foreach (GameObject item in VIP_Item)
                 {
@@ -127,11 +123,48 @@ public class GrabItem : MonoBehaviour
         else if (other.tag == "Interacted")
         {
             Interacted_Item = other;
+            InteractFunction();
+            Range.enabled = false;
         }
     }
     private void InteractFunction()
     {
+        if (Interacted_Item != null)
+        {
+            switch (ItemIndex)
+            {
+                case 1:
+                    {
+                        switch (Interacted_Item.gameObject.GetComponent<InteractiveObject>().index)
+                        {
+                            case 1:
+                                {
+                                    float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
+                                    DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+                                    //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
+                                    if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.6f)
+                                    {
+                                        AnimL.SetInteger("Card", 1);
+                                        Range.enabled = false;
+                                        CameraRotate.cameratotate = false;
+                                        Character.AllProhibit = true;
+                                        Character.MoveOnly = false;
+                                        GrabbedItem = Interacted_Item.gameObject;
+                                        GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                                        StartCoroutine(GateOpenFunction());
+                                    }
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
 
+            }
+        }
     }
 
 
@@ -401,5 +434,11 @@ public class GrabItem : MonoBehaviour
         Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
         CameraRotate.cameratotate = true;
+    }
+
+    public GateOpen GateOpen;
+    private IEnumerator GateOpenFunction()
+    {
+        yield break;
     }
 }
