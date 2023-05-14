@@ -77,7 +77,6 @@ public class GrabItem : MonoBehaviour
                 Character.MoveOnly = true;
                 CameraRotate.cameratotate = false;
                 physicMaterialBox.dynamicFriction = 0.4f;
-                InteractFix1.maxspeed = 1.5f;
                 StartCoroutine(PushObject());
             }
             else if (other.tag == "PushOnly" && Range.size.x < 0.2f)
@@ -92,7 +91,6 @@ public class GrabItem : MonoBehaviour
                 Character.MoveOnly = true;
                 CameraRotate.cameratotate = false;
                 physicMaterialBox.dynamicFriction = 0.4f;
-                InteractFix1.maxspeed = 1.5f;
                 StartCoroutine(PushObject2());
             }
             else if (other.tag == "Rod" && Range.size.y < 0.5f && controller.isGrounded == true)
