@@ -301,7 +301,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 1f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 1.5f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -337,13 +337,13 @@ public class GrabItem : MonoBehaviour
                 else if (DistanceToPushedItem < 1f)
                 {
                     Character.speed = Mathf.Clamp(DistanceToPushedItem- 1.1f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)*1.1f)*1.1f;   
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)*1.1f)*1.3f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)) * 1.1f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)) * 1.3f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 Character.EnergyUse = true;
