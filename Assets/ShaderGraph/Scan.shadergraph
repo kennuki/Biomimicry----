@@ -1677,7 +1677,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6f50459015e540e09ce3e39b2b01413e",
     "m_Id": 0,
-    "m_DisplayName": "_NoiseAmount",
+    "m_DisplayName": "NoiseAmount",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

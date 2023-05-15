@@ -210,9 +210,9 @@ public class Character : MonoBehaviour
                 {
                     anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
                 }
-                if (angleDifference <= 60 + anglebias && angleDifference > -60 + anglebias)
+                if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias && Input.GetKey(KeyCode.S)==false)
                 {
-                    TouchedObjectRb.AddForce(move * 7.5f);
+                    TouchedObjectRb.AddForce(move *7.5f);
                 }
                 else
                 {
@@ -237,7 +237,7 @@ public class Character : MonoBehaviour
             {
                 anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
             }
-            if (angleDifference <= 60 + anglebias && angleDifference > -60 + anglebias)
+            if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias)
             {
                 TouchedObjectRb.AddForce(move * 7.5f);
             }

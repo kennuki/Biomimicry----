@@ -14,7 +14,9 @@ public class BoxPushDetect : MonoBehaviour
     }
     private void Update()
     {
-        float angle = Player.transform.eulerAngles.y + transform.eulerAngles.y;
+        float angle = -Player.transform.eulerAngles.y + transform.localEulerAngles.y;
+        if (angle < 0)
+            angle += 360;
         if (angle > 360)
             angle -= 360;
         for (int i = 0; i < 4; i++)
