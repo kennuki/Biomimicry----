@@ -198,9 +198,37 @@ public class Character : MonoBehaviour
         TouchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
         if (TouchedObjectRb != null)
         {
+            if (other.tag != "PushOnly"&& other.tag != "Pushable")
+            {
+                Vector2 toObject = new Vector2(other.transform.position.x, other.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
+                Vector2 move2 = new Vector2(move.x, move.z);
+                toObject.Normalize();
+                move2.Normalize();
+                float anglebias = 0;
+                float angleDifference = Vector2.SignedAngle(move2, toObject);
+                if (other.gameObject.GetComponent<GateRotate>() != null)
+                {
+                    anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
+                }
+                if (angleDifference <= 60 + anglebias && angleDifference > -60 + anglebias)
+                {
+                    TouchedObjectRb.AddForce(move * 7.5f);
+                }
+                else
+                {
+
+                }
+            }          
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        TouchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
+        if (TouchedObjectRb != null)
+        {
 
             Vector2 toObject = new Vector2(other.transform.position.x, other.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
-            Vector2 move2 = new Vector2(move.x,move.z);
+            Vector2 move2 = new Vector2(move.x, move.z);
             toObject.Normalize();
             move2.Normalize();
             float anglebias = 0;
@@ -211,14 +239,13 @@ public class Character : MonoBehaviour
             }
             if (angleDifference <= 60 + anglebias && angleDifference > -60 + anglebias)
             {
-                TouchedObjectRb.AddForce(move * 4f);
+                TouchedObjectRb.AddForce(move * 7.5f);
             }
             else
             {
 
             }
 
-            
         }
     }
 

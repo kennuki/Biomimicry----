@@ -14,7 +14,6 @@ public class GateRotate : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(transform.localEulerAngles.y);
         transform.position = OriginPos;
         float angle = transform.localEulerAngles.y;
         if (angle > 180)
