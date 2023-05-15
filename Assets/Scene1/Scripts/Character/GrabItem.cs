@@ -42,82 +42,91 @@ public class GrabItem : MonoBehaviour
     private int ItemIndex;
     public GameObject[] VIP_Item;
     private Collider Interacted_Item;
+    private Transform Obstacle;
     private void OnTriggerEnter(Collider other)
     {
-        if(ThrowItem == false)
+        if (ThrowItem == false)
         {
-            if (other.tag == "Grabbable")
+            if (Obstacle != null && Vector3.Distance(Obstacle.position, transform.position) > Vector3.Distance(other.transform.position, transform.position) || Obstacle == null)
             {
-                grabbleItem = other.GetComponent<GrabbleItem>();
-                Range.enabled = false;
-                Character.AllProhibit = true;
-                GrabbedItem = other.gameObject;
-                GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
-                GrabAllow = true;
-                ThrowItem = true;
-                StartCoroutine(Grab());
-                foreach (GameObject item in VIP_Item)
+                if (other.tag == "Grabbable")
                 {
-                    if (other.name == item.name)
+
+                    grabbleItem = other.GetComponent<GrabbleItem>();
+                    Range.enabled = false;
+                    Character.AllProhibit = true;
+                    GrabbedItem = other.gameObject;
+                    GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
+                    GrabAllow = true;
+                    ThrowItem = true;
+                    StartCoroutine(Grab());
+                    foreach (GameObject item in VIP_Item)
                     {
-                        ItemName = other.gameObject.name;
-                        ItemIndex = other.gameObject.GetComponent<InteractiveObject>().index;
+                        if (other.name == item.name)
+                        {
+                            ItemName = other.gameObject.name;
+                            ItemIndex = other.gameObject.GetComponent<InteractiveObject>().index;
+                        }
                     }
                 }
-            }
-            else if (other.tag == "Pushable" && Range.size.x < 0.4f)
-            {
-                AnimL.SetInteger("PushPull", 1);
-                AnimR.SetInteger("PushPull", 1);
-                Range.enabled = false;
-                PushedItem = other.gameObject;
-                PushedItemRb = PushedItem.GetComponent<Rigidbody>();
-                physicMaterialBox = PushedItem.GetComponentInChildren<MeshCollider>().material;
-                Character.AllProhibit = true;
-                Character.MoveOnly = true;
-                CameraRotate.cameratotate = false;
-                physicMaterialBox.dynamicFriction = 0.4f;
-                StartCoroutine(PushObject());
-            }
-            else if (other.tag == "PushOnly" && Range.size.x < 0.2f)
-            {
-                AnimL.SetInteger("PushPull", 1);
-                AnimR.SetInteger("PushPull", 1);
-                Range.enabled = false;
-                PushedItem = other.gameObject;
-                PushedItemRb = PushedItem.GetComponent<Rigidbody>();
-                physicMaterialBox = PushedItem.GetComponent<Collider>().material;
-                Character.AllProhibit = true;
-                Character.MoveOnly = true;
-                CameraRotate.cameratotate = false;
-                physicMaterialBox.dynamicFriction = 0.4f;
-                StartCoroutine(PushObject2());
-            }
-            else if (other.tag == "Rod" && Range.size.y < 0.5f && controller.isGrounded == true)
-            {
-                PushedItem = other.gameObject;
-                float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
-                DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-                //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
-                if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.6f)
+                else if (other.tag == "Pushable" && Range.size.x < 0.4f)
                 {
-                    AnimR.SetInteger("Rod", 1);
+                    AnimL.SetInteger("PushPull", 1);
+                    AnimR.SetInteger("PushPull", 1);
                     Range.enabled = false;
-                    CameraRotate.cameratotate = false;
+                    PushedItem = other.gameObject;
+                    PushedItemRb = PushedItem.GetComponent<Rigidbody>();
+                    physicMaterialBox = PushedItem.GetComponentInChildren<BoxCollider>().material;
+                    if (physicMaterialBox == null)
+                    {
+                        physicMaterialBox = PushedItem.GetComponentInChildren<MeshCollider>().material;
+                    }
                     Character.AllProhibit = true;
-                    Character.MoveOnly = false;
-                    GrabbedItem = other.gameObject;
-                    GrabbedItem.GetComponent<BoxCollider>().enabled = false;
-                    StartCoroutine(DoorOpen1());
+                    Character.MoveOnly = true;
+                    CameraRotate.cameratotate = false;
+                    physicMaterialBox.dynamicFriction = 0.4f;
+                    StartCoroutine(PushObject());
                 }
-                Range.enabled = false;
+                else if (other.tag == "PushOnly" && Range.size.x < 0.2f)
+                {
+                    AnimL.SetInteger("PushPull", 1);
+                    AnimR.SetInteger("PushPull", 1);
+                    Range.enabled = false;
+                    PushedItem = other.gameObject;
+                    PushedItemRb = PushedItem.GetComponent<Rigidbody>();
+                    physicMaterialBox = PushedItem.GetComponent<Collider>().material;
+                    Character.AllProhibit = true;
+                    Character.MoveOnly = true;
+                    CameraRotate.cameratotate = false;
+                    physicMaterialBox.dynamicFriction = 0.4f;
+                    StartCoroutine(PushObject2());
+                }
+                else if (other.tag == "Rod" && Range.size.y < 0.5f && controller.isGrounded == true)
+                {
+                    PushedItem = other.gameObject;
+                    float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
+                    DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+                    //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
+                    if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
+                    {
+                        AnimR.SetInteger("Rod", 1);
+                        Range.enabled = false;
+                        CameraRotate.cameratotate = false;
+                        Character.AllProhibit = true;
+                        Character.MoveOnly = false;
+                        GrabbedItem = other.gameObject;
+                        GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                        StartCoroutine(DoorOpen1());
+                    }
+                    Range.enabled = false;
+                }
             }
-            else if (other.tag == "Obstacle")
+            if (other.tag == "Obstacle")
             {
-                Range.enabled = false;
+                Obstacle = other.gameObject.transform;
             }
         }
-        
+
         else if (other.tag == "Interacted")
         {
             Interacted_Item = other;
@@ -205,6 +214,7 @@ public class GrabItem : MonoBehaviour
     bool IfTriggerDetect = false;
     private IEnumerator TriggerDetect()
     {
+        Obstacle = null;
         Range.size = new Vector3(0.1f, 0.25f, 0.1f);
         Range.enabled = true;
         transform.eulerAngles = new Vector3(cm1.transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); 
@@ -235,7 +245,7 @@ public class GrabItem : MonoBehaviour
 
     }
 
-    public Vector3 ThrowForce = new Vector3(60, 100, 200);
+    public Vector3 ThrowForce = new Vector3(50, 80, 160);
     private IEnumerator Throw()
     {
         float ForceAdjust = LookPoint.eulerAngles.x;
@@ -256,15 +266,18 @@ public class GrabItem : MonoBehaviour
             Character.AllProhibit = true;
             GrabAllow = true;
             yield return new WaitForSeconds(0.05f);
+            GrabbedItem.layer = 10;
             GrabbedItemRb.isKinematic = false;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.35f);
             if (GrabbedItemRb.gameObject.transform.parent != null)
-                GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust*(GrabbedItemRb.mass+0.03f));
+                GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust*(GrabbedItemRb.mass+0.05f));
             GrabbedItem.transform.SetParent(null);
             yield return new WaitForSeconds(0.3f);
+            GrabbedItem.layer = 0;
             Character.AllProhibit = false;
             yield return new WaitForSeconds(0.3f);
             ThrowItem = false;
+            AnimL.SetInteger("HandState", 0);
         }
         yield return new WaitForSeconds(Time.deltaTime);
     }
@@ -278,11 +291,15 @@ public class GrabItem : MonoBehaviour
         GrabOffset = grabbleItem.Offset;
         yield return new WaitForSeconds(0.32f);
         GrabbedItemRb.isKinematic = true;
+        yield return new WaitForSeconds(Time.deltaTime);
         GrabbedItem.transform.SetParent(LeftHand);
         GrabbedItem.transform.position = LeftHand.position + transform.rotation * GrabOffset;
         GrabbedItem.transform.eulerAngles = LeftHand.eulerAngles;
         GrabbedItem.transform.Rotate(AngleOffset, Space.Self);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
+        GrabbedItem.transform.position = LeftHand.position + transform.rotation * GrabOffset;
+        yield return new WaitForSeconds(0.2f);
+        AnimL.SetInteger("HandState", 2);
         Character.AllProhibit = false;
     }
 
@@ -336,13 +353,13 @@ public class GrabItem : MonoBehaviour
                 else if (DistanceToPushedItem < 1f)
                 {
                     Character.speed = Mathf.Clamp(DistanceToPushedItem- 1.1f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)*1.1f)*1.3f;   
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)*1.1f)*2f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)) * 1.3f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (1.1f - DistanceToPushedItem)) * 2f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 Character.EnergyUse = true;
@@ -365,7 +382,7 @@ public class GrabItem : MonoBehaviour
                 {
                     Character.speed = 1 +1f - DistanceToPushedItem;
                 }
-                if (DistanceToPushedItem > 1.32f)
+                if (DistanceToPushedItem > 1.5f)
                 {
                     Range.enabled = false;
                     AnimL.SetInteger("PushPull", 0);
