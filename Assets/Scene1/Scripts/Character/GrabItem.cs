@@ -145,6 +145,24 @@ public class GrabItem : MonoBehaviour
                     }
                     Range.enabled = false;
                 }
+                else if (other.gameObject.name == "Rod2" && Range.size.y < 0.5f && controller.isGrounded == true)
+                {
+                    PushedItem = other.gameObject;
+                    float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
+                    DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
+                    //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
+                    if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
+                    {
+                        AnimR.SetInteger("Rod", 1);
+                        Range.enabled = false;
+                        CameraRotate.cameratotate = false;
+                        Character.AllProhibit = true;
+                        Character.MoveOnly = false;
+                        GrabbedItem = other.gameObject;
+                        GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    Range.enabled = false;
+                }
             }
             if (other.tag == "Obstacle")
             {
