@@ -9,9 +9,13 @@ public class GrabItem : MonoBehaviour
     public CharacterController controller;
     public Animator AnimL,AnimR;
     BoxCollider Range;
+    public AudioCharacter audioCharacter;
+    AudioSource audioSource;
+    AudioClip audioClip;
     public static bool ThrowItem = false;
     void Start()
     {
+        audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
     }
@@ -601,5 +605,10 @@ public class GrabItem : MonoBehaviour
 
     }
 
+    private IEnumerator AudioPlay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.PlayOneShot(audioClip);
+    }
 
 }
