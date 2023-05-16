@@ -13,13 +13,13 @@ public class VolumeControl : MonoBehaviour
     {
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
 
-        volumeSlider.value = audioMixer.GetFloat("MasterVolume", out float volume) ? volume : 0f;
+
     }
 
     private void OnVolumeChanged(float value)
     {
         float mappedValue = Mathf.Lerp(-80f, 20f, value);
 
-        audioMixer.SetFloat("MasterVolume", mappedValue);
+        audioMixer.SetFloat("Volume", mappedValue);
     }
 }

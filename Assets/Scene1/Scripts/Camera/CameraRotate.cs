@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class CameraRotate : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class CameraRotate : MonoBehaviour
         Cursor.visible = false;
         cameratotate = true;
         StartCoroutine(LockCursorToMiddle());
+        sensitivity = sensitivitySlider.value;
+        sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
     }
 
     // Update is called once per frame
@@ -80,6 +83,8 @@ public class CameraRotate : MonoBehaviour
     public GameObject LookPoint;
     public GameObject PlayerRotate2;
     public GameObject PlayerRotate;  //control character's rotation that follow the camera
+    private float sensitivity;
+    public Slider sensitivitySlider;
     public float CmRotateRate = 1f;  //rotate speed rate
     public Vector2 va2 = Vector2.zero;      //offset of the cursor
     Vector2 vt2 = Vector2.zero;   //temp that store the cursor's position in the screen
@@ -98,11 +103,11 @@ public class CameraRotate : MonoBehaviour
         va2 = v2 - vt2;
         if (Mathf.Abs(va2.x) > 0f)
         {
-            this.transform.Rotate(Vector3.up * va2.x * CmRotateRate * 80, Space.World);
-            PlayerRotate.transform.Rotate(Vector3.up * va2.x * CmRotateRate * 80, Space.World);
+            this.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
+            PlayerRotate.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
             if (h == 0 && j == 0)
             {
-                PlayerRotate2.transform.Rotate(Vector3.up * -va2.x * CmRotateRate*80, Space.World);
+                PlayerRotate2.transform.Rotate(Vector3.up * -va2.x * CmRotateRate* sensitivity * 80, Space.World);
             }
         }
         float CameraXAngle = this.transform.eulerAngles.x;
@@ -119,7 +124,7 @@ public class CameraRotate : MonoBehaviour
         {
             if (va2.y > 0 && CameraXAngle > -35f)
             {
-                transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate / 30;
+                transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate* sensitivity / 30;
                 Quaternion targetRotation = Quaternion.Euler(faceAngle - 90, transform.eulerAngles.y, transform.eulerAngles.z);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.2f);
 
@@ -128,13 +133,17 @@ public class CameraRotate : MonoBehaviour
             }
             else if (va2.y <= 0 && CameraXAngle < 45f)
             {
-                transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate / 30;
+                transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate* sensitivity / 30;
                 Quaternion targetRotation = Quaternion.Euler(faceAngle - 90, transform.eulerAngles.y, transform.eulerAngles.z);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.2f);
             }
         }
         va2 = Vector2.zero;
         vt2 = v2;
+    }
+    void OnSensitivityChanged(float value)
+    {
+        sensitivity = value;
     }
 
     public AnimationCurve Curve;

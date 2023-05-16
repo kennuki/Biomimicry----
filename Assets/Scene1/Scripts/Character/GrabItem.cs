@@ -50,8 +50,29 @@ public class GrabItem : MonoBehaviour
     {
         if (ThrowItem == false)
         {
-            if (Obstacle != null && Vector3.Distance(Obstacle.position, transform.position) > Vector3.Distance(other.transform.position, transform.position) || Obstacle == null)
+            Transform raycastOrigin = transform;
+            Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
+            RaycastHit hit;
+            bool NoObstacle = true;
+            LayerMask layerMask = 1 << 6;
+
+            if (Physics.Raycast(ray, out hit,6, layerMask))
             {
+                Vector3 collisionPoint = hit.point;
+                if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
+                {
+                    NoObstacle = true;
+                }
+                else
+                {
+                    NoObstacle = false;
+                }
+            }
+            if (Obstacle != null && NoObstacle == true || Obstacle == null)
+            {
+
+               
+                
                 if (other.tag == "Grabbable")
                 {
 
@@ -74,7 +95,6 @@ public class GrabItem : MonoBehaviour
                 }
                 else if (other.tag == "Pushable" && Range.size.x < 0.2f)
                 {
-                    Debug.Log(other.gameObject.name);
                     AnimL.SetInteger("PushPull", 1);
                     AnimR.SetInteger("PushPull", 1);
                     Range.enabled = false;
@@ -128,11 +148,12 @@ public class GrabItem : MonoBehaviour
             }
             if (other.tag == "Obstacle")
             {
+              
                 Obstacle = other.gameObject.transform;
             }
         }
 
-        else if (other.tag == "Interacted")
+        else if (other.tag == "Interacted" && Range.size.y < 2f && controller.isGrounded == true)
         {
             Interacted_Item = other;
             InteractFunction();
@@ -153,7 +174,7 @@ public class GrabItem : MonoBehaviour
                                 {
                                     float PlayerToScan_Y = Mathf.Abs(transform.position.y - Interacted_Item.transform.position.y);
                                     DistanceToPushedItem = Vector3.Distance(transform.position, Interacted_Item.transform.position);
-                                    if (DistanceToPushedItem < 1f && PlayerToScan_Y < 0.4f && DistanceToPushedItem > 0.6f)
+                                    if (DistanceToPushedItem < 1f && PlayerToScan_Y < 0.2f && DistanceToPushedItem > 0.6f)
                                     {
                                         AnimL.SetInteger("Scan", 1);
                                         Range.enabled = false;
@@ -360,22 +381,22 @@ public class GrabItem : MonoBehaviour
                 AnimL.SetInteger("PushPull", 1);
                 AnimR.SetInteger("PushPull", 1);
 
-                if (DistanceToPushedItem >= 0.85f)
+                if (DistanceToPushedItem >= 0.65f)
                 {
                     Character.speed = 1+DistanceToPushedItem-0.9f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.85f - DistanceToPushedItem) * 1f) * 0f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 1f) * 0f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                else if (DistanceToPushedItem < 0.8f)
+                else if (DistanceToPushedItem < 0.6f)
                 {
-                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.9f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.9f - DistanceToPushedItem))*1.2f;   
+                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.7f, 0, 1);
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.7f - DistanceToPushedItem))*1.2f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.9f - DistanceToPushedItem)) * 1.2f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.7f - DistanceToPushedItem)) * 1.2f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 if (DistanceToPushedItem > 1.6f)
@@ -401,14 +422,14 @@ public class GrabItem : MonoBehaviour
                 DistanceToPushedItem = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PushedItem.transform.position.x, PushedItem.transform.position.z));
                 float maxSpeed = 1;
                 Vector3 vel = PushedItemRb.velocity;
-                if (DistanceToPushedItem > 0.7f)
+                if (DistanceToPushedItem > 0.65f)
                 {
                     Character.speed = 1;
-                    Force = transform.rotation * Vector3.back * PushForce * (1 + (DistanceToPushedItem-0.6f) * 5f);
+                    Force = transform.rotation * Vector3.back * PushForce * (1 + (DistanceToPushedItem-0.65f) * 5f);
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
 
                 }
-                else if (DistanceToPushedItem < 0.7f)
+                else if (DistanceToPushedItem < 0.65f)
                 {
                     Character.speed = 1 +1f - DistanceToPushedItem;
                 }
@@ -491,6 +512,7 @@ public class GrabItem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         AnimL.SetInteger("Scan", 0);
         yield return new WaitForSeconds(1.8f);
+        Interacted_Item = null;
         Character.AllProhibit = false;
         Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -514,7 +536,7 @@ public class GrabItem : MonoBehaviour
             direction = PushedItem.transform.position - transform.position;
             normalizedDirection = direction.normalized;
             elevationAngle = Mathf.Atan2(normalizedDirection.y, Mathf.Sqrt(normalizedDirection.x * normalizedDirection.x + normalizedDirection.z * normalizedDirection.z)) * Mathf.Rad2Deg;
-            TargetEulerAngle = new Vector3(0 - elevationAngle - 10, cm1.transform.localEulerAngles.y, cm1.transform.localEulerAngles.z);
+            TargetEulerAngle = new Vector3(0 - elevationAngle - 18, cm1.transform.localEulerAngles.y, cm1.transform.localEulerAngles.z);
             Cm1AngleX = cm1.transform.localEulerAngles.x;
             if (Cm1AngleX > 180)
             {
