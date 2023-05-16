@@ -119,6 +119,12 @@ public class Character : MonoBehaviour
             LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.375f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
         }
     }
+    public void Squat() 
+    {
+        SquatState = Mathf.Abs(SquatState - 1);
+        count = 0;
+
+    }
 
 
     #endregion
@@ -155,6 +161,16 @@ public class Character : MonoBehaviour
             SquatState = 0;
             c = 0;
             v1 = -55;
+        }
+    }
+    public void Jump(float intensity)
+    {
+        if (controller.isGrounded == true)
+        {
+            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
+            SquatState = 0;
+            c = 0;
+            v1 = -55*intensity;
         }
     }
 

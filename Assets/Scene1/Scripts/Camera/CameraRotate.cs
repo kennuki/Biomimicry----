@@ -122,7 +122,7 @@ public class CameraRotate : MonoBehaviour
         faceAngle = Mathf.Atan2(XZDistance, LookPoint.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
         if (Mathf.Abs(va2.y) >= 0f)
         {
-            if (va2.y > 0 && CameraXAngle > -35f)
+            if (va2.y > 0 && CameraXAngle > -40f)
             {
                 transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate* sensitivity / 30;
                 Quaternion targetRotation = Quaternion.Euler(faceAngle - 90, transform.eulerAngles.y, transform.eulerAngles.z);
@@ -131,7 +131,7 @@ public class CameraRotate : MonoBehaviour
 
 
             }
-            else if (va2.y <= 0 && CameraXAngle < 45f)
+            else if (va2.y <= 0 && CameraXAngle < 70f)
             {
                 transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate* sensitivity / 30;
                 Quaternion targetRotation = Quaternion.Euler(faceAngle - 90, transform.eulerAngles.y, transform.eulerAngles.z);

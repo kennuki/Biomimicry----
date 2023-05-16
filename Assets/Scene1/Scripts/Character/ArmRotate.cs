@@ -7,12 +7,13 @@ public class ArmRotate : MonoBehaviour
     public Transform PlayerCamera;
     private void Update()
     {
-        Vector3 TargetRotation = new Vector3(PlayerCamera.eulerAngles.x-10 , transform.eulerAngles.y, transform.eulerAngles.z);
-        if (TargetRotation.x > 180)
-        {
-            TargetRotation.x -= 360;
-        }
+        Vector3 TargetRotation = new Vector3(-PlayerCamera.eulerAngles.x , transform.eulerAngles.y, transform.eulerAngles.z);
         Vector3 OriginRotation = transform.eulerAngles;
+
+        if (TargetRotation.x < -180)
+        {
+            TargetRotation.x += 360;
+        }
         if (OriginRotation.x > 180)
         {
             OriginRotation.x -= 360;

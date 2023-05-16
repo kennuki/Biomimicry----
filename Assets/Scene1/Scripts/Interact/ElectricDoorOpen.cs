@@ -40,7 +40,7 @@ public class ElectricDoorOpen : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Rod_Camera.Priority = 0;
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(2f);
         Camera.main.cullingMask &= ~(1 << layerIndex);
     }
     private IEnumerator ArmR_Adjust()

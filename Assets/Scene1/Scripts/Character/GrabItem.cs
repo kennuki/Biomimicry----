@@ -145,7 +145,7 @@ public class GrabItem : MonoBehaviour
                     }
                     Range.enabled = false;
                 }
-                else if (other.gameObject.name == "Rod2" && Range.size.y < 0.5f && controller.isGrounded == true)
+                else if (other.gameObject.name == "Board" && Range.size.y < 0.5f && controller.isGrounded == true &&other.tag != "Rod")
                 {
                     PushedItem = other.gameObject;
                     float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
@@ -160,8 +160,14 @@ public class GrabItem : MonoBehaviour
                         Character.MoveOnly = false;
                         GrabbedItem = other.gameObject;
                         GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                        StartCoroutine(ElectricityRecover());
                     }
                     Range.enabled = false;
+                }
+                else if(other.gameObject.name == "Chair")
+                {
+                    GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                    StartCoroutine(SitDown());
                 }
             }
             if (other.tag == "Obstacle")
@@ -298,6 +304,8 @@ public class GrabItem : MonoBehaviour
 
     }
 
+
+
     public Vector3 ThrowForce = new Vector3(50, 80, 160);
     private IEnumerator Throw()
     {
@@ -307,28 +315,29 @@ public class GrabItem : MonoBehaviour
             ForceAdjust -= 360;
         }
 
-        ForceAdjust = ForceAdjust / -45 + 1;
+        ForceAdjust = ForceAdjust / 45 + 1;
         Vector3 AdjustForce = ThrowForce;
         AdjustForce.x = ThrowForce.x / ForceAdjust;
-        AdjustForce.y = ThrowForce.y - ForceAdjust * 20;
-
+        AdjustForce.y = ThrowForce.y - ForceAdjust * 25;
         if (GrabbedItem != null)
         {
+            Physics.IgnoreLayerCollision(7, 10);
             ItemName = null;
             ItemIndex = 0;
             Character.AllProhibit = true;
             GrabAllow = true;
+            GrabbedItemRb.useGravity = false;
             yield return new WaitForSeconds(0.05f);
-            GrabbedItem.layer = 10;
             GrabbedItemRb.isKinematic = false;
             yield return new WaitForSeconds(0.35f);
             if (GrabbedItemRb.gameObject.transform.parent != null)
-                GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust*(GrabbedItemRb.mass+0.05f));
-            GrabbedItem.transform.SetParent(null);
+                GrabbedItem.transform.SetParent(null);
+            GrabbedItemRb.AddForce(LookPoint.rotation * AdjustForce * ForceAdjust*(GrabbedItemRb.mass+0.05f));
+            GrabbedItemRb.useGravity = true;
             yield return new WaitForSeconds(0.3f);
-            GrabbedItem.layer = 0;
             Character.AllProhibit = false;
             yield return new WaitForSeconds(0.3f);
+            Physics.IgnoreLayerCollision(7, 10, false);
             ThrowItem = false;
             AnimL.SetInteger("HandState", 0);
         }
@@ -521,6 +530,21 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
     }
 
+    public GameObject chair;
+    public StageRoutine stageRoutine;
+    private IEnumerator ElectricityRecover()
+    {
+        chair.SetActive(true);
+        stageRoutine.enabled = true;
+        yield return new WaitForSeconds(1f);
+        AnimR.SetInteger("Rod", 0);
+        yield return new WaitForSeconds(1f);
+        Character.AllProhibit = false;
+        Character.MoveOnly = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        CameraRotate.cameratotate = true;
+    }
+
     public ScanScreen Screen;
     private IEnumerator GateOpenFunction(bool ScanResult)
     {
@@ -537,6 +561,16 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         yield break;
     }
+
+    public MoveToTarget moveToTarget;
+    private IEnumerator SitDown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        moveToTarget.enabled = true;
+
+    }
+
+
 
     private IEnumerator PushLookAngleAdjust()
     {
@@ -566,4 +600,6 @@ public class GrabItem : MonoBehaviour
         }
 
     }
+
+
 }
