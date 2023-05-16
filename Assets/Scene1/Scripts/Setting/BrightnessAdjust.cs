@@ -35,7 +35,7 @@ public class BrightnessAdjust : MonoBehaviour
     {
         colorAdjustments.postExposure.Override(initialExposure + value);
 
-        colorAdjustments.contrast.Override(initialContrast - value);
+        colorAdjustments.contrast.Override(initialContrast - value*1.5f);
 
         colorAdjustments.saturation.Override(initialSaturation - value);
 

@@ -54,7 +54,7 @@ public class GrabItem : MonoBehaviour
             Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
             RaycastHit hit;
             bool NoObstacle = true;
-            LayerMask layerMask = 1 << 6;
+            LayerMask layerMask = 1 << 6 | 1 << 12;
 
             if (Physics.Raycast(ray, out hit,6, layerMask))
             {
@@ -381,22 +381,22 @@ public class GrabItem : MonoBehaviour
                 AnimL.SetInteger("PushPull", 1);
                 AnimR.SetInteger("PushPull", 1);
 
-                if (DistanceToPushedItem >= 0.65f)
+                if (DistanceToPushedItem >= 0.7f)
                 {
-                    Character.speed = 1+DistanceToPushedItem-0.9f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 1f) * 0f;
+                    Character.speed = 1+DistanceToPushedItem-0.65f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 8f) * 1.2f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                else if (DistanceToPushedItem < 0.6f)
+                else if (DistanceToPushedItem < 0.65f)
                 {
                     Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.7f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.7f - DistanceToPushedItem))*1.2f;   
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem))*1.2f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.7f - DistanceToPushedItem)) * 1.2f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem)*5f) * 1.2f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 if (DistanceToPushedItem > 1.6f)
