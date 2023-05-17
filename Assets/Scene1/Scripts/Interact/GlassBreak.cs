@@ -93,7 +93,7 @@ public class GlassBreak : MonoBehaviour
                     panicRed_PP.State = 0;
                     panicRed_PP.RunTime = 3f;
                     yield return new WaitForSeconds(0.4f);
-                    doll.transform.position = character.position + character.rotation * new Vector3(0,-1f,1.5f);
+                    doll.transform.position = character.position + character.rotation * new Vector3(0,0.7f,1f);
                     doll.transform.SetParent(character);
                     yield return new WaitForSeconds(Time.deltaTime);
                     doll.SetActive(true);

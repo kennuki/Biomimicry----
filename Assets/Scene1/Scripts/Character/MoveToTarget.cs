@@ -97,6 +97,7 @@ public class MoveToTarget : MonoBehaviour
 
     }
 
+    public GameObject Boss;
     public Light light1;
     public Light light2;
     public Light light3;
@@ -158,6 +159,7 @@ public class MoveToTarget : MonoBehaviour
                     routine1.enabled = true;
                 }
             }
+            Boss.SetActive(true);
             yield return null;
         }
         elapsedTime = 0f;

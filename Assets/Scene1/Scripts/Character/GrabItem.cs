@@ -130,7 +130,7 @@ public class GrabItem : MonoBehaviour
                     physicMaterialBox.dynamicFriction = 0.4f;
                     StartCoroutine(PushObject2());
                 }
-                else if (other.tag == "Rod" && Range.size.y < 0.5f && controller.isGrounded == true)
+                else if (other.tag == "Rod" && Range.size.y < 0.5f && controller.isGrounded == true&&new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")).magnitude ==0)
                 {
                     PushedItem = other.gameObject;
                     float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
@@ -138,6 +138,8 @@ public class GrabItem : MonoBehaviour
                     //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
                     if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
                     {
+                        armRotate1.enabled = false;
+                        armRotate2.enabled = false;
                         AnimR.SetInteger("Rod", 1);
                         Range.enabled = false;
                         CameraRotate.cameratotate = false;
@@ -415,19 +417,19 @@ public class GrabItem : MonoBehaviour
                 if (DistanceToPushedItem >= 0.7f)
                 {
                     Character.speed = 1+DistanceToPushedItem-0.65f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 8f) * 1.2f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 8f) * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else if (DistanceToPushedItem < 0.65f)
                 {
                     Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.7f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem))*1.2f;   
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem))*1.4f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem)*5f) * 1.2f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem)*5f) * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 if (DistanceToPushedItem > 1.6f)
@@ -502,8 +504,15 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 1f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
+                    int clip = Random.Range(3, 6);
+                    audioClip = audioCharacter.AudioClip[clip];
+                    if(audioSource.isPlaying == false)
+                    {
+                        audioSource.PlayOneShot(audioClip);
+                    }
+
                 }
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -521,6 +530,7 @@ public class GrabItem : MonoBehaviour
 
     }
 
+    public ArmRotate armRotate1, armRotate2;
     public ElectricDoorOpen ElectricDoorOpen;
     private IEnumerator DoorOpen1()
     {
@@ -528,6 +538,8 @@ public class GrabItem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         AnimR.SetInteger("Rod", 0);
         yield return new WaitForSeconds(1.8f);
+        armRotate1.enabled = true;
+        armRotate2.enabled = true;
         Character.AllProhibit = false;
         Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
