@@ -12,6 +12,7 @@ TagManager:
   - Obstacle
   - Interacted
   - Floor1
+  - Glass
   layers:
   - Default
   - TransparentFX
