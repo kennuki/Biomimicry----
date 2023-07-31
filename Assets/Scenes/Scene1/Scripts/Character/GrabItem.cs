@@ -243,7 +243,7 @@ public class GrabItem : MonoBehaviour
         }
     }
 
-    public FlashLight flash;
+    public FlashLight flash,flash2;
     private IEnumerator ChipGetFunction()
     {
         while (true)
@@ -254,6 +254,7 @@ public class GrabItem : MonoBehaviour
                     {
                         yield return new WaitForSeconds(0.32f);
                         flash.enabled = true;
+                        flash2.enabled = true;
                         ItemName = null;
                         yield return new WaitForSeconds(Time.deltaTime);
                         ThrowItem = false;
