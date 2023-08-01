@@ -22,7 +22,6 @@ public class GrabItem : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(AnimL.GetInteger("HandState"));
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
             StartCoroutine(TriggerDetect());

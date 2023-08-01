@@ -28,6 +28,10 @@ public class ColliderFix : MonoBehaviour
                 {
                     isColliding = true;
                 }
+                else if (hit.transform.gameObject.tag == "Glass")
+                {
+                    isColliding = true;
+                }
             }
             else
             {
