@@ -82,7 +82,11 @@ public class MoveToTarget : MonoBehaviour
         {
             if (CurrentEulerAngles.y > 180)
             {
-                CurrentEulerAngles-= new Vector3(0, 360, 0);
+                //CurrentEulerAngles-= new Vector3(0, 360, 0);
+            }
+            if (CurrentEulerAngles.y - targetRotation.y > 180)
+            {
+                CurrentEulerAngles -= new Vector3(0, 360, 0);
             }
             CurrentEulerAngles = Vector3.Lerp(CurrentEulerAngles, targetRotation, 0.02f);
             transform.eulerAngles = CurrentEulerAngles;
@@ -105,6 +109,8 @@ public class MoveToTarget : MonoBehaviour
     public Light light5;
     public Light light6;
     public Light light7;
+    public Light light8;
+    public Light light9;
     public GameObject FakeSpotlight1;
     public GameObject FakeSpotlight2;
     public Renderer[] StageLight;
@@ -121,7 +127,8 @@ public class MoveToTarget : MonoBehaviour
         float OriginIntensity3 = light3.intensity;
         float OriginIntensity4 = light4.intensity;
         float OriginIntensity5 = light5.intensity;
-
+        float OriginIntensity8 = light8.intensity;
+        float OriginIntensity9 = light9.intensity;
         while (elapsedTime < 5f)
         {
             elapsedTime += Time.deltaTime;
@@ -136,7 +143,9 @@ public class MoveToTarget : MonoBehaviour
             light3.intensity = Mathf.Lerp(OriginIntensity3, 0, t);
             light4.intensity = Mathf.Lerp(OriginIntensity4, 0, t);
             light5.intensity = Mathf.Lerp(OriginIntensity5, 0, t);
-            colorAdjustments.postExposure.value = Mathf.Lerp(initialExposure, 2.5f, t);
+            light8.intensity = Mathf.Lerp(OriginIntensity8, 0, t);
+            light9.intensity = Mathf.Lerp(OriginIntensity9, 0, t);
+            colorAdjustments.postExposure.value = Mathf.Lerp(initialExposure, 0, t);
             yield return null;
         }
         yield return new WaitForSeconds(2f);
@@ -151,7 +160,8 @@ public class MoveToTarget : MonoBehaviour
             light2.intensity = Mathf.Lerp(0,1, t);
             light6.intensity = Mathf.Lerp(0, 1f, t);
             light7.intensity = Mathf.Lerp(0, 1f, t);
-            colorAdjustments.postExposure.value = Mathf.Lerp(1, initialExposure-1.5f, t);
+
+            colorAdjustments.postExposure.value = Mathf.Lerp(0, initialExposure-1.5f, t);
             if (elapsedTime > 1&& elapsedTime<1.1f)
             {
                 foreach (DynamicSpotLightRoutine1 routine1 in dynamicSpotLights)

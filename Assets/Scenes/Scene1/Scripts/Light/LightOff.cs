@@ -6,32 +6,45 @@ public class LightOff : MonoBehaviour
 {
     private Light SpotLight;
     private Transform Character;
+
+    private float initialIntensity;
     public float OffDistance = 40;
+    public float DecreasingRate = 1f;
+    public bool Off_On = true;
     private void Start()
     {
         SpotLight = this.GetComponent<Light>();
         Character = GameObject.Find("Character").transform;
+        initialIntensity = SpotLight.intensity;
     }
 
-    
+
     void Update()
     {
-        if (Vector3.Distance(Character.transform.position, transform.position) > OffDistance)
+        float intensityDelta = Vector3.Distance(Character.transform.position, transform.position);
+        if(Off_On == true)
         {
-            if(SpotLight!= null)
+            if (intensityDelta > OffDistance)
             {
-                SpotLight.enabled = false;
-            }
-        }
-        else
-        {
-            if (SpotLight != null)
-            {
-                if(SpotLight.enabled == false)
+                SpotLight.intensity = Mathf.Max(initialIntensity - (intensityDelta - OffDistance) * DecreasingRate, 0.0f);
+                if (SpotLight != null && intensityDelta > OffDistance + initialIntensity)
                 {
-                    SpotLight.enabled = true;
+                    SpotLight.enabled = false;
+                }
+            }
+            else
+            {
+                initialIntensity = SpotLight.intensity;
+                if (SpotLight != null)
+                {
+                    if (SpotLight.enabled == false)
+                    {
+                        SpotLight.enabled = true;
+                        SpotLight.intensity = initialIntensity;
+                    }
                 }
             }
         }
+
     }
 }

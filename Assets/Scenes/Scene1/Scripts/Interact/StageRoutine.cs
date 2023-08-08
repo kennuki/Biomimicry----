@@ -7,14 +7,14 @@ public class StageRoutine : MonoBehaviour
     public Animator Switch;
 
     public GameObject[] objectsToEnable;
-    public Material emissionMaterial;
+    public GameObject[] objectsToEnable2;
+    public float[] intensity;
     public float targetEmission = 1f;
     public float flashProbability = 0.2f;
     public float flashDuration = 0.5f;
     public float flashTime = 0.1f;
     public float minDelay = 0f;
     public float maxDelay = 0.1f;
-    private int currentIndex = 0;
 
 
     public Light targetLight;
@@ -27,7 +27,11 @@ public class StageRoutine : MonoBehaviour
     public float targetIntensity2;
     public float fadeDuration2 = 1.5f;
 
-
+    public Light targetLight5;
+    public Light targetLight6;
+    public Light targetLight7;
+    public float targetIntensity3;
+    public float targetIntensity4;
 
     private float startIntensity; 
     private float timer; 
@@ -36,24 +40,25 @@ public class StageRoutine : MonoBehaviour
         Switch.enabled = true;
         startIntensity = targetLight.intensity; 
         timer = 0f; 
-        StartCoroutine(EnableObjectsWithDelay());
+        StartCoroutine(EnableObjectsWithDelay(objectsToEnable, intensity[0]));
+        StartCoroutine(EnableObjectsWithDelay(objectsToEnable2, intensity[1]));
     }
 
-    private System.Collections.IEnumerator EnableObjectsWithDelay()
+    private System.Collections.IEnumerator EnableObjectsWithDelay(GameObject[]gameObjects, float Intensity)
     {
+        int currentIndex = 0;
         yield return new WaitForSeconds(4f);
-        while (currentIndex < objectsToEnable.Length)
+        while (currentIndex < gameObjects.Length)
         {
             float delay = Random.Range(minDelay, maxDelay);
             yield return new WaitForSeconds(delay);
 
 
-            Renderer renderer = objectsToEnable[currentIndex].GetComponent<Renderer>();
 
-            Material material = new Material(emissionMaterial);
-            renderer.material = material;
+            Renderer renderer = gameObjects[currentIndex].GetComponent<Renderer>();
 
-            StartCoroutine(AnimateEmission(material));
+
+            StartCoroutine(AnimateEmission(renderer, Intensity));
 
 
 
@@ -62,32 +67,33 @@ public class StageRoutine : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator AnimateEmission(Material material)
+    private System.Collections.IEnumerator AnimateEmission(Renderer render,float Intensity)
     {
-        Color targetEmissionColor = Color.white * targetEmission;
-        if(currentIndex == 0)
+        Color targetEmissionColor = render.material.GetColor("_BaseColor") * Intensity;
+        yield return null;
+        /*if(currentIndex == 0)
         {
-            targetEmissionColor = Color.white * 4;
-        }
+            targetEmissionColor = Color.white * Intensity;
+        }*/
         float elapsedTime = 0f;
 
         while (elapsedTime < 0.3f)
         {
             elapsedTime += Time.deltaTime;
             Color emissionColor = Color.Lerp(Color.black, targetEmissionColor, elapsedTime);
-            material.SetColor("_EmissionColor", emissionColor);
+            render.material.SetColor("_EmissionColor", targetEmissionColor);
             yield return null;
         }
-        material.SetColor("_EmissionColor", targetEmissionColor);
+        render.material.SetColor("_EmissionColor", targetEmissionColor);
         if (Random.value < flashProbability)
         {
-            yield return StartCoroutine(AnimateFlashing(material));
+            yield return StartCoroutine(AnimateFlashing(render));
         }
     }
 
-    private System.Collections.IEnumerator AnimateFlashing(Material material)
+    private System.Collections.IEnumerator AnimateFlashing(Renderer render)
     {
-        Color initialEmissionColor = material.GetColor("_EmissionColor");
+        Color initialEmissionColor = render.material.GetColor("_EmissionColor");
         float minEmission = targetEmission / 4f + Random.Range(0f, targetEmission / 2f);
         float maxEmission = targetEmission;
         float counter =0f;
@@ -101,7 +107,7 @@ public class StageRoutine : MonoBehaviour
             float t = counter / flashTime;
             float emission = increasing ? Mathf.Lerp(minEmission, maxEmission, t) : Mathf.Lerp(maxEmission, minEmission, t);
             Color newEmissionColor = Color.white * emission;
-            material.SetColor("_EmissionColor", newEmissionColor);
+            render.material.SetColor("_EmissionColor", newEmissionColor);
             if (t >= 1f)
             {
                 counter = 0f;
@@ -112,7 +118,7 @@ public class StageRoutine : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        material.SetColor("_EmissionColor", initialEmissionColor);
+        render.material.SetColor("_EmissionColor", initialEmissionColor);
         this.enabled = false;
     }
 
@@ -124,7 +130,7 @@ public class StageRoutine : MonoBehaviour
         {
             if (timer <= fadeDuration+4)
             {
-                float t = timer-4 / fadeDuration;
+                float t = (timer-4) / fadeDuration;
                 float currentIntensity = Mathf.Lerp(startIntensity, targetIntensity, t);
                 targetLight.intensity = currentIntensity;
                 targetLight2.intensity = currentIntensity;
@@ -136,15 +142,37 @@ public class StageRoutine : MonoBehaviour
             }
             if (timer <= fadeDuration2+4)
             {
-                float t2 = timer-4 / fadeDuration2;
-                float currentIntensity2 = Mathf.Lerp(0, targetIntensity2, t2);
-                targetLight3.intensity = currentIntensity2;
-                targetLight4.intensity = currentIntensity2;
+                float t = (timer - 4) / fadeDuration2;
+                float currentIntensity = Mathf.Lerp(0, targetIntensity2, t);
+                targetLight3.intensity = currentIntensity;
+                targetLight4.intensity = currentIntensity;
             }
             else
             {
                 targetLight3.intensity = targetIntensity2;
                 targetLight4.intensity = targetIntensity2;
+            }
+            if (timer <= fadeDuration2 + 4)
+            {
+                float t = (timer - 4) / fadeDuration2;
+                float currentIntensity = Mathf.Lerp(0, targetIntensity3, t);
+                targetLight5.intensity = currentIntensity;
+                targetLight6.intensity = currentIntensity;
+            }
+            else
+            {
+                targetLight5.intensity = targetIntensity3;
+                targetLight6.intensity = targetIntensity3;
+            }
+            if (timer <= fadeDuration2 + 4)
+            {
+                float t = (timer - 4) / fadeDuration2;
+                float currentIntensity = Mathf.Lerp(0, targetIntensity4, t);
+                targetLight7.intensity = currentIntensity;
+            }
+            else
+            {
+                targetLight7.intensity = targetIntensity4;
             }
         }
        
