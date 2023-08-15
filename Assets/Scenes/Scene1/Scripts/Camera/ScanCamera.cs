@@ -16,7 +16,7 @@ public class ScanCamera : MonoBehaviour
         Field_Of_View = Cm.fieldOfView;
         NearPlane = Cm.nearClipPlane;
         GlassRotate = TargetGlass.rotation;
-        OriginRotation = transform.rotation;
+        OriginRotation = Quaternion.Euler(0, 0, 0);
         CameraOriginPos = transform.position;
         ReflectorScaleX = Reflector.localScale.x;
     }
@@ -43,9 +43,11 @@ public class ScanCamera : MonoBehaviour
     {
         GlassRotate = TargetGlass.rotation;
         Vector3 ABVector = transform.position - CharacterCamera.position;
-        Vector3 ABOriginVector = new Vector3(CameraOriginPos.x, transform.position.y, CameraOriginPos.z) - CharacterCamera.position;
+        Vector3 ABOriginVectorNoY = new Vector3(CameraOriginPos.x, transform.position.y, CameraOriginPos.z) - CharacterCamera.position;
+        Vector3 ABOriginVector = CameraOriginPos - CharacterCamera.position;
         Vector3 MirrorFacingVector = Reflector.up;
-        float angle = Vector3.Angle(MirrorFacingVector, ABOriginVector);
+        Vector3 MIrrorHeightVector = Reflector.forward;
+        float angle = Vector3.Angle(Reflector.up, ABOriginVector);
         if (angle < 90)
         {
             MirrorFacingVector = -Reflector.up;
@@ -62,8 +64,8 @@ public class ScanCamera : MonoBehaviour
         }
         Vector3 Projection_Y = Vector3.Project(ABVector, MirrorFacingVector);
         Vector3 Projection_Y_Target;
-        Vector3 Projection_Y2 = Vector3.Project(ABOriginVector, MirrorFacingVector);
-        Vector3 Projection_X2 = ABOriginVector - Projection_Y2;
+        Vector3 Projection_Y2 = Vector3.Project(ABOriginVectorNoY, MirrorFacingVector);
+        Vector3 Projection_X2 = ABOriginVectorNoY - Projection_Y2;
         float DistanceY = Projection_Y.magnitude;
         float DistanceY2 = Projection_Y2.magnitude;
         float Distance_MirrorCm_Mirror = Vector3.Distance(transform.position,CameraOriginPos);
@@ -78,13 +80,13 @@ public class ScanCamera : MonoBehaviour
         {
             Cm.fieldOfView = Field_Of_View;
         }
+        Vector3 Projection_Z = Vector3.Project(ABOriginVector, MIrrorHeightVector);
         if (DistanceY2 < MirrorFocusPoint && DistanceY < DistanceY2 + (MirrorFocusPoint - DistanceY2) * MirrorFocusRate)
         {
             Projection_Y_Target = Projection_Y2 - TargetGlass.rotation * new Vector3(0, 0, ((MirrorFocusPoint - DistanceY2) * MirrorFocusRate));
             TargetPos2 = CameraOriginPos - (Projection_X2 * 0.5f) + (Projection_Y_Target - Projection_Y2);
             transform.position = TargetPos2;
-            float y_change = CharacterCamera.position.y - CameraOriginPos.y;
-            transform.position = new Vector3(TargetPos2.x, CameraOriginPos.y + y_change * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY))* Mirror_Camera_Y_ShakeRate, 0, 1) + CameraY_Offset, TargetPos2.z);
+            transform.position = TargetPos2 + Projection_Z * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY)) * Mirror_Camera_Y_ShakeRate, 0, 1);
         }
         else
         {
@@ -92,8 +94,8 @@ public class ScanCamera : MonoBehaviour
             Projection_Y_Target = Projection_Y2 - TargetGlass.rotation * new Vector3(0, 0, ((MirrorFocusPoint - DistanceY2) * MirrorFocusRate));
             TargetPos2 = CameraOriginPos - (Projection_X2 * 0.5f) + (Projection_Y_Target - Projection_Y2);
             transform.position = TargetPos2;
-            float y_change = CharacterCamera.position.y - CameraOriginPos.y;
-            transform.position = new Vector3(TargetPos2.x, CameraOriginPos.y + y_change * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY))* Mirror_Camera_Y_ShakeRate, 0, 1) + CameraY_Offset, TargetPos2.z);
+            //transform.position = new Vector3(TargetPos2.x, CameraOriginPos.y + y_change * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY))* Mirror_Camera_Y_ShakeRate, 0, 1) + CameraY_Offset, TargetPos2.z);
+            transform.position = TargetPos2 + Projection_Z * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY)) * Mirror_Camera_Y_ShakeRate, 0, 1);
 
         }
         Cm.nearClipPlane = NearPlane + Distance_MirrorCm_Mirror;

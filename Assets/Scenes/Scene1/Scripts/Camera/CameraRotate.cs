@@ -81,7 +81,7 @@ public class CameraRotate : MonoBehaviour
 
     public CinemachineVirtualCamera CM1;
     public GameObject LookPoint;
-    public GameObject PlayerRotate2;
+    //public GameObject PlayerRotate2;
     public GameObject PlayerRotate;  //control character's rotation that follow the camera
     private float sensitivity;
     public Slider sensitivitySlider;
@@ -105,10 +105,10 @@ public class CameraRotate : MonoBehaviour
         {
             this.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
             PlayerRotate.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
-            if (h == 0 && j == 0)
+            /*if (h == 0 && j == 0)
             {
                 PlayerRotate2.transform.Rotate(Vector3.up * -va2.x * CmRotateRate* sensitivity * 80, Space.World);
-            }
+            }*/
         }
         float CameraXAngle = this.transform.eulerAngles.x;
         if (CameraXAngle > 180)
@@ -122,7 +122,7 @@ public class CameraRotate : MonoBehaviour
         faceAngle = Mathf.Atan2(XZDistance, LookPoint.transform.position.y - transform.position.y) * Mathf.Rad2Deg;
         if (Mathf.Abs(va2.y) >= 0f)
         {
-            if (va2.y > 0 && CameraXAngle > -40f)
+            if (va2.y > 0 && CameraXAngle > -70f)
             {
                 transposer.m_FollowOffset += new Vector3(0, -va2.y * 0.13f, 0) * CmRotateRate* sensitivity / 30;
                 Quaternion targetRotation = Quaternion.Euler(faceAngle - 90, transform.eulerAngles.y, transform.eulerAngles.z);

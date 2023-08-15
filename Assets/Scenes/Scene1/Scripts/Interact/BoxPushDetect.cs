@@ -21,7 +21,7 @@ public class BoxPushDetect : MonoBehaviour
             angle -= 360;
         for (int i = 0; i < 4; i++)
         {
-            if (Mathf.Abs(angle - i * 90) < 20 || (angle - i * 90) > 340)
+            if (Mathf.Abs(angle +90 - i * 90) < 20 || (angle+90 - i * 90) > 340)
             {
                 BoxColliders[i].enabled = true;
             }

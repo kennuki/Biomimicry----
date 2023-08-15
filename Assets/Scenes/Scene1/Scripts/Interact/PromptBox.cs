@@ -20,7 +20,7 @@ public class PromptBox : MonoBehaviour
     void Update()
     {
         Dialog.position = this.transform.position + offset;
-        Angle = FaceAngleToItem(CharacterPos, ItemPos);
+        Angle = FaceAngleToItem(CharacterPos, ItemPos)+90;
         if (DistanceOfItemToCharacter() < ShowDistance && MoveDetect() == false)
         {
             if (Mathf.Abs(Angle) < 30 || Mathf.Abs(Angle + 360) < 30)

@@ -7,19 +7,22 @@ public class Character : MonoBehaviour
 {
     CharacterController controller;
     public GameObject LookPoint;
+    public GameObject Left_Hand;
     public Animator anim;
+    public AnimationClip Run;
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
     void Start()
     {
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
-        OffsetLookpointToCharacterY = transform.position.y-LookPoint.transform.position.y;
+        OffsetLookpointToCharacterY = LookPoint.transform.localPosition.y;
+        OffsetLookpointToCharacterX = LookPoint.transform.localPosition.x;
         Origin_speed = speed;
+        CenterOrigin = controller.center.y;
     }
 
     void FixedUpdate()
     {
-        //Debug.Log(speed);
         if (AllProhibit == false)
         {
             if (ActionProhibit == false)
@@ -33,7 +36,12 @@ public class Character : MonoBehaviour
         {
             MoveFunction();
         }
-        else move = Vector3.zero;
+        else
+        {
+            move = Vector3.zero;
+            anim.SetInteger("Run", 0);
+        }
+
         GravityFunction();
         controller.Move(move * Time.deltaTime);
     }
@@ -51,38 +59,65 @@ public class Character : MonoBehaviour
     Vector3 move;
     private Vector3 dir;
     float h, j;  //Horizontal input, Vertical input
+    int RunDir;
     private void MoveFunction()
     {
-        h = Input.GetAxis("Horizontal");
-        j = Input.GetAxis("Vertical");
+        j = Input.GetAxis("Horizontal");
+        h = -Input.GetAxis("Vertical");
+        if (h <= 0)
+        {
+            RunDir = -1;
+        }
+        else
+        {
+            RunDir = 1;
+        }
         imaangle = transform.eulerAngles.y * Mathf.Deg2Rad;
         float jx = j * Mathf.Sin(imaangle);
         float jz = j * Mathf.Cos(imaangle);
         float hx = h * Mathf.Sin(imaangle + 0.5f * Mathf.PI);
         float hz = h * Mathf.Cos(imaangle + 0.5f * Mathf.PI);
         dir = new Vector3(jx + hx, dir.y, jz + hz);
+        anim.SetFloat("RunSpeed",  -RunDir * speed*0.4f);
         if (j != 0 && h != 0)
         {
             dir /= Mathf.Sqrt(2);
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Energy > 0 && dir.magnitude>0 && MoveOnly == false)
+        if (dir.magnitude > 0.1f)
+        {
+            anim.SetInteger("Run", 1);
+        }
+        else
+        {
+            anim.SetInteger("Run", 0);
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && Energy > 0 && dir.magnitude>0 && MoveOnly == false && SquatState == 0)
         {
             EnergyUse = true;
             speed = Origin_speed + 1.5f;
         }
         else if(MoveOnly == false)
         {
+            //Debug.Log(EnergyUse);
             EnergyUse = false;
-            speed = Origin_speed;
+            if (SquatState == 1)
+            {
+                speed = Origin_speed * 0.5f;
+            }
+            else
+                speed = Origin_speed;
         }
         move = dir * speed;
     }
     #endregion
     #region SquatFunction
-    int SquatState = 0; //0 = stand, 1 = Squat, 2 = Lie down and look
+    public static int SquatState = 0; //0 = stand, 1 = Squat, 2 = Lie down and look
     float count = 0;
     float CdHeight;
     float OffsetLookpointToCharacterY;
+    float OffsetLookpointToCharacterX;
+    float CenterOrigin;
+    public static bool If_Squat = false;
     private void SquatFunction()
     {
         count += Time.deltaTime;
@@ -99,25 +134,30 @@ public class Character : MonoBehaviour
             GrabProhibit = true;
             MoveOnly = true;
         }
-        else
+        else if(count>1f)
         {
             GrabProhibit = false;
             MoveOnly = false;
         }
-        if (SquatState == 1 && count < 1)
+        if (SquatState == 1 && count <= 1)
         {
+            If_Squat = true;
             speed = 2;
-            controller.height = Mathf.Clamp(controller.height - Time.deltaTime, CdHeight / 2, CdHeight);
-            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y - Time.deltaTime * 0.5f, 0 - CdHeight * 0.25f, 0), 0);
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y - Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.25f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
+            controller.height = Mathf.Clamp(controller.height - Time.deltaTime* CdHeight, CdHeight / 2, CdHeight);
+            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y - Time.deltaTime * CdHeight/2, CenterOrigin - CdHeight * 0.25f, CenterOrigin), 0);
+            LookPoint.transform.localPosition = new Vector3(Mathf.Clamp(LookPoint.transform.localPosition.x - Time.deltaTime*0.35f, OffsetLookpointToCharacterX  - CdHeight * 0.13f, OffsetLookpointToCharacterX), Mathf.Clamp(LookPoint.transform.localPosition.y - Time.deltaTime, OffsetLookpointToCharacterY - CdHeight * 0.32f, OffsetLookpointToCharacterY), LookPoint.transform.localPosition.z);
+            anim.SetLayerWeight(1, Mathf.Clamp(count * 2.15f,0,1));
         }
-        else if (SquatState == 0 && count < 1)
+        else if (SquatState == 0 && count <= 1)
         {
+            If_Squat = false;
+            anim.SetLayerWeight(1, Mathf.Clamp(1 - count * 2.15f, 0, 1));
             speed = Origin_speed;
-            controller.height = Mathf.Clamp(controller.height + Time.deltaTime * 1.5f, CdHeight / 2, CdHeight);
-            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * 0.75f, 0 - CdHeight * 0.375f, 0), 0);
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, Mathf.Clamp(LookPoint.transform.position.y + Time.deltaTime, transform.position.y - OffsetLookpointToCharacterY - CdHeight * 0.375f, transform.position.y - OffsetLookpointToCharacterY), LookPoint.transform.position.z);
+            controller.height = Mathf.Clamp(controller.height + Time.deltaTime * CdHeight, CdHeight / 2, CdHeight);
+            controller.center = new Vector3(0, Mathf.Clamp(controller.center.y + Time.deltaTime * CdHeight / 2, CenterOrigin - CdHeight * 0.375f, CenterOrigin), 0);
+            LookPoint.transform.localPosition = new Vector3(Mathf.Clamp(LookPoint.transform.localPosition.x + Time.deltaTime * 0.35f, OffsetLookpointToCharacterX - CdHeight * 0.13f, OffsetLookpointToCharacterX), Mathf.Clamp(LookPoint.transform.localPosition.y + Time.deltaTime, OffsetLookpointToCharacterY - CdHeight * 0.35f, OffsetLookpointToCharacterY), LookPoint.transform.localPosition.z);
         }
+
     }
     public void Squat() 
     {
@@ -157,8 +197,12 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space)&&controller.isGrounded == true)
         {
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
-            SquatState = 0;
+            //LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
+            if(SquatState == 1)
+            {
+                //SquatState = 0;
+            }
+            //anim.SetLayerWeight(1, 0);
             c = 0;
             v1 = -55;
         }
@@ -167,8 +211,12 @@ public class Character : MonoBehaviour
     {
         if (controller.isGrounded == true)
         {
-            LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
-            SquatState = 0;
+            //LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
+            if (SquatState == 1)
+            {
+                //SquatState = 0;
+            }
+            //anim.SetLayerWeight(1, 0);
             c = 0;
             v1 = -55*intensity;
         }

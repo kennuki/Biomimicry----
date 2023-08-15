@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PushPull
+  m_Mask: 01000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/Bottom_L_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_L_B/Leg_L_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_L_B/Leg_L_B/Foot_L_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_L_B/Leg_L_B/Foot_L_B/Toe_L_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_R_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_R_B/Leg_R_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_R_B/Leg_R_B/Foot_R_B
+    m_Weight: 0
+  - m_Path: Armature/Bottom_R_B/Leg_R_B/Foot_R_B/Toe_R_B
+    m_Weight: 0
+  - m_Path: Armature/Waist_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.018
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.018/Claw_L_Top_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.018/Claw_L_Top_B/Bone.021
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.019
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.019/Claw_L_Down_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_L/Bone.007/Left_Hand_Control/Shoulder_L_B/Wrist_L_B/Fist_L_B/Bone.019/Claw_L_Down_B/Bone.023
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.011
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.011/Claw_R_Top_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.011/Claw_R_Top_B/Bone.013
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.014
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.014/Claw_R_Down_B
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Bone_R/Bone.003/Right_Hand_Control/Shoulder_R_B/Wrist_R_B/Fist_R_B/Bone.014/Claw_R_Down_B/Bone.016
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Neck_B
+    m_Weight: 1
+  - m_Path: Armature/Waist_B/Bone.001/Neck_B/Head_B
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Neck_B/Head_B/Eye_L_B
+    m_Weight: 0
+  - m_Path: Armature/Waist_B/Bone.001/Neck_B/Head_B/Eye_R_B
+    m_Weight: 0
+  - m_Path: Body
+    m_Weight: 0
+  - m_Path: Hand
+    m_Weight: 0
+  - m_Path: Head
+    m_Weight: 0
