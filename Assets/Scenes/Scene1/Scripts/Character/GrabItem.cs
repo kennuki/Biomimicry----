@@ -289,10 +289,10 @@ public class GrabItem : MonoBehaviour
                         yield return new WaitForSeconds(Time.deltaTime);
                         ThrowItem = false;
                         GrabAllow = true;
+                        GrabbedItem.SetActive(false);
                         yield return new WaitForSeconds(0.22f);
                         Hand_Anim.SetInteger("HandState", 0);
                         Hand_Anim.SetLayerWeight(2, 0);
-                        GrabbedItem.SetActive(false);
                         break;
                     }
                 default:
