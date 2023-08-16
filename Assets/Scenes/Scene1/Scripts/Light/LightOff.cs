@@ -21,6 +21,10 @@ public class LightOff : MonoBehaviour
 
     void Update()
     {
+        if (Character == null)
+        {
+            Character = GameObject.Find("Character").transform;
+        }
         float intensityDelta = Vector3.Distance(Character.transform.position, transform.position);
         if(Off_On == true)
         {

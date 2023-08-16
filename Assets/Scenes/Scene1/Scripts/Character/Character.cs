@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
     }
     public void Squat() 
     {
-        SquatState = Mathf.Abs(SquatState - 1);
+        SquatState = 1;
         count = 0;
 
     }
@@ -276,7 +276,7 @@ public class Character : MonoBehaviour
                 }
                 if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias && Input.GetKey(KeyCode.S)==false)
                 {
-                    TouchedObjectRb.AddForce(move *7.5f);
+                    TouchedObjectRb.AddForce(move *7.5f* TouchedObjectRb.mass);
                 }
                 else
                 {
@@ -303,7 +303,7 @@ public class Character : MonoBehaviour
             }
             if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias)
             {
-                TouchedObjectRb.AddForce(move * 7.5f);
+                TouchedObjectRb.AddForce(move * 7.5f* TouchedObjectRb.mass);
             }
             else
             {

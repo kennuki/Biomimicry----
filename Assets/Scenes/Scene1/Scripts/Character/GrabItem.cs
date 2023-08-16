@@ -19,10 +19,12 @@ public class GrabItem : MonoBehaviour
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
+        ReloadScene();
     }
 
     void Update()
     {
+        //Debug.Log(GrabbedItem);
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
             StartCoroutine(TriggerDetect());
@@ -57,10 +59,11 @@ public class GrabItem : MonoBehaviour
     public Transform LeftHand;
     private GameObject GrabbedItem, PushedItem;
     private Rigidbody GrabbedItemRb, PushedItemRb;
+    private Collider GrabbedItemCd;
     private PhysicMaterial physicMaterialBox;
     private string ItemName;
     private int ItemIndex;
-    public GameObject[] VIP_Item;
+    public string[] VIP_Item;
     private Collider Interacted_Item;
     private Transform Obstacle;
     private Vector3 GrabbedItemScale;
@@ -101,12 +104,13 @@ public class GrabItem : MonoBehaviour
                     GrabbedItemScale = GrabbedItem.transform.localScale;
                     HandAnimeLayer(true);
                     GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
+                    GrabbedItemCd = GrabbedItem.GetComponent<Collider>();
                     GrabAction = true;
                     ThrowItem = true;
                     StartCoroutine(Grab());
-                    foreach (GameObject item in VIP_Item)
+                    foreach (string name in VIP_Item)
                     {
-                        if (other.name == item.name)
+                        if (other.name == name)
                         {
                             ItemName = other.gameObject.name;
                             ItemIndex = other.gameObject.GetComponent<InteractiveObject>().index;
@@ -154,7 +158,6 @@ public class GrabItem : MonoBehaviour
                         PushedItem = other.gameObject;
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
                         DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-                        //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
                         if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
                         {
                             armRotate1.enabled = false;
@@ -193,6 +196,7 @@ public class GrabItem : MonoBehaviour
                     }
                     else if (other.gameObject.name == "Chair")
                     {
+                        GrabbedItem = other.gameObject;
                         GrabbedItem.GetComponent<BoxCollider>().enabled = false;
                         StartCoroutine(SitDown());
                     }
@@ -267,6 +271,7 @@ public class GrabItem : MonoBehaviour
         }
     }
 
+    public static bool FlashGet = false;
     public FlashLight flash,flash2;
     private IEnumerator ChipGetFunction()
     {
@@ -277,12 +282,14 @@ public class GrabItem : MonoBehaviour
                 case 3:
                     {
                         yield return new WaitForSeconds(0.32f);
-                        flash.enabled = true;
-                        flash2.enabled = true;
+                        FlashGet = true;
+                        flash.enabled = FlashGet;
+                        flash2.enabled = FlashGet;
                         ItemName = null;
                         yield return new WaitForSeconds(Time.deltaTime);
                         ThrowItem = false;
                         GrabAllow = true;
+                        yield return new WaitForSeconds(0.22f);
                         Hand_Anim.SetInteger("HandState", 0);
                         Hand_Anim.SetLayerWeight(2, 0);
                         GrabbedItem.SetActive(false);
@@ -389,6 +396,10 @@ public class GrabItem : MonoBehaviour
             GrabbedItemRb.useGravity = false;
             GrabAction = true;
             yield return new WaitForSeconds(0.05f);
+            if (GrabbedItemCd != null)
+            {
+                GrabbedItem.GetComponent<Collider>().enabled = true;
+            }
             GrabbedItemRb.isKinematic = false;
             yield return new WaitForSeconds(0.4f);
             if (GrabbedItemRb.gameObject.transform.parent != null)
@@ -403,6 +414,7 @@ public class GrabItem : MonoBehaviour
             Hand_Anim.SetInteger("HandState", 0);
             GrabAllow = true;
             GrabbedItem = null;
+            GrabbedItemCd = null;
             HandAnimeLayer(false);
         }
         yield return new WaitForSeconds(Time.deltaTime);
@@ -416,6 +428,10 @@ public class GrabItem : MonoBehaviour
         AngleOffset = grabbleItem.Angle;
         GrabOffset = grabbleItem.Offset;
         yield return new WaitForSeconds(0.32f);
+        if (GrabbedItemCd != null)
+        {
+            GrabbedItem.GetComponent<Collider>().enabled = false;
+        }
         GrabbedItemRb.isKinematic = true;
         yield return new WaitForSeconds(Time.deltaTime);
         GrabbedItem.transform.SetParent(LeftHand);
@@ -633,12 +649,15 @@ public class GrabItem : MonoBehaviour
         Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
         CameraRotate.cameratotate = true;
+        GrabbedItem = null;
     }
 
     public GameObject chair;
     public StageRoutine stageRoutine;
+    public static bool ElectricRecover = false;
     private IEnumerator ElectricityRecover()
     {
+        ElectricRecover = true;
         chair.SetActive(true);
         stageRoutine.enabled = true;
         yield return new WaitForSeconds(1f);
@@ -649,6 +668,7 @@ public class GrabItem : MonoBehaviour
         Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
         CameraRotate.cameratotate = true;
+        GrabbedItem = null;
     }
 
     public ScanScreen Screen;
@@ -677,6 +697,15 @@ public class GrabItem : MonoBehaviour
 
     }
 
+    private void ReloadScene()
+    {
+        flash.enabled = FlashGet;
+        flash2.enabled = FlashGet;
+        chair.SetActive(ElectricRecover);
+
+
+
+    }
 
 
     private IEnumerator PushLookAngleAdjust()

@@ -19,6 +19,10 @@ public class PromptBox : MonoBehaviour
     public float ShowDistance = 5;
     void Update()
     {
+        if (CharacterTransform == null)
+        {
+            CharacterTransform = GameObject.Find("Character").GetComponent<Transform>();
+        }
         Dialog.position = this.transform.position + offset;
         Angle = FaceAngleToItem(CharacterPos, ItemPos)+90;
         if (DistanceOfItemToCharacter() < ShowDistance && MoveDetect() == false)

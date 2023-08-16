@@ -29,7 +29,7 @@ public class GlassBreak : MonoBehaviour
     {
         if(other.gameObject.layer == 7)
         {
-            StartCoroutine(GlassBreakCondition1(30));
+            StartCoroutine(GlassBreakCondition1(Random.Range(10,25)));
         }
     }
     private IEnumerator GlassBreakCondition1(float time)
@@ -73,7 +73,7 @@ public class GlassBreak : MonoBehaviour
         {
             if (character.position.x > InitialPos.x && character.position.x < EndPos.x && character.position.z > InitialPos.y && character.position.z < EndPos.y)
             {
-                if (character.eulerAngles.y > 0 && character.eulerAngles.y < 20 || character.eulerAngles.y < 360 && character.eulerAngles.y > 340)
+                if (character.eulerAngles.y > 90 && character.eulerAngles.y < 120)
                 {
                     yield return new WaitForSeconds(0.5f);
                     audioSource.PlayOneShot(audioClip[0],1.5f);

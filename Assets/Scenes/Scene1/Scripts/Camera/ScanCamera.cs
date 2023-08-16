@@ -22,10 +22,11 @@ public class ScanCamera : MonoBehaviour
     }
     private void Update()
     {
+
         CameraFix();
         CameraFix2();      
     }
-
+    public float NearPlaneFixRate = 1;
     public float MirrorFixRate = 0.5f;
     public float CameraY_Offset = 0.1f;
     private float Field_Of_View;
@@ -47,6 +48,7 @@ public class ScanCamera : MonoBehaviour
         Vector3 ABOriginVector = CameraOriginPos - CharacterCamera.position;
         Vector3 MirrorFacingVector = Reflector.up;
         Vector3 MIrrorHeightVector = Reflector.forward;
+        Vector3 Projection_Z;
         float angle = Vector3.Angle(Reflector.up, ABOriginVector);
         if (angle < 90)
         {
@@ -54,6 +56,7 @@ public class ScanCamera : MonoBehaviour
             MirrorFocusRate = -Mathf.Abs(MirrorFocusRate);
             InverseY = Quaternion.Euler(0, 180, 0);
             Reflector.localScale = new Vector3(-ReflectorScaleX, Reflector.localScale.y, Reflector.localScale.z);
+
         }
         else
         {
@@ -80,13 +83,13 @@ public class ScanCamera : MonoBehaviour
         {
             Cm.fieldOfView = Field_Of_View;
         }
-        Vector3 Projection_Z = Vector3.Project(ABOriginVector, MIrrorHeightVector);
+        Projection_Z = Vector3.Project(ABOriginVector, Reflector.forward);
         if (DistanceY2 < MirrorFocusPoint && DistanceY < DistanceY2 + (MirrorFocusPoint - DistanceY2) * MirrorFocusRate)
         {
             Projection_Y_Target = Projection_Y2 - TargetGlass.rotation * new Vector3(0, 0, ((MirrorFocusPoint - DistanceY2) * MirrorFocusRate));
             TargetPos2 = CameraOriginPos - (Projection_X2 * 0.5f) + (Projection_Y_Target - Projection_Y2);
             transform.position = TargetPos2;
-            transform.position = TargetPos2 + Projection_Z * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY)) * Mirror_Camera_Y_ShakeRate, 0, 1);
+            transform.position = TargetPos2 + Projection_Z * MirrorFixRate / Mathf.Sqrt(DistanceY) * Mirror_Camera_Y_ShakeRate +CameraY_Offset* Projection_Z;
         }
         else
         {
@@ -95,10 +98,11 @@ public class ScanCamera : MonoBehaviour
             TargetPos2 = CameraOriginPos - (Projection_X2 * 0.5f) + (Projection_Y_Target - Projection_Y2);
             transform.position = TargetPos2;
             //transform.position = new Vector3(TargetPos2.x, CameraOriginPos.y + y_change * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY))* Mirror_Camera_Y_ShakeRate, 0, 1) + CameraY_Offset, TargetPos2.z);
-            transform.position = TargetPos2 + Projection_Z * Mathf.Clamp((MirrorFixRate / Mathf.Sqrt(DistanceY)) * Mirror_Camera_Y_ShakeRate, 0, 1);
+            transform.position = TargetPos2 + Projection_Z * MirrorFixRate / Mathf.Sqrt(DistanceY) * Mirror_Camera_Y_ShakeRate + CameraY_Offset * Projection_Z;
 
         }
-        Cm.nearClipPlane = NearPlane + Distance_MirrorCm_Mirror;
+        float MagnitudeX = Vector3.Project(Projection_X2, Reflector.right).magnitude;
+        Cm.nearClipPlane = NearPlane + Distance_MirrorCm_Mirror * NearPlaneFixRate - MagnitudeX * 0.2f;
     }
 
     private Quaternion OriginRotation;

@@ -36,15 +36,17 @@ public class MoveToTarget : MonoBehaviour
     Vector3 direction;
     float c = 0;
     bool finish = false;
-    private void Update()
+    private void FixedUpdate()
     {
-
+;
         c += Time.deltaTime;
         currentPosition = transform.position;
-        if (Vector3.Distance(currentPosition, previousPosition) < 0.01f  && finish == false && c > 1)
+        Debug.Log(transform.position.y);
+        if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
         {
             c = 0;
-            character.Jump(0.7f);
+            character.Jump(0.8f);
+
         }
         if (finish==false)
         {
@@ -52,16 +54,15 @@ public class MoveToTarget : MonoBehaviour
             Character.AllProhibit = true;
             Character.MoveOnly = false;
             direction = target.position - transform.position;
-            if (direction.magnitude > 0.72f)
+            if (direction.magnitude > 0.62f)
             {
                 direction.Normalize();
                 direction.y = controller.velocity.y/ movementSpeed;
                 controller.Move(direction * movementSpeed * Time.deltaTime);              
             }
-            else
+            else if(transform.position.y>-1)
             {
                 finish = true;
-                character.Squat();
                 StartCoroutine(RotateToStage());
                 
             }
@@ -76,7 +77,7 @@ public class MoveToTarget : MonoBehaviour
     }
     private IEnumerator RotateToStage()
     {
-        Vector3 targetRotation = new Vector3(transform.eulerAngles.x, -90, transform.eulerAngles.z);
+        Vector3 targetRotation = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
         Vector3 CurrentEulerAngles = transform.eulerAngles;
         while (true)
         {
@@ -149,15 +150,15 @@ public class MoveToTarget : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(2f);
-        Curtain1.SetBool("Open", true);
-        Curtain2.SetBool("Open", true);
+        Curtain1.enabled = true;
+        Curtain2.enabled = true;
         elapsedTime = 0f;
-        while (elapsedTime < 2f)
+        while (elapsedTime < 3.5f)
         {
             elapsedTime += Time.deltaTime;
-            float t = elapsedTime / 2;
-            light1.intensity = Mathf.Lerp(0,1, t);
-            light2.intensity = Mathf.Lerp(0,1, t);
+            float t = elapsedTime / 3.5f;
+            light1.intensity = Mathf.Lerp(0,4, t);
+            light2.intensity = Mathf.Lerp(0,4, t);
             light6.intensity = Mathf.Lerp(0, 1f, t);
             light7.intensity = Mathf.Lerp(0, 1f, t);
 
@@ -169,16 +170,20 @@ public class MoveToTarget : MonoBehaviour
                     routine1.enabled = true;
                 }
             }
-            Boss.SetActive(true);
+            
             yield return null;
         }
         elapsedTime = 0f;
-        while (elapsedTime < 3f)
+        while (elapsedTime < 4f)
         {
+            if (elapsedTime > 1.5f)
+            {
+                Boss.SetActive(true);
+            }
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / 3;
-            light6.intensity = Mathf.Lerp(1, 3.66f, t);
-            light7.intensity = Mathf.Lerp(1, 3.66f, t);
+            light6.intensity = Mathf.Lerp(1, 20f, t);
+            light7.intensity = Mathf.Lerp(1, 20f, t);
             yield return null;
         }
         FakeSpotlight1.SetActive(true);
