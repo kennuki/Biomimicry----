@@ -8,7 +8,6 @@ public class GrabItem : MonoBehaviour
     public Transform LookPoint;
     public CharacterController controller;
     public Animator Hand_Anim;
-    public Animator AnimL,AnimR;
     BoxCollider Range;
     public AudioCharacter audioCharacter;
     AudioSource audioSource;

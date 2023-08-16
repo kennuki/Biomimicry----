@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Reload : MonoBehaviour
 {
+    public LoadScene loadScene;
     public void ReloadScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 1;
-        SceneManager.LoadScene(currentSceneIndex);
+        StartCoroutine(loadScene.ReLoadSceneDelay(1));
     }
 }

@@ -41,7 +41,6 @@ public class MoveToTarget : MonoBehaviour
 ;
         c += Time.deltaTime;
         currentPosition = transform.position;
-        Debug.Log(transform.position.y);
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
         {
             c = 0;
@@ -176,7 +175,7 @@ public class MoveToTarget : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < 4f)
         {
-            if (elapsedTime > 1.5f)
+            if (elapsedTime > 0.5f)
             {
                 Boss.SetActive(true);
             }
@@ -189,6 +188,7 @@ public class MoveToTarget : MonoBehaviour
         FakeSpotlight1.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         FakeSpotlight2.SetActive(true);
+        this.enabled = false;
 
     }
 
