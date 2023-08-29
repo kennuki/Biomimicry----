@@ -24,6 +24,7 @@ public class LoadScene : MonoBehaviour
     public IEnumerator ReLoadSceneDelay(int Scene)
     {
         yield return null;
+        Debug.Log("0.0");
         SceneManager.LoadScene(Scene);
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class PanicRed_PP : MonoBehaviour
 {
-    public AudioSource CharacterAudioSourse;
+    private AudioSource CharacterAudioSourse;
     private AudioSource CharacterAudioSourseLoop;
     private AudioCharacter AudioCharacter;
 
@@ -28,7 +29,8 @@ public class PanicRed_PP : MonoBehaviour
 
     void Start()
     {
-
+        SceneManager.activeSceneChanged += OnSceneChanged;
+        CharacterAudioSourse = GameObject.Find("Character").transform.Find("PlayerAudio").GetComponent<AudioSource>();
         AudioCharacter = CharacterAudioSourse.gameObject.GetComponent<AudioCharacter>();
         CharacterAudioSourseLoop = AudioCharacter.AudioSources[1];
         OriginVolume = CharacterAudioSourse.volume;
@@ -51,11 +53,16 @@ public class PanicRed_PP : MonoBehaviour
     
     void Update()
     {
+        if(CharacterAudioSourse == null)
+        {
+            FindAudioSourse();
+        }
         NoiseFunction();
         if (Input.GetKeyDown(KeyCode.N))
         {
             State = 0;
         }
+
     }
 
 
@@ -245,6 +252,23 @@ public class PanicRed_PP : MonoBehaviour
         CharacterAudioSourse.PlayScheduled(AudioSettings.dspTime); 
         CharacterAudioSourse.SetScheduledEndTime(AudioSettings.dspTime + duration); 
     }
+    private void OnSceneChanged(Scene previousScene, Scene newScene)
+    {
+        SceneManager.activeSceneChanged -= OnSceneChanged;
+        Debug.Log("Scene changed from: " + previousScene.name + " to: " + newScene.name);
+        // Perform actions or preparations here
+        // For example, reset player position, save game progress, etc.
+    }
+    private void FindAudioSourse()
+    {
+        CharacterAudioSourse = GameObject.Find("Character").transform.Find("PlayerAudio").GetComponent<AudioSource>();
+        AudioCharacter = CharacterAudioSourse.gameObject.GetComponent<AudioCharacter>();
+        CharacterAudioSourseLoop = AudioCharacter.AudioSources[1];
+        OriginVolume = CharacterAudioSourse.volume;
+        OriginVolumeLoop = CharacterAudioSourseLoop.volume;
 
+        NoiseAffect = Camera.main.gameObject.transform.Find("Plane").gameObject;
+        render = NoiseAffect.GetComponent<Renderer>();
+    }
 
 }

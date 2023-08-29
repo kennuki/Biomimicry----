@@ -15,6 +15,7 @@ public class GrabItem : MonoBehaviour
     public static bool ThrowItem = false;
     void Start()
     {
+        stageRoutine = GameObject.Find("StageRoundLight").GetComponent<StageRoutine>();
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
@@ -652,7 +653,7 @@ public class GrabItem : MonoBehaviour
     }
 
     public GameObject chair;
-    public StageRoutine stageRoutine;
+    private StageRoutine stageRoutine;
     public static bool ElectricRecover = false;
     private IEnumerator ElectricityRecover()
     {

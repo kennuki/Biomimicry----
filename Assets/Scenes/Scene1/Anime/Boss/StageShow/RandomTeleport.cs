@@ -18,7 +18,7 @@ public class RandomTeleport : MonoBehaviour
     }
     private void Update()
     {
-        if(Boss == null)
+        if (Boss == null||Character == null)
         {
             Boss = GameObject.Find("Boss").transform;
             Character = GameObject.Find("Character").transform;
