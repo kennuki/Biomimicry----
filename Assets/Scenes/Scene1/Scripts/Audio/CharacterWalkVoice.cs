@@ -28,6 +28,7 @@ public class CharacterWalkVoice : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Text>() != null)
             floorType = other.gameObject.GetComponent<Text>().text;
+        Debug.Log(other.gameObject.name);
         if (floorType != null&& character.GetComponent<CharacterController>().isGrounded == true)
         {
             if (floorType == "Tile")
@@ -61,6 +62,7 @@ public class CharacterWalkVoice : MonoBehaviour
             }
             else if (floorType == "Metal")
             {
+                Debug.Log("12");
                 if (character.GetComponent<CharacterController>().velocity.magnitude != 0 )
                 {
                     if (!audioSource.isPlaying)
@@ -107,8 +109,13 @@ public class CharacterWalkVoice : MonoBehaviour
             StartCoroutine(FadeVolume());
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+    }
     private void OnTriggerExit(Collider other)
     {
+
         if (other.GetComponent<Text>() != null)
         {
             if (floorType == other.GetComponent<Text>().text)

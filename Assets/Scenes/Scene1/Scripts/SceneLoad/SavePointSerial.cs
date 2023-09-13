@@ -16,7 +16,6 @@ public class SavePointSerial : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(CurrentSavePointIndex);
         if(CurrentSavePointIndex> PrevioudSavePointIndex)
         {
             PrevioudSavePointIndex = CurrentSavePointIndex;

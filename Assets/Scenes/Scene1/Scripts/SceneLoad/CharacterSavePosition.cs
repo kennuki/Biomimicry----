@@ -12,10 +12,26 @@ public class CharacterSavePosition : MonoBehaviour
         public bool If_Rotate;
         public Vector3 Angle;
     }
+
+    private void Start()
+    {
+        foreach (SaveDetail detail in Details)
+        {
+            if (detail.SavePoint == SavePointSerial.CurrentSavePointIndex)
+            {
+                Debug.Log(detail.Pos);
+                transform.position = detail.Pos;
+                if (detail.If_Rotate)
+                {
+                    transform.localEulerAngles = detail.Angle;
+                }
+            }
+        }
+    }
     public List<SaveDetail> Details;
     private void Update()
     {
-        if (LoadScene.SceneWillChange == true)
+        /*if (LoadScene.SceneWillChange == true)
         {
 
             gameObject.transform.SetParent(null);
@@ -23,6 +39,7 @@ public class CharacterSavePosition : MonoBehaviour
             {
                 if (detail.SavePoint == SavePointSerial.CurrentSavePointIndex)
                 {
+                    Debug.Log(detail.Pos);
                     transform.position = detail.Pos;
                     if (detail.If_Rotate)
                     {
@@ -31,6 +48,7 @@ public class CharacterSavePosition : MonoBehaviour
                 }
             }
 
-        }
+        }*/
     }
+    
 }
