@@ -28,7 +28,6 @@ public class CharacterWalkVoice : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Text>() != null)
             floorType = other.gameObject.GetComponent<Text>().text;
-        Debug.Log(other.gameObject.name);
         if (floorType != null&& character.GetComponent<CharacterController>().isGrounded == true)
         {
             if (floorType == "Tile")
@@ -111,7 +110,7 @@ public class CharacterWalkVoice : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        
     }
     private void OnTriggerExit(Collider other)
     {

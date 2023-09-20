@@ -5,10 +5,18 @@ using UnityEngine.AI;
 
 public class RandomTeleport : MonoBehaviour
 {
+    [System.Serializable]
+    public class TelePortPoint
+    {
+        public int PointCount;
+        public Transform[] Point;
+        public int[] MaxTeleportTimes;
+    }
     private Transform Character;
     private Transform Boss;
     private NavMeshAgent agent;
-    public Vector3[] Point;
+    public TelePortPoint telePort;
+    
     private void Start()
     {
         Boss = GameObject.Find("Boss").transform;
@@ -35,20 +43,25 @@ public class RandomTeleport : MonoBehaviour
         t += Time.deltaTime;
         if (Vector3.Distance(Character.position, Boss.position) > 10 || t > TeleportCD)
         {
-            foreach(Vector3 vector in Point)
+            for(int i = 0;i<telePort.PointCount; i++)
             {
-                if (Vector3.Distance(vector, Boss.position) < 20)
+                if (telePort.MaxTeleportTimes[i] > 0)
                 {
-                    StartCoroutine(Teleport(vector));
-                    t = 0;
-                    TeleportCD = 10;
-                    break;
+                    if (Vector3.Distance(telePort.Point[i].position, Boss.position) < 20)
+                    {
+                        StartCoroutine(Teleport(telePort.Point[i].position));
+                        t = 0;
+                        TeleportCD = 10;
+                        telePort.MaxTeleportTimes[i] -= 1;
+                        break;
+                    }
                 }
-            }
+            }         
         }
     }
     public IEnumerator Teleport(Vector3 v)
     {
+
         agent.speed = 0;
         this.transform.position = v;
         yield return new WaitForSeconds(1.5f);
