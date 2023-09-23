@@ -35,7 +35,7 @@ public class RandomTeleport : MonoBehaviour
         }
         RandomTeleportFunc();
     }
-    float TeleportCD = 3;
+    float TeleportCD = 3f;
     float t = 0;
     float AgentSpeed;
     public void RandomTeleportFunc()

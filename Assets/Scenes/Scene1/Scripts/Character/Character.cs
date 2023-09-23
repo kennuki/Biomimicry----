@@ -276,7 +276,9 @@ public class Character : MonoBehaviour
                 }
                 if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias && Input.GetKey(KeyCode.S)==false)
                 {
-                    TouchedObjectRb.AddForce(move *7.5f* TouchedObjectRb.mass);
+                    Vector3 force = move;
+                    force.y = Mathf.Clamp((move.y + 0.5f) / 5, -1f, 1f);
+                    TouchedObjectRb.AddForce(move *7.5f/ TouchedObjectRb.mass);
                 }
                 else
                 {
@@ -303,7 +305,7 @@ public class Character : MonoBehaviour
             }
             if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias)
             {
-                TouchedObjectRb.AddForce(move * 7.5f* TouchedObjectRb.mass);
+                TouchedObjectRb.AddForce(move * 7.5f/ TouchedObjectRb.mass);
             }
             else
             {

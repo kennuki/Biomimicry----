@@ -15,6 +15,8 @@ public class Boss : MonoBehaviour
     private float invisibleStartTime = -7.0f;
     private float invisibleCD = 13;
 
+    private float Distance; 
+
     private void Start()
     {
         BossAudio = GetComponent<AudioSource>();
@@ -25,13 +27,16 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        if (target != null)
+        Distance = Vector3.Distance(target.position, transform.position);
+        Debug.Log(Distance);
+        if (target == null)
         {
-            navMeshAgent.SetDestination(target.position);
+            target = GameObject.Find("Character").transform;
+
         }
         else
         {
-            target = GameObject.Find("Character").transform;
+            navMeshAgent.SetDestination(target.position);
         }
 
         // 檢查是否需要施放隱形技能
