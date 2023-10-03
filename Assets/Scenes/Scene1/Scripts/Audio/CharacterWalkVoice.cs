@@ -61,7 +61,7 @@ public class CharacterWalkVoice : MonoBehaviour
             }
             else if (floorType == "Metal")
             {
-                Debug.Log("12");
+
                 if (character.GetComponent<CharacterController>().velocity.magnitude != 0 )
                 {
                     if (!audioSource.isPlaying)

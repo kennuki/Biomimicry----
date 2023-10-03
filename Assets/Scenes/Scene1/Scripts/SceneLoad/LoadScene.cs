@@ -13,7 +13,7 @@ public class LoadScene : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             SceneWillChange = true;
             //list.SaveActiveState();

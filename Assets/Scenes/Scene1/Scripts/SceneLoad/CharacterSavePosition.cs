@@ -19,7 +19,7 @@ public class CharacterSavePosition : MonoBehaviour
         {
             if (detail.SavePoint == SavePointSerial.CurrentSavePointIndex)
             {
-                Debug.Log(detail.Pos);
+                //Debug.Log(detail.Pos);
                 transform.position = detail.Pos;
                 if (detail.If_Rotate)
                 {

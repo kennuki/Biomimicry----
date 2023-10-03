@@ -35,7 +35,7 @@ public class RandomTeleport : MonoBehaviour
         }
         RandomTeleportFunc();
     }
-    float TeleportCD = 3f;
+    float TeleportCD = 3.7f;
     float t = 0;
     float AgentSpeed;
     public void RandomTeleportFunc()
@@ -49,6 +49,7 @@ public class RandomTeleport : MonoBehaviour
                 {
                     if (Vector3.Distance(telePort.Point[i].position, Boss.position) < 20)
                     {
+
                         StartCoroutine(Teleport(telePort.Point[i].position));
                         t = 0;
                         TeleportCD = 10;
@@ -61,10 +62,13 @@ public class RandomTeleport : MonoBehaviour
     }
     public IEnumerator Teleport(Vector3 v)
     {
-
+        Debug.Log(v);
         agent.speed = 0;
+        agent.enabled = false;
         this.transform.position = v;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(Time.deltaTime);
+        agent.enabled = true;
         agent.speed = AgentSpeed;
+
     }
 }

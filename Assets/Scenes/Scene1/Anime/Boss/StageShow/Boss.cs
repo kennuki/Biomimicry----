@@ -22,13 +22,18 @@ public class Boss : MonoBehaviour
         BossAudio = GetComponent<AudioSource>();
         target = GameObject.Find("Character").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        renderers = GetComponentsInChildren<Renderer>();       
+        navMeshAgent.enabled = false;
+        renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            //Debug.Log(renderer.name);
+        }
     }
 
     private void Update()
     {
-        Distance = Vector3.Distance(target.position, transform.position);
-        Debug.Log(Distance);
+        navMeshAgent.enabled = true;
+        //Debug.Log(Distance);
         if (target == null)
         {
             target = GameObject.Find("Character").transform;
@@ -38,10 +43,12 @@ public class Boss : MonoBehaviour
         {
             navMeshAgent.SetDestination(target.position);
         }
+        Distance = Vector3.Distance(target.position, transform.position);
 
         // 檢查是否需要施放隱形技能
         if (isInvisible == false && Time.time - invisibleStartTime >= invisibleCD)
         {
+            //Debug.Log("0");
             SetAlphaForRenderers(0,0);
             SetAlphaForRenderers(1,0f);
             ActivateInvisibility();

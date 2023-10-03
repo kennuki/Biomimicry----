@@ -32,6 +32,8 @@ public class GlassBreak : MonoBehaviour
             StartCoroutine(GlassBreakCondition1(Random.Range(10,25)));
         }
     }
+
+    public Vector3 ShowPos;
     private IEnumerator GlassBreakCondition1(float time)
     {
         StartCoroutine(GlassBreakCondition2());
@@ -58,9 +60,10 @@ public class GlassBreak : MonoBehaviour
             panicRed_PP.State = 0;
             panicRed_PP.RunTime = 3f;
             yield return new WaitForSeconds(0.4f);
-            doll.transform.position = character.position + character.rotation * new Vector3(0, -1f, 1.5f);
+            doll.transform.position = character.position + character.rotation * ShowPos;
             doll.transform.SetParent(character);
             yield return new WaitForSeconds(Time.deltaTime);
+
             doll.SetActive(true);
             yield return new WaitForSeconds(Time.deltaTime * 1);
             doll.SetActive(false);
@@ -93,7 +96,7 @@ public class GlassBreak : MonoBehaviour
                     panicRed_PP.State = 0;
                     panicRed_PP.RunTime = 3f;
                     yield return new WaitForSeconds(0.4f);
-                    doll.transform.position = character.position + character.rotation * new Vector3(0,0.7f,1f);
+                    doll.transform.position = character.position + character.rotation *ShowPos;
                     doll.transform.SetParent(character);
                     yield return new WaitForSeconds(Time.deltaTime);
                     doll.SetActive(true);
