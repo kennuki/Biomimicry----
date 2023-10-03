@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class GrabItem : MonoBehaviour
 {
@@ -190,27 +191,17 @@ public class GrabItem : MonoBehaviour
                             Character.MoveOnly = false;
                             GrabbedItem = other.gameObject;
                             GrabbedItem.GetComponent<BoxCollider>().enabled = false;
-                            StartCoroutine(ElectricityRecover());
-                        }
-                        Range.enabled = false;
-                    }
-                    else if (other.gameObject.name == "Board2" && Range.size.y < 0.5f && controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
-                    {
-                        PushedItem = other.gameObject;
-                        float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
-                        DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-                        //Debug.Log(DistanceToPushedItem +" "+ PlayerToRod_Y);
-                        if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
-                        {
-                            Hand_Anim.SetLayerWeight(2, 1);
-                            Hand_Anim.SetInteger("Rod", 1);
-                            Range.enabled = false;
-                            CameraRotate.cameratotate = false;
-                            Character.AllProhibit = true;
-                            Character.MoveOnly = false;
-                            GrabbedItem = other.gameObject;
-                            GrabbedItem.GetComponent<BoxCollider>().enabled = false;
-                            StartCoroutine(DoorOpenUp());
+                            Debug.Log("0");
+                            if (GrabbedItem.gameObject.GetComponent<Text>().text == "Board")
+                            {
+                                Debug.Log("1");
+                                StartCoroutine(ElectricityRecover());
+                            }
+                            else if (GrabbedItem.gameObject.GetComponent<Text>().text == "Board2")
+                            {
+                                StartCoroutine(DoorOpenUp());
+                            }
+
                         }
                         Range.enabled = false;
                     }
