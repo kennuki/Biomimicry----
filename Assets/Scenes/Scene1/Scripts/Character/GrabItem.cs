@@ -333,10 +333,6 @@ public class GrabItem : MonoBehaviour
                 {
                     GrabAction = false;
                     GrabAllow = false;
-                    //float AngleX = cm1.transform.eulerAngles.x;
-                    //if (AngleX > 180) AngleX -= 360;
-                    //AngleX = Mathf.Clamp(AngleX, 0, 45);
-                    //Hand_Anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
                     Hand_Anim.SetInteger("HandState", 1);
                 }
                 else if (Hand_Anim.GetInteger("HandState") == 2)
