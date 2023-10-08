@@ -16,7 +16,10 @@ public class GrabItem : MonoBehaviour
     public static bool ThrowItem = false;
     void Start()
     {
-        stageRoutine = GameObject.Find("StageRoundLight").GetComponent<StageRoutine>();
+        if(stageRoutine == null)
+        {
+            //stageRoutine = GameObject.Find("StageRoundLight").GetComponent<StageRoutine>();
+        }
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
@@ -25,6 +28,7 @@ public class GrabItem : MonoBehaviour
 
     void Update()
     {
+
         //Debug.Log(GrabbedItem);
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
@@ -32,6 +36,7 @@ public class GrabItem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F) && ThrowItem == true && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
+
             Interacted_Item = null;
             StartCoroutine(TriggerDetect());
             if (ItemName != null)
@@ -242,7 +247,7 @@ public class GrabItem : MonoBehaviour
                                 {
                                     float PlayerToScan_Y = Mathf.Abs(transform.position.y - Interacted_Item.transform.position.y);
                                     DistanceToPushedItem = Vector3.Distance(transform.position, Interacted_Item.transform.position);
-                                    if (DistanceToPushedItem < 1f && PlayerToScan_Y < 0.2f && DistanceToPushedItem > 0.6f)
+                                    if (DistanceToPushedItem < 1f && PlayerToScan_Y < 0.8f && DistanceToPushedItem > 0.3f)
                                     {
                                         Hand_Anim.SetLayerWeight(2, 1);
                                         Hand_Anim.SetInteger("Scan", 1);
@@ -328,10 +333,6 @@ public class GrabItem : MonoBehaviour
                 {
                     GrabAction = false;
                     GrabAllow = false;
-                    //float AngleX = cm1.transform.eulerAngles.x;
-                    //if (AngleX > 180) AngleX -= 360;
-                    //AngleX = Mathf.Clamp(AngleX, 0, 45);
-                    //Hand_Anim.SetFloat("AngleX", Mathf.Clamp((1 - AngleX / 45), 0, 1));
                     Hand_Anim.SetInteger("HandState", 1);
                 }
                 else if (Hand_Anim.GetInteger("HandState") == 2)
@@ -681,6 +682,7 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         GrabbedItem = null;
     }
+
     public Animator DoorOpenUp_Anim;
     private IEnumerator DoorOpenUp()
     {
