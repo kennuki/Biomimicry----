@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
         OffsetLookpointToCharacterX = LookPoint.transform.localPosition.x;
         Origin_speed = speed;
         CenterOrigin = controller.center.y;
+        float a;
+        CalculateCollisionVelocities(5, 10, 1, 0, out a);
     }
 
     void FixedUpdate()
@@ -47,6 +49,7 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
+        //Debug.Log(controller.velocity);
         EnergyUseFunction();
     }
 
@@ -264,26 +267,22 @@ public class Character : MonoBehaviour
         {
             if (other.tag != "PushOnly"&& other.tag != "Pushable")
             {
-                Vector2 toObject = new Vector2(other.transform.position.x, other.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
-                Vector2 move2 = new Vector2(move.x, move.z);
-                toObject.Normalize();
-                move2.Normalize();
-                float anglebias = 0;
-                float angleDifference = Vector2.SignedAngle(move2, toObject);
-                if (other.gameObject.GetComponent<GateRotate>() != null)
+                Vector3 collisionPoint = other.ClosestPointOnBounds(transform.position);
+                Vector3 vectorA = move;
+                if(move.magnitude == 0)
                 {
-                    anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
+                    vectorA = -transform.right;
                 }
-                if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias && Input.GetKey(KeyCode.S)==false)
+                Vector3 vectorB = transform.position - collisionPoint;
+                float angle = Vector3.Angle(vectorA, vectorB);
+                if (angle > 90)
                 {
-                    Vector3 force = move;
-                    force.y = Mathf.Clamp((move.y + 0.5f) / 5, -1f, 1f);
-                    TouchedObjectRb.AddForce(move *7.5f*TouchedObjectRb.mass);
+                    float TargetForce;
+                    CalculateCollisionVelocities(10, Vector3.Magnitude(move), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity, Vector3.Normalize(move))), out TargetForce);
+                    TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(move) * 0.05f, collisionPoint, ForceMode.Impulse);
+                    Debug.Log(TargetForce * Vector3.Normalize(move) + " " + other.name);
                 }
-                else
-                {
 
-                }
             }          
         }
     }
@@ -292,27 +291,25 @@ public class Character : MonoBehaviour
         TouchedObjectRb = other.gameObject.GetComponent<Rigidbody>();
         if (TouchedObjectRb != null)
         {
-
-            Vector2 toObject = new Vector2(other.transform.position.x, other.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
-            Vector2 move2 = new Vector2(move.x, move.z);
-            toObject.Normalize();
-            move2.Normalize();
-            float anglebias = 0;
-            float angleDifference = Vector2.SignedAngle(move2, toObject);
-            if (other.gameObject.GetComponent<GateRotate>() != null)
+            Vector3 collisionPoint = other.ClosestPointOnBounds(transform.position);
+            float TargetForce;
+            CalculateCollisionVelocities(10, Vector3.Magnitude(controller.velocity), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity,Vector3.Normalize(controller.velocity))), out TargetForce);
+            if (other.tag == "PushOnly" && other.tag == "Pushable")
             {
-                anglebias = other.gameObject.GetComponent<GateRotate>().AngleBias;
-            }
-            if (angleDifference <= 40 + anglebias && angleDifference > -40 + anglebias)
-            {
-                TouchedObjectRb.AddForce(move * 1* TouchedObjectRb.mass);
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.01f, collisionPoint, ForceMode.VelocityChange);
             }
             else
-            {
-
-            }
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f, collisionPoint, ForceMode.VelocityChange);
 
         }
+    }
+
+
+    //完全彈性碰撞公式解
+    //m1 = player質量，v1 = 玩家速度，m2 = 被碰撞物體質量 ， v2 = 被碰撞物體速度 ，v2a = 碰撞後物體的速度解
+    private void CalculateCollisionVelocities(float m1, float v1, float m2, float v2 ,out float v2a)
+    {
+        v2a = ((m1 + m1) * v1 + (m2 - m1) * v2) / (m1 + m2);
     }
 
     private T GetChildComponentByName<T>(string name) where T : Component
@@ -326,4 +323,5 @@ public class Character : MonoBehaviour
         }
         return null;
     }
+
 }

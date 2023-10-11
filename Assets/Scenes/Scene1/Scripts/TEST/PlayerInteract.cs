@@ -25,7 +25,8 @@ public class PlayerInteract : MonoBehaviour
             {
                 case InteractObjectsType.PushOnly:
                     useInteractObjects.SetImpact(transform.right * -200);
-                    animator.SetTrigger("Push");
+                    animator.SetLayerWeight(4, 0.8f);
+                    animator.SetInteger("PushPull", 1);
 
                     break;
                 default:

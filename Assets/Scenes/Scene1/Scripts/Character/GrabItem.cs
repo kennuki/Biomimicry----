@@ -29,7 +29,7 @@ public class GrabItem : MonoBehaviour
     void Update()
     {
 
-        //Debug.Log(GrabbedItem);
+        //Debug.Log(cm1.transform.rotation.x);
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
             StartCoroutine(TriggerDetect());
@@ -141,7 +141,7 @@ public class GrabItem : MonoBehaviour
                         Character.AllProhibit = true;
                         Character.MoveOnly = true;
                         CameraRotate.cameratotate = false;
-                        physicMaterialBox.dynamicFriction = 0.1f;
+                        //physicMaterialBox.dynamicFriction = 0.1f;
                         StartCoroutine(PushObject());
                         StartCoroutine(PushLookAngleAdjust());
                     }
@@ -156,7 +156,7 @@ public class GrabItem : MonoBehaviour
                         Character.AllProhibit = true;
                         Character.MoveOnly = true;
                         CameraRotate.cameratotate = false;
-                        physicMaterialBox.dynamicFriction = 0.4f;
+                        //physicMaterialBox.dynamicFriction = 0.4f;
                         StartCoroutine(PushObject2());
                     }
                     else if (other.tag == "Rod"  && controller.isGrounded == true && new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude == 0 &&Character.SquatState == 0)
@@ -594,6 +594,7 @@ public class GrabItem : MonoBehaviour
             
         }
     }
+
     private IEnumerator PushAnimFix1()
     {
         float counter = 0;
@@ -610,6 +611,7 @@ public class GrabItem : MonoBehaviour
         }
         
     }
+
     private IEnumerator PushObject2()
     {
         Vector3 Force = Vector3.zero;
@@ -620,7 +622,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 1.4f;
+                    Force = transform.rotation * Quaternion.Euler(cm1.transform.localEulerAngles.x, 0, 0) * Vector3.forward * PushForce * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                     int clip = Random.Range(3, 6);
                     audioClip = audioCharacter.AudioClip[clip];
@@ -641,7 +643,7 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         Cursor.lockState = CursorLockMode.Locked;
         yield return new WaitForSeconds(1);
-        physicMaterialBox.dynamicFriction = 2f;
+        //physicMaterialBox.dynamicFriction = 2f;
         yield break;
 
     }
