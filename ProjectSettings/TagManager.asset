@@ -13,6 +13,7 @@ TagManager:
   - Interacted
   - Floor1
   - Glass
+  - Joint
   layers:
   - Default
   - TransparentFX

@@ -485,7 +485,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 0.8f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 8f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -622,7 +622,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Quaternion.Euler(cm1.transform.localEulerAngles.x, 0, 0) * Vector3.forward * PushForce * 1.4f;
+                    Force = transform.rotation  * Vector3.forward * PushForce * 28f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                     int clip = Random.Range(3, 6);
                     audioClip = audioCharacter.AudioClip[clip];

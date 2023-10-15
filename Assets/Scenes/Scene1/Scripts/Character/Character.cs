@@ -269,18 +269,21 @@ public class Character : MonoBehaviour
             {
                 Vector3 collisionPoint = other.ClosestPointOnBounds(transform.position);
                 Vector3 vectorA = move;
-                if(move.magnitude == 0)
-                {
-                    vectorA = -transform.right;
-                }
                 Vector3 vectorB = transform.position - collisionPoint;
                 float angle = Vector3.Angle(vectorA, vectorB);
                 if (angle > 90)
                 {
                     float TargetForce;
                     CalculateCollisionVelocities(10, Vector3.Magnitude(move), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity, Vector3.Normalize(move))), out TargetForce);
-                    TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(move) * 0.05f, collisionPoint, ForceMode.Impulse);
-                    Debug.Log(TargetForce * Vector3.Normalize(move) + " " + other.name);
+                    if(other.tag == "Joint")
+                    {
+
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.05f, collisionPoint, ForceMode.Impulse);
+                    }
+                    else
+                    {
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(move) * 0.05f, collisionPoint, ForceMode.Impulse);
+                    }
                 }
 
             }          
@@ -293,16 +296,26 @@ public class Character : MonoBehaviour
         {
             Vector3 collisionPoint = other.ClosestPointOnBounds(transform.position);
             float TargetForce;
-            CalculateCollisionVelocities(10, Vector3.Magnitude(controller.velocity), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity,Vector3.Normalize(controller.velocity))), out TargetForce);
-            if (other.tag == "PushOnly" && other.tag == "Pushable")
+            CalculateCollisionVelocities(10, Vector3.Magnitude(controller.velocity), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity, Vector3.Normalize(controller.velocity))), out TargetForce);
+            if (other.tag == "PushOnly" || other.tag == "Pushable")
             {
-                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.01f, collisionPoint, ForceMode.VelocityChange);
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.VelocityChange);
+            }
+            else if(other.tag == "Joint")
+            {
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.VelocityChange);
             }
             else
+            {
                 TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f, collisionPoint, ForceMode.VelocityChange);
+                Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
+            }
+
 
         }
     }
+  
+
 
 
     //完全彈性碰撞公式解
