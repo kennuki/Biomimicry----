@@ -485,7 +485,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 8f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -506,7 +506,7 @@ public class GrabItem : MonoBehaviour
                 Character.speed = OriginSpeed;
                 Character.EnergyUse = false;
                 yield return new WaitForSeconds(0.2f);
-                physicMaterialBox.dynamicFriction = 2f;
+               // physicMaterialBox.dynamicFriction = 2f;
                 yield break;
             }
             else if (Input.GetKey(KeyCode.W))
@@ -514,22 +514,22 @@ public class GrabItem : MonoBehaviour
                 Hand_Anim.SetLayerWeight(4, 0.8f);
                 Hand_Anim.SetInteger("PushPull", 1);
 
-                if (DistanceToPushedItem >= 0.7f)
+                if (DistanceToPushedItem >= 0.9f)
                 {
-                    Character.speed = 1+DistanceToPushedItem-0.65f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem) * 8f) * 1.4f;
+                    Character.speed = 1+DistanceToPushedItem-0.85f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.85f - DistanceToPushedItem) * 8f) * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                else if (DistanceToPushedItem < 0.65f)
+                else if (DistanceToPushedItem < 0.85f)
                 {
-                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.7f, 0, 1);
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem))*1.4f;   
+                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 085f, 0, 1);
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.85f - DistanceToPushedItem))*1.4f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.65f - DistanceToPushedItem)*5f) * 1.4f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.85f - DistanceToPushedItem)*5f) * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 if (DistanceToPushedItem > 1.6f)
@@ -543,7 +543,7 @@ public class GrabItem : MonoBehaviour
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
                     Cursor.lockState = CursorLockMode.Locked;
-                    physicMaterialBox.dynamicFriction = 2f;
+                    //physicMaterialBox.dynamicFriction = 2f;
                     yield break;
                 }
                 Character.EnergyUse = true;
@@ -577,7 +577,7 @@ public class GrabItem : MonoBehaviour
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
                     Cursor.lockState = CursorLockMode.Locked;
-                    physicMaterialBox.dynamicFriction = 2f;
+                    //physicMaterialBox.dynamicFriction = 2f;
                     yield break;
                 }
                 if (PushedItemRb.velocity.magnitude > maxSpeed&& DistanceToPushedItem < 0.7f)

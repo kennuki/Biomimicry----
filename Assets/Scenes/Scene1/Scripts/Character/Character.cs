@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
     void Start()
     {
+        SquatState = 0;
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
         OffsetLookpointToCharacterY = LookPoint.transform.localPosition.y;
