@@ -21,7 +21,7 @@ public class BoxVoice : MonoBehaviour
     {
         int clip = Random.Range(0, 3);
 
-        if (rb.velocity.magnitude > 0.1f)
+        if (rb.velocity.magnitude > 0.3f)
         {
             if (!audioSource.isPlaying)
             {

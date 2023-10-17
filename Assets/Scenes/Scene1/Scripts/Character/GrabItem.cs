@@ -29,7 +29,7 @@ public class GrabItem : MonoBehaviour
     void Update()
     {
 
-        //Debug.Log(cm1.transform.rotation.x);
+        //Debug.Log(character.rotation);
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
             StartCoroutine(TriggerDetect());
@@ -101,6 +101,16 @@ public class GrabItem : MonoBehaviour
 
 
 
+                if (other.tag == "BrushOff" && GrabAllow == true)
+                {
+                    Range.enabled = false;
+                    Character.AllProhibit = true;
+                    GrabbedItem = other.gameObject;
+                    HandAnimeLayer(true);
+                    GrabbedItemRb = GrabbedItem.GetComponent<Rigidbody>();
+                    GrabAction = true;
+                    StartCoroutine(BrushAway());
+                }
                 if (other.tag == "Grabbable" && GrabAllow == true)
                 {
                     grabbleItem = other.GetComponent<GrabbleItem>();
@@ -124,7 +134,7 @@ public class GrabItem : MonoBehaviour
                         }
                     }
                 }
-                if(Character.SquatState == 0&&GrabbedItem == null)
+                if (Character.SquatState == 0&&GrabbedItem == null)
                 {
                     if (other.tag == "Pushable" && Range.size.x < 2f)
                     {
@@ -469,6 +479,17 @@ public class GrabItem : MonoBehaviour
                 break;
 
         }
+    }
+    private IEnumerator BrushAway()
+    {      
+        yield return new WaitForSeconds(0.1f);
+        Character.AllProhibit = false;
+        GrabbedItemRb.AddForce(character.rotation * Vector3.right*10);
+        yield return new WaitForSeconds(0.4f);
+        ThrowItem = false;
+        GrabAllow = true;
+        Hand_Anim.SetInteger("HandState", 0);
+        HandAnimeLayer(false);
     }
 
     float OriginSpeed = Character.speed;
