@@ -22,7 +22,6 @@ public class FlashLight : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log("0..2");
             if (!isFlashlightOn)
             {
                 StartCoroutine(TurnOnFlashlight(flashtimes));

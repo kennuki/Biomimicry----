@@ -41,6 +41,7 @@ public class MoveToTarget : MonoBehaviour
 ;
         c += Time.deltaTime;
         currentPosition = transform.position;
+        Debug.Log(transform.position.y);
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
         {
             c = 0;
@@ -53,7 +54,7 @@ public class MoveToTarget : MonoBehaviour
             Character.AllProhibit = true;
             Character.MoveOnly = false;
             direction = target.position - transform.position;
-            if (direction.magnitude > 0.62f)
+            if (new Vector2(direction.x,direction.z).magnitude> 0.62f)
             {
                 direction.Normalize();
                 direction.y = controller.velocity.y/ movementSpeed;
@@ -63,7 +64,7 @@ public class MoveToTarget : MonoBehaviour
             {
                 finish = true;
                 StartCoroutine(RotateToStage());
-                
+
             }
 
         }
@@ -76,6 +77,7 @@ public class MoveToTarget : MonoBehaviour
     }
     private IEnumerator RotateToStage()
     {
+
         Vector3 targetRotation = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
         Vector3 CurrentEulerAngles = transform.eulerAngles;
         while (true)

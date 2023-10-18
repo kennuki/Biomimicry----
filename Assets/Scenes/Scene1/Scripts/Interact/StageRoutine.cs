@@ -34,7 +34,10 @@ public class StageRoutine : MonoBehaviour
     public float targetIntensity4;
 
     private float startIntensity; 
-    private float timer; 
+    private float timer;
+
+    public GameObject GreenLight_Dark, GreenLight, BlueLight_Dark, BlueLight;
+    public GameObject EmergencyLight, EmergencyLight_Dark;
     private void Start()
     {
         Switch.enabled = true;
@@ -42,6 +45,7 @@ public class StageRoutine : MonoBehaviour
         timer = 0f; 
         StartCoroutine(EnableObjectsWithDelay(objectsToEnable, intensity[0]));
         StartCoroutine(EnableObjectsWithDelay(objectsToEnable2, intensity[1]));
+        StartCoroutine(DynamoLightSet());
     }
 
     private System.Collections.IEnumerator EnableObjectsWithDelay(GameObject[]gameObjects, float Intensity)
@@ -120,6 +124,18 @@ public class StageRoutine : MonoBehaviour
         }
         render.material.SetColor("_EmissionColor", initialEmissionColor);
         this.enabled = false;
+    }
+
+    private IEnumerator DynamoLightSet()
+    {
+        yield return new WaitForSeconds(1);
+        GreenLight_Dark.SetActive(false);
+        GreenLight.SetActive(true);
+        BlueLight_Dark.SetActive(true);
+        BlueLight.SetActive(false);
+        EmergencyLight.SetActive(true);
+        EmergencyLight_Dark.SetActive(false);
+        yield break;
     }
 
     private void Update()

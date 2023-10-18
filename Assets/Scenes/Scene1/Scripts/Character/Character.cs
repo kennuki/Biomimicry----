@@ -289,7 +289,7 @@ public class Character : MonoBehaviour
                             Targetvelocity.y = 0;
                         }
                         TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.Impulse);
-                        Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
+                        //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
                     }
                 }
 
@@ -315,7 +315,7 @@ public class Character : MonoBehaviour
             else
             {
                 TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f, collisionPoint, ForceMode.VelocityChange);
-                Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
+                //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
             }
 
 

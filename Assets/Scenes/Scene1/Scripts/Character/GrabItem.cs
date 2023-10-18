@@ -18,7 +18,7 @@ public class GrabItem : MonoBehaviour
     {
         if(stageRoutine == null)
         {
-            //stageRoutine = GameObject.Find("StageRoundLight").GetComponent<StageRoutine>();
+           stageRoutine = GameObject.Find("LightGroup").transform.Find("1-5(Stage)").transform.Find("Audience Seat").transform.Find("Ceiling Light").GetComponent<StageRoutine>();
         }
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
@@ -75,33 +75,35 @@ public class GrabItem : MonoBehaviour
     private Vector3 GrabbedItemScale;
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.tag);
+        if (other.tag == "Obstacle")
+        {
+            Obstacle = other.gameObject.transform;
+        }
+        Transform raycastOrigin = transform;
+        Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
+        RaycastHit hit;
+        bool NoObstacle = true;
+        LayerMask layerMask = 1 << 6 | 1 << 12;
+
+        if (Physics.Raycast(ray, out hit, 6, layerMask))
+        {
+            Vector3 collisionPoint = hit.point;
+            if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
+            {
+                NoObstacle = true;
+            }
+            else
+            {
+
+                NoObstacle = false;
+
+            }
+        }
         if (ThrowItem == false)
         {
-            Transform raycastOrigin = transform;
-            Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
-            RaycastHit hit;
-            bool NoObstacle = true;
-            LayerMask layerMask = 1 << 6 | 1 << 12;
-
-            if (Physics.Raycast(ray, out hit,6, layerMask))
+            if (other.tag == "BrushOff" && GrabAllow == true)
             {
-                Vector3 collisionPoint = hit.point;
-                if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
-                {
-                    NoObstacle = true;
-                }
-                else
-                {
-                    NoObstacle = false;
-                }
-            }
-            if (Obstacle != null && NoObstacle == true || Obstacle == null)
-            {
-
-
-
-                if (other.tag == "BrushOff" && GrabAllow == true)
+                if(Vector3.Distance(other.transform.position, transform.position) < 1.4f)
                 {
                     Range.enabled = false;
                     Character.AllProhibit = true;
@@ -111,6 +113,11 @@ public class GrabItem : MonoBehaviour
                     GrabAction = true;
                     StartCoroutine(BrushAway());
                 }
+
+            }
+            if (Obstacle != null && NoObstacle == true || Obstacle == null)
+            {
+               
                 if (other.tag == "Grabbable" && GrabAllow == true)
                 {
                     grabbleItem = other.GetComponent<GrabbleItem>();
@@ -134,7 +141,7 @@ public class GrabItem : MonoBehaviour
                         }
                     }
                 }
-                if (Character.SquatState == 0&&GrabbedItem == null)
+                if (Character.SquatState == 0 && GrabbedItem == null)
                 {
                     if (other.tag == "Pushable" && Range.size.x < 2f)
                     {
@@ -169,7 +176,7 @@ public class GrabItem : MonoBehaviour
                         //physicMaterialBox.dynamicFriction = 0.4f;
                         StartCoroutine(PushObject2());
                     }
-                    else if (other.tag == "Rod"  && controller.isGrounded == true && new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude == 0 &&Character.SquatState == 0)
+                    else if (other.tag == "Rod" && controller.isGrounded == true && new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude == 0 && Character.SquatState == 0)
                     {
                         PushedItem = other.gameObject;
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
@@ -227,21 +234,19 @@ public class GrabItem : MonoBehaviour
                         StartCoroutine(SitDown());
                     }
                 }
-                
+
             }
-            if (other.tag == "Obstacle")
+        }
+        else if (Obstacle != null && NoObstacle == true || Obstacle == null)
+        {
+            if (other.tag == "Interacted" && Range.size.y < 2f && controller.isGrounded == true)
             {
-              
-                Obstacle = other.gameObject.transform;
+                Interacted_Item = other;
+                InteractFunction();
+                Range.enabled = false;
             }
         }
 
-        else if (other.tag == "Interacted" && Range.size.y < 2f && controller.isGrounded == true)
-        {
-            Interacted_Item = other;
-            InteractFunction();
-            Range.enabled = false;
-        }
     }
     private void InteractFunction()
     {
@@ -287,6 +292,30 @@ public class GrabItem : MonoBehaviour
                             Character.AllProhibit = true;
                             Character.MoveOnly = false;
                             StartCoroutine(GateOpenFunction(false));
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        switch (Interacted_Item.gameObject.GetComponent<InteractiveObject>().index)
+                        {
+                            case 4:
+                                {
+                                    
+                                    float PlayerToScan_Y = Mathf.Abs(transform.position.y - Interacted_Item.transform.position.y);
+                                    DistanceToPushedItem = Vector3.Distance(transform.position, Interacted_Item.transform.position);
+                                    if (DistanceToPushedItem < 4f && PlayerToScan_Y < 0.8f && DistanceToPushedItem > 1f)
+                                    {
+                                        Range.enabled = false;
+                                        CameraRotate.cameratotate = false;
+                                        Character.AllProhibit = true;
+                                        Character.MoveOnly = false;
+                                        StartCoroutine(ElectricityRecover());
+                                    }
+                                    break;
+                                }
+                            default:
+                                break;
                         }
                         break;
                     }
@@ -484,7 +513,7 @@ public class GrabItem : MonoBehaviour
     {      
         yield return new WaitForSeconds(0.1f);
         Character.AllProhibit = false;
-        GrabbedItemRb.AddForce(character.rotation * Vector3.right*10);
+        GrabbedItemRb.AddForce(character.rotation * Vector3.forward*15);
         yield return new WaitForSeconds(0.4f);
         ThrowItem = false;
         GrabAllow = true;
@@ -687,17 +716,35 @@ public class GrabItem : MonoBehaviour
         GrabbedItem = null;
     }
 
+
     public GameObject chair;
     private StageRoutine stageRoutine;
+    public PosRotAdjust adjust;
     public static bool ElectricRecover = false;
     private IEnumerator ElectricityRecover()
     {
+        adjust.enabled = true;
+        while(adjust.arrive == false)
+        {
+            yield return null;
+        }
+        Hand_Anim.SetLayerWeight(2, 1);
+        Hand_Anim.SetInteger("Unlock", 1);
         ElectricRecover = true;
         chair.SetActive(true);
         stageRoutine.enabled = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.1f);
+        if (GrabbedItemRb.gameObject.transform.parent != null)
+            GrabbedItem.transform.SetParent(null);
+        GrabbedItem.transform.localScale = GrabbedItemScale;
+        GrabbedItemRb.useGravity = false;
+        yield return new WaitForSeconds(0.56f);
         Hand_Anim.SetLayerWeight(2, 0);
-        Hand_Anim.SetInteger("Rod", 0);
+        Hand_Anim.SetInteger("Unlock", 0);       
+        ThrowItem = false;
+        GrabAllow = true;
+        Hand_Anim.SetInteger("HandState", 0);
+        HandAnimeLayer(false);
         yield return new WaitForSeconds(1f);
         Character.AllProhibit = false;
         Character.MoveOnly = true;
@@ -705,6 +752,7 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         GrabbedItem = null;
     }
+
 
     public Animator DoorOpenUp_Anim;
     private IEnumerator DoorOpenUp()
