@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class StageRoutine : MonoBehaviour
 {
-    public Animator Switch;
-
     public GameObject[] objectsToEnable;
     public GameObject[] objectsToEnable2;
     public float[] intensity;
@@ -40,7 +38,6 @@ public class StageRoutine : MonoBehaviour
     public GameObject EmergencyLight, EmergencyLight_Dark;
     private void Start()
     {
-        Switch.enabled = true;
         startIntensity = targetLight.intensity; 
         timer = 0f; 
         StartCoroutine(EnableObjectsWithDelay(objectsToEnable, intensity[0]));

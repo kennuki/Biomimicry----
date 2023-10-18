@@ -9,7 +9,6 @@ public class Character : MonoBehaviour
     public GameObject LookPoint;
     public GameObject Left_Hand;
     public Animator anim;
-    public AnimationClip Run;
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
     void Start()
     {

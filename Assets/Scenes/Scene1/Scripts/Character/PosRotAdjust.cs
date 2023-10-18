@@ -21,7 +21,7 @@ public class PosRotAdjust : MonoBehaviour
     private void Update()
     {
         Distance = Vector2.Distance(new Vector2(Character.position.x, Character.position.z), (new Vector2(AdjustPosition.x, AdjustPosition.z)));
-        //Debug.Log(Distance);
+        Debug.Log(Distance);
     }
     private IEnumerator Arm_Adjust1()
     {
