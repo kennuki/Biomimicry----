@@ -78,6 +78,7 @@ public class GrabItem : MonoBehaviour
         if (other.tag == "Obstacle")
         {
             Obstacle = other.gameObject.transform;
+            Debug.Log(other.name);
         }
         Transform raycastOrigin = transform;
         Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
@@ -239,14 +240,26 @@ public class GrabItem : MonoBehaviour
         }
         else if (Obstacle != null && NoObstacle == true || Obstacle == null)
         {
-            if (other.tag == "Interacted" && Range.size.y < 2f && controller.isGrounded == true)
+            if (Obstacle == null)
             {
+                Debug.Log(other.name);
+            }
+            if (other.tag == "Interacted" && Range.size.y<2 && controller.isGrounded == true)
+            {
+                Debug.Log(NoObstacle);
                 Interacted_Item = other;
                 InteractFunction();
                 Range.enabled = false;
             }
         }
-
+        else if(Obstacle == null)
+        {
+            Debug.Log(false);
+        }
+        else
+        {
+            Debug.Log(true);
+        }
     }
     private void InteractFunction()
     {
@@ -513,7 +526,9 @@ public class GrabItem : MonoBehaviour
     {      
         yield return new WaitForSeconds(0.1f);
         Character.AllProhibit = false;
-        GrabbedItemRb.AddForce(character.rotation * Vector3.forward*15);
+        GrabbedItemRb.AddForce(character.rotation * Vector3.forward*10);
+        yield return null;
+        GrabbedItemRb.AddForce(character.rotation * Vector3.forward * 10);
         yield return new WaitForSeconds(0.4f);
         ThrowItem = false;
         GrabAllow = true;
