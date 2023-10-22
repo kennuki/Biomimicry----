@@ -32,7 +32,7 @@ public class PosRotAdjust : MonoBehaviour
         RodForward = new Vector3(RodForward.x, 0, RodForward.z);
         float rotationAngle = Vector3.SignedAngle(RodForward, CharacerToRod, Vector3.up);
         Quaternion rotationQuaternion = Quaternion.AngleAxis(rotationAngle, Vector3.up);
-        Quaternion CharacterRotationDifference = Quaternion.Euler(0, AdjustAngle.y, 0) * Quaternion.Inverse(character.rotation);
+        Quaternion CharacterRotationDifference = Quaternion.Euler(0, AdjustAngle.y, 0) * Quaternion.Inverse(character.rotation); 
         Quaternion TargetRotation = character.rotation * rotationQuaternion * CharacterRotationDifference;
         for (float i = 0; i < 1f; i += Time.deltaTime)
         {
