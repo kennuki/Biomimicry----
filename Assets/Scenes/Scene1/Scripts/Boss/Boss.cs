@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Cinemachine;
 
 public class Boss : MonoBehaviour
 {
+    public Animator anim;
     AudioSource BossAudio;
-    public PanicRed_PP panic;
+    private PanicRed_PP panic;
     public Transform target; 
     private NavMeshAgent navMeshAgent;
     private Renderer[] renderers;
@@ -21,6 +23,8 @@ public class Boss : MonoBehaviour
     {
         BossAudio = GetComponent<AudioSource>();
         target = GameObject.Find("Character").transform;
+        panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
+        Dead_Camera = this.transform.Find("Cm_Dead").GetComponent<CinemachineVirtualCamera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = false;
         renderers = GetComponentsInChildren<Renderer>();
@@ -28,11 +32,16 @@ public class Boss : MonoBehaviour
         {
             //Debug.Log(renderer.name);
         }
+        navMeshAgent.enabled = true;
     }
 
     private void Update()
     {
-        navMeshAgent.enabled = true;
+
+        if(panic == null)
+        {
+            panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
+        }
         //Debug.Log(Distance);
         if (target == null)
         {
@@ -45,19 +54,35 @@ public class Boss : MonoBehaviour
         }
         Distance = Vector3.Distance(target.position, transform.position);
 
+        if (navMeshAgent.velocity.magnitude > 0.1f)
+        {
+            if (Random.Range(0, 10) < 2)
+            {
+                anim.SetInteger("Walk", 2);
+            }
+            else
+            {
+                anim.SetInteger("Walk", 1);
+            }
+        }
+        else
+        {
+            anim.SetInteger("Walk", 0);
+        }
+
         // 檢查是否需要施放隱形技能
         if (isInvisible == false && Time.time - invisibleStartTime >= invisibleCD)
         {
             //Debug.Log("0");
-            SetAlphaForRenderers(0,0);
-            SetAlphaForRenderers(1,0f);
-            ActivateInvisibility();
+            //SetAlphaForRenderers(0,0);
+           // SetAlphaForRenderers(1,0f);
+            //ActivateInvisibility();
         }
         else if(isInvisible == true&& Time.time- invisibleStartTime >= invisibleDuration)
         {
-            SetAlphaForRenderers(0,1);
-            SetAlphaForRenderers(1,0.3f);
-            isInvisible = false;
+            //SetAlphaForRenderers(0,1);
+           // SetAlphaForRenderers(1,0.3f);
+            //isInvisible = false;
         }
     }
 
@@ -82,6 +107,59 @@ public class Boss : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Character")
+        {
+            StartCoroutine(PlayerDead());
+        }
+    }
 
 
+    public static bool Dead = false;
+    public GameObject DeadPanel;
+    public Transform Hand;
+    public IEnumerator PlayerDead()
+    {
+        int layerIndex = LayerMask.NameToLayer("Character");
+        Dead = true;
+        Character.ActionProhibit = true;
+        Character.AllProhibit = true;
+        CameraRotate.cameratotate = false;
+        navMeshAgent.enabled = false;
+        anim.SetInteger("Dead", 1);
+        target.GetComponent<CharacterController>().enabled = false;
+        StartCoroutine(ddd());
+        StartCoroutine(DropHead());
+        Camera.main.cullingMask |= 1 << layerIndex;
+        yield return new WaitForSeconds(10);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        CameraRotate.cameratotate = false;
+        DeadPanel.SetActive(true);
+        target.SetParent(null);
+        Dead_Camera.Priority = 0;
+        Camera.main.cullingMask &= ~(1 << layerIndex);
+        Time.timeScale = 0;
+        yield break;
+    }
+
+    public CinemachineVirtualCamera Dead_Camera;
+    private IEnumerator DropHead()
+    {
+
+        Dead_Camera.Priority = 11;
+
+        yield return new WaitForSeconds(10f);
+
+    }
+    private IEnumerator ddd()
+    {
+        while (true)
+        {
+            target.position = Hand.position;
+            yield return null;
+        }
+
+    }
 }

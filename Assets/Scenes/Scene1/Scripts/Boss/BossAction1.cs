@@ -22,7 +22,7 @@ public class BossAction1 : MonoBehaviour
         anim_body.enabled = true;
         anim_body.SetBool("Dance", true);
         anim_body.SetInteger("Idle", 1);
-        yield return new WaitForSeconds(32f);
+        yield return new WaitForSeconds(30f);
         Skip.SkipDrama = false;
         BossAudio.PlayOneShot(BossAudio.clip);
         anim_body.SetBool("Dance", false);
@@ -32,6 +32,7 @@ public class BossAction1 : MonoBehaviour
         teleport.enabled = true;
         Character.AllProhibit = false;
         Character.ActionProhibit = false;
-        Character.MoveOnly = true;
+        Character.MoveOnly = false;
+
     }
 }

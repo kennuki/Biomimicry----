@@ -33,7 +33,7 @@ public class RandomTeleport : MonoBehaviour
             agent = Boss.GetComponent<NavMeshAgent>();
             AgentSpeed = agent.speed;
         }
-        RandomTeleportFunc();
+        //RandomTeleportFunc();
     }
     float TeleportCD = 3.7f;
     float t = 0;

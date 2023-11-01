@@ -12,6 +12,10 @@ public class Character : MonoBehaviour
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
     void Start()
     {
+        ActionProhibit = false;
+        GrabProhibit = false;
+        AllProhibit = false;
+        MoveOnly = false;
         SquatState = 0;
         controller = GetComponent<CharacterController>();
         CdHeight = controller.height;
