@@ -78,7 +78,7 @@ public class DynamicSpotLightRoutine1 : MonoBehaviour
 
     private IEnumerator ChangeFakeLightProperties()
     {
-        initialFakeLightAlpha = fakeLightMaterial.GetFloat("_Opacity");
+        initialFakeLightAlpha = fakeLightRenderer.material.GetFloat("_Opacity");
 
         // Change fake light alpha
         float elapsedTime = 0f;
@@ -93,6 +93,18 @@ public class DynamicSpotLightRoutine1 : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(23);
+        Color Origin1 = fakeLightRenderer.material.GetColor("_Color");
+        Color Origin2 = targetLight.color;
+        elapsedTime = 0f;
+        while (elapsedTime < 7f)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / 7;
+            fakeLightRenderer.material.SetColor("_Color", Color.Lerp(Origin1, new Color(1f, 0.25f, 0.25f, 1f), t));
+            targetLight.color = Color.Lerp(Origin2, new Color(1f, 0.25f, 0.25f, 1f), t);
+            yield return null;
+        }
     }
 }
 

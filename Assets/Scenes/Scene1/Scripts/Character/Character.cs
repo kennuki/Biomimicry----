@@ -313,7 +313,8 @@ public class Character : MonoBehaviour
             }
             else
             {
-                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f, collisionPoint, ForceMode.VelocityChange);
+                Debug.Log("0.0");
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f* other.material.bounciness, collisionPoint, ForceMode.VelocityChange);
                 //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
             }
 

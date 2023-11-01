@@ -88,14 +88,14 @@ public class GrabItem : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 6, layerMask))
         {
-            Vector3 collisionPoint = hit.point;
+            //Vector3 collisionPoint = hit.point;
             if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
             {
                 NoObstacle = true;
             }
             else
             {
-
+                //Debug.Log(hit.transform.gameObject.name);
                 NoObstacle = false;
 
             }
@@ -238,28 +238,17 @@ public class GrabItem : MonoBehaviour
 
             }
         }
-        else if (Obstacle != null && NoObstacle == true || Obstacle == null)
+        else if (Obstacle != null && NoObstacle == true|| Obstacle == null)
         {
-            if (Obstacle == null)
+            if (other.tag == "Interacted" && Range.size.y<4 && controller.isGrounded == true)
             {
-                Debug.Log(other.name);
-            }
-            if (other.tag == "Interacted" && Range.size.y<2 && controller.isGrounded == true)
-            {
-                Debug.Log(NoObstacle);
+                //Debug.Log(Obstacle.name);
                 Interacted_Item = other;
                 InteractFunction();
                 Range.enabled = false;
             }
         }
-        else if(Obstacle == null)
-        {
-            Debug.Log(false);
-        }
-        else
-        {
-            Debug.Log(true);
-        }
+
     }
     private void InteractFunction()
     {

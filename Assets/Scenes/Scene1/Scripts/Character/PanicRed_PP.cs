@@ -23,6 +23,7 @@ public class PanicRed_PP : MonoBehaviour
 
     public int State = 3;
     public float RunTime = 2f;
+    public bool quick = false;
     private float counter = 0;
 
     private Vignette vignette;
@@ -85,7 +86,14 @@ public class PanicRed_PP : MonoBehaviour
         if(State == 0)
         {
             vignette.active = true;
-            counter += Time.deltaTime;
+            if (quick)
+            {
+                counter += Time.deltaTime*1;
+            }
+            else
+            {
+                counter += Time.deltaTime;
+            }
             NoiseAffect.SetActive(true);
             if (render.material.GetFloat("_Strength") < NoiseMaxStrenth)
             {
@@ -120,7 +128,7 @@ public class PanicRed_PP : MonoBehaviour
             }
             if (CharacterAudioSourseLoop.pitch < 1.6f)
                 CharacterAudioSourseLoop.pitch += Time.deltaTime*2;
-            if (!CharacterAudioSourseLoop.isPlaying)
+            if (!CharacterAudioSourseLoop.isPlaying&&quick ==false)
             {
                 CharacterAudioSourseLoop.PlayOneShot(AudioCharacter.AudioClip[1]);              
             }
@@ -173,7 +181,7 @@ public class PanicRed_PP : MonoBehaviour
                     NoiseDelayCount -= 1;
                 }
             }
-            if (!CharacterAudioSourseLoop.isPlaying)
+            if (!CharacterAudioSourseLoop.isPlaying&&quick == false)
             {
                 CharacterAudioSourseLoop.PlayOneShot(AudioCharacter.AudioClip[1]);
             }
@@ -222,7 +230,7 @@ public class PanicRed_PP : MonoBehaviour
             {
                 CharacterAudioSourseLoop.pitch -= Time.deltaTime;
             }
-            if (!CharacterAudioSourseLoop.isPlaying)
+            if (!CharacterAudioSourseLoop.isPlaying&& quick == false)
             {
                 CharacterAudioSourseLoop.PlayOneShot(AudioCharacter.AudioClip[1]);
             }
