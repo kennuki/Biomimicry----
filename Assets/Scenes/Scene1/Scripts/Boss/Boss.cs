@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         BossAudio = GetComponent<AudioSource>();
         target = GameObject.Find("Character").transform;
         panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
@@ -119,10 +121,11 @@ public class Boss : MonoBehaviour
     public static bool Dead = false;
     public GameObject DeadPanel;
     public Transform Hand;
+    Vector3 DeadAngle = new Vector3(0, 90, 0);
     public IEnumerator PlayerDead()
     {
-        int layerIndex = LayerMask.NameToLayer("Character");
         Dead = true;
+        //int layerIndex = LayerMask.NameToLayer("Character");
         Character.ActionProhibit = true;
         Character.AllProhibit = true;
         CameraRotate.cameratotate = false;
@@ -131,15 +134,19 @@ public class Boss : MonoBehaviour
         target.GetComponent<CharacterController>().enabled = false;
         StartCoroutine(ddd());
         StartCoroutine(DropHead());
-        Camera.main.cullingMask |= 1 << layerIndex;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(2);
+        target.LookAt(this.transform);
+        target.Rotate(DeadAngle);
+        //Camera.main.cullingMask |= 1 << layerIndex;
+        yield return new WaitForSeconds(8);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
         DeadPanel.SetActive(true);
         target.SetParent(null);
-        Dead_Camera.Priority = 0;
-        Camera.main.cullingMask &= ~(1 << layerIndex);
+        //Dead_Camera.Priority = 0;
+        //Camera.main.cullingMask &= ~(1 << layerIndex);
         Time.timeScale = 0;
         yield break;
     }
@@ -148,18 +155,28 @@ public class Boss : MonoBehaviour
     private IEnumerator DropHead()
     {
 
-        Dead_Camera.Priority = 11;
+        //Dead_Camera.Priority = 11;
 
         yield return new WaitForSeconds(10f);
 
     }
+
+    
     private IEnumerator ddd()
     {
-        while (true)
+        SceneLoad = false;
+        while (SceneLoad == false)
         {
-            target.position = Hand.position;
+            target.position = Hand.position+new Vector3(0,-0.42f,0);
             yield return null;
         }
 
+    }
+    bool SceneLoad = false;
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneLoad = true;
+        navMeshAgent.enabled = true;
+        DeadPanel.SetActive(false);
     }
 }

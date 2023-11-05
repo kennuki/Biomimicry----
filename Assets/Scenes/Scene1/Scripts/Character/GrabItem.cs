@@ -71,31 +71,24 @@ public class GrabItem : MonoBehaviour
     private int ItemIndex;
     public string[] VIP_Item;
     private Collider Interacted_Item;
-    private Transform Obstacle;
     private Vector3 GrabbedItemScale;
+    bool NoObstacle = true;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Obstacle")
-        {
-            Obstacle = other.gameObject.transform;
-            Debug.Log(other.name);
-        }
-        Transform raycastOrigin = transform;
-        Ray ray = new Ray(raycastOrigin.position, raycastOrigin.forward);
+        float Dis = Vector3.Distance(other.transform.position, transform.position);
+        Vector3 Dir = other.transform.position - transform.position;
+        Ray ray = new Ray(transform.position, Dir);
         RaycastHit hit;
-        bool NoObstacle = true;
         LayerMask layerMask = 1 << 6 | 1 << 12;
 
         if (Physics.Raycast(ray, out hit, 6, layerMask))
         {
-            //Vector3 collisionPoint = hit.point;
             if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
             {
                 NoObstacle = true;
             }
             else
             {
-                //Debug.Log(hit.transform.gameObject.name);
                 NoObstacle = false;
 
             }
@@ -116,7 +109,7 @@ public class GrabItem : MonoBehaviour
                 }
 
             }
-            if (Obstacle != null && NoObstacle == true || Obstacle == null)
+            if (NoObstacle == true)
             {
                
                 if (other.tag == "Grabbable" && GrabAllow == true)
@@ -144,6 +137,7 @@ public class GrabItem : MonoBehaviour
                 }
                 if (Character.SquatState == 0 && GrabbedItem == null)
                 {
+                    //Debug.Log(Dis);
                     if (other.tag == "Pushable" && Range.size.x < 2f)
                     {
                         Hand_Anim.SetLayerWeight(4, 0.8f);
@@ -163,7 +157,7 @@ public class GrabItem : MonoBehaviour
                         StartCoroutine(PushObject());
                         StartCoroutine(PushLookAngleAdjust());
                     }
-                    else if (other.tag == "PushOnly" && Range.size.x < 2f)
+                    else if (other.tag == "PushOnly" && Range.size.x < 2f && Dis < 1f)
                     {
                         Hand_Anim.SetLayerWeight(4, 0.8f);
                         Hand_Anim.SetInteger("PushPull", 1);
@@ -238,7 +232,7 @@ public class GrabItem : MonoBehaviour
 
             }
         }
-        else if (Obstacle != null && NoObstacle == true|| Obstacle == null)
+        else if (NoObstacle == true)
         {
             if (other.tag == "Interacted" && Range.size.y<4 && controller.isGrounded == true)
             {
@@ -389,7 +383,7 @@ public class GrabItem : MonoBehaviour
     bool IfTriggerDetect = false;
     private IEnumerator TriggerDetect()
     {
-        Obstacle = null;
+        NoObstacle = true;
         Range.size = new Vector3(0.1f, 0.25f, 0.1f);
         Range.enabled = true;
         transform.eulerAngles = new Vector3(cm1.transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); 

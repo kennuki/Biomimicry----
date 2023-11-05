@@ -20,7 +20,7 @@ public class Skip : MonoBehaviour
         }
         if (SkipDrama == true)
         {
-            Time.timeScale = 10;
+            Time.timeScale = 5;
         }
         else
         {
