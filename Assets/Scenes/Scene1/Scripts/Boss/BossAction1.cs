@@ -22,7 +22,7 @@ public class BossAction1 : MonoBehaviour
         anim_body.enabled = true;
         anim_body.SetBool("Dance", true);
         anim_body.SetInteger("Idle", 1);
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(29.5f);
         Skip.SkipDrama = false;
         BossAudio.PlayOneShot(BossAudio.clip);
         anim_body.SetBool("Dance", false);

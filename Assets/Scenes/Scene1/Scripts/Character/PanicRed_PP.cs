@@ -263,7 +263,7 @@ public class PanicRed_PP : MonoBehaviour
     private void OnSceneChanged(Scene previousScene, Scene newScene)
     {
         SceneManager.activeSceneChanged -= OnSceneChanged;
-        Debug.Log("Scene changed from: " + previousScene.name + " to: " + newScene.name);
+        //Debug.Log("Scene changed from: " + previousScene.name + " to: " + newScene.name);
         // Perform actions or preparations here
         // For example, reset player position, save game progress, etc.
     }

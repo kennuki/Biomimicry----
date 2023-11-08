@@ -28,8 +28,6 @@ public class GrabItem : MonoBehaviour
 
     void Update()
     {
-
-        //Debug.Log(character.rotation);
         if (IfTriggerDetect == false && Input.GetKeyDown(KeyCode.F) && ThrowItem == false && Character.AllProhibit == false && Character.GrabProhibit == false)
         {
             StartCoroutine(TriggerDetect());
@@ -192,7 +190,7 @@ public class GrabItem : MonoBehaviour
                         }
                         Range.enabled = false;
                     }
-                    else if (other.gameObject.name == "Board" && Range.size.y < 0.5f && controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
+                    else if (other.gameObject.name == "Board"  && controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
                     {
                         PushedItem = other.gameObject;
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
@@ -211,11 +209,11 @@ public class GrabItem : MonoBehaviour
                             Debug.Log("0");
                             if (GrabbedItem.gameObject.GetComponent<Text>().text == "Board")
                             {
-                                Debug.Log("1");
                                 StartCoroutine(ElectricityRecover());
                             }
                             else if (GrabbedItem.gameObject.GetComponent<Text>().text == "Board2")
                             {
+                                Debug.Log("1");
                                 StartCoroutine(DoorOpenUp());
                             }
 
@@ -305,7 +303,8 @@ public class GrabItem : MonoBehaviour
                                         Range.enabled = false;
                                         CameraRotate.cameratotate = false;
                                         Character.AllProhibit = true;
-                                        Character.MoveOnly = false;
+                                        Character.ActionProhibit = true;
+                                        //Character.MoveOnly = false;
                                         StartCoroutine(ElectricityRecover());
                                     }
                                     break;
@@ -374,6 +373,7 @@ public class GrabItem : MonoBehaviour
                 {
                     Hand_Anim.SetInteger("HandState", 3);
                     GrabAction = false;
+                    GrabAllow = true;
                 }
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -391,17 +391,17 @@ public class GrabItem : MonoBehaviour
         while (Range.size.z < 2f)
         {
             Range.size = Range.size + new Vector3(0, 0, Time.deltaTime * 50);
-            Range.center = Range.center + new Vector3(0, 0, Time.deltaTime * 25);        
+            Range.center = Range.center + new Vector3(0, 0, Time.deltaTime * 25f);        
             yield return new WaitForSeconds(Time.deltaTime);
         }
         while (Range.size.y < 6f)
         {
-            Range.size = Range.size + new Vector3(0, Time.deltaTime * 75, 0);
+            Range.size = Range.size + new Vector3(0, Time.deltaTime * 75f, 0);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         while (Range.size.x < 2.5f)
         {
-            Range.size = Range.size + new Vector3(Time.deltaTime * 75, 0, 0);
+            Range.size = Range.size + new Vector3(Time.deltaTime * 75f, 0, 0);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         if (Interacted_Item == null && ThrowItem == true && Character.AllProhibit == false && Character.GrabProhibit == false)
@@ -456,13 +456,13 @@ public class GrabItem : MonoBehaviour
             GrabbedItemRb.useGravity = true;
             yield return new WaitForSeconds(0.25f);
             Character.AllProhibit = false;
+            GrabbedItem = null;
+            Hand_Anim.SetInteger("HandState", 0);
+            HandAnimeLayer(false);
             yield return new WaitForSeconds(0.3f);
             Physics.IgnoreLayerCollision(7, 10, false);
-            Hand_Anim.SetInteger("HandState", 0);
             GrabAllow = true;
-            GrabbedItem = null;
             GrabbedItemCd = null;
-            HandAnimeLayer(false);
         }
         yield return new WaitForSeconds(Time.deltaTime);
     }
@@ -514,9 +514,11 @@ public class GrabItem : MonoBehaviour
         GrabbedItemRb.AddForce(character.rotation * Vector3.forward * 10);
         yield return new WaitForSeconds(0.4f);
         ThrowItem = false;
-        GrabAllow = true;
         Hand_Anim.SetInteger("HandState", 0);
         HandAnimeLayer(false);
+        GrabbedItem = null;
+        yield return new WaitForSeconds(0.1f);
+        GrabAllow = true;
     }
 
     float OriginSpeed = Character.speed;
@@ -732,6 +734,7 @@ public class GrabItem : MonoBehaviour
         chair.SetActive(true);
         stageRoutine.enabled = true;
         yield return new WaitForSeconds(1.1f);
+        CameraRotate.cameratotate = true;
         if (GrabbedItemRb.gameObject.transform.parent != null)
             GrabbedItem.transform.SetParent(null);
         GrabbedItem.transform.localScale = GrabbedItemScale;
@@ -744,10 +747,10 @@ public class GrabItem : MonoBehaviour
         Hand_Anim.SetInteger("HandState", 0);
         HandAnimeLayer(false);
         yield return new WaitForSeconds(1f);
+        Character.ActionProhibit = false;
         Character.AllProhibit = false;
-        Character.MoveOnly = true;
         Cursor.lockState = CursorLockMode.Locked;
-        CameraRotate.cameratotate = true;
+
         GrabbedItem = null;
     }
 

@@ -12,6 +12,7 @@ public class MoveToTarget : MonoBehaviour
     public Transform LookPoint;
     public Character character;
     public Transform target;
+    private Vector3 OriginPos;
     public float movementSpeed = 5f;
 
     private CharacterController controller;
@@ -20,6 +21,7 @@ public class MoveToTarget : MonoBehaviour
     private Vector3 currentPosition;
     private void Start()
     {
+        OriginPos = transform.localPosition;
         controller = GetComponent<CharacterController>();
         previousPosition = transform.position+Vector3.forward;
         currentPosition = transform.position;
@@ -68,11 +70,6 @@ public class MoveToTarget : MonoBehaviour
 
         }
         previousPosition = currentPosition;
-        if(finish == true)
-        {
-            Character.AllProhibit = true;
-            Character.MoveOnly = false;
-        }
     }
     private IEnumerator RotateToStage()
     {
@@ -236,6 +233,8 @@ public class MoveToTarget : MonoBehaviour
         DynamicLight1.SetActive(false);
         yield return new WaitForSeconds(1.7f);
         Anim_Move.SetTrigger("Action2");
+        StartCoroutine(CameraMoveUpOrDown(-1, -1));
+        LookPoint.localPosition = OriginPos;
         yield return new WaitForSeconds(0.5f);
         panic.State = 0;
         AllLight.SetActive(true);
@@ -243,8 +242,10 @@ public class MoveToTarget : MonoBehaviour
         DynamicLight2.SetActive(true);
         Light_Boss_S.SetActive(true);
         Light_Boss_P.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(CameraMoveUpOrDown(-1));
+        yield return new WaitForSeconds(1f);
+        Character.AllProhibit = false;
+        Character.ActionProhibit = false;
+        CameraRotate.cameratotate = true;
         yield return new WaitForSeconds(5);
         this.enabled = false;
 
@@ -254,16 +255,16 @@ public class MoveToTarget : MonoBehaviour
     private IEnumerator CameraRoutine()
     {
         yield return new WaitForSeconds(5f);
-        StartCoroutine(CameraMoveUpOrDown(1));
+        StartCoroutine(CameraMoveUpOrDown(1,1));
         yield return new WaitForSeconds(34);
 
     }
-    private IEnumerator CameraMoveUpOrDown(int UpDown)
+    private IEnumerator CameraMoveUpOrDown(int UpDown,int FrontBack)
     {
-        Vector3 TargetPos = LookPoint.position + Vector3.up * UpDown;
+        Vector3 TargetPos = LookPoint.position + Vector3.up * UpDown + Vector3.left* FrontBack;
         while (true)
         {
-            Vector3 LookPointMove = Vector3.Lerp(LookPoint.position, TargetPos, 0.1f);
+            Vector3 LookPointMove = Vector3.Lerp(LookPoint.position, TargetPos, 0.5f);
             LookPoint.position = LookPointMove;
             if (Vector3.Distance(LookPoint.position, TargetPos) < 0.03f)
             {

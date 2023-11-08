@@ -282,7 +282,11 @@ public class Character : MonoBehaviour
                     if(other.tag == "Joint")
                     {
 
-                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.05f, collisionPoint, ForceMode.Impulse);
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.05f, collisionPoint, ForceMode.VelocityChange);
+                    }
+                    else if (other.gameObject.layer == 18)
+                    {
+
                     }
                     else
                     {
@@ -291,7 +295,7 @@ public class Character : MonoBehaviour
                         {
                             Targetvelocity.y = 0;
                         }
-                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.Impulse);
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.VelocityChange);
                         //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
                     }
                 }
@@ -314,6 +318,10 @@ public class Character : MonoBehaviour
             else if(other.tag == "Joint")
             {
                 TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.VelocityChange);
+            }
+            else if (other.gameObject.layer == 18)
+            {
+                
             }
             else
             {

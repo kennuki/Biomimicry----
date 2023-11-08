@@ -51,6 +51,7 @@ public class PosRotAdjust : MonoBehaviour
             character.rotation = Quaternion.Lerp(character.rotation, TargetRotation, 0.7f);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        character.rotation = TargetRotation;
         this.enabled = false;
         yield break;
 
@@ -100,7 +101,6 @@ public class PosRotAdjust : MonoBehaviour
             yield return null;
         }
         arrive = true;
-        Character.AllProhibit = false;
         StartCoroutine(Arm_Adjust1());
         StartCoroutine(Arm_Adjust2());
         yield break;
