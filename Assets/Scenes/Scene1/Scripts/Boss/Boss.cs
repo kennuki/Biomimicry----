@@ -7,14 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
-    [System.Serializable]
-    public class TelePortPoint
-    {
-        public int PointCount;
-        public Transform[] Point;
-        public int[] MaxTeleportTimes;
-    }
-    public TelePortPoint telePort;
 
     public Animator anim;
     AudioSource BossAudio;
@@ -36,6 +28,7 @@ public class Boss : MonoBehaviour
         Dead_Camera = this.transform.Find("Cm_Dead").GetComponent<CinemachineVirtualCamera>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
+        AddIdlePoint();
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = false;
@@ -49,15 +42,88 @@ public class Boss : MonoBehaviour
 
 
 
+    [System.Serializable]
+    public class TelePortPoint
+    {
+        public int PointCount;
+        public Transform[] Point;
+        public int[] MaxTeleportTimes;
+    }
+    public TelePortPoint telePort;
+
+    public Transform IdlePointList;
+    public List<Transform> IdlePoint = new List<Transform>();
+    public void AddIdlePoint()
+    {
+        if (IdlePointList != null)
+        {
+            foreach (Transform child in IdlePointList)
+            {
+                IdlePoint.Add(child);
+            }
+        }
+        else
+        {
+            Debug.LogError("Target object not assigned!");
+        }
+    }
+
+    private List<Transform> PointCache = new List<Transform>();
+    public void AddCachePoint(Transform target)
+    {
+        bool InCache = false;
+        foreach (Transform point in PointCache)
+        {
+            if (target == point)
+            {
+                InCache = true;
+            }
+        }
+        if (InCache==false)
+        {
+            if (PointCache.Count > 5)
+            {
+                PointCache.Add(target);
+                PointCache.RemoveAt(0);
+            }
+            else
+            {
+                PointCache.Add(target);
+            }
+        }
+
+    }
+
+
+
     int State = 0;/*State 0 = Can see target and not over limited distance
                     State 1 = Cannot see target. On the way to LastPosition
                     State 2 = Cannot see target. Reached LastPosition and start wandering in random Teleport Position for 3 second.
                     State 3 = Search valid teleport point.
                     State 4 = After State 3.
                     State 5 = Teleport duration.
+                    State 6
                    */
+    float Teleport_CD = 0;
+
     private void Update()
     {
+        if (Input.GetKey(KeyCode.O))
+        {
+            Debug.Log(State);
+        }
+
+        if (IdleTarget_Point!= null)
+        {
+            string A="";
+            foreach (Transform point in PointCache)
+            {
+                A = A + point.name;
+            }
+                Debug.Log(A);
+
+        }
+
         WalkAnim();
         if(panic == null)
         {
@@ -83,10 +149,13 @@ public class Boss : MonoBehaviour
             }
         }
 
+
+
+        Teleport_CD += Time.deltaTime;
         DistanceLast = Vector3.Distance(LastPos, transform.position);
         DistancePlayer = Vector3.Distance(target.position, transform.position);
 
-        if(State == 0)
+        if (State == 0)
         {
             if (navMeshAgent.enabled == true)
             {
@@ -96,23 +165,20 @@ public class Boss : MonoBehaviour
         }
         if(State == 1)
         {
-
+            if(See == true)
+            {
+                ChoosePath();
+            }
             if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
             {
-                RandomIndex = Random.Range(0, telePort.PointCount);
                 State = 2;
             }
-            else if (DistanceLast < 1.6f)
+            else if (DistanceLast < 2f)
             {
-                RandomIndex = Random.Range(0, telePort.PointCount);
                 State = 2;
             }
             else if (navMeshAgent.enabled == true)
             {
-                if(LastPos == Vector3.zero)
-                {
-                    State = 2;
-                }
                 navMeshAgent.SetDestination(LastPos);
             }
             else
@@ -122,8 +188,9 @@ public class Boss : MonoBehaviour
         }
         if(State == 2)
         {
-            Debug.Log(navMeshAgent.enabled);
-            if (See == true)
+            LastPos = Vector3.zero;
+            //Debug.Log(navMeshAgent.enabled);
+            if (See == true&& navMeshAgent.enabled == true)
             {
                 if (DistancePlayer < 25)
                 {
@@ -131,49 +198,41 @@ public class Boss : MonoBehaviour
                 }
                 else if (DistancePlayer >= 25)
                 {
-                    State = 3;
+                    if (Teleport_CD > 8)
+                    {
+                        State = 3;
+                    }
+                    else
+                    {
+                        StartCoroutine(BossIdle());
+                        State = 6;
+                    }
                 }
             }
             else if (navMeshAgent.enabled == true)
             {
-                
-                navMeshAgent.SetDestination(telePort.Point[RandomIndex].position);
+                StartCoroutine(BossIdle());
+                State = 6;
             }
-            if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
+            /*if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
             {
-                RandomIndex += 1;
-                if (RandomIndex >= telePort.PointCount)
-                {
-                    RandomIndex -= telePort.PointCount;
-                    RandomTimes += 1;
-                }
-                else
-                {
-                    RandomTimes += 1;
-                }
-                if(RandomTimes == telePort.PointCount)
-                {
-                    NoSeeTime = 0;
-                    State = 3;
-                }
+                NoSeeTime = 0;
+                State = 3;
             }
             else
             {
-
                 NoSeeTime += Time.deltaTime;
-                if(NoSeeTime > 7)
+                if (NoSeeTime > 7)
                 {
                     NoSeeTime = 0;
                     State = 3;
                 }
-            }
+            }*/
         }
         if(State == 3)
         {
             StartCoroutine(SearchTeleportPoint());
         }
-
-
         if (State == 5)
         {
             State5_Counter += Time.deltaTime;
@@ -184,77 +243,12 @@ public class Boss : MonoBehaviour
                 anim.SetInteger("Turn", 0);
                 LastPos = target.position;
                 navMeshAgent.enabled = true;
+                Teleport_CD = 0;
                 ChoosePath();
             }
         }
 
     }
-    private Vector3 LastPos;
-    private bool See = true;
-    private float NoSeeTime = 0;
-    float State5_Counter;
-    int RandomIndex;
-    int RandomTimes = 0;
-    Transform TeleportLast;
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Character")
-        {
-            StartCoroutine(PlayerDead());
-        }
-    }
-
-    private IEnumerator SearchTeleportPoint()
-    {
-        State = 4;
-        anim.SetInteger("Walk", 0);
-        Vector3 DirectionToPlayer;
-        Quaternion rotationToFaceAway;
-        foreach (Transform teleport_point in telePort.Point)
-        {
-            navMeshAgent.enabled = false;
-            transform.position = teleport_point.position;
-            DirectionToPlayer = target.position - transform.position;
-            rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
-            transform.rotation = rotationToFaceAway;
-            yield return null;
-            navMeshAgent.enabled = true;
-            if (navMeshAgent.enabled == true)
-            {
-                navMeshAgent.SetDestination(target.position);
-            }
-            if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
-            {
-
-            }
-            else if(navMeshAgent.path != null)
-            {
-                if(teleport_point == TeleportLast)
-                {
-                    RandomIndex = Random.Range(0, telePort.PointCount);
-                    transform.position = telePort.Point[RandomIndex].position;
-                    TeleportLast = telePort.Point[RandomIndex];
-                    DirectionToPlayer = target.position - transform.position;
-                    rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
-                    transform.rotation = rotationToFaceAway;
-                }
-                TeleportLast = teleport_point;
-                navMeshAgent.enabled = false;
-                State = 5;
-                yield break;
-            }
-        }
-        RandomIndex = Random.Range(0, telePort.PointCount);
-        transform.position = telePort.Point[RandomIndex].position;
-        TeleportLast = telePort.Point[RandomIndex];
-        DirectionToPlayer = target.position - transform.position;
-        rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
-        transform.rotation = rotationToFaceAway;
-        yield break;
-    }
-
-
-
     private void ChoosePath()
     {
         if (See == true)
@@ -265,15 +259,18 @@ public class Boss : MonoBehaviour
             }
             else if (DistancePlayer >= 25)
             {
-                State = 3;
+                if (Teleport_CD > 8)
+                {
+                    State = 3;
+                }
+                else
+                {
+                    State = 2;
+                }
             }
         }
         else if (See == false)
         {
-            if(LastPos == Vector3.zero)
-            {
-                State = 2;
-            }
             if (DistancePlayer < 25f)
             {
                 State = 1;
@@ -284,6 +281,176 @@ public class Boss : MonoBehaviour
             }
         }
     }
+
+    Transform TargetTeleportPoint;
+    private IEnumerator SearchTeleportPoint()
+    {
+        Vector3 DirectionToPlayer;
+        Quaternion rotationToFaceAway;
+        float DistanceToPlayerCache = Vector3.Distance(transform.position,target.position);
+        State = 4;
+        anim.SetInteger("Walk", 0);
+        navMeshAgent.enabled = false;
+        foreach (Transform teleport_point in telePort.Point)
+        {
+            float DistanceToPlayer = Vector3.Distance(teleport_point.position, target.position);
+            if (DistanceToPlayer < DistanceToPlayerCache)
+            {
+                if(TargetTeleportPoint == null)
+                {
+                    TargetTeleportPoint = teleport_point;
+                }
+                else if(DistanceToPlayer < DistanceToPlayerCache)
+                {
+                    TargetTeleportPoint = teleport_point;
+                    DistanceToPlayerCache = DistanceToPlayer;
+                }
+            }
+        }
+
+        if (TargetTeleportPoint != null)
+        {
+            transform.position = TargetTeleportPoint.position;
+            DirectionToPlayer = target.position - transform.position;
+            rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
+            transform.rotation = rotationToFaceAway;
+            yield return null;
+            navMeshAgent.enabled = true;
+            State = 5;
+            //navMeshAgent.SetDestination(target.position);
+        }
+        else
+        {
+            navMeshAgent.enabled = true;
+            Teleport_CD = 0;
+            State = 2;
+        }
+        
+
+        if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
+        {
+
+        }
+        else if (navMeshAgent.path != null)
+        {
+            /*if (teleport_point == TeleportLast)
+            {
+                RandomIndex = Random.Range(0, telePort.PointCount);
+                transform.position = telePort.Point[RandomIndex].position;
+                TeleportLast = telePort.Point[RandomIndex];
+                DirectionToPlayer = target.position - transform.position;
+                rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
+                transform.rotation = rotationToFaceAway;
+            }*/
+            //TeleportLast = teleport_point;
+            //navMeshAgent.enabled = false;
+            //State = 5;
+            //yield break;
+        }
+
+
+
+        /*RandomIndex = Random.Range(0, telePort.PointCount);
+        transform.position = telePort.Point[RandomIndex].position;
+        TeleportLast = telePort.Point[RandomIndex];
+        DirectionToPlayer = target.position - transform.position;
+        rotationToFaceAway = Quaternion.LookRotation(-DirectionToPlayer);
+        transform.rotation = rotationToFaceAway;*/
+        yield break;
+    }
+
+    float distance = 100;
+    Transform IdleTarget_Point;
+    private IEnumerator BossIdle()
+    {
+
+        float time = 0;
+        int i;
+        for (i = 0; i < IdlePoint.Count; i++)
+        {
+            if (Vector3.Distance(IdlePoint[i].position, this.transform.position) < distance)
+            {
+                IdleTarget_Point = IdlePoint[i];
+                distance = Vector3.Distance(IdlePoint[i].position, this.transform.position);
+            }
+        }
+
+        AddCachePoint(IdleTarget_Point);
+
+        NearPoint near = IdleTarget_Point.GetComponent<NearPoint>();
+        int nearpoint_count = near.pointInfo.NearPoint.Length;
+        List<Transform> NearPoint_fix = new List<Transform>();
+        while (time < 80)
+        {
+            if(See == true)
+            {
+                State = 0;
+                yield break;
+            }
+            if(Vector3.Distance(IdleTarget_Point.position,transform.position) > 2)
+            {
+                time += Time.deltaTime;
+                navMeshAgent.SetDestination(IdleTarget_Point.position);
+                yield return null;
+            }
+            else
+            {
+
+                for (int j=0;j< nearpoint_count; j++)
+                {
+                    bool InCache = false;
+                    foreach (Transform point in PointCache)
+                    {
+                        if(point == near.pointInfo.NearPoint[j])
+                        {
+                            InCache = true;
+                        }
+                    }
+                    if (!InCache)
+                    {
+                        NearPoint_fix.Add(near.pointInfo.NearPoint[j]);
+                    }
+                }
+                if (NearPoint_fix.Count == 0)
+                {
+                    Debug.Log("0235");
+                    PointCache.Clear();
+                }
+                else
+                {
+                    IdleTarget_Point = NearPoint_fix[Random.Range(0, NearPoint_fix.Count)];
+                    AddCachePoint(IdleTarget_Point);
+                    near = IdleTarget_Point.GetComponent<NearPoint>();
+                    nearpoint_count = near.pointInfo.NearPoint.Length;
+                    NearPoint_fix.Clear();
+                }
+
+            }
+        }
+        State = 2;
+        yield break;
+
+    }
+
+
+    private Transform TargetPoint_Idle;
+    private Vector3 LastPos;
+    private bool See = true;
+    private float NoSeeTime = 0;
+    float State5_Counter;
+    Transform TeleportLast;
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Character")
+        {
+            StartCoroutine(PlayerDead());
+        }
+    }
+
+
+
+
+
 
     
 
@@ -326,7 +493,6 @@ public class Boss : MonoBehaviour
     {
         State = 6;
         NoSeeTime = 0;
-        RandomTimes = 0;
 
         flashlight.enabled = false;
         Cm_Default_Transition_Time = cinemachineBrain.m_DefaultBlend.BlendTime;
@@ -428,6 +594,7 @@ public class Boss : MonoBehaviour
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         SceneLoad = true;
         navMeshAgent.enabled = true;
+        PointCache.Clear();
         DeadPanel.SetActive(false);
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
