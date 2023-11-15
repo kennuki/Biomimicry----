@@ -27,12 +27,10 @@ public class Boss : MonoBehaviour
     private Renderer[] renderers;
     private Transform target; 
     private Transform IdleTarget_Point;
-    private Transform TargetPoint_Idle;
-    private Transform TeleportLast;
     private Transform TargetTeleportPoint;
     private Vector3 LastPos=Vector3.zero;
     private bool See = true;
-    private float NoSeeTime = 0;
+
     private float distance;
     private float Teleport_CD = 7;
     private float WalkChange_Counter = 0;
@@ -116,7 +114,6 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetKey(KeyCode.O))
         {
             Debug.Log(State);
@@ -258,7 +255,6 @@ public class Boss : MonoBehaviour
             {
                 LastPos = hit.point;
                 See = true;
-                NoSeeTime = 0;
             }
             else
                 See = false;
@@ -342,14 +338,13 @@ public class Boss : MonoBehaviour
 
         if (TargetTeleportPoint != null)
         {
-            yield return null;
             anim.SetInteger("Turn", 1);
+            yield return new WaitForSeconds(Time.deltaTime * 3);
             transform.position = TargetTeleportPoint.position;
             DirectionToPlayer = target.position - transform.position;
             rotationToFaceAway = Quaternion.LookRotation(DirectionToPlayer);
             transform.rotation = rotationToFaceAway;
             navMeshAgent.enabled = true;
-            Debug.Log("teleport");
             State = ChasingState.Teleport;
             //navMeshAgent.SetDestination(target.position);
         }
@@ -419,7 +414,6 @@ public class Boss : MonoBehaviour
                 }
                 if (NearPoint_fix.Count == 0)
                 {
-                    Debug.Log("0235");
                     PointCache.Clear();
                 }
                 else
@@ -496,7 +490,6 @@ public class Boss : MonoBehaviour
 
     public IEnumerator PlayerDead()
     {
-        NoSeeTime = 0;
         flashlight.enabled = false;
         Dead = true;
         Cm_Default_Transition_Time = cinemachineBrain.m_DefaultBlend.BlendTime;
@@ -576,7 +569,9 @@ public class Boss : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        State = 0;
+        LastPos = target.position;
+        PointCache.Clear();
+        State = ChasingState.ChaseTrack;
         See = true;
         SceneLoad = true;
         navMeshAgent.enabled = true;
