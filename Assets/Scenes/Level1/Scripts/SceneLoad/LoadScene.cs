@@ -18,7 +18,7 @@ public class LoadScene : MonoBehaviour
             SceneWillChange = true;
             //list.SaveActiveState();
             //save.ReloadScene();
-            StartCoroutine(ReLoadSceneDelay(1));
+            StartCoroutine(ReLoadSceneDelay(2));
         }
     }
     public IEnumerator ReLoadSceneDelay(int Scene)

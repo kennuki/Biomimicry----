@@ -22,9 +22,9 @@ public class MoveToTarget : MonoBehaviour
     private void Start()
     {
         OriginPos = transform.localPosition;
-        controller = GetComponent<CharacterController>();
-        previousPosition = transform.position+Vector3.forward;
-        currentPosition = transform.position;
+        controller = character.GetComponent<CharacterController>();
+        previousPosition = character.transform.position+Vector3.forward;
+        currentPosition = character.transform.position;
         postProcessProfile = postProcessVolume.profile;
         clonedProfile = Instantiate(postProcessProfile);
         if (clonedProfile.TryGet(out colorAdjustments))
@@ -42,7 +42,7 @@ public class MoveToTarget : MonoBehaviour
     {
 ;
         c += Time.deltaTime;
-        currentPosition = transform.position;
+        currentPosition = character.transform.position;
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
         {
             c = 0;
@@ -54,14 +54,14 @@ public class MoveToTarget : MonoBehaviour
             CameraRotate.cameratotate = false;
             Character.AllProhibit = true;
             Character.MoveOnly = false;
-            direction = target.position - transform.position;
+            direction = target.position - character.transform.position;
             if (new Vector2(direction.x,direction.z).magnitude> 0.22f)
             {
                 direction.Normalize();
                 direction.y = controller.velocity.y/ movementSpeed;
                 controller.Move(direction * movementSpeed * Time.deltaTime);              
             }
-            else if(transform.position.y>-1f)
+            else if(character.transform.position.y>-1f)
             {
                 finish = true;
                 StartCoroutine(RotateToStage());
@@ -74,8 +74,8 @@ public class MoveToTarget : MonoBehaviour
     private IEnumerator RotateToStage()
     {
 
-        Vector3 targetRotation = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-        Vector3 CurrentEulerAngles = transform.eulerAngles;
+        Vector3 targetRotation = new Vector3(character.transform.eulerAngles.x, 0, character.transform.eulerAngles.z);
+        Vector3 CurrentEulerAngles = character.transform.eulerAngles;
         while (true)
         {
             if (CurrentEulerAngles.y > 180)
@@ -87,7 +87,7 @@ public class MoveToTarget : MonoBehaviour
                 CurrentEulerAngles -= new Vector3(0, 360, 0);
             }
             CurrentEulerAngles = Vector3.Lerp(CurrentEulerAngles, targetRotation, 0.02f);
-            transform.eulerAngles = CurrentEulerAngles;
+            character.transform.eulerAngles = CurrentEulerAngles;
             if(Mathf.Abs(CurrentEulerAngles.y - targetRotation.y) < 1)
             {
                 StartCoroutine(StageLightSet());
