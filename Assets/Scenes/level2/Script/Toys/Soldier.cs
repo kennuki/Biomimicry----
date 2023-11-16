@@ -34,6 +34,7 @@ public class Soldier : MonoBehaviour
     int state = 0;
     void Move()
     {
+        Debug.Log(patrolDirection);
         patrolDirection = (transform.position - TargetPos()).normalized;
         transform.Translate(patrolDirection * speed*0.05f,Space.Self);
         float Distance = Vector3.Distance(transform.position, TargetPos());
