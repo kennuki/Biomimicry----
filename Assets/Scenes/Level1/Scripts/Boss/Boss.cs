@@ -337,6 +337,7 @@ public class Boss : MonoBehaviour
 
         if (TargetTeleportPoint != null)
         {
+            panic2.State = 0;
             anim.SetInteger("Turn", 1);
             yield return new WaitForSeconds(Time.deltaTime * 3);
             transform.position = TargetTeleportPoint.position;

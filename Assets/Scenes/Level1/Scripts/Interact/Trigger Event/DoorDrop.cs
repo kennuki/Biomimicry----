@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DoorDrop : EventTriggerFunction
 {
-    public Animator anim;
+    public PlayableDirector playableDirector;
     public override void Enter()
     {
         if (Trigger)
         {
-            anim.enabled = true;
+            playableDirector.Play();
+            Trigger = false;
         }
     }
+
 }
