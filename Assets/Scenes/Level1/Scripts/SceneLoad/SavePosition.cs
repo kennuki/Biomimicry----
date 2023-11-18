@@ -14,21 +14,22 @@ public class SavePosition : MonoBehaviour
         public Vector3 Angle;
     }
 
+    CharacterController controller;
+
     private void Start()
     {
-        if(Level == SceneManager.GetActiveScene().buildIndex) 
-        {
-            LoadPostion();
-        }
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadPostion();       
     }
     private void LoadPostion()
     {
+        controller = this.GetComponent<CharacterController>();
+        controller.enabled = false;
         foreach (SaveDetail detail in Details)
         {
             if (detail.SavePoint == SavePointSerial.CurrentSavePointIndex)
             {
-                //Debug.Log(detail.Pos);
+                Debug.Log(detail.Pos);
                 transform.position = detail.Pos;
                 if (detail.If_Rotate)
                 {
@@ -36,7 +37,14 @@ public class SavePosition : MonoBehaviour
                 }
             }
         }
+        controller.enabled = true;
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        LoadPostion();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public int Level;
     public List<SaveDetail> Details;
 

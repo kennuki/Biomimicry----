@@ -84,6 +84,7 @@ public class GrabItem : MonoBehaviour
             if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
             {
                 NoObstacle = true;
+
             }
             else
             {
@@ -135,7 +136,6 @@ public class GrabItem : MonoBehaviour
                 }
                 if (Character.SquatState == 0 && GrabbedItem == null)
                 {
-                    //Debug.Log(Dis);
                     if (other.tag == "Pushable" && Range.size.x < 2f)
                     {
                         Hand_Anim.SetLayerWeight(4, 0.8f);
@@ -191,8 +191,8 @@ public class GrabItem : MonoBehaviour
                         }
                         Range.enabled = false;
                     }
-                    else if (other.gameObject.name == "Board"  && Range.size.y < 3f&& controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
-                    {                       
+                    else if (other.gameObject.name == "Board" && Range.size.y < 3f && controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
+                    {
                         PushedItem = other.gameObject;
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
                         DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
@@ -227,15 +227,25 @@ public class GrabItem : MonoBehaviour
                         GrabbedItem.GetComponent<BoxCollider>().enabled = false;
                         StartCoroutine(SitDown());
                     }
+                    else if (other.gameObject.name == "ElevatorButton")
+                    {
+                        float PlayerToTarget_Y = Mathf.Abs(transform.position.y - other.transform.position.y);
+                        float PlayerToTarget = Vector3.Distance(transform.position, other.transform.position);
+                        if (PlayerToTarget < 1.2f && PlayerToTarget_Y < 0.8f && PlayerToTarget > 0.5f)
+                        {
+                            StartCoroutine(EventActive(other.gameObject,"Press", 1.5f, 0.5f, true,true));
+
+                        }
+                    }
                 }
 
             }
         }
         else if (NoObstacle == true)
         {
+            Debug.Log(NoObstacle);
             if (other.tag == "Interacted" && Range.size.y<4 && controller.isGrounded == true)
             {
-                //Debug.Log(Obstacle.name);
                 Interacted_Item = other;
                 InteractFunction();
                 Range.enabled = false;
@@ -315,6 +325,7 @@ public class GrabItem : MonoBehaviour
                         }
                         break;
                     }
+             
                 default:
                     break;
 
@@ -550,9 +561,7 @@ public class GrabItem : MonoBehaviour
                 Range.enabled = false;
                 StartCoroutine(PushAnimFix1());             
                 Hand_Anim.SetInteger("PushPull", 0);
-                Character.AllProhibit = false;
-                Character.MoveOnly = false;
-                CameraRotate.cameratotate = true;
+                CharacterState(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Character.speed = OriginSpeed;
                 Character.EnergyUse = false;
@@ -771,6 +780,35 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         GrabbedItem = null;
     }
+
+
+    private IEnumerator EventActive(GameObject target, string HandAnime, float WaitTime1, float WaitTime2,bool ColliderClose,bool RotateBody)
+    {
+        if (ColliderClose)
+            target.GetComponent<Collider>().enabled = false;
+        if (RotateBody)
+            target.GetComponent<RotateAdjust>().adjust();
+        Range.enabled = false;
+        CharacterState(true);
+        Hand_Anim.SetLayerWeight(2, 1);
+        Hand_Anim.SetInteger(HandAnime, 1);
+        yield return new WaitForSeconds(WaitTime1);
+        target.GetComponent<EventActive>().Active = true;
+        Hand_Anim.SetLayerWeight(2, 0);
+        Hand_Anim.SetInteger(HandAnime, 0);
+        yield return new WaitForSeconds(WaitTime2);
+        CharacterState(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        GrabbedItem = null;
+    }
+
+    private void CharacterState(bool Stop)
+    {
+        Character.AllProhibit = Stop;
+        Character.ActionProhibit = Stop;
+        CameraRotate.cameratotate = !Stop;
+    }
+
 
     public ScanScreen Screen;
     private IEnumerator GateOpenFunction(bool ScanResult)

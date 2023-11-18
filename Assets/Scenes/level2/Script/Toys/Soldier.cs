@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    private Animator anim;
     public Transform PointA, PointB;
     private Vector3 PosA, PosB;
     public float speed = 2f;
+    public float speedRate = 1;
     private bool Change = true;
     private Vector3 patrolDirection;
     private float TurnTime = 0.5f;
-    float OriginSpeed;
     float OriginRotate_Y;
     private Vector3 TargetPos()
     {
@@ -20,8 +21,9 @@ public class Soldier : MonoBehaviour
     }
     private void Start()
     {
+        anim = GetComponent<Animator>();
+        anim.SetInteger("Walk", 1);
         OriginRotate_Y = transform.eulerAngles.y;
-        OriginSpeed = speed;
         PosA = PointA.position;
         PosB = PointB.position;
     }
@@ -34,16 +36,16 @@ public class Soldier : MonoBehaviour
     int state = 0;
     void Move()
     {
-        Debug.Log(patrolDirection);
         patrolDirection = (transform.position - TargetPos()).normalized;
-        transform.Translate(patrolDirection * speed*0.05f,Space.Self);
+        //patrolDirection = transform.rotation * patrolDirection;
+        transform.Translate(patrolDirection * -speed * speedRate * 0.05f, Space.World);
         float Distance = Vector3.Distance(transform.position, TargetPos());
         if (Distance < 1)
         {
             if(state == 0)
             {
                 OriginRotate_Y += 180;
-                speed = 0;
+                anim.SetInteger("Walk", 0);
                 StartCoroutine(Turn());
                 state = 1;
             }
@@ -51,10 +53,7 @@ public class Soldier : MonoBehaviour
 
             if(state == 2)
             {
-                if (!Change)
-                    speed = OriginSpeed;
-                else
-                    speed = -OriginSpeed;
+                anim.SetInteger("Walk", 1);
                 state = 0;
                 Change = !Change;
             }

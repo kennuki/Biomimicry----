@@ -14,7 +14,7 @@ public class CameraRotate : MonoBehaviour
         Cursor.visible = false;
         cameratotate = true;
         StartCoroutine(LockCursorToMiddle());
-        sensitivity = sensitivitySlider.value;
+        sensitivity = sensitivitySlider.value;  
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
     }
 

@@ -14,9 +14,9 @@ public class CopyDetect : MonoBehaviour
         public Vector3 Angle;
     }
     public List<SaveDetail> Details;
+    public int SaveSceneIndex = 1;
     public int SavePointIndex = 0;
     private bool Register = false; 
-    //public bool Save_Register_At_Start = false;
     private NoDestroyList _NoDestroyList;
     private void Awake()
     {
@@ -25,6 +25,7 @@ public class CopyDetect : MonoBehaviour
     }
     private void Update()
     {
+        Save();
         if(LoadScene.SceneWillChange == true)
         {
             if(Register == true)
@@ -53,8 +54,7 @@ public class CopyDetect : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(Register == false)
-        {
-            
+        {          
             SaveItem();
         }
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -97,6 +97,14 @@ public class CopyDetect : MonoBehaviour
             Register = true;
 
             _NoDestroyList.NoDestroyObj.Add(gameObject.name);
+        }
+
+    }
+    private void Save()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != SaveSceneIndex)
+        {
+            Destroy(this.gameObject);
         }
     }
     private IEnumerator DelaySaveRegister()

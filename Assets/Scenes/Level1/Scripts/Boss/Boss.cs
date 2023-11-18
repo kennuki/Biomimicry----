@@ -225,7 +225,6 @@ public class Boss : MonoBehaviour
         }
         if (State == ChasingState.TeleportPointSearch)
         {
-            Debug.Log("?");
             StartCoroutine(SearchTeleportPoint());
         }
         if (State == ChasingState.Teleport)

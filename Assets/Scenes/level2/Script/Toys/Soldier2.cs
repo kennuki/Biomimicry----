@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Soldier2 : MonoBehaviour
 {
-    public Transform target; 
+    private Animator anim;
+    public Transform target;
+    public Transform Soldier;
+    public float speed = 1;
     public float orbitSpeed = 5f;
     private Vector3 PosCache;
     private void Start()
     {
-        PosCache = transform.position;
+        anim = GetComponent<Animator>();
+        anim.SetInteger("Walk", 1); 
+        PosCache = Soldier.transform.position;
     }
     void Update()
     {
         if (target != null)
         {
-            transform.RotateAround(target.position, Vector3.up, orbitSpeed * Time.deltaTime);
+            Soldier.transform.RotateAround(target.position, Vector3.up, speed*orbitSpeed * Time.deltaTime);
         }
-        Vector3 moveDirection = PosCache - transform.position;
+        Vector3 moveDirection = PosCache - Soldier.transform.position;
         if (moveDirection != Vector3.zero)
         {
-            transform.LookAt(transform.position - moveDirection);
-            PosCache = transform.position;
+            Soldier.transform.LookAt(Soldier.transform.position - moveDirection);
+            PosCache = Soldier.transform.position;
         }
 
     }
