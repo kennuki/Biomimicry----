@@ -15,11 +15,9 @@ public abstract class EventTriggerFunction : MonoBehaviour
     public bool Trigger = false;
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("0");
         if (other.name == "Character")
         {
             Trigger = true;
-            other.enabled = false;
         }
     }
     public abstract void Enter();

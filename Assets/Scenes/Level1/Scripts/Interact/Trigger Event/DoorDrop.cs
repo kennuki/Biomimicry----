@@ -12,6 +12,7 @@ public class DoorDrop : EventTriggerFunction
         {
             playableDirector.Play();
             Trigger = false;
+            this.enabled = false;
         }
     }
 

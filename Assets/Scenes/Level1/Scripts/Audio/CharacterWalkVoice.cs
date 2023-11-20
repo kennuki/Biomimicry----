@@ -21,8 +21,8 @@ public class CharacterWalkVoice : MonoBehaviour
     private void Update()
     {
         AudioSpeed = Character.speed * 0.46f;
-        audioMixer.SetFloat("RunPitch", AudioSpeed);
-
+        audioMixer.SetFloat("RunPitch", 1/AudioSpeed);
+        audioSource.pitch = AudioSpeed;
     }
     private void OnTriggerStay(Collider other)
     {
