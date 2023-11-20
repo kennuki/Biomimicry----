@@ -18,6 +18,7 @@ public class Boss : MonoBehaviour
     public Animator anim;
     public Transform IdlePointList;
     public TelePortPoint telePort;
+    private Transform target; 
 
     private List<Transform> IdlePoint = new List<Transform>();
     private List<Transform> PointCache = new List<Transform>();
@@ -25,7 +26,6 @@ public class Boss : MonoBehaviour
     private PanicRed_PP panic2;
     private NavMeshAgent navMeshAgent;
     private Renderer[] renderers;
-    private Transform target; 
     private Transform IdleTarget_Point;
     private Transform TargetTeleportPoint;
     private Vector3 LastPos=Vector3.zero;
@@ -233,6 +233,7 @@ public class Boss : MonoBehaviour
 
             if (Anime_Teleport_Counter > 2)
             {
+                IdlePoint.Clear();
                 Anime_Teleport_Counter = 0;
                 anim.SetInteger("Turn", 0);
                 LastPos = target.position;
@@ -362,6 +363,7 @@ public class Boss : MonoBehaviour
 
     private IEnumerator BossIdle()
     {
+        Debug.Log("00");
         distance = 100;
         float time = 0;
         int i;
@@ -424,6 +426,7 @@ public class Boss : MonoBehaviour
                     nearpoint_count = near.pointInfo.NearPoint.Length;
                     NearPoint_fix.Clear();
                 }
+
                 navMeshAgent.SetDestination(IdleTarget_Point.position);
 
             }
