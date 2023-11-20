@@ -193,11 +193,12 @@ public class GrabItem : MonoBehaviour
                     }
                     else if (other.gameObject.name == "Board" && Range.size.y < 3f && controller.isGrounded == true && other.tag != "Rod" && Character.SquatState == 0)
                     {
+                        Debug.Log("1");
                         PushedItem = other.gameObject;
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
                         DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
 
-                        if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
+                        if (DistanceToPushedItem < 1.5f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
                         {
                             Hand_Anim.SetLayerWeight(2, 1);
                             Hand_Anim.SetInteger("Rod", 1);

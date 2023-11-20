@@ -20,6 +20,7 @@ public class ElevatorDoorOpen : MonoBehaviour
     private void DoorOpen()
     {
         anim.enabled = true;
+        anim.SetBool("Open", true);
     }
 
 

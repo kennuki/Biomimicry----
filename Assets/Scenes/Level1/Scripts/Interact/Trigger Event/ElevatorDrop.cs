@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class ElevatorDrop : EventTriggerFunction
 {
-    public Animator anim;
+    public PlayableDirector playableDirector;
+    public PlayableAsset yourTimelineAsset;
     public override void Enter()
     {
         if (Trigger)
         {
-            anim.enabled = true;
+            playableDirector.playableAsset = yourTimelineAsset;
+            playableDirector.Play();
         }
     }
 }

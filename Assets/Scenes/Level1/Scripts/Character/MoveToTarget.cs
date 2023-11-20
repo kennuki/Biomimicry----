@@ -21,7 +21,7 @@ public class MoveToTarget : MonoBehaviour
     private Vector3 currentPosition;
     private void Start()
     {
-        OriginPos = transform.localPosition;
+        OriginPos = LookPoint.localPosition;
         controller = character.GetComponent<CharacterController>();
         previousPosition = character.transform.position+Vector3.forward;
         currentPosition = character.transform.position;
@@ -233,7 +233,6 @@ public class MoveToTarget : MonoBehaviour
         DynamicLight1.SetActive(false);
         yield return new WaitForSeconds(1.7f);
         Anim_Move.SetTrigger("Action2");
-        StartCoroutine(CameraMoveUpOrDown(-1, -1));
         LookPoint.localPosition = OriginPos;
         yield return new WaitForSeconds(0.5f);
         panic.State = 0;
@@ -259,6 +258,7 @@ public class MoveToTarget : MonoBehaviour
         yield return new WaitForSeconds(34);
 
     }
+    Vector3 OriginPos_CameraLook;
     private IEnumerator CameraMoveUpOrDown(int UpDown,int FrontBack)
     {
         Vector3 TargetPos = LookPoint.position + Vector3.up * UpDown + Vector3.left* FrontBack;
