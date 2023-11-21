@@ -51,12 +51,11 @@ public class RotateAdjust : MonoBehaviour
     private IEnumerator Arm_Adjust1()
     {
         Vector3 OriginAngle = LeftArm.localEulerAngles;
-        OriginAngle = new Vector3(OriginAngle.x, (character.localEulerAngles.y + 180) % 360 - 180, (OriginAngle.z + 180) % 360 - 180);
-
-        Vector3 Variation = new Vector3(0, adjustAngle.Rotate_Y_Arm - OriginAngle.y, adjustAngle.Rotate_Z_Arm - OriginAngle.z);
+        OriginAngle = new Vector3(OriginAngle.x, OriginAngle.y, (OriginAngle.z + 180) % 360 - 180);
+        Vector3 Variation = new Vector3(0, adjustAngle.Rotate_Y_Arm , adjustAngle.Rotate_Z_Arm - OriginAngle.z);
         Quaternion OriginRotation = LeftArm.localRotation;
         Quaternion OriginRotation2 = LeftArm.rotation;
-        LeftArm.Rotate(character.rotation * new Vector3(0, Variation.y, 0), Space.World);
+        LeftArm.Rotate(character.rotation * new Vector3(0, -Variation.y, 0), Space.World);
         LeftArm.Rotate(new Vector3(0, 0, Variation.z), Space.World);
         Quaternion TargetRotation = LeftArm.rotation;
         LeftArm.localRotation = OriginRotation;

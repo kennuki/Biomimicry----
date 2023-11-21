@@ -364,7 +364,6 @@ public class Boss : MonoBehaviour
         distance = 100;
         float time = 0;
         int i;
-        Debug.Log(IdlePoint.Count);
         for (i = 0; i < IdlePoint.Count; i++)
         {
             if (Vector3.Distance(IdlePoint[i].position, this.transform.position) < distance)
@@ -380,15 +379,14 @@ public class Boss : MonoBehaviour
         int nearpoint_count = near.pointInfo.NearPoint.Length;
         List<Transform> NearPoint_fix = new List<Transform>();
         AddCachePoint(IdleTarget_Point);
-
-        while (time < 5)
+        float RandomTime = Random.Range(5, 10);
+        while (time < RandomTime)
         {
             if(See == true)
             {
                 State = 0;
                 yield break;
             }
-            Debug.Log(Vector3.Distance(IdleTarget_Point.position, transform.position));
             if(Vector3.Distance(IdleTarget_Point.position,transform.position) > 3)
             {
                 time += Time.deltaTime;
@@ -425,7 +423,7 @@ public class Boss : MonoBehaviour
                     nearpoint_count = near.pointInfo.NearPoint.Length;
                     NearPoint_fix.Clear();
                 }
-
+                time += Time.deltaTime;
                 navMeshAgent.SetDestination(IdleTarget_Point.position);
 
             }
@@ -522,7 +520,7 @@ public class Boss : MonoBehaviour
         DeadPanel.SetActive(true);
         target.SetParent(null);
 
-        Dead_Camera.Priority = 0;
+
         Camera.main.cullingMask &= ~(1 << layerIndex);
 
         Time.timeScale = 0;
@@ -572,6 +570,7 @@ public class Boss : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
     {
+        Dead_Camera.Priority = 0;
         target = GameObject.Find("Character").transform;
         LastPos = target.position;
         PointCache.Clear();
@@ -586,7 +585,6 @@ public class Boss : MonoBehaviour
         panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
-        Debug.Log("0000");
         DeadPanel.SetActive(false);
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
