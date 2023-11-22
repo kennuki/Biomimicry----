@@ -40,7 +40,12 @@ public class MoveToTarget : MonoBehaviour
     bool finish = false;
     private void FixedUpdate()
     {
-;
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Click");
+            source.PlayOneShot(characteraudio.AudioClip[6]);
+            source.Play();
+        }
         c += Time.deltaTime;
         currentPosition = character.transform.position;
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
@@ -99,7 +104,7 @@ public class MoveToTarget : MonoBehaviour
         }
     }
 
-    public AudioCharacter audio;
+    public AudioCharacter characteraudio;
     public AudioSource source;
     public Animator Anim_Move;
     public GameObject AllLight;
@@ -220,7 +225,7 @@ public class MoveToTarget : MonoBehaviour
         DynamicLight1.SetActive(false);
         DynamicLight2.SetActive(false);
         Light_Boss_S.SetActive(false);
-        source.PlayOneShot(audio.AudioClip[6]);
+        source.PlayOneShot(characteraudio.AudioClip[6]);
         //source.PlayOneShot(audio.AudioClip[7]);
         yield return new WaitForSeconds(1.5f);
         DynamicLight1.SetActive(true);

@@ -15,6 +15,7 @@ TagManager:
   - Glass
   - Joint
   - BrushOff
+  - PostProcess
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - IgnoreCharacter
   - Character2
   - Boss
-  - 
+  - PostProcess
   - 
   - 
   - 

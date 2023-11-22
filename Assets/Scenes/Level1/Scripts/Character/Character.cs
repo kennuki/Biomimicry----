@@ -176,7 +176,9 @@ public class Character : MonoBehaviour
 
     #endregion
     #region GravityFunction
-    float g = 3.5f, v1 = 5, c = 0;
+    float g = 3.5f, c = 0;
+    float v1 = 5;
+    public float OriginV1 = 5;
     private void GravityFunction()
     {
         c += Time.deltaTime;
@@ -194,7 +196,7 @@ public class Character : MonoBehaviour
             else
                 MoveOnly = false;
             ActionProhibit = false;
-            v1 = 5;
+            v1 = OriginV1;
         }
         move.y = move.y - v1 * 5 * Time.deltaTime;
     }

@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
         TeleportPointSearch,
         TeleportStart,
         Teleport
-    } 
+    }
     private void Start()
     {
         FindFunction();
@@ -148,7 +148,6 @@ public class Boss : MonoBehaviour
         }
         if (State == ChasingState.ChaseTrack)
         {
-            Debug.Log("1");
             if (See == true)
             {
                 ChoosePath();
@@ -233,7 +232,6 @@ public class Boss : MonoBehaviour
 
             if (Anime_Teleport_Counter > 2)
             {
-                IdlePoint.Clear();
                 Anime_Teleport_Counter = 0;
                 anim.SetInteger("Turn", 0);
                 LastPos = target.position;
@@ -363,7 +361,6 @@ public class Boss : MonoBehaviour
 
     private IEnumerator BossIdle()
     {
-        Debug.Log("00");
         distance = 100;
         float time = 0;
         int i;
@@ -382,15 +379,15 @@ public class Boss : MonoBehaviour
         int nearpoint_count = near.pointInfo.NearPoint.Length;
         List<Transform> NearPoint_fix = new List<Transform>();
         AddCachePoint(IdleTarget_Point);
-
-        while (time < 5)
+        float RandomTime = Random.Range(5, 10);
+        while (time < RandomTime)
         {
             if(See == true)
             {
                 State = 0;
                 yield break;
             }
-            if(Vector3.Distance(IdleTarget_Point.position,transform.position) > 2)
+            if(Vector3.Distance(IdleTarget_Point.position,transform.position) > 3)
             {
                 time += Time.deltaTime;
                 navMeshAgent.SetDestination(IdleTarget_Point.position);
@@ -426,7 +423,7 @@ public class Boss : MonoBehaviour
                     nearpoint_count = near.pointInfo.NearPoint.Length;
                     NearPoint_fix.Clear();
                 }
-
+                time += Time.deltaTime;
                 navMeshAgent.SetDestination(IdleTarget_Point.position);
 
             }
@@ -516,14 +513,14 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         panic2.State = 0;
         yield return new WaitForSeconds(1.5f);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
         DeadPanel.SetActive(true);
         target.SetParent(null);
 
-        Dead_Camera.Priority = 0;
+
         Camera.main.cullingMask &= ~(1 << layerIndex);
 
         Time.timeScale = 0;
@@ -570,8 +567,11 @@ public class Boss : MonoBehaviour
         //target.rotation = TargetRotation;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+    private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
     {
+        Dead_Camera.Priority = 0;
+        target = GameObject.Find("Character").transform;
         LastPos = target.position;
         PointCache.Clear();
         State = ChasingState.ChaseTrack;
@@ -580,13 +580,12 @@ public class Boss : MonoBehaviour
         navMeshAgent.enabled = true;
         cinemachineBrain.m_DefaultBlend.m_Time = Cm_Default_Transition_Time;
         anim.SetInteger("Dead", 0);
-        target = GameObject.Find("Character").transform;
         flashlight = target.transform.Find("Head").transform.Find("FlashLight").GetComponent<Light>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
         DeadPanel.SetActive(false);
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

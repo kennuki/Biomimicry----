@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +8,19 @@ public class Save : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        DontDestroyOnLoad(gameObject);
+
+    }
+    private void Update()
+    {
+        if (LoadScene.SceneWillChange)
+        {
+            foreach (int index in SaveSceneIndex)
+            {
+                if (index == LoadScene.SceneChangeIndex) ;
+            }
+                    //DontDestroyOnLoad(gameObject);
+        }
+
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

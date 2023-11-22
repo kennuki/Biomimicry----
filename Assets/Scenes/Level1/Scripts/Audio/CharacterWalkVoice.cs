@@ -17,12 +17,13 @@ public class CharacterWalkVoice : MonoBehaviour
     public Character character;
     private string floorType;
 
-    float AudioSpeed;
+    public float adjust;
+    public float AudioSpeed;
     private void Update()
     {
         AudioSpeed = Character.speed * 0.46f;
-        audioMixer.SetFloat("RunPitch", 1/AudioSpeed);
-        audioSource.pitch = AudioSpeed;
+        //audioMixer.SetFloat("RunPitch", 1+(1-AudioSpeed)*adjust);
+        audioSource.pitch = Mathf.Clamp(AudioSpeed,0.8f,2);
     }
     private void OnTriggerStay(Collider other)
     {

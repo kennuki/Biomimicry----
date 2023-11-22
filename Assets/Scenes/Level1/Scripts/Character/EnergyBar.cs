@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour
 {
-    public Character character;
+    private Character character;
     public RectTransform energy_Bar, energy_Black,energy_Board;
     private Image Bar, Board;
     float BarWidth,EnergyRatio;
     float BarOriginPosX, BlackOriginPosX;
     void Start()
     {
+        character = GameObject.Find("Character").GetComponent<Character>();
         BarWidth = energy_Black.rect.width - 65;
         BarOriginPosX = energy_Bar.localPosition.x;
         BlackOriginPosX = energy_Black.localPosition.x;

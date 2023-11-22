@@ -21,7 +21,6 @@ public class CopyDetect : MonoBehaviour
     private void Awake()
     {
         _NoDestroyList = GameObject.Find("NoDestroyList").GetComponent<NoDestroyList>();
-        SceneManager.sceneLoaded += OnSceneLoaded;       
     }
     private void Update()
     {
@@ -49,30 +48,6 @@ public class CopyDetect : MonoBehaviour
         {
             Register = true;
             StartCoroutine(DelaySaveRegister());
-        }
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if(Register == false)
-        {          
-            SaveItem();
-        }
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-    public void SaveItem()
-    {
-        if(_NoDestroyList == null)
-        {
-            _NoDestroyList = GameObject.Find("NoDestroyList").GetComponent<NoDestroyList>();
-        }
-
-        foreach (string name in _NoDestroyList.NoDestroyObj)
-        {
-
-            if (name == gameObject.name)
-            {
-                Destroy(gameObject,Time.deltaTime);
-            }
         }
     }
     public void SaveRegister()

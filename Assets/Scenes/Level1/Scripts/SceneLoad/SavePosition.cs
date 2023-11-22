@@ -29,7 +29,6 @@ public class SavePosition : MonoBehaviour
         {
             if (detail.SavePoint == SavePointSerial.CurrentSavePointIndex)
             {
-                Debug.Log(detail.Pos);
                 transform.position = detail.Pos;
                 if (detail.If_Rotate)
                 {
