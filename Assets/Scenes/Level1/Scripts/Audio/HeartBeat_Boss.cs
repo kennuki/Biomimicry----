@@ -9,6 +9,7 @@ public class HeartBeat_Boss : MonoBehaviour
     public AudioSource audioSource;
     public string pitch_speed = "HeartPitch";
     public string pitch_pitch = "HeartPitch2";
+    public float speed = 1;
     public GameObject Boss;
     private Boss boss;
     private float Distance;
@@ -41,7 +42,7 @@ public class HeartBeat_Boss : MonoBehaviour
     }
     private void heartbeat_calculate()
     {
-        audioMixer.SetFloat(pitch_speed, (rate+0.3f)*1.5f);
+        audioMixer.SetFloat(pitch_speed, (rate+0.3f)*1.5f*speed);
         audioMixer.SetFloat(pitch_pitch, (0.7f/rate)+(0.7f-rate)*0.6f-0.2f);
         audioSource.volume = Mathf.Clamp(volume, 0, 1);
     }

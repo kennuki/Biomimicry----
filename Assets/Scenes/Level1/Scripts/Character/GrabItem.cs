@@ -73,27 +73,30 @@ public class GrabItem : MonoBehaviour
     bool NoObstacle = true;
     private void OnTriggerEnter(Collider other)
     {
+
         float Dis = Vector3.Distance(other.transform.position, transform.position);
         Vector3 Dir = other.transform.position - transform.position;
         Ray ray = new Ray(transform.position, Dir);
         RaycastHit hit;
         LayerMask layerMask = 1 << 6 | 1 << 12;
-
         if (Physics.Raycast(ray, out hit, 6, layerMask))
         {
             if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
             {
-                NoObstacle = true;
+                if (other.tag != "PostProcess")
+                    NoObstacle = true;
 
             }
             else
             {
                 NoObstacle = false;
-
             }
         }
+        else
+            NoObstacle = true;
         if (ThrowItem == false)
         {
+
             if (other.tag == "BrushOff" && GrabAllow == true)
             {
                 if(Vector3.Distance(other.transform.position, transform.position) < 1.4f)
@@ -110,7 +113,6 @@ public class GrabItem : MonoBehaviour
             }
             if (NoObstacle == true)
             {
-               
                 if (other.tag == "Grabbable" && GrabAllow == true)
                 {
                     grabbleItem = other.GetComponent<GrabbleItem>();
@@ -169,28 +171,6 @@ public class GrabItem : MonoBehaviour
                         //physicMaterialBox.dynamicFriction = 0.4f;
                         StartCoroutine(PushObject2());
                     }
-                    else if (other.tag == "Rod" && controller.isGrounded == true && new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude == 0 && Character.SquatState == 0)
-                    {
-
-                        PushedItem = other.gameObject;
-                        float PlayerToRod_Y = Mathf.Abs(transform.position.y - PushedItem.transform.position.y);
-                        DistanceToPushedItem = Vector3.Distance(transform.position, PushedItem.transform.position);
-                        if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.3f)
-                        {
-                            armRotate1.enabled = false;
-                            armRotate2.enabled = false;
-                            Hand_Anim.SetLayerWeight(2, 1);
-                            Hand_Anim.SetInteger("Rod", 1);
-                            Range.enabled = false;
-                            CameraRotate.cameratotate = false;
-                            Character.AllProhibit = true;
-                            Character.MoveOnly = false;
-                            GrabbedItem = other.gameObject;
-                            GrabbedItem.GetComponent<BoxCollider>().enabled = false;
-                            StartCoroutine(DoorOpen1());
-                        }
-                        Range.enabled = false;
-                    }
                     else if (other.gameObject.name == "Board" && controller.isGrounded == true&& Character.SquatState == 0)
                     {
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - other.transform.position.y);
@@ -198,14 +178,14 @@ public class GrabItem : MonoBehaviour
 
                         if (DistanceToPushedItem < 1f && PlayerToRod_Y < 0.4f && DistanceToPushedItem > 0.1f)
                         {
+
                             StartCoroutine(EventActive(other.gameObject,0,"Rod",1f,0.5f,true,true));
                         }
                         Range.enabled = false;
                     }
                     else if (other.gameObject.name == "Chair")
                     {
-                        GrabbedItem = other.gameObject;
-                        GrabbedItem.GetComponent<BoxCollider>().enabled = false;
+                        other.GetComponent<BoxCollider>().enabled = false;
                         StartCoroutine(SitDown());
                     }
                     else if (other.gameObject.name == "ElevatorButton")
@@ -528,7 +508,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (DistanceToPushedItem - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 4f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 1f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }

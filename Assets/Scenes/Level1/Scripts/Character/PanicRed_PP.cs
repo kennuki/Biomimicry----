@@ -49,6 +49,7 @@ public class PanicRed_PP : MonoBehaviour
         
         postProcessProfile.TryGet(out vignette);
         vignette.active = false;
+        State = 3;
     }
 
     
@@ -63,7 +64,6 @@ public class PanicRed_PP : MonoBehaviour
         {
             State = 0;
         }
-
     }
 
 
@@ -278,5 +278,9 @@ public class PanicRed_PP : MonoBehaviour
         NoiseAffect = Camera.main.gameObject.transform.Find("Plane").gameObject;
         render = NoiseAffect.GetComponent<Renderer>();
     }
-
+    private void Use()
+    {
+        Debug.Log("Use");
+        State = 0;
+    }
 }
