@@ -18,7 +18,7 @@ public class SavePosition : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
         LoadPostion();       
     }
     private void LoadPostion()
@@ -38,10 +38,9 @@ public class SavePosition : MonoBehaviour
         }
         controller.enabled = true;
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnActiveSceneChanged(Scene scene, Scene nextscene)
     {
         LoadPostion();
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public int Level;

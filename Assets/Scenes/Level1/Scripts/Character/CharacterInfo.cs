@@ -7,6 +7,7 @@ public class CharacterInfo : MonoBehaviour
     public bool AllProhibit = false;
     public bool ActionProhibit = false;
     public bool cameraRotate = true;
+    public bool moveOnly = false;
     public bool control = true;
     public Vector3 CharacterPos;
     public Vector3 CharacterEulerAngle;
@@ -21,8 +22,7 @@ public class CharacterInfo : MonoBehaviour
         Character.AllProhibit = AllProhibit;
         Character.ActionProhibit = ActionProhibit;
         CameraRotate.cameratotate = cameraRotate;
-        character.position = CharacterPos;
-        character.localEulerAngles = CharacterEulerAngle;
+        Character.MoveOnly = moveOnly;
         if (control)
         {
             controller.enabled = true;
@@ -30,6 +30,8 @@ public class CharacterInfo : MonoBehaviour
         else
         {
             controller.enabled = false;
+            character.position = CharacterPos;
+            character.localEulerAngles = CharacterEulerAngle;
         }
     }
 }

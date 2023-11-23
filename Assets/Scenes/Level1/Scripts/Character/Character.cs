@@ -247,6 +247,7 @@ public class Character : MonoBehaviour
     float ChargeCounter = 0;
     private void EnergyUseFunction()
     {
+
         ChargeCounter += Time.deltaTime;
         if (EnergyUse == true && Energy > 0)
         {

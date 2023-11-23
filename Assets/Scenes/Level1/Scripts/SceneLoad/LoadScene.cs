@@ -15,15 +15,13 @@ public class LoadScene : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            SceneWillChange = true;
-            //SavePointSerial.CurrentSavePointIndex = 5;
-            //list.SaveActiveState();
-            //save.ReloadScene();
-            StartCoroutine(ReLoadSceneDelay(1));
+            SavePointSerial.CurrentSavePointIndex = 5;
+            StartCoroutine(ReLoadSceneDelay(2));
         }
     }
     public IEnumerator ReLoadSceneDelay(int Scene)
     {
+        SceneWillChange = true;
         SceneChangeIndex = Scene;
         yield return null;
         //Debug.Log("0.0");
