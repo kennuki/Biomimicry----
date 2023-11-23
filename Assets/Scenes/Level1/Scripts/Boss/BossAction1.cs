@@ -6,25 +6,28 @@ public class BossAction1 : MonoBehaviour
 {
     RandomTeleport teleport;
     Boss boss;
-    AudioSource BossAudio;
+    public AudioSource BossAudio;
+    public AudioClip music;
     public PanicRed_PP panic;
     public Animator anim_body;
     private void Start()
     {
         boss = this.GetComponent<Boss>();
         teleport = GetComponent<RandomTeleport>();
-        BossAudio = GetComponent<AudioSource>();
         StartCoroutine(Orei());
     }
     public IEnumerator Orei()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
+        BossAudio.PlayOneShot(music);
+        yield return new WaitForSeconds(3f);
         anim_body.enabled = true;
+
         anim_body.SetBool("Dance", true);
         anim_body.SetInteger("Idle", 1);
         yield return new WaitForSeconds(29.5f);
+        BossAudio.Stop();
         Skip.SkipDrama = false;
-        BossAudio.PlayOneShot(BossAudio.clip);
         anim_body.SetBool("Dance", false);
         anim_body.SetInteger("Idle", 0);    
         panic.State = 0;

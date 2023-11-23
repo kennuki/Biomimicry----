@@ -22,10 +22,8 @@ public class Boss : MonoBehaviour
 
     private List<Transform> IdlePoint = new List<Transform>();
     private List<Transform> PointCache = new List<Transform>();
-    private PanicRed_PP panic;
     private PanicRed_PP panic2;
     private NavMeshAgent navMeshAgent;
-    private Renderer[] renderers;
     private Transform IdleTarget_Point;
     private Transform TargetTeleportPoint;
     private Vector3 LastPos=Vector3.zero;
@@ -52,7 +50,6 @@ public class Boss : MonoBehaviour
         FindFunction();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        renderers = GetComponentsInChildren<Renderer>();
         AddIdlePoint();
         navMeshAgent.enabled = true;
     }
@@ -61,7 +58,6 @@ public class Boss : MonoBehaviour
     {
         target = GameObject.Find("Character").transform;
         flashlight = target.transform.Find("Head").transform.Find("FlashLight").GetComponent<Light>();
-        panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
         panic2 = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic2").GetComponent<PanicRed_PP>();
         Dead_Camera = this.transform.Find("Cm_Dead").GetComponent<CinemachineVirtualCamera>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
@@ -479,6 +475,8 @@ public class Boss : MonoBehaviour
     public float HeadTime,HeadTime2;
     public float GrabAdjust_y=-0.42f;
 
+    public AudioClip sing;
+    public AudioSource source;
     private Light flashlight;
     private CinemachineBrain cinemachineBrain;
     private CinemachineVirtualCamera Cm1;
@@ -490,6 +488,7 @@ public class Boss : MonoBehaviour
 
     public IEnumerator PlayerDead()
     {
+        source.PlayOneShot(sing);
         flashlight.enabled = false;
         Dead = true;
         Cm_Default_Transition_Time = cinemachineBrain.m_DefaultBlend.BlendTime;
@@ -582,7 +581,6 @@ public class Boss : MonoBehaviour
         anim.SetInteger("Dead", 0);
         flashlight = target.transform.Find("Head").transform.Find("FlashLight").GetComponent<Light>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
-        panic = GameObject.Find("PostProcessing").transform.Find("Effect").transform.Find("Panic").GetComponent<PanicRed_PP>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
         DeadPanel.SetActive(false);

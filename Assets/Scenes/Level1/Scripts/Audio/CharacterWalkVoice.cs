@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class CharacterWalkVoice : MonoBehaviour
 {
-    AudioSource audioSource;
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
     public AudioClip[] audioClip;
     public AudioMixer audioMixer;
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
     }
     public Character character;
@@ -50,7 +50,7 @@ public class CharacterWalkVoice : MonoBehaviour
             {
                 if (character.GetComponent<CharacterController>().velocity.magnitude != 0 )
                 {
-                    if (!audioSource.isPlaying)
+                    if (!audioSource.isPlaying )
                     {
                         audioSource.PlayOneShot(audioClip[1]);
                     }
@@ -79,7 +79,7 @@ public class CharacterWalkVoice : MonoBehaviour
             {
                 if (character.GetComponent<CharacterController>().velocity.magnitude != 0)
                 {
-                    if (!audioSource.isPlaying)
+                    if (!audioSource.isPlaying )
                     {
                         audioSource.PlayOneShot(audioClip[3]);
                     }
@@ -93,7 +93,7 @@ public class CharacterWalkVoice : MonoBehaviour
             {
                 if (character.GetComponent<CharacterController>().velocity.magnitude != 0)
                 {
-                    if (!audioSource.isPlaying)
+                    if (!audioSource.isPlaying )
                     {
                         audioSource.PlayOneShot(audioClip[4]);
                     }

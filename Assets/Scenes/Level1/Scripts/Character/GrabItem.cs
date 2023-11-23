@@ -89,6 +89,13 @@ public class GrabItem : MonoBehaviour
             }
             else
             {
+                if(other.name == "Board")
+                {
+                    Debug.Log(hit.transform.gameObject.name);
+                    Debug.Log(Vector3.Distance(hit.point, transform.position));
+                    Debug.Log(Vector3.Distance(other.transform.position, transform.position));
+                }
+
                 NoObstacle = false;
             }
         }
@@ -96,7 +103,6 @@ public class GrabItem : MonoBehaviour
             NoObstacle = true;
         if (ThrowItem == false)
         {
-
             if (other.tag == "BrushOff" && GrabAllow == true)
             {
                 if(Vector3.Distance(other.transform.position, transform.position) < 1.4f)
@@ -113,6 +119,7 @@ public class GrabItem : MonoBehaviour
             }
             if (NoObstacle == true)
             {
+            //Debug.Log(other.name);
                 if (other.tag == "Grabbable" && GrabAllow == true)
                 {
                     grabbleItem = other.GetComponent<GrabbleItem>();
@@ -173,6 +180,8 @@ public class GrabItem : MonoBehaviour
                     }
                     else if (other.gameObject.name == "Board" && controller.isGrounded == true&& Character.SquatState == 0)
                     {
+
+                        Debug.Log("??");
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - other.transform.position.y);
                         DistanceToPushedItem = Vector3.Distance(transform.position, other.transform.position);
 
