@@ -104,6 +104,7 @@ public class CameraRotate : MonoBehaviour
         if (Mathf.Abs(va2.x) > 0f)
         {
             this.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
+            Debug.Log("");
             PlayerRotate.transform.Rotate(Vector3.up * va2.x * CmRotateRate* sensitivity * 80, Space.World);
             /*if (h == 0 && j == 0)
             {
