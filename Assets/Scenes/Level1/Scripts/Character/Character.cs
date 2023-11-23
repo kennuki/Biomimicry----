@@ -53,7 +53,6 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.Log(controller.velocity);
         EnergyUseFunction();
     }
 
@@ -206,6 +205,7 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space)&&controller.isGrounded == true)
         {
+            Debug.Log("");
             //LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
             if(SquatState == 1)
             {
@@ -216,6 +216,7 @@ public class Character : MonoBehaviour
             v1 = -55;
         }
     }
+
     public void Jump(float intensity)
     {
         if (controller.isGrounded == true)
@@ -230,7 +231,8 @@ public class Character : MonoBehaviour
             v1 = -55*intensity;
         }
     }
-
+    
+   
 
     #endregion
 

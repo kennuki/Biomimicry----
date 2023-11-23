@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ScanScreen : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip BB;
+    public AudioClip DoorOpen;
     public Animator GateOpen;
     public Rigidbody[] DoorRb;
     public bool ScanResult = false;
@@ -62,7 +65,16 @@ public class ScanScreen : MonoBehaviour
                         rb.isKinematic = false;
                     }
                     Success = true;
+                    source.volume = 0.3f;
+                    source.clip = DoorOpen;
+                    source.Play();
                 }
+            }
+            if (counter_Scan < 1 && counter_Scan > 0.9f)
+            {
+                source.volume = 0.1f;
+                source.clip = BB;
+                source.Play();
             }
         }
         FlickFunction();
@@ -93,4 +105,6 @@ public class ScanScreen : MonoBehaviour
 
         MojiRender.material.EnableKeyword("_EMISSION");
     }
+
+
 }
