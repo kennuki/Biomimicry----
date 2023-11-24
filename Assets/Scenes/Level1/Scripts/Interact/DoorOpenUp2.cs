@@ -7,24 +7,24 @@ public class DoorOpenUp2 : MonoBehaviour
 {
     public PlayableDirector director;
     public PlayableAsset asset;
-    private AudioSource source;
     public Animator Rod;
     public Animator DoorOpenUp_Anim;
     private EventActive Event;
     private void Start()
     {
         Event = this.GetComponent<EventActive>();
-        source = GetComponent<AudioSource>();
     }
     private void Update()
     {
         if (Event.Active)
         {
             StartCoroutine(DoorOpen());
+            Event.Active = false;
         }
     }
     private IEnumerator DoorOpen()
     {
+        Debug.Log("");
         director.playableAsset = asset;
         director.Play();
         Rod.enabled = true;

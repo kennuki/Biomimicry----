@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EnergyBar : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnergyBar : MonoBehaviour
     float BarOriginPosX, BlackOriginPosX;
     void Start()
     {
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
         character = GameObject.Find("Character").GetComponent<Character>();
         BarWidth = energy_Black.rect.width - 65;
         BarOriginPosX = energy_Bar.localPosition.x;
@@ -45,7 +47,6 @@ public class EnergyBar : MonoBehaviour
     private void BarTransparentFunction()
     {
         BarTransparent_Counter += Time.deltaTime;
-
         if (character.Energy < EnergyCache)
         {            
             if (Bar.color.a < BarOrigin_Alpha) 
@@ -93,5 +94,9 @@ public class EnergyBar : MonoBehaviour
         }
         EnergyCache = character.Energy;
 
+    }
+    private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
+    {
+        character = GameObject.Find("Character").GetComponent<Character>();
     }
 }

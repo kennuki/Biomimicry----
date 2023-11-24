@@ -14,6 +14,8 @@ public class BoxPushDetect : MonoBehaviour
     }
     private void Update()
     {
+        if(Player==null)
+            Player = GameObject.Find("Character").transform;
         float angle = -Player.transform.eulerAngles.y + transform.localEulerAngles.y;
         if (angle < 0)
             angle += 360;
