@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    [SerializeField]
+    SoldierAttack soldierAttack;
     private Animator anim;
     public Transform PointA, PointB;
     private Vector3 PosA, PosB;
@@ -21,6 +23,7 @@ public class Soldier : MonoBehaviour
     }
     private void Start()
     {
+        soldierAttack.speedchange += onSpeedChange;
         anim = GetComponent<Animator>();
         anim.SetInteger("Walk", 1);
         OriginRotate_Y = transform.eulerAngles.y;
@@ -72,5 +75,13 @@ public class Soldier : MonoBehaviour
         state = 2;
     }
     
-
+    public void onSpeedChange(object sender,StatuEventArgs e)
+    {
+        speed = e.Speed;
+    }
+}
+public class StatuEventArgs : System.EventArgs
+{
+    public float Speed;
+    public StatuEventArgs(int speed) {}
 }

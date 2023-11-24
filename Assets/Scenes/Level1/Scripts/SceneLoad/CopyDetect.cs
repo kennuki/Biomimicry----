@@ -21,11 +21,12 @@ public class CopyDetect : MonoBehaviour
     private void Awake()
     {
         _NoDestroyList = GameObject.Find("NoDestroyList").GetComponent<NoDestroyList>();
+        DestoryCheck();
     }
     private void Update()
-    {
+    {      
         Save();
-        if(LoadScene.SceneWillChange == true)
+        if(LoadScene.Instance.SceneWillChange == true)
         {
             if(Register == true)
             {
@@ -86,5 +87,20 @@ public class CopyDetect : MonoBehaviour
     {
         yield return null;
         SaveRegister();
+    }
+    private void DestoryCheck()
+    {
+        if (_NoDestroyList == null)
+        {
+            _NoDestroyList = GameObject.Find("NoDestroyList").GetComponent<NoDestroyList>();
+        }
+        foreach (string name in _NoDestroyList.NoDestroyObj)
+        {
+
+            if (name == gameObject.name.ToString())
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

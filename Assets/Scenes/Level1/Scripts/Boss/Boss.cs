@@ -125,6 +125,15 @@ public class Boss : MonoBehaviour
                 //Debug.Log(A);
 
         }
+        if (LoadScene.Instance.SceneWillChange)
+        {
+            SceneChange = true;
+        }
+        if(!LoadScene.Instance.SceneWillChange&& SceneChange)
+        {
+            RestartFunction();
+            SceneChange = false;
+        }
      
         WalkAnim();
         BossChasing();
@@ -239,6 +248,7 @@ public class Boss : MonoBehaviour
     }
     private void BossChasing_Detect()
     {
+        //Debug.Log(target.name);
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
         Ray ray = new Ray(transform.position, direction);
@@ -267,13 +277,16 @@ public class Boss : MonoBehaviour
             StartCoroutine(PlayerDead());
         }
     }
-
     private void ChoosePath()
     {
         if (See)
         {
             if (DistancePlayer < 25)
+            {
                 State = ChasingState.Chase;
+                Teleport_CD = 2;
+            }
+
             else
             {
                 if (Teleport_CD > 8)
@@ -303,7 +316,6 @@ public class Boss : MonoBehaviour
             }
         }
     }
-
     private IEnumerator SearchTeleportPoint()
     {
         Vector3 DirectionToPlayer;
@@ -354,7 +366,6 @@ public class Boss : MonoBehaviour
         
         yield break;
     }
-
     private IEnumerator BossIdle()
     {
         distance = 100;
@@ -429,7 +440,6 @@ public class Boss : MonoBehaviour
         yield break;
 
     }
-
     private void WalkAnim()
     {
         WalkChange_Counter += Time.deltaTime;
@@ -484,6 +494,7 @@ public class Boss : MonoBehaviour
     private GameObject FakeHead;
     private float Cm_Default_Transition_Time;
     private bool SceneLoad = false;
+    private bool SceneChange = false;
 
 
     public IEnumerator PlayerDead()
@@ -512,7 +523,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         panic2.State = 0;
         yield return new WaitForSeconds(1.5f);
-        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
@@ -566,9 +577,10 @@ public class Boss : MonoBehaviour
         //target.rotation = TargetRotation;
     }
 
-
-    private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
+    private void RestartFunction()
     {
+        DeadPanel = GameObject.Find("UI(Save)").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
+        Debug.Log(LoadScene.Instance.SceneWillChange);
         Dead_Camera.Priority = 0;
         target = GameObject.Find("Character").transform;
         LastPos = target.position;
@@ -584,6 +596,6 @@ public class Boss : MonoBehaviour
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
         DeadPanel.SetActive(false);
-        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        //SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

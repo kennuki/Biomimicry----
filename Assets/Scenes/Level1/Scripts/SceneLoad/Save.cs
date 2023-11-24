@@ -4,28 +4,27 @@ using UnityEngine.SceneManagement;
 public class Save : MonoBehaviour
 {
     public int[] SaveSceneIndex;
-
-    void Start()
+    private void FixedUpdate()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-    }
-    private void Update()
-    {
-        if (LoadScene.SceneWillChange)
+        if (LoadScene.Instance.SceneWillChange)
         {
             foreach (int index in SaveSceneIndex)
             {
-                if (index == LoadScene.SceneChangeIndex)
-                    DontDestroyOnLoad(gameObject);
+                if (index == LoadScene.Instance.SceneChangeIndex)
+                {
+                    if (index != SceneManager.GetActiveScene().buildIndex)
+                        DontDestroyOnLoad(gameObject);
+                }
+
             }
 
         }
 
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnActiveSceneLoaded1(Scene scene, Scene Newscene)
     {
+        Debug.Log(this.name);
         bool DontDestroy = false;
         foreach(int index in SaveSceneIndex)
         {
@@ -34,9 +33,9 @@ public class Save : MonoBehaviour
         }
         if (!DontDestroy)
             Destroy(this.gameObject);
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        //SceneManager.activeSceneChanged -= OnActiveSceneLoaded1;
     }
-
+ 
 
 
 }

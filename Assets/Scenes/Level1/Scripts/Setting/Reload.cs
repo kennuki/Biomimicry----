@@ -14,7 +14,7 @@ public class Reload : MonoBehaviour
     public void ReloadScene()
     {
         Debug.Log("Click");
-        LoadScene.SceneWillChange = true;
+        LoadScene.Instance.SceneWillChange = true;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 1;
         StartCoroutine(loadScene.ReLoadSceneDelay(1));

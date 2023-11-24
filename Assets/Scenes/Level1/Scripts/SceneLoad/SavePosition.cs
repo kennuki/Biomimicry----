@@ -18,7 +18,7 @@ public class SavePosition : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        //SceneManager.activeSceneChanged += OnActiveSceneChanged;
         LoadPostion();       
     }
     private void LoadPostion()
@@ -40,6 +40,7 @@ public class SavePosition : MonoBehaviour
     }
     private void OnActiveSceneChanged(Scene scene, Scene nextscene)
     {
+
         LoadPostion();
     }
 

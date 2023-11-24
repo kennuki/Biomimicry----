@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LoadNext : MonoBehaviour
 {
+
     public LoadScene loadScene;
     void Start()
     {

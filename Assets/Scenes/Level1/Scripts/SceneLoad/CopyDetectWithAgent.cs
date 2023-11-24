@@ -25,7 +25,7 @@ public class CopyDetectWithAgent : MonoBehaviour
     }
     private void Update()
     {
-        if (LoadScene.SceneWillChange == true)
+        if (LoadScene.Instance.SceneWillChange == true)
         {
             if (Register == true)
             {

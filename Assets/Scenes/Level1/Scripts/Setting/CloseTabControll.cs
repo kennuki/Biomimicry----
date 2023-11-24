@@ -48,6 +48,7 @@ public class CloseTabControll : MonoBehaviour
 
     public void ClosePanel()
     {
+        Debug.Log("???");
         if (panel != null)
         {
             Time.timeScale = 1;

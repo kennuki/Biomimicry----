@@ -14,7 +14,6 @@ public class FloorShine : MonoBehaviour
         if (render != null)
         {
             originalColor = render.material.GetColor("_EmissionColor"); // "_EmissionColor" ê•ópò“çTêßé©·¢åıìI Shader ô“ù…ñº‚i
-            Debug.Log(originalColor);
             //render.material.SetColor("_EmissionColor", new Color(0.17f, 0.05f, 0.05f, 0));
         }
         else

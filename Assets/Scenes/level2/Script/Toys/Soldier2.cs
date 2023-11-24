@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Soldier2 : MonoBehaviour
 {
+    [SerializeField]
+    SoldierAttack soldierAttack;
     private Animator anim;
     public Transform target;
     public Transform Soldier;
@@ -12,6 +14,7 @@ public class Soldier2 : MonoBehaviour
     private Vector3 PosCache;
     private void Start()
     {
+        soldierAttack.speedchange += onSpeedChange;
         anim = GetComponent<Animator>();
         anim.SetInteger("Walk", 1); 
         PosCache = Soldier.transform.position;
@@ -29,5 +32,9 @@ public class Soldier2 : MonoBehaviour
             PosCache = Soldier.transform.position;
         }
 
+    }
+    public void onSpeedChange(object sender, StatuEventArgs e)
+    {
+        speed = e.Speed;
     }
 }
