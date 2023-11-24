@@ -7,18 +7,21 @@ public class Dismember : MonoBehaviour
     public GameObject[] PlayerObject; 
     public GameObject FakePlayer;
     public GameObject FakeBody;
+    public GameObject[] FakeComponent;
     public Vector3 force = new Vector3(0, 0, 0);
-    /*private IEnumerator dismember()
+    public Vector3 RandomForce = new Vector3(0, 0, 0);
+    public void dismember()
     {
         foreach(GameObject gameObject in PlayerObject)
         {
             gameObject.SetActive(false);
         }
-        FakeBody.GetComponent<>
-        FakeHead.transform.SetParent(null);
-        Rigidbody FakeHeadRb = FakeHead.GetComponent<Rigidbody>();
-        FakeHeadRb.useGravity = true;
-        FakeHeadRb.isKinematic = false;
-        FakeHeadRb.AddForce(transform.rotation * HeadDropForce);
-    }*/
+        FakePlayer.SetActive(true);
+        FakeBody.GetComponent<Rigidbody>().AddForce(transform.rotation*force);
+        RandomForce = new Vector3(RandomForce.x, RandomForce.y, Random.Range(-RandomForce.z, RandomForce.z));
+        foreach (GameObject gameObject in FakeComponent)
+        {
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.rotation * (force / 2 + RandomForce));
+        }
+    }
 }

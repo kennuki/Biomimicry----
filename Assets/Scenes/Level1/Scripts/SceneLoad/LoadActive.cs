@@ -25,6 +25,6 @@ public class LoadActive : MonoBehaviour
                 gameObject.SetActive(true);
         if(!Active)
             foreach (GameObject gameObject in Active_Object)
-                gameObject.SetActive(false);
+                gameObject.SetActive(false);    
     }
 }
