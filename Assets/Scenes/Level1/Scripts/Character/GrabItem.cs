@@ -547,7 +547,7 @@ public class GrabItem : MonoBehaviour
                 if (DistanceToPushedItem >= 0.9f)
                 {
                     Character.speed = 1+DistanceToPushedItem-0.85f;
-                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.85f - DistanceToPushedItem) * 8f) * 1.4f;
+                    Force = transform.rotation * Vector3.forward * PushForce * (1 + (0.95f - DistanceToPushedItem)  ) * 1.4f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else if (DistanceToPushedItem < 0.85f)
