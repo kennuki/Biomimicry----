@@ -18,7 +18,6 @@ public class LoadScene : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(SceneWillChange);
         if (Input.GetKeyDown(KeyCode.L))
         {
             SavePointSerial.CurrentSavePointIndex = 0;

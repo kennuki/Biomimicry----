@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GrabItem : MonoBehaviour
 {
+    public static bool ThrowItem = false;
     public Transform LookPoint;
     public CharacterController controller;
     public Animator Hand_Anim;
-    BoxCollider Range;
     public AudioCharacter audioCharacter;
+    public Transform LeftHand;
+    public string[] VIP_Item;
+    private GameObject GrabbedItem, PushedItem;
+    private Rigidbody GrabbedItemRb, PushedItemRb;
+    private Collider GrabbedItemCd;
+    private Vector3 triggerPoint;
+    private string ItemName;
+    private int ItemIndex;
+    private Collider Interacted_Item;
+    private Vector3 GrabbedItemScale;
+    bool NoObstacle = true;
+    BoxCollider Range;
     AudioSource audioSource;
     AudioClip audioClip;
-    public static bool ThrowItem = false;
     void Start()
     {
-        if(stageRoutine == null)
+        if(stageRoutine == null&&SceneManager.GetActiveScene().buildIndex==1)
         {
            stageRoutine = GameObject.Find("LightGroup").transform.Find("1-5(Stage)").transform.Find("Audience Seat").transform.Find("Ceiling Light").GetComponent<StageRoutine>();
         }
@@ -60,20 +72,13 @@ public class GrabItem : MonoBehaviour
         }
     }
 
-    public Transform LeftHand;
-    private GameObject GrabbedItem, PushedItem;
-    private Rigidbody GrabbedItemRb, PushedItemRb;
-    private Collider GrabbedItemCd;
-    private PhysicMaterial physicMaterialBox;
-    private string ItemName;
-    private int ItemIndex;
-    public string[] VIP_Item;
-    private Collider Interacted_Item;
-    private Vector3 GrabbedItemScale;
-    bool NoObstacle = true;
     private void OnTriggerEnter(Collider other)
     {
-
+        if (other.attachedRigidbody)
+        {
+            triggerPoint = other.bounds.ClosestPoint(transform.position);
+            Debug.Log(triggerPoint);
+        }
         float Dis = Vector3.Distance(other.transform.position, transform.position);
         Vector3 Dir = other.transform.position - transform.position;
         Ray ray = new Ray(transform.position, Dir);
@@ -152,16 +157,10 @@ public class GrabItem : MonoBehaviour
                         Range.enabled = false;
                         PushedItem = other.gameObject;
                         PushedItemRb = PushedItem.GetComponent<Rigidbody>();
-                        physicMaterialBox = PushedItem.GetComponentInChildren<BoxCollider>().material;
-                        if (physicMaterialBox == null)
-                        {
-                            physicMaterialBox = PushedItem.GetComponentInChildren<MeshCollider>().material;
-                        }
                         Character.AllProhibit = true;
                         Character.MoveOnly = true;
                         CameraRotate.cameratotate = false;
-                        //physicMaterialBox.dynamicFriction = 0.1f;
-                        StartCoroutine(PushObject());
+                        StartCoroutine(PushObject(triggerPoint));
                         StartCoroutine(PushLookAngleAdjust());
                     }
                     else if (other.tag == "PushOnly" && Range.size.x < 2f && Dis < 1f)
@@ -171,11 +170,9 @@ public class GrabItem : MonoBehaviour
                         Range.enabled = false;
                         PushedItem = other.gameObject;
                         PushedItemRb = PushedItem.GetComponent<Rigidbody>();
-                        physicMaterialBox = PushedItem.GetComponent<Collider>().material;
                         Character.AllProhibit = true;
                         Character.MoveOnly = true;
                         CameraRotate.cameratotate = false;
-                        //physicMaterialBox.dynamicFriction = 0.4f;
                         StartCoroutine(PushObject2());
                     }
                     else if (other.gameObject.name == "Board" && controller.isGrounded == true&& Character.SquatState == 0)
@@ -506,10 +503,10 @@ public class GrabItem : MonoBehaviour
     float OriginSpeed = Character.speed;
     private float DistanceToPushedItem;
     public float PushForce = 10f;
-    private IEnumerator PushObject()
+    private IEnumerator PushObject(Vector3 trigger_point)
     {      
         Vector3 Force = Vector3.zero;
-        DistanceToPushedItem = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PushedItem.transform.position.x, PushedItem.transform.position.z));
+        DistanceToPushedItem = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(trigger_point.x, trigger_point.z));
         Character.speed = 0;
         for (float i = 0; i <= 0.25f; i += Time.deltaTime)
         {
@@ -678,24 +675,6 @@ public class GrabItem : MonoBehaviour
 
     }
 
-    public ArmRotate armRotate1, armRotate2;
-    public ElectricDoorOpen ElectricDoorOpen;
-    private IEnumerator DoorOpen1()
-    {
-        ElectricDoorOpen.enabled = true;
-        yield return new WaitForSeconds(1f);
-        Hand_Anim.SetInteger("Rod", 0);
-        Hand_Anim.SetLayerWeight(2, 0);
-        yield return new WaitForSeconds(1.8f);
-        armRotate1.enabled = true;
-        armRotate2.enabled = true;
-        Character.AllProhibit = false;
-        Character.MoveOnly = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        CameraRotate.cameratotate = true;
-        GrabbedItem = null;
-    }
-
 
     public GameObject chair;
     private StageRoutine stageRoutine;
@@ -799,7 +778,7 @@ public class GrabItem : MonoBehaviour
     {
         flash.enabled = FlashGet;
         flash2.enabled = FlashGet;
-        chair.SetActive(ElectricRecover);
+        //chair.SetActive(ElectricRecover);
 
 
 

@@ -24,13 +24,15 @@ public class SoldierStop : MonoBehaviour
         if(floorControll.floor == floorColor)
         {
             anim.enabled = false;
-            cd.enabled = false;
+            if (cd != null)
+                cd.enabled = false;
             Stop();
         }
         else
         {
             anim.enabled = true;
-            cd.enabled = true;
+            if (cd != null)
+                cd.enabled = true;
             speedchange(this, new StatuEventArgs(0, true));
         }
     }

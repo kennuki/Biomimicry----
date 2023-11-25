@@ -6,7 +6,7 @@ public class PointInfo : MonoBehaviour
 {
     public static PointInfo Instance;
     public List<Transform> AllPoint;
-    private void Start()
+    private void Awake()
     {
         if (Instance != null)
             Destroy(this.gameObject);
