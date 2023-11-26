@@ -9,12 +9,11 @@ public class AllArea : MonoBehaviour
     public Transform player_point;
     public Transform friend_point;
     public Transform box1_point;
-    public Transform box2_point;
     public bool player_pos_change = false;
     public List<Transform> ItemArea;
     public enum ItemType
     {
-        player,friend,box1,box2
+        player,friend,box1
     }
     private void Awake()
     {
@@ -36,7 +35,6 @@ public class AllArea : MonoBehaviour
         update_AreaFull(player_point);
         update_AreaFull(friend_point);
         update_AreaFull(box1_point);
-        update_AreaFull(box2_point);
     }
     public void update_AreaFull(Transform target)
     {

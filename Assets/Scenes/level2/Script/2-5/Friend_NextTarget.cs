@@ -33,7 +33,6 @@ public class Friend_NextTarget : MonoBehaviour
     {
         self_point = AllArea.Instance.friend_point;
         box1 = AllArea.Instance.box1_point;
-        box2 = AllArea.Instance.box2_point;
     }
     private void Calculate_NextPoint_self()
     {
@@ -71,7 +70,6 @@ public class Friend_NextTarget : MonoBehaviour
                     possibleChoice -= 1;
             }
             average = CalculateScore(near, possibleChoice) / NextPoint_player.Count;
-            Debug.Log(average);
             if (average > average_max)
             {
                 target = near;
@@ -84,7 +82,6 @@ public class Friend_NextTarget : MonoBehaviour
     {
         List<Transform> next2point = next_self.GetComponent<NearArea>().nearPoint;
         float score = possible_choice * NextPoint_player.Count;
-        //Debug.Log(score + " " + next_self);
         foreach (Transform point in NextPoint_player)
         {
             foreach (Transform next2 in next2point)
@@ -94,7 +91,6 @@ public class Friend_NextTarget : MonoBehaviour
             }
          
         }
-        Debug.Log(score + " " + next_self);
         return score;
     }
 }

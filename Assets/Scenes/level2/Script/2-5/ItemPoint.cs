@@ -48,9 +48,6 @@ public class ItemPoint : MonoBehaviour
             case AllArea.ItemType.box1:
                 AllArea.Instance.box1_point = NowPoint;
                 break;
-            case AllArea.ItemType.box2:
-                AllArea.Instance.box2_point = NowPoint;
-                break;
             default:
                 break;
         }
