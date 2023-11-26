@@ -5,6 +5,7 @@ using UnityEngine;
 public class FacePoint_Player : MonoBehaviour
 {
     public Transform nextPoint;
+    public float dis_has_moved;
     private Transform nowPoint;
     private Transform player;
     private void Start()
@@ -17,6 +18,7 @@ public class FacePoint_Player : MonoBehaviour
         {
             nowPoint = AllArea.Instance.player_point;
             CalculateNextPoint();
+            CalculateDis();
         }
 
 
@@ -35,5 +37,16 @@ public class FacePoint_Player : MonoBehaviour
                 min_dis = dis;
             }
         }
+    }
+    private void CalculateDis()
+    {
+        dis_has_moved = Distance2D(nextPoint.position,nowPoint.position)-Distance2D(nextPoint.position, player.position);
+        //Debug.Log(dis_has_moved);
+    }
+    public float Distance2D(Vector3 a, Vector3 b)
+    {
+        a.y = 0;
+        b.y = 0;
+        return Vector3.Distance(a, b);
     }
 }

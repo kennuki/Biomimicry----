@@ -5,10 +5,12 @@ using UnityEngine;
 public class AllArea : MonoBehaviour
 {
     public static AllArea Instance;
+    public Transform friend_next_point;
     public Transform player_point;
     public Transform friend_point;
     public Transform box1_point;
     public Transform box2_point;
+    public bool player_pos_change = false;
     public List<Transform> ItemArea;
     public enum ItemType
     {
