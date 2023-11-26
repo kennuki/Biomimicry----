@@ -10,10 +10,8 @@ public class Friend_NextTarget : MonoBehaviour
     private List<Transform> NextPoint_player;
     public NearArea self, player;
     private Transform player_facePoint;
-    private Transform player_point;
     private Transform self_point;
-    private Transform box1,box2;
-    private ItemPoint friend_;
+    private Transform box1;
     public Transform target;
     private void Update()
     {
@@ -42,7 +40,6 @@ public class Friend_NextTarget : MonoBehaviour
         }
         NextPoint_self = self.nearPoint;
         self.nearPoint.Remove(box1);
-        self.nearPoint.Remove(box2);
         self.nearPoint.Remove(player_facePoint);
     }
     private void Calculate_NextPoint_player()
@@ -54,7 +51,6 @@ public class Friend_NextTarget : MonoBehaviour
         }
         NextPoint_player = player.nearPoint;
         player.nearPoint.Remove(box1);
-        player.nearPoint.Remove(box2);
     }
     private void Calculate_BestPoint()
     {
@@ -66,7 +62,7 @@ public class Friend_NextTarget : MonoBehaviour
             possibleChoice = near.GetComponent<NearArea>().nearPoint.Count;
             foreach(Transform near2 in near.GetComponent<NearArea>().nearPoint)
             {
-                if (near2.name == box1.name || near2.name == box2.name)
+                if (near2.name == box1.name)
                     possibleChoice -= 1;
             }
             average = CalculateScore(near, possibleChoice) / NextPoint_player.Count;

@@ -534,8 +534,7 @@ public class GrabItem : MonoBehaviour
             }
 
             float angle = Vector3.Angle(player_dir, move_dir);
-            Debug.Log(angle);
-
+            Debug.Log(Character.speed);
             if (Mathf.Abs(angle-90) < 60 || Input.GetKey(KeyCode.F)|| DistanceToPushedItem > 5f||Character.NoEnergy == true)
             {
                 Range.enabled = false;
@@ -558,23 +557,23 @@ public class GrabItem : MonoBehaviour
 
                 if (DistanceToPushedItem >= 0.4f)
                 {
-                    Character.speed = 1+DistanceToPushedItem-0.3f;
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.45f - DistanceToPushedItem)  ) * 1.4f;
+                    Character.speed = 1+DistanceToPushedItem-0.1f;
+                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.2f - DistanceToPushedItem)  ) * 3f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                else if (DistanceToPushedItem < 0.3f)
+                else if (DistanceToPushedItem < 0.39f)
                 {
-                    Character.speed = Mathf.Clamp(DistanceToPushedItem- 0.3f, 0, 1);
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem))*1.4f;   
+                    Character.speed = 0.5f;
+                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem))*3f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem)*5f) * 1.4f;
+                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem)*5f) * 3f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                if (DistanceToPushedItem > 0.8f)
+                if (DistanceToPushedItem > 0.5f)
                 {
                     StartCoroutine(PushAnimFix1());
                     Range.enabled = false;
@@ -634,7 +633,7 @@ public class GrabItem : MonoBehaviour
             {
                 Character.EnergyUse = false;
             }
-            yield return new WaitForFixedUpdate();
+            yield return null;
             
         }
     }

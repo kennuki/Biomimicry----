@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Friend_Move : MonoBehaviour
 {
-    private Vector3 target;
     public Friend_NextTarget nextTarget;
     public FacePoint_Player facePoint;
     private Transform nowPoint,nextPoint;
