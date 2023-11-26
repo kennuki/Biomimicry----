@@ -555,25 +555,25 @@ public class GrabItem : MonoBehaviour
                 Hand_Anim.SetLayerWeight(4, 0.8f);
                 Hand_Anim.SetInteger("PushPull", 1);
 
-                if (DistanceToPushedItem >= 0.4f)
+                if (DistanceToPushedItem >= 0.21f)
                 {
                     Character.speed = 1+DistanceToPushedItem-0.1f;
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.2f - DistanceToPushedItem)  ) * 3f;
-                    PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
+                    Force = rotation_player * Vector3.forward * PushForce * (0.5f + ( - DistanceToPushedItem)  ) * 1f;
+                    //PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                else if (DistanceToPushedItem < 0.39f)
+                else if (DistanceToPushedItem < 0.5f)
                 {
                     Character.speed = 0.5f;
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem))*3f;   
+                    Force = rotation_player * Vector3.forward * PushForce * (1 + (- DistanceToPushedItem))*5f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 else
                 {
                     Character.speed = 1f;
                     Force = rotation_player * Vector3.forward * PushForce * (1 + (0.3f - DistanceToPushedItem)*5f) * 3f;
-                    PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
+                    //PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                if (DistanceToPushedItem > 0.5f)
+                if (DistanceToPushedItem > 0.8)
                 {
                     StartCoroutine(PushAnimFix1());
                     Range.enabled = false;

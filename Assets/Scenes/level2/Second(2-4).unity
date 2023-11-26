@@ -15865,7 +15865,7 @@ MonoBehaviour:
   cm1: {fileID: 866042416}
   character: {fileID: 1879004868}
   ThrowForce: {x: -30, y: 80, z: -80}
-  PushForce: 50
+  PushForce: 40
   chair: {fileID: 0}
   adjust: {fileID: 0}
   Screen: {fileID: 0}
@@ -19968,7 +19968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161957787}
   m_LocalRotation: {x: -0, y: 0.717787, z: -0, w: 0.69626284}
-  m_LocalPosition: {x: 3.93, y: -0.55999756, z: 0.28}
+  m_LocalPosition: {x: 4.04, y: -0.55999756, z: 3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498762982}
