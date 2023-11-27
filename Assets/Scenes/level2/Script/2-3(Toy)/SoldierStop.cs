@@ -19,21 +19,24 @@ public class SoldierStop : MonoBehaviour
     {
         speedchange(this, new StatuEventArgs(0,false));
     }
+    bool Change = false;
     private void Update()
     {
         if(floorControll.floor == floorColor)
         {
+            Change = true;
             anim.enabled = false;
             if (cd != null)
                 cd.enabled = false;
             Stop();
         }
-        else
+        else if(Change)
         {
             anim.enabled = true;
             if (cd != null)
                 cd.enabled = true;
             speedchange(this, new StatuEventArgs(0, true));
+            Change = false;
         }
     }
 
