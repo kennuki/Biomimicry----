@@ -22,7 +22,7 @@ public class CameraRotate : MonoBehaviour
     void Update()
     {
         CursorHide();
-        if (cameratotate == true)
+        if (cameratotate == true&&Character.LookState == 1)
         {
             CameraRotateFunction();
         }

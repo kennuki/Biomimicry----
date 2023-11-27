@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class Character : MonoBehaviour
 {
+    public static bool push = false;
     CharacterController controller;
     public GameObject LookPoint;
     public GameObject Left_Hand;
@@ -29,6 +30,14 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (LookState == 3)
+            {
+                LookState = 0;
+            }
+            LookState = 3;
+        }
         if (AllProhibit == false)
         {
             if (ActionProhibit == false)
@@ -59,6 +68,7 @@ public class Character : MonoBehaviour
 
 
     #region MoveFunction
+    public static int LookState = 1;
     public static float speed = 3f;
     public static float Origin_speed = 3f;
     public static float imaangle;
@@ -83,7 +93,10 @@ public class Character : MonoBehaviour
         float jz = j * Mathf.Cos(imaangle);
         float hx = h * Mathf.Sin(imaangle + 0.5f * Mathf.PI);
         float hz = h * Mathf.Cos(imaangle + 0.5f * Mathf.PI);
-        dir = new Vector3(jx + hx, dir.y, jz + hz);
+        if (LookState == 1)
+            dir = new Vector3(jx + hx, dir.y, jz + hz);
+        else if (LookState == 3)
+            dir = new Vector3(-h, dir.y, -j);
         anim.SetFloat("RunSpeed",  -RunDir * speed*0.4f);
         if (j != 0 && h != 0)
         {
