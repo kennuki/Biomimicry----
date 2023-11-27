@@ -11,6 +11,7 @@ public class Soldier : MonoBehaviour
     private Animator anim;
     public Transform PointA, PointB;
     private Vector3 PosA, PosB;
+    public float Anim_Speed = 1;
     public float speed = 2f;
     public float OriginSpeed;
     public float speedRate = 1;
@@ -35,10 +36,11 @@ public class Soldier : MonoBehaviour
         PosA = PointA.position;
         PosB = PointB.position;
     }
-    void Update()
+    void FixedUpdate()
     {
         TargetPos();
         Move();
+        anim.SetFloat("Anim_Speed", Anim_Speed);
     }
 
     int state = 0;
