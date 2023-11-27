@@ -51,7 +51,11 @@ public class Soldier2 : MonoBehaviour
     public void onSpeedChange(object sender, StatuEventArgs e)
     {
         if (e.Recover)
-            speed= OriginSpeed;
+        {
+            speed = OriginSpeed;
+            Debug.Log("Recover");
+        }
+
         else
             speed = e.Speed;
     }
