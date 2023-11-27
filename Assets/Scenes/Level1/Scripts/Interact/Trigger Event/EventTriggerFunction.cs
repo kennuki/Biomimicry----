@@ -5,10 +5,10 @@ using UnityEngine;
 
 public abstract class EventTriggerFunction : MonoBehaviour
 {
-    public Transform Character;
+    public Transform character;
     private void Start()
     {
-        Character = GameObject.Find("Character").transform;
+        character = GameObject.Find("Character").transform;
     }
 
 

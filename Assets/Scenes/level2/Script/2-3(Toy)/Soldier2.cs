@@ -11,6 +11,7 @@ public class Soldier2 : MonoBehaviour
     public Animator anim;
     public Transform target;
     public Transform Soldier;
+    public float Anim_Speed = 1;
     public float speed = 1;
     private float OriginSpeed;
     public float orbitSpeed = 5f;
@@ -45,7 +46,7 @@ public class Soldier2 : MonoBehaviour
             }
 
         }
-
+        anim.SetFloat("Anim_Speed", Anim_Speed);
     }
     public void onSpeedChange(object sender, StatuEventArgs e)
     {
