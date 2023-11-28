@@ -17,11 +17,16 @@ public class HeartBeat_Boss : MonoBehaviour
     private float volume;
     private void Start()
     {
-        //Boss = GameObject.Find("Boss");
+        Boss = GameObject.Find("Boss");
         boss = Boss.GetComponent<Boss>();
     }
     private void Update()
     {
+        if(Boss == null)
+        {
+            Boss = GameObject.Find("Boss");
+            boss = Boss.GetComponent<Boss>();
+        }
         DisranceToRate();
         heartbeat_calculate();
         if(boss.enabled == true)
