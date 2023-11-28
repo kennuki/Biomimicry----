@@ -15,9 +15,9 @@ public class HeartBeat_Boss : MonoBehaviour
     private float Distance;
     private float rate;
     private float volume;
+    private bool SceneChange = false;
     private void Start()
     {
-        Boss = GameObject.Find("Boss");
         boss = Boss.GetComponent<Boss>();
     }
     private void Update()
@@ -25,7 +25,8 @@ public class HeartBeat_Boss : MonoBehaviour
         if(Boss == null)
         {
             Boss = GameObject.Find("Boss");
-            boss = Boss.GetComponent<Boss>();
+            if (Boss != null)
+                boss = Boss.GetComponent<Boss>();
         }
         DisranceToRate();
         heartbeat_calculate();
@@ -37,7 +38,6 @@ public class HeartBeat_Boss : MonoBehaviour
         {
             audioSource.Stop();
         }
-
     }
     private void DisranceToRate()
     {
