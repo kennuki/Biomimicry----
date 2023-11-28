@@ -346,7 +346,8 @@ public class Boss : MonoBehaviour
         {
             panic2.State = 0;
             anim.SetInteger("Turn", 1);
-            yield return new WaitForSeconds(Time.deltaTime * 3);
+            StartCoroutine(FadeIn(0.7f));
+            yield return new WaitForSeconds(Time.deltaTime * 6);
             DirectionToPlayer = target.position - transform.position;
             rotationToFaceAway = Quaternion.LookRotation(DirectionToPlayer);
             transform.rotation = rotationToFaceAway;
@@ -464,9 +465,24 @@ public class Boss : MonoBehaviour
             anim.SetInteger("Walk", 0);
         }
     }
+    private IEnumerator FadeIn(float fade_speed)
+    {
+        float currentAlpha = 1;
+        while (currentAlpha > 0)
+        {
+            currentAlpha -= fade_speed * Time.deltaTime;
+
+            currentAlpha = Mathf.Clamp01(currentAlpha);
+
+            render.material.SetFloat("_Alpha", currentAlpha);
+
+            yield return null; 
+        }
+        render.material.SetFloat("_Alpha", 0);
+    }
 
 
-
+    public Renderer render;
 
 
 
@@ -523,7 +539,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         panic2.State = 0;
         yield return new WaitForSeconds(1.5f);
-
+        Dead_Camera.Priority = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
