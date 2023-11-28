@@ -347,10 +347,10 @@ public class Boss : MonoBehaviour
             panic2.State = 0;
             anim.SetInteger("Turn", 1);
             yield return new WaitForSeconds(Time.deltaTime * 3);
-            transform.position = TargetTeleportPoint.position;
             DirectionToPlayer = target.position - transform.position;
             rotationToFaceAway = Quaternion.LookRotation(DirectionToPlayer);
             transform.rotation = rotationToFaceAway;
+            transform.position = TargetTeleportPoint.position;
             navMeshAgent.enabled = true;
             State = ChasingState.Teleport;
             //navMeshAgent.SetDestination(target.position);

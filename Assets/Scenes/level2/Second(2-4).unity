@@ -15904,7 +15904,7 @@ MonoBehaviour:
   cm1: {fileID: 866042416}
   character: {fileID: 1879004868}
   ThrowForce: {x: -30, y: 80, z: -80}
-  PushForce: 40
+  PushForce: 20
   chair: {fileID: 0}
   adjust: {fileID: 0}
   Screen: {fileID: 0}

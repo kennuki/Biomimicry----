@@ -5,13 +5,14 @@ using UnityEngine.Playables;
 
 public class DoorOpenUp2 : MonoBehaviour
 {
-    public PlayableDirector director;
+    private PlayableDirector director;
     public PlayableAsset asset;
     public Animator Rod;
     public Animator DoorOpenUp_Anim;
     private EventActive Event;
     private void Start()
     {
+        director = GameObject.Find("Timeline").GetComponent<PlayableDirector>();
         Event = this.GetComponent<EventActive>();
     }
     private void Update()
