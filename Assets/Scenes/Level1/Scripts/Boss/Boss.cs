@@ -43,15 +43,18 @@ public class Boss : MonoBehaviour
         Wandering,
         TeleportPointSearch,
         TeleportStart,
-        Teleport
+        Teleport,
+        Stop
     }
     private void Start()
     {
         FindFunction();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        path_player = new NavMeshPath();
         AddIdlePoint();
         navMeshAgent.enabled = true;
+        render.SetFloat("_Alpha", 0);
     }
 
     private void FindFunction()
@@ -107,14 +110,16 @@ public class Boss : MonoBehaviour
 
 
     private ChasingState State = ChasingState.Chase;
-
+    NavMeshPath path_player;
     private void Update()
     {
         if (Input.GetKey(KeyCode.O))
         {
             Debug.Log(State);
+           
         }
-
+        navMeshAgent.CalculatePath(target.position, path_player);
+        Debug.Log(path_player.status);
         if (IdleTarget_Point!= null)
         {
             string A="";
@@ -143,28 +148,34 @@ public class Boss : MonoBehaviour
     {
         BossChasing_Detect();
         BossChasing_Tick();
+        if(State == ChasingState.Stop)
+        {
+            Stop();
+        }
         if (State == ChasingState.Chase)
         {
-            if (navMeshAgent.enabled == true)
+            if(path_player.status == NavMeshPathStatus.PathPartial)
+            {
+                State = ChasingState.Stop;
+            }
+            else if (navMeshAgent.enabled == true)
             {
                 navMeshAgent.SetDestination(LastPos);
                 ChoosePath();
             }
+
         }
         if (State == ChasingState.ChaseTrack)
         {
             if (See == true)
             {
+                //Debug.Log(See); 
                 ChoosePath();
             }
-            if (navMeshAgent.path == null || navMeshAgent.path.corners.Length == 0)
+            if (navMeshAgent.pathPending)
             {
                 State = ChasingState.WanderStart;
-            }
-            else if (DistanceLast < 2f)
-            {
-                State = ChasingState.WanderStart;
-            }
+            }   
             else if (navMeshAgent.velocity.magnitude>0.01f)
             {
                 
@@ -179,7 +190,7 @@ public class Boss : MonoBehaviour
         {
             LastPos = Vector3.zero;
             //Debug.Log(navMeshAgent.enabled);
-            if (See == true && navMeshAgent.enabled == true)
+            if (See == true && navMeshAgent.enabled == true&& path_player.status == NavMeshPathStatus.PathComplete)
             {
                 if (DistancePlayer < 25)
                 {
@@ -242,7 +253,7 @@ public class Boss : MonoBehaviour
                 LastPos = target.position;
                 navMeshAgent.enabled = true;
                 Teleport_CD = 0;
-                ChoosePath();
+                State = ChasingState.Chase;
             }
         }
     }
@@ -250,10 +261,11 @@ public class Boss : MonoBehaviour
     {
         //Debug.Log(target.name);
         Vector3 direction = target.position - transform.position;
-        direction.Normalize();
+        //direction.Normalize();
         Ray ray = new Ray(transform.position, direction);
+        //Debug.DrawRay(transform.position,direction,Color.blue);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~LayerMask.GetMask("Camera")))
         {
             if (hit.transform.gameObject.name == "Character")
             {
@@ -321,6 +333,7 @@ public class Boss : MonoBehaviour
         Vector3 DirectionToPlayer;
         Quaternion rotationToFaceAway;
         float DistanceToPlayerCache = Vector3.Distance(transform.position,target.position);
+        //Debug.Log(DistanceToPlayerCache);
         State = ChasingState.TeleportStart;
         anim.SetInteger("Walk", 0);
         navMeshAgent.enabled = false;
@@ -344,6 +357,7 @@ public class Boss : MonoBehaviour
 
         if (TargetTeleportPoint != null)
         {
+            //Debug.Log(DistanceToPlayerCache);
             panic2.State = 0;
             anim.SetInteger("Turn", 1);
             StartCoroutine(FadeIn(0.7f));
@@ -369,16 +383,17 @@ public class Boss : MonoBehaviour
     }
     private IEnumerator BossIdle()
     {
+
         distance = 100;
         float time = 0;
         int i;
         for (i = 0; i < IdlePoint.Count; i++)
         {
-            if (Vector3.Distance(IdlePoint[i].position, this.transform.position) < distance)
+            if (Distance2D(IdlePoint[i].position, this.transform.position) < distance)
             {
 
                     IdleTarget_Point = IdlePoint[i];
-                    distance = Vector3.Distance(IdlePoint[i].position, this.transform.position);
+                    distance = Distance2D(IdlePoint[i].position, this.transform.position);
  
             }
         }
@@ -392,10 +407,14 @@ public class Boss : MonoBehaviour
         {
             if(See == true)
             {
-                State = 0;
-                yield break;
+                if (path_player.status == NavMeshPathStatus.PathComplete)
+                {
+                    State = ChasingState.Chase;
+                    yield break;
+                }
+
             }
-            if(Vector3.Distance(IdleTarget_Point.position,transform.position) > 3)
+            if(Distance2D(IdleTarget_Point.position,transform.position) > 0.5f)
             {
                 time += Time.deltaTime;
                 navMeshAgent.SetDestination(IdleTarget_Point.position);
@@ -441,6 +460,18 @@ public class Boss : MonoBehaviour
         yield break;
 
     }
+    private float stop_time = 0;
+    private void Stop()
+    {
+        stop_time += Time.deltaTime;
+        navMeshAgent.enabled = false;
+        if (stop_time > 1)
+        {
+            navMeshAgent.enabled = true;
+            stop_time = 0;
+            State = ChasingState.WanderStart;
+        }
+    }
     private void WalkAnim()
     {
         WalkChange_Counter += Time.deltaTime;
@@ -468,21 +499,26 @@ public class Boss : MonoBehaviour
     private IEnumerator FadeIn(float fade_speed)
     {
         float currentAlpha = 1;
-        while (currentAlpha > 0)
+        while (currentAlpha > 0.01f)
         {
             currentAlpha -= fade_speed * Time.deltaTime;
 
             currentAlpha = Mathf.Clamp01(currentAlpha);
 
-            render.material.SetFloat("_Alpha", currentAlpha);
+            render.SetFloat("_Alpha", currentAlpha);
 
             yield return null; 
         }
-        render.material.SetFloat("_Alpha", 0);
+        render.SetFloat("_Alpha", 0.01f);
+    }
+    public float Distance2D(Vector3 a, Vector3 b)
+    {
+        a.y = 0;
+        b.y = 0;
+        return Vector3.Distance(a, b);
     }
 
-
-    public Renderer render;
+    public Material render;
 
 
 
@@ -595,6 +631,7 @@ public class Boss : MonoBehaviour
 
     private void RestartFunction()
     {
+        render.SetFloat("_Alpha", 0);
         DeadPanel = GameObject.Find("UI(Save)").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
         Debug.Log(LoadScene.Instance.SceneWillChange);
         Dead_Camera.Priority = 0;
@@ -607,8 +644,10 @@ public class Boss : MonoBehaviour
         navMeshAgent.enabled = true;
         cinemachineBrain.m_DefaultBlend.m_Time = Cm_Default_Transition_Time;
         anim.SetInteger("Dead", 0);
+        anim.SetInteger("Turn", 0);
         flashlight = target.transform.Find("Head").transform.Find("FlashLight").GetComponent<Light>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        render = Camera.main.transform.Find("Plane_boss").GetComponent<Material>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
         DeadPanel.SetActive(false);
