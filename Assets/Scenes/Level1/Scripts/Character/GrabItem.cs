@@ -535,7 +535,7 @@ public class GrabItem : MonoBehaviour
             }
 
             float angle = Vector3.Angle(player_dir, move_dir);
-            if (Mathf.Abs(angle-90) < 60 || Input.GetKey(KeyCode.F)|| dis_to_target > 1.5f||Character.NoEnergy == true)
+            if (Mathf.Abs(angle-90) < 60 || Input.GetKey(KeyCode.F)|| dis_to_target > 2.5f||Character.NoEnergy == true)
             {
                 Range.enabled = false;
                 StartCoroutine(PushAnimFix1());             
@@ -561,7 +561,7 @@ public class GrabItem : MonoBehaviour
                     Force = rotation_player * Vector3.forward * PushForce * (1 + (-dis_to_target))*2f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
-                if (dis_to_target > 1.5f)
+                if (dis_to_target > 2.5f)
                 {
                     StartCoroutine(PushAnimFix1());
                     Range.enabled = false;

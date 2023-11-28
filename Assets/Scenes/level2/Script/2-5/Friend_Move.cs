@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Friend_Move : MonoBehaviour
 {
+    public Animator anim;
     public Friend_NextTarget nextTarget;
     public FacePoint_Player facePoint;
     private Transform nowPoint,nextPoint;
@@ -23,12 +24,17 @@ public class Friend_Move : MonoBehaviour
             }
         }
     }
+    private void Start()
+    {
+        anim.SetInteger("Walk", 1);
+    }
     private void Update()
     {
-        nowPoint = AllArea.Instance.friend_point;
+        nowPoint = AllArea.Instance.friend_point;;
         if (nextTarget.target != null)
             nextPoint = nextTarget.target;
         player_move_dis = facePoint.dis_has_moved;
+        PosValue = nowPoint.position;
         if (!move_to_center)
         {
             move();
@@ -37,7 +43,6 @@ public class Friend_Move : MonoBehaviour
         {
             MoveToCenter();
         }
-        PosValue = nowPoint.position;
     }
     private void move()
     {

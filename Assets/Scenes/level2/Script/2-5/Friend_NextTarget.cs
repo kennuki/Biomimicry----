@@ -72,6 +72,12 @@ public class Friend_NextTarget : MonoBehaviour
                 average_max = average;
             }
         }
+        StartCoroutine(UpdateNextPoint());
+         
+    }   
+    private IEnumerator UpdateNextPoint()
+    {
+        yield return null;
         AllArea.Instance.friend_next_point = target;
     }
     private float CalculateScore(Transform next_self, float possible_choice)
