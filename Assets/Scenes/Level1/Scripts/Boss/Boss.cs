@@ -651,6 +651,7 @@ public class Boss : MonoBehaviour
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         PointCache.Clear();
         DeadPanel.SetActive(false);
+        path_player = new NavMeshPath();
         //SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }
