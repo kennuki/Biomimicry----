@@ -26,6 +26,7 @@ public class Boss : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Transform IdleTarget_Point;
     private Transform TargetTeleportPoint;
+    private Collider cd;
     private Vector3 LastPos=Vector3.zero;
     private bool See = true;
 
@@ -33,8 +34,8 @@ public class Boss : MonoBehaviour
     private float Teleport_CD = 7;
     private float WalkChange_Counter = 0;
     private float Anime_Teleport_Counter;
-    private float DistanceLast;
     private float DistancePlayer;
+    private float Chase_time = 0;
     private enum ChasingState
     {
         Chase,
@@ -44,7 +45,8 @@ public class Boss : MonoBehaviour
         TeleportPointSearch,
         TeleportStart,
         Teleport,
-        Stop
+        Stop,
+        Dead
     }
     private void Start()
     {
@@ -54,7 +56,9 @@ public class Boss : MonoBehaviour
         path_player = new NavMeshPath();
         AddIdlePoint();
         navMeshAgent.enabled = true;
+        render = Camera.main.transform.Find("Plane_boss").GetComponent<Renderer>().sharedMaterial;
         render.SetFloat("_Alpha", 0);
+        cd = GetComponent<Collider>();
     }
 
     private void FindFunction()
@@ -118,8 +122,8 @@ public class Boss : MonoBehaviour
             Debug.Log(State);
            
         }
-        navMeshAgent.CalculatePath(target.position, path_player);
-        Debug.Log(path_player.status);
+        if (navMeshAgent.enabled == true)
+            navMeshAgent.CalculatePath(target.position, path_player);
         if (IdleTarget_Point!= null)
         {
             string A="";
@@ -163,7 +167,12 @@ public class Boss : MonoBehaviour
                 navMeshAgent.SetDestination(LastPos);
                 ChoosePath();
             }
-
+            if (Chase_time > 15)
+            {
+                State = ChasingState.TeleportPointSearch;
+                Chase_time = 0;
+            }
+            Chase_time += Time.deltaTime;
         }
         if (State == ChasingState.ChaseTrack)
         {
@@ -185,6 +194,7 @@ public class Boss : MonoBehaviour
             {
                 State = ChasingState.WanderStart;
             }
+            Chase_time += Time.deltaTime;
         }
         if (State == ChasingState.WanderStart)
         {
@@ -245,7 +255,8 @@ public class Boss : MonoBehaviour
         if (State == ChasingState.Teleport)
         {
             Anime_Teleport_Counter += Time.deltaTime;
-
+            transform.LookAt(target);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             if (Anime_Teleport_Counter > 2)
             {
                 Anime_Teleport_Counter = 0;
@@ -253,7 +264,9 @@ public class Boss : MonoBehaviour
                 LastPos = target.position;
                 navMeshAgent.enabled = true;
                 Teleport_CD = 0;
+                Chase_time -= 5;
                 State = ChasingState.Chase;
+                cd.enabled = true;
             }
         }
     }
@@ -279,15 +292,8 @@ public class Boss : MonoBehaviour
     private void BossChasing_Tick()
     {
         Teleport_CD += Time.deltaTime;
-        DistanceLast = Vector3.Distance(LastPos, transform.position);
         DistancePlayer = Vector3.Distance(target.position, transform.position);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Character")
-        {
-            StartCoroutine(PlayerDead());
-        }
+
     }
     private void ChoosePath()
     {
@@ -330,13 +336,14 @@ public class Boss : MonoBehaviour
     }
     private IEnumerator SearchTeleportPoint()
     {
-        Vector3 DirectionToPlayer;
-        Quaternion rotationToFaceAway;
+        //Vector3 DirectionToPlayer;
+        //Quaternion rotationToFaceAway;
         float DistanceToPlayerCache = Vector3.Distance(transform.position,target.position);
         //Debug.Log(DistanceToPlayerCache);
         State = ChasingState.TeleportStart;
         anim.SetInteger("Walk", 0);
         navMeshAgent.enabled = false;
+        cd.enabled = false;
         foreach (Transform teleport_point in telePort.Point)
         {
             float DistanceToPlayer = Vector3.Distance(teleport_point.position, target.position);
@@ -362,9 +369,8 @@ public class Boss : MonoBehaviour
             anim.SetInteger("Turn", 1);
             StartCoroutine(FadeIn(0.7f));
             yield return new WaitForSeconds(Time.deltaTime * 6);
-            DirectionToPlayer = target.position - transform.position;
-            rotationToFaceAway = Quaternion.LookRotation(DirectionToPlayer);
-            transform.rotation = rotationToFaceAway;
+            transform.LookAt(target);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             transform.position = TargetTeleportPoint.position;
             navMeshAgent.enabled = true;
             State = ChasingState.Teleport;
@@ -518,14 +524,22 @@ public class Boss : MonoBehaviour
         return Vector3.Distance(a, b);
     }
 
-    public Material render;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Character")
+        {
+            State = ChasingState.Dead;
+            StartCoroutine(PlayerDead());
+        }
+    }
 
 
 
     
 
 
+    private Material render;
     public static bool Dead = false;
     public GameObject DeadPanel;
     public Transform Hand;
@@ -647,11 +661,11 @@ public class Boss : MonoBehaviour
         anim.SetInteger("Turn", 0);
         flashlight = target.transform.Find("Head").transform.Find("FlashLight").GetComponent<Light>();
         Cm1 = GameObject.Find("CameraGroup").transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
-        render = Camera.main.transform.Find("Plane_boss").GetComponent<Material>();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
+        render = Camera.main.transform.Find("Plane_boss").GetComponent<Renderer>().sharedMaterial;
         PointCache.Clear();
         DeadPanel.SetActive(false);
-        path_player = new NavMeshPath();
+        //path_player = new NavMeshPath();
         //SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

@@ -411,6 +411,7 @@ public class GrabItem : MonoBehaviour
         AdjustForce.y = ThrowForce.y - ForceAdjust * 35;
         if (GrabbedItem != null)
         {
+            Range.enabled = false;
             ThrowItem = false;
             HandAnimeLayer(true);
             Physics.IgnoreLayerCollision(7, 10);
@@ -438,8 +439,9 @@ public class GrabItem : MonoBehaviour
             HandAnimeLayer(false);
             yield return new WaitForSeconds(0.3f);
             Physics.IgnoreLayerCollision(7, 10, false);
-            GrabAllow = true;
             GrabbedItemCd = null;
+            yield return new WaitForSeconds(1f);
+            GrabAllow = true;
         }
         yield return new WaitForSeconds(Time.deltaTime);
     }

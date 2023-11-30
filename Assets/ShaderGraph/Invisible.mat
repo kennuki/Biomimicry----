@@ -40,7 +40,7 @@ Material:
     - Vector1_61535d23856b4308ac60bd83d0b21cd2: 5
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 300.87
-    - _Alpha: 0.01
+    - _Alpha: 0.7092684
     - _Strength: 0
     m_Colors: []
   m_BuildTextureStacks: []
