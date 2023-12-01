@@ -40,12 +40,6 @@ public class MoveToTarget : MonoBehaviour
     bool finish = false;
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Debug.Log("Click");
-            source.PlayOneShot(characteraudio.AudioClip[6]);
-            source.Play();
-        }
         c += Time.deltaTime;
         currentPosition = character.transform.position;
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
@@ -263,7 +257,6 @@ public class MoveToTarget : MonoBehaviour
         yield return new WaitForSeconds(34);
 
     }
-    Vector3 OriginPos_CameraLook;
     private IEnumerator CameraMoveUpOrDown(int UpDown,int FrontBack)
     {
         Vector3 TargetPos = LookPoint.position + Vector3.up * UpDown + Vector3.left* FrontBack;

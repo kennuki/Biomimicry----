@@ -28,10 +28,6 @@ public class GrabItem : MonoBehaviour
     AudioClip audioClip;
     void Start()
     {
-        if(stageRoutine == null&&SceneManager.GetActiveScene().buildIndex==1)
-        {
-           stageRoutine = GameObject.Find("LightGroup").transform.Find("1-5(Stage)").transform.Find("Audience Seat").transform.Find("Ceiling Light").GetComponent<StageRoutine>();
-        }
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
@@ -188,7 +184,7 @@ public class GrabItem : MonoBehaviour
                     else if (other.gameObject.name == "Chair")
                     {
                         other.GetComponent<BoxCollider>().enabled = false;
-                        StartCoroutine(SitDown());
+                        other.GetComponent<EventActive>().Active = true;
                     }
                     else if (other.gameObject.name == "ElevatorButton")
                     {
@@ -275,11 +271,7 @@ public class GrabItem : MonoBehaviour
                                     if (dis_to_target < 4f && PlayerToScan_Y < 0.8f && dis_to_target > 1f)
                                     {
                                         Range.enabled = false;
-                                        CameraRotate.cameratotate = false;
-                                        Character.AllProhibit = true;
-                                        Character.ActionProhibit = true;
-                                        //Character.MoveOnly = false;
-                                        StartCoroutine(ElectricityRecover());
+                                        StartCoroutine(ElectricityRecover(Interacted_Item.gameObject));
                                     }
                                     break;
                                 }
@@ -626,7 +618,6 @@ public class GrabItem : MonoBehaviour
             
         }
     }
-
     private IEnumerator PushAnimFix1()
     {
         float counter = 0;
@@ -643,7 +634,6 @@ public class GrabItem : MonoBehaviour
         }
         
     }
-
     private IEnumerator PushObject2()
     {
         Vector3 Force = Vector3.zero;
@@ -679,24 +669,15 @@ public class GrabItem : MonoBehaviour
         yield break;
 
     }
-
-
-    public GameObject chair;
-    private StageRoutine stageRoutine;
-    public PosRotAdjust adjust;
-    public static bool ElectricRecover = false;
-    private IEnumerator ElectricityRecover()
+    private IEnumerator ElectricityRecover(GameObject target)
     {
-        adjust.enabled = true;
-        while(adjust.arrive == false)
+        StartCoroutine(DelayActive(target, 0, false));
+        while (!target.GetComponent<EventActive>().ContinuePlayerAction)
         {
             yield return null;
         }
         Hand_Anim.SetLayerWeight(2, 1);
         Hand_Anim.SetInteger("Unlock", 1);
-        ElectricRecover = true;
-        chair.SetActive(true);
-        stageRoutine.enabled = true;
         yield return new WaitForSeconds(1.1f);
         CameraRotate.cameratotate = true;
         if (GrabbedItemRb.gameObject.transform.parent != null)
@@ -704,11 +685,11 @@ public class GrabItem : MonoBehaviour
         GrabbedItem.transform.localScale = GrabbedItemScale;
         GrabbedItemRb.useGravity = false;
         yield return new WaitForSeconds(0.56f);
-        Hand_Anim.SetLayerWeight(2, 0);
-        Hand_Anim.SetInteger("Unlock", 0);       
         ThrowItem = false;
         GrabAllow = true;
         Hand_Anim.SetInteger("HandState", 0);
+        Hand_Anim.SetLayerWeight(2, 0);
+        Hand_Anim.SetInteger("Unlock", 0);       
         HandAnimeLayer(false);
         yield return new WaitForSeconds(1f);
         Character.ActionProhibit = false;
@@ -717,16 +698,14 @@ public class GrabItem : MonoBehaviour
 
         GrabbedItem = null;
     }
-
-
     private IEnumerator EventActive(GameObject target,float delayActive, string HandAnime, float WaitTime1, float WaitTime2,bool ColliderClose,bool RotateBody)
     {
-        StartCoroutine(DelayActive(target, delayActive));
+        StartCoroutine(DelayActive(target, delayActive,false));
+        Range.enabled = false;
         if (ColliderClose)
             target.GetComponent<Collider>().enabled = false;
         if (RotateBody)
             target.GetComponent<RotateAdjust>().adjust();
-        Range.enabled = false;
         CharacterState(true);
         Hand_Anim.SetLayerWeight(2, 1);
         Hand_Anim.SetInteger(HandAnime, 1);
@@ -738,27 +717,24 @@ public class GrabItem : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GrabbedItem = null;
     }
-
-    private IEnumerator DelayActive(GameObject target,float Delay)
+    private IEnumerator DelayActive(GameObject target,float Delay,bool player_stop)
     {
+        if (player_stop)
+            target.GetComponent<EventActive>().ContinuePlayerAction = false;
         yield return new WaitForSeconds(Delay);
         target.GetComponent<EventActive>().Active = true;
     }
-
     private void CharacterState(bool Stop)
     {
         Character.AllProhibit = Stop;
         Character.ActionProhibit = Stop;
         CameraRotate.cameratotate = !Stop;
     }
-
-
-    public ScanScreen Screen;
     private IEnumerator GateOpenFunction(bool ScanResult)
     {
         yield return new WaitForSeconds(0.5f);
-        Screen.Scanning = true;
-        Screen.ScanResult = ScanResult;
+        ScanScreen.Scanning = true;
+        ScanScreen.ScanResult = ScanResult;
         yield return new WaitForSeconds(1f);
         Hand_Anim.SetInteger("Scan", 0);
         Hand_Anim.SetLayerWeight(2, 0);
@@ -770,26 +746,11 @@ public class GrabItem : MonoBehaviour
         CameraRotate.cameratotate = true;
         yield break;
     }
-
-    public MoveToTarget moveToTarget;
-    private IEnumerator SitDown()
-    {
-        yield return new WaitForSeconds(0.5f);
-        moveToTarget.enabled = true;
-
-    }
-
     private void ReloadScene()
     {
         flash.enabled = FlashGet;
         flash2.enabled = FlashGet;
-        //chair.SetActive(ElectricRecover);
-
-
-
     }
-
-
     private IEnumerator PushLookAngleAdjust()
     {
         Vector3 direction = PushedItem.transform.position - transform.position;
@@ -818,7 +779,6 @@ public class GrabItem : MonoBehaviour
         }
 
     }
-
     private IEnumerator AudioPlay(float delay)
     {
         yield return new WaitForSeconds(delay);
