@@ -161,7 +161,7 @@ public class GrabItem : MonoBehaviour
                         StartCoroutine(PushObject(triggerPoint));
                         StartCoroutine(PushLookAngleAdjust());
                     }
-                    else if (other.tag == "PushOnly" && Range.size.x < 2f && Dis < 1f)
+                    else if (other.tag == "PushOnly" && Range.size.x < 2f && Dis < 2f)
                     {
                         Hand_Anim.SetLayerWeight(4, 0.8f);
                         Hand_Anim.SetInteger("PushPull", 1);
