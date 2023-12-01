@@ -18,7 +18,6 @@ public class SavePosition : MonoBehaviour
 
     private void Start()
     {
-        //SceneManager.activeSceneChanged += OnActiveSceneChanged;
         LoadPostion();       
     }
     private void LoadPostion()

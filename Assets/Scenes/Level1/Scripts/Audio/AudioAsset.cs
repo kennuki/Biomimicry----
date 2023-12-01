@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
+
+public class AudioAsset : MonoBehaviour
+{
+    public static AudioAsset Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
+    public AudioClip tile_walk;
+    public AudioClip metal_walk;
+    public AudioClip carpet_walk;
+    public AudioClip wood_walk;
+
+    public AudioClip tile_land;
+    public AudioClip metal_land;
+    public AudioClip carpet_land;
+    public AudioClip wood_land;
+}

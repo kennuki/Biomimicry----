@@ -25,7 +25,6 @@ public class DoorOpenUp2 : MonoBehaviour
     }
     private IEnumerator DoorOpen()
     {
-        Debug.Log("");
         director.playableAsset = asset;
         director.Play();
         Rod.enabled = true;

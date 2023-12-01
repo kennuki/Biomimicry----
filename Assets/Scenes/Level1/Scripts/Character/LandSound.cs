@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class LandSound : MonoBehaviour
 {
     public AudioSource audioSource;
-    public AudioClip[] audioClip;
     public CharacterController controller;
+    private AudioClip clip;
+
     float c = 0;
     int playstate = 0;
     private void Update()
     {
-        //Debug.Log(playstate);
         UngroundTime();
         landsound();
     }
@@ -40,67 +40,44 @@ public class LandSound : MonoBehaviour
                 playstate = 1;
             }
         }
-
+        if(playstate == 1)
+        {
+            PlayAudio();
+        }
 
 
     }
-
-    string type;
-
-    private void OnTriggerStay(Collider other)
+    private bool PerformRaycast()
     {
-        if (playstate==1)
+        Vector3 OriginPos = transform.position;
+        RaycastHit hit;
+        FloorType floor;
+        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2))
         {
-            if (other.gameObject.GetComponent<Text>() != null)
+            floor = hit.transform.GetComponent<FloorType>();
+            if (floor != null)
             {
-                type = other.GetComponent<Text>().text;
+                clip = FloorTypeInfo.GetAudioClipLand(floor.floorType);
+                return true;
             }
-
-            switch (type)
+            return false;
+        }
+        return false;
+    }
+    private void PlayAudio()
+    {
+        if (PerformRaycast())
+        {
+            if (!audioSource.isPlaying)
             {
-                case "Metal":
-                    {
-                        if (!audioSource.isPlaying)
-                        {
-                            audioSource.PlayOneShot(audioClip[0]);
-                            playstate = 2;
-                        }
-                        break;
-                    }
-                case "Wood":
-                    {
-                        if (!audioSource.isPlaying)
-                        {
-                            audioSource.PlayOneShot(audioClip[1]);
-                            playstate = 2;
-                        }
-                        break;
-                    }
-                case "Tile":
-                    {
-                        if (!audioSource.isPlaying)
-                        {
-                            audioSource.PlayOneShot(audioClip[2]);
-                            playstate = 2;
-                        }
-                        break;
-                    }
-                case "Carpet":
-                    {
-                        if (!audioSource.isPlaying)
-                        {
-                            audioSource.PlayOneShot(audioClip[3]);
-                            playstate = 2;
-                        }
-                        break;
-                    }
-
-
-                default:
-                    break;
+                audioSource.clip = clip;
+                audioSource.Play();
+                playstate = 2;
             }
         }
-       
     }
+
+
+
 
 }

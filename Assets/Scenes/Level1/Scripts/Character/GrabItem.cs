@@ -175,8 +175,6 @@ public class GrabItem : MonoBehaviour
                     }
                     else if (other.gameObject.name == "Board" && controller.isGrounded == true&& Character.SquatState == 0)
                     {
-
-                        Debug.Log("??");
                         float PlayerToRod_Y = Mathf.Abs(transform.position.y - other.transform.position.y);
                         dis_to_target = Vector3.Distance(transform.position, other.transform.position);
 
@@ -519,7 +517,7 @@ public class GrabItem : MonoBehaviour
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
         while (true)
         {
@@ -656,7 +654,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (dis_to_target - 0.3f < i * 4)
                 {
-                    Force = transform.rotation  * Vector3.forward * PushForce * 28f;
+                    Force = transform.rotation  * Vector3.forward * PushForce * 10f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                     int clip = Random.Range(3, 6);
                     audioClip = audioCharacter.AudioClip[clip];
