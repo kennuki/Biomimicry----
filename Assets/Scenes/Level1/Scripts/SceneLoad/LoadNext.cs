@@ -11,7 +11,8 @@ public class LoadNext : MonoBehaviour
     [SerializeField] private Slider _loadingSlider;
 
     [Header("Scenes to Load")]
-    [SerializeField] private string _levelScene = "Level(2-1)";
+    [SerializeField] private string _levelScene = "Level(2-0)";
+    [SerializeField] private string _levelSceneAdditive = "Level(2-2)";
 
     private List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     public LoadScene loadScene;
@@ -25,6 +26,8 @@ public class LoadNext : MonoBehaviour
         _loading_bar_gameobject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelScene));
+        if (_levelSceneAdditive != "")
+            scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelSceneAdditive, LoadSceneMode.Additive));
         float loadProgress = 0f;
         for (int i = 0; i < scenesToLoad.Count; i++)
         {

@@ -11,7 +11,6 @@ public class SoldierAttack : MonoBehaviour
     private Animator anim;
     private Transform player;
     private Collider cd;
-    public  GameObject DeadPanel;
     public Vector3 DeadAngle = new Vector3(0, 90, 0);
     private Dismember dismember;
 
@@ -49,7 +48,7 @@ public class SoldierAttack : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
-        DeadPanel.SetActive(true);
+        DeadPanel.ActivePanel = true;
         Third_Camera.Priority = 9;
         Camera.main.cullingMask &= ~(1 << layerIndex);
         Time.timeScale = 0;
