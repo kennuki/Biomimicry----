@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -569,7 +569,8 @@ MonoBehaviour:
   _loading_bar_gameobject: {fileID: 238546167}
   _loadingSlider: {fileID: 1369822932}
   _object_to_hide: []
-  _levelScene: Level(1-1)
+  _levelScene: Level(1-3)
+  _levelSceneNoDestroy: Level(1-0)
 --- !u!4 &932676288
 Transform:
   m_ObjectHideFlags: 0

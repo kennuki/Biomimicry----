@@ -23,7 +23,8 @@ public class Unlock : MonoBehaviour
 
     private void WhenActive()
     {
-        chair.SetActive(true);
+        if (chair != null)
+            chair.SetActive(true);
         adjust.enabled = true;
         routine.enabled = true;
     }

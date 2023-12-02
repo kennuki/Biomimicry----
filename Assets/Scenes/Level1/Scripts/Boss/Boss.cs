@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
 
     public Animator anim;
     public Transform IdlePointList;
+    public GameObject Light;
     public TelePortPoint telePort;
     private Transform target; 
 
@@ -50,6 +51,7 @@ public class Boss : MonoBehaviour
     }
     private void Start()
     {
+        Light.SetActive(true);
         FindFunction();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -646,7 +648,7 @@ public class Boss : MonoBehaviour
     private void RestartFunction()
     {
         render.SetFloat("_Alpha", 0);
-        DeadPanel = GameObject.Find("UI(Save)").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
+        DeadPanel = GameObject.Find("UI").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
         Debug.Log(LoadScene.Instance.SceneWillChange);
         Dead_Camera.Priority = 0;
         target = GameObject.Find("Character").transform;

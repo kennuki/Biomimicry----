@@ -202,7 +202,6 @@ public class GrabItem : MonoBehaviour
         }
         else if (NoObstacle == true)
         {
-            Debug.Log(NoObstacle);
             if (other.tag == "Interacted" && Range.size.y<4 && controller.isGrounded == true)
             {
                 Interacted_Item = other;
