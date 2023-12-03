@@ -62,6 +62,7 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(LookState);
         EnergyUseFunction();
     }
 

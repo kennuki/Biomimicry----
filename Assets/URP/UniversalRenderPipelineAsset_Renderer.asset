@@ -10,90 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: DollHidden
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    passTag: DollHidden
-    Event: 1000
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 4194304
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 31ba1d69463d39a4985c71799997a1fb, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 5
-    enableWrite: 0
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &-7724603902764227453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Dialog Hidden
+  m_Name: WhiteBear
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: Dialog Hidden
+    passTag: WhiteBear
     Event: 1000
-    filterSettings:
-      RenderQueueType: 1
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 12582912
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 6756839de40c1ae469ad73e6dfb66e6b, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 5
-    enableWrite: 0
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &-1023448654880988062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: DollVisible
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  settings:
-    passTag: DollVisible
-    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -103,7 +25,7 @@ MonoBehaviour:
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
     overrideDepthState: 0
-    depthCompareFunction: 4
+    depthCompareFunction: 0
     enableWrite: 1
     stencilSettings:
       overrideStencilState: 0
@@ -115,47 +37,8 @@ MonoBehaviour:
     cameraSettings:
       overrideCamera: 0
       restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &-355332712500304643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Doll2 Hidden
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  settings:
-    passTag: Doll2 Hidden
-    Event: 1000
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 4194304
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 31ba1d69463d39a4985c71799997a1fb, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+      offset: {x: 0, y: 0, z: 0, w: 1}
+      cameraFieldOfView: 145
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,11 +55,8 @@ MonoBehaviour:
   - {fileID: 2456569533563241560}
   - {fileID: 3791498282267072201}
   - {fileID: 607402769443431838}
-  - {fileID: -1023448654880988062}
   - {fileID: -8103431408818324767}
-  - {fileID: -7724603902764227453}
-  - {fileID: -355332712500304643}
-  m_RendererFeatureMap: 588415aef97c1722c9560879991b9e349ea543c499ed6d0862a4f7efdefacbf1e1faa34711d48a8f83642459adb1cc94fde457d6c79a11fb
+  m_RendererFeatureMap: 588415aef97c1722c9560879991b9e349ea543c499ed6d08e1faa34711d48a8f
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:

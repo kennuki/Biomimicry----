@@ -9,6 +9,8 @@ public class CharacterInfo : MonoBehaviour
     public bool cameraRotate = true;
     public bool moveOnly = false;
     public bool control = true;
+    public bool control_by_other = false;
+    public bool cancel_thirdview = false;
     public Vector3 CharacterPos;
     public Vector3 CharacterEulerAngle;
     public Transform character;
@@ -30,8 +32,17 @@ public class CharacterInfo : MonoBehaviour
         else
         {
             controller.enabled = false;
-            character.position = CharacterPos;
-            character.localEulerAngles = CharacterEulerAngle;
+            if (!control_by_other)
+            {
+                character.position = CharacterPos;
+                character.localEulerAngles = CharacterEulerAngle;
+            }
+
+        }
+        if (cancel_thirdview)
+        {
+            Character.LookState = 1;
+            cancel_thirdview = false;
         }
     }
 }

@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Inner
+  m_Name: WhiteBear
   m_Shader: {fileID: -6465566751694194690, guid: 4b31655d575d9894b916be424921fc05, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 20
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -53,20 +53,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_2c28fe31c1604baf96b4843d39d8e2ea: 0
-    - Vector1_378611f549e4433d8e34a6a9f5c8419b: 0.5
+    - Vector1_378611f549e4433d8e34a6a9f5c8419b: 1
     - Vector1_43fbd82f418d4e3e8bc5608584788fd3: 1
-    - Vector1_57cef04cf4be486cbf18848c0fe2b117: 0.66
+    - Vector1_57cef04cf4be486cbf18848c0fe2b117: 0.71
+    - Vector1_5e4b24d78fe24baf961c72f3b4e14f54: 0.83
     - Vector1_61535d23856b4308ac60bd83d0b21cd2: 0.76
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 1
-    - _Distort_Speed: 0.1
-    - _Sequence: 0.157
+    - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
+    - _Alpha: 0
+    - _Distort_Speed: 0.02
+    - _Resolution: 10
+    - _Sequence: 0
     - _Strength: 2
-    - _bright: 2.72
-    - _deep: 0.678
+    - _bright: 1
+    - _deep: 0.954
     m_Colors:
     - _Color: {r: 1, g: 0, b: 0.027672768, a: 1}
-    - _Distort_Tile: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _Distort_Tile: {r: 0.2, g: 0.2, b: 1, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _Random: {r: -1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

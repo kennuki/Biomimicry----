@@ -477,7 +477,6 @@ GameObject:
   - component: {fileID: 244380137}
   - component: {fileID: 244380136}
   - component: {fileID: 244380135}
-  - component: {fileID: 244380134}
   - component: {fileID: 244380133}
   - component: {fileID: 244380138}
   - component: {fileID: 244380139}
@@ -517,19 +516,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 3
---- !u!114 &244380134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244380131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14deb30ddd135149ad1beb96f9d018d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDistance: 1
 --- !u!114 &244380135
 MonoBehaviour:
   m_ObjectHideFlags: 0
