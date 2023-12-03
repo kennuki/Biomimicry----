@@ -218,7 +218,6 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space)&&controller.isGrounded == true)
         {
-            Debug.Log("");
             //LookPoint.transform.position = new Vector3(LookPoint.transform.position.x, transform.position.y - OffsetLookpointToCharacterY, LookPoint.transform.position.z);
             if(SquatState == 1)
             {

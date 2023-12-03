@@ -14,6 +14,8 @@ public class ElectricDoorOpen : MonoBehaviour
     {
         Event = this.GetComponent<EventActive>();
         CameraRotate = GameObject.Find("CM vcam1").GetComponent<CameraRotate>();
+        Rod_Camera = GameObject.Find("CameraGroup").transform.Find("CM Rod Animation").GetComponent<CinemachineVirtualCamera>();
+        playableDirector = GameObject.Find("Timeline").GetComponent<PlayableDirector>();
     }
     private void Update()
     {

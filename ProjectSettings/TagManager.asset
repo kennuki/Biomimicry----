@@ -16,6 +16,7 @@ TagManager:
   - Joint
   - BrushOff
   - PostProcess
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -39,8 +40,8 @@ TagManager:
   - Character2
   - Boss
   - PostProcess
-  - 
-  - 
+  - Doll
+  - Dialog
   - 
   - 
   - 

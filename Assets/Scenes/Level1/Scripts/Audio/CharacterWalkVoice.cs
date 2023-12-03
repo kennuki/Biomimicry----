@@ -2,106 +2,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class CharacterWalkVoice : MonoBehaviour
 {
     public AudioSource audioSource;
-    public AudioSource audioSource2;
-    public AudioClip[] audioClip;
     public AudioMixer audioMixer;
+    public float AudioSpeed;
+    public float fadeDuration = 0.05f;
+    public float StopTime = 0.05f;
+
+    private GameObject character;
+    private CharacterController controller;
+    private AudioClip clip;
+    private float startVolume;
+    private float mouse_input_x, mouse_input_y;
+
     private void Start()
     {
         startVolume = audioSource.volume;
+        character = GameObject.Find("Character");
+        controller = character.GetComponent<CharacterController>();
     }
-    public Character character;
-    private string floorType;
-
-    public float adjust;
-    public float AudioSpeed;
     private void Update()
     {
-        AudioSpeed = Character.speed * 0.46f;
-        //audioMixer.SetFloat("RunPitch", 1+(1-AudioSpeed)*adjust);
-        audioSource.pitch = Mathf.Clamp(AudioSpeed,0.8f,2);
+        AudioControl();
+        DetectAllow();
+        DetectFloor();
     }
-    private void OnTriggerStay(Collider other)
+    private void AudioControl()
     {
-        if (other.gameObject.GetComponent<Text>() != null)
-            floorType = other.gameObject.GetComponent<Text>().text;
-        if (floorType != null&& character.GetComponent<CharacterController>().isGrounded == true)
+        AudioSpeed = Character.speed * 0.46f;
+        audioSource.pitch = Mathf.Clamp(AudioSpeed, 0.8f, 2);
+        mouse_input_x = Input.GetAxis("Horizontal");
+        mouse_input_y = Input.GetAxis("Vertical");
+    }
+    private void DetectFloor()
+    {
+        if (DetectAllow())
+            PlayAudio();
+        else
+            StartCoroutine(FadeVolume());
+    }
+    private bool PerformRaycast()
+    {
+        Vector3 OriginPos = transform.position;
+        RaycastHit hit;
+        FloorType floor;
+        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2))
         {
-            if (floorType == "Tile")
+            floor = hit.transform.GetComponent<FloorType>();
+            if (floor != null)
             {
-                if (character.GetComponent<CharacterController>().velocity.magnitude != 0)
-                {
-                    if (!audioSource.isPlaying)
-                    {
-                        if (floorType != null)
-                        audioSource.PlayOneShot(audioClip[0]);
-                    }
-                }
-                else
-                {
-                    StartCoroutine(FadeVolume());
-                }
+                clip = FloorTypeInfo.GetAudioClipWalk(floor.floorType);
+                return true;
             }
-            else if (floorType == "Wood")
+            return false;
+        }
+        return false;
+    }
+    private bool DetectAllow()
+    {
+        if (!controller.isGrounded)
+            return false;
+        if (mouse_input_x == 0 && mouse_input_y == 0)
+            return false;
+        return true;
+    }
+    private void PlayAudio()
+    {
+        if (PerformRaycast())
+        {
+            audioSource.clip = clip;
+            if (!audioSource.isPlaying)
             {
-                if (character.GetComponent<CharacterController>().velocity.magnitude != 0 )
-                {
-                    if (!audioSource.isPlaying )
-                    {
-                        audioSource.PlayOneShot(audioClip[1]);
-                    }
-                }
-                else 
-                {
-                    StartCoroutine(FadeVolume());
-                }
-            }
-            else if (floorType == "Metal")
-            {
-
-                if (character.GetComponent<CharacterController>().velocity.magnitude != 0 )
-                {
-                    if (!audioSource.isPlaying)
-                    {
-                        audioSource.PlayOneShot(audioClip[2]);
-                    }
-                }
-                else
-                {
-                    StartCoroutine(FadeVolume());
-                }
-            }
-            else if (floorType == "Grass")
-            {
-                if (character.GetComponent<CharacterController>().velocity.magnitude != 0)
-                {
-                    if (!audioSource.isPlaying )
-                    {
-                        audioSource.PlayOneShot(audioClip[3]);
-                    }
-                }
-                else
-                {
-                    StartCoroutine(FadeVolume());
-                }
-            }
-            else if (floorType == "Carpet")
-            {
-                if (character.GetComponent<CharacterController>().velocity.magnitude != 0)
-                {
-                    if (!audioSource.isPlaying )
-                    {
-                        audioSource.PlayOneShot(audioClip[4]);
-                    }
-                }
-                else
-                {
-                    StartCoroutine(FadeVolume());
-                }
+                audioSource.Play();
             }
         }
         else
@@ -109,36 +83,28 @@ public class CharacterWalkVoice : MonoBehaviour
             StartCoroutine(FadeVolume());
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (other.GetComponent<Text>() != null)
-        {
-            if (floorType == other.GetComponent<Text>().text)
-            {
-                StartCoroutine(FadeVolume());
-            }
-        }
-
-    }
-    float startVolume;
-    float fadeDuration = 0.05f;
     private IEnumerator FadeVolume()
     {
         float t = 0;
-        floorType = null;
-
-        while (t < fadeDuration)
+        while (t < fadeDuration && !controller.isGrounded)
         {
             t += Time.deltaTime;
             audioSource.volume = Mathf.Lerp(startVolume, 0f, t / fadeDuration);
             yield return null;
         }
-        audioSource.Stop();
-        audioSource.volume = startVolume; 
+        audioSource.Pause();
+        while (!DetectAllow())
+        {
+            t += Time.deltaTime;
+            if (t > StopTime)
+            {
+                audioSource.Stop();
+                audioSource.volume = startVolume;
+                yield break;
+            }
+            yield return null;
+        }
+        audioSource.volume = startVolume;
+        yield break;
     }
 }

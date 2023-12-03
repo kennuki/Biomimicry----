@@ -16,6 +16,7 @@ public class LightShine : MonoBehaviour
     }
 
     float Counter = 0;
+    public float RandomTime_Max = 1f;
     float RandomTime =0.5f;
     float Spotlight_Origin_Intensity;
     float Pointlight_Origin_Intensity;
@@ -27,13 +28,13 @@ public class LightShine : MonoBehaviour
         Counter += Time.deltaTime;
         if (Counter > RandomTime)
         {
-            if (RandomTime < 0.2f)
+            if (RandomTime < RandomTime_Max/5)
             {
-                RandomTime = Random.Range(0.01f, 0.24f);
+                RandomTime = Random.Range(0.01f, RandomTime_Max/4);
             }
             else
             {
-                RandomTime = Random.Range(0.01f, 1f);
+                RandomTime = Random.Range(0.01f, RandomTime_Max);
 
             }
             if (Spotlight.intensity == 0.5f)
@@ -43,7 +44,7 @@ public class LightShine : MonoBehaviour
                 Pointlight.intensity = Pointlight_Origin_Intensity * Mathf.Clamp((RandomTime + 0.4f), 0, 1f) / 1f;
                 Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity);
                 FadeAllow = false;
-                if (RandomTime > 0.4f)
+                if (RandomTime > RandomTime_Max/2)
                 {
                     RandomTime *= 2.2f;
                 }

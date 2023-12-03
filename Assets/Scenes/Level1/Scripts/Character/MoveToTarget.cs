@@ -9,7 +9,7 @@ public class MoveToTarget : MonoBehaviour
     public DynamicSpotLightRoutine1[] dynamicSpotLights;
     public Animator Curtain1;
     public Animator Curtain2;
-    public Transform LookPoint;
+    private Transform LookPoint;
     public Character character;
     public Transform target;
     private Vector3 OriginPos;
@@ -19,10 +19,18 @@ public class MoveToTarget : MonoBehaviour
 
     private Vector3 previousPosition;
     private Vector3 currentPosition;
-    private void Start()
+    private void Awake()
     {
-        OriginPos = LookPoint.localPosition;
+        character = GameObject.Find("Character").GetComponent<Character>();
         controller = character.GetComponent<CharacterController>();
+        LookPoint = character.transform.Find("CameraLookPoint");
+        characteraudio = character.transform.Find("PlayerAudio").GetComponent<AudioCharacter>();
+        source = characteraudio.transform.GetComponent<AudioSource>();
+        OriginPos = LookPoint.localPosition;
+        GameObject.Find("Reactive").GetComponent<Reactive>().Active();
+        Boss = GameObject.Find("Boss");
+        Anim_Move = Boss.GetComponent<Animator>();
+        Boss.SetActive(false);
         previousPosition = character.transform.position+Vector3.forward;
         currentPosition = character.transform.position;
         postProcessProfile = postProcessVolume.profile;
@@ -40,11 +48,15 @@ public class MoveToTarget : MonoBehaviour
     bool finish = false;
     private void FixedUpdate()
     {
+
         if (Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log("Click");
-            source.PlayOneShot(characteraudio.AudioClip[6]);
-            source.Play();
+            postProcessProfile = postProcessVolume.profile;
+            clonedProfile = Instantiate(postProcessProfile);
+            if (clonedProfile.TryGet(out colorAdjustments))
+            {
+                initialExposure = colorAdjustments.postExposure.value;
+            }
         }
         c += Time.deltaTime;
         currentPosition = character.transform.position;
@@ -104,15 +116,13 @@ public class MoveToTarget : MonoBehaviour
         }
     }
 
-    public AudioCharacter characteraudio;
-    public AudioSource source;
-    public Animator Anim_Move;
+    private AudioCharacter characteraudio;
+    private AudioSource source;
+    private Animator Anim_Move;
     public GameObject AllLight;
     public GameObject DynamicLight1;
     public GameObject DynamicLight2;
-    public GameObject Light_Boss_S;
-    public GameObject Light_Boss_P;
-    public GameObject Boss;
+    private GameObject Boss;
     public Light light1;
     public Light light2;
     public Light light3;
@@ -224,17 +234,14 @@ public class MoveToTarget : MonoBehaviour
         AllLight.SetActive(false);
         DynamicLight1.SetActive(false);
         DynamicLight2.SetActive(false);
-        Light_Boss_S.SetActive(false);
         source.PlayOneShot(characteraudio.AudioClip[6]);
         //source.PlayOneShot(audio.AudioClip[7]);
         yield return new WaitForSeconds(1.5f);
         DynamicLight1.SetActive(true);
-        Light_Boss_S.SetActive(true);
         panic.State = 0;
         yield return new WaitForSeconds(0.5f);
         panic.State = 0;
         yield return new WaitForSeconds(2.6f);
-        Light_Boss_S.SetActive(false);
         DynamicLight1.SetActive(false);
         yield return new WaitForSeconds(1.7f);
         Anim_Move.SetTrigger("Action2");
@@ -244,8 +251,6 @@ public class MoveToTarget : MonoBehaviour
         AllLight.SetActive(true);
         DynamicLight1.SetActive(true);
         DynamicLight2.SetActive(true);
-        Light_Boss_S.SetActive(true);
-        Light_Boss_P.SetActive(true);
         yield return new WaitForSeconds(1f);
         Character.AllProhibit = false;
         Character.ActionProhibit = false;
@@ -263,7 +268,6 @@ public class MoveToTarget : MonoBehaviour
         yield return new WaitForSeconds(34);
 
     }
-    Vector3 OriginPos_CameraLook;
     private IEnumerator CameraMoveUpOrDown(int UpDown,int FrontBack)
     {
         Vector3 TargetPos = LookPoint.position + Vector3.up * UpDown + Vector3.left* FrontBack;

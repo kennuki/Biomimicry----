@@ -9,8 +9,8 @@ public class ScanScreen : MonoBehaviour
     public AudioClip DoorOpen;
     public Animator GateOpen;
     public Rigidbody[] DoorRb;
-    public bool ScanResult = false;
-    public bool Scanning = false;
+    public static bool ScanResult = false;
+    public static bool Scanning = false;
     private float ScanTime = 1.5f;
     private float FailShowTime = 3f;
     float counter_Scan = 0,counter_FailShow = 0; 
@@ -70,7 +70,7 @@ public class ScanScreen : MonoBehaviour
                     source.Play();
                 }
             }
-            if (counter_Scan < 1 && counter_Scan > 0.9f)
+            if (counter_Scan < 1.2f && counter_Scan > 1.1f)
             {
                 source.volume = 0.1f;
                 source.clip = BB;
