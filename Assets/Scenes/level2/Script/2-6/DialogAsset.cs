@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DialogAsset : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Material material;
+    public string[] lines;
+    public Color[] color;
+    public float[] ShaderGlow;
+    public float[] DistortSpeed;
+    public float[] Alpha;
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        material.SetColor("_Color", new Color(1, 1, 1, 1));
+        material.SetFloat("_Alpha", 0);
     }
 }

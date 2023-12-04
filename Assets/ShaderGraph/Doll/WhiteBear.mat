@@ -56,20 +56,22 @@ Material:
     - Vector1_378611f549e4433d8e34a6a9f5c8419b: 1
     - Vector1_43fbd82f418d4e3e8bc5608584788fd3: 1
     - Vector1_57cef04cf4be486cbf18848c0fe2b117: 0.71
-    - Vector1_5e4b24d78fe24baf961c72f3b4e14f54: 0.83
+    - Vector1_5e4b24d78fe24baf961c72f3b4e14f54: 0.77
     - Vector1_61535d23856b4308ac60bd83d0b21cd2: 0.76
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 1
     - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
     - _Alpha: 0
-    - _Distort_Speed: 0.02
+    - _Distort_Speed: 1.1844239
+    - _GlowPower: 0.7
     - _Resolution: 10
     - _Sequence: 0
     - _Strength: 2
     - _bright: 1
     - _deep: 0.954
+    - fdfff: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.027672768, a: 1}
+    - _Color: {r: 0.004696667, g: 0.7840391, b: 1, a: 1}
     - _Distort_Tile: {r: 0.2, g: 0.2, b: 1, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _Random: {r: -1, g: 1, b: 0, a: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class UsePeep : MonoBehaviour
 {
     public GameObject Black;
+    public DialogManager manager;
     private Material material;
     private float TargetAlpha = 0.85f;
     public PeepMaterial peepMaterial;
@@ -64,6 +65,7 @@ public class UsePeep : MonoBehaviour
         }
         isUsed = true;
         isProcessing = false;
+        StartCoroutine(manager.SetDialog());
     }
     private IEnumerator Fadeout()
     {

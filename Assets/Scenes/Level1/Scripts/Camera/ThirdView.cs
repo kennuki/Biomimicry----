@@ -54,9 +54,10 @@ public class ThirdView : MonoBehaviour
         int layerIndex = LayerMask.NameToLayer("Character");
         Camera.main.cullingMask |= 1 << layerIndex;
     }
-    private void CameraCullRecover()
+    private IEnumerator CameraCullRecover()
     {
         Third_Camera.Priority = 9;
+        yield return new WaitForSeconds(2);
         int layerIndex = LayerMask.NameToLayer("Character");
         Camera.main.cullingMask &= ~(1 << layerIndex);
     }
@@ -73,7 +74,8 @@ public class ThirdView : MonoBehaviour
         }
         else if (Character.LookState == 1)
         {
-            CameraCullRecover();
+            StartCoroutine(CameraCullRecover());
+            
         }
     }
 }

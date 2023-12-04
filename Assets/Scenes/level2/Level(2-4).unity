@@ -4686,7 +4686,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+      maxColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5329,7 +5329,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5432,8 +5432,66 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 0
-    m_Bursts: []
+    m_BurstCount: 1
+    m_Bursts:
+    - serializedVersion: 2
+      time: 0
+      countCurve:
+        serializedVersion: 2
+        minMaxState: 0
+        scalar: 1
+        minScalar: 30
+        maxCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        minCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      cycleCount: 1
+      repeatInterval: 0.01
+      probability: 1
   SizeModule:
     enabled: 0
     curve:
@@ -5825,7 +5883,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     mode: 0
     timeMode: 0
     fps: 30
@@ -5936,8 +5994,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 1
-    tilesY: 1
+    tilesX: 2
+    tilesY: 4
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -15891,7 +15949,7 @@ Transform:
   m_Children:
   - {fileID: 32764625}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &430537018
 GameObject:
@@ -18427,7 +18485,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624381487
 GameObject:
@@ -20899,6 +20957,7 @@ GameObject:
   - component: {fileID: 780893473}
   - component: {fileID: 780893472}
   - component: {fileID: 780893471}
+  - component: {fileID: 780893474}
   m_Layer: 0
   m_Name: Canvas_Dialog
   m_TagString: Untagged
@@ -20987,6 +21046,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &780893474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780893469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814f263ee08a886409e7e6dbe8796286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetDoll:
+  - {fileID: 543450653263974844}
+  dialogFrame: {fileID: 996547513}
+  dialog_obj: {fileID: 1684091408}
+  dialog: {fileID: 1684091412}
 --- !u!1 &789214099
 GameObject:
   m_ObjectHideFlags: 0
@@ -21473,13 +21549,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823208481}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -142.96118, y: -194.47192, z: -24.79797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.2611847, y: 3.9698029, z: -4.79797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1715411058}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1033470948}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849245333
 GameObject:
@@ -22347,7 +22423,7 @@ Transform:
   - {fileID: 780893470}
   - {fileID: 1066645166}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &892531891
 GameObject:
@@ -29076,7 +29152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &996547514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29178,7 +29254,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
@@ -34344,8 +34420,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1144028893}
+  - {fileID: 823208482}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1038651166
 GameObject:
@@ -34411,7 +34488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044443042
 GameObject:
@@ -35054,7 +35131,7 @@ Transform:
   m_Children:
   - {fileID: 1210517240}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1066645165
 GameObject:
@@ -50808,7 +50885,7 @@ Transform:
   - {fileID: 1189903389}
   - {fileID: 1342081174}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1478903813
 MonoBehaviour:
@@ -51423,7 +51500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547631422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.9436, y: -50.12378, z: -22.046}
+  m_LocalPosition: {x: -13.93, y: -50.12378, z: -22.046}
   m_LocalScale: {x: 0.30796, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2016439183}
@@ -51490,7 +51567,7 @@ HingeJoint:
   m_Anchor: {x: 0.19, y: -0.02, z: 0}
   m_Axis: {x: 0, y: 90, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.28322542, y: -0.020004272, z: -0.000102996826}
+  m_ConnectedAnchor: {x: -0.28322273, y: -0.020004272, z: -0.00011444092}
   m_UseSpring: 1
   m_Spring:
     spring: 2000
@@ -51508,12 +51585,12 @@ HingeJoint:
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
-  m_BreakForce: 2000
-  m_BreakTorque: 2000
+  m_BreakForce: 200
+  m_BreakTorque: 20
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 0.01
-  m_ConnectedMassScale: 0.01
+  m_MassScale: 0.5
+  m_ConnectedMassScale: 0.5
 --- !u!54 &1547631427
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53034,8 +53111,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 39fa7dd9533750845a8eb281a6d020bd, type: 2}
+  m_sharedMaterial: {fileID: -8057788750412123770, guid: 39fa7dd9533750845a8eb281a6d020bd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -53059,8 +53136,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -53069,9 +53146,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -53122,10 +53199,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1684091410}
-  lines:
-  - Hello! I'm Robot!
-  - Nothing can stop me!
+  lines: []
+  color: []
+  ShaderGlow: []
+  DistortSpeed: []
+  Alpha: []
+  target_material: {fileID: 0}
+  particle: {fileID: 281532377}
   textSpeed: 0.1
+  DialogFrame: {fileID: 996547513}
 --- !u!1 &1704348965
 GameObject:
   m_ObjectHideFlags: 0
@@ -53859,7 +53941,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: c6bf2c8b4bb9d354dae2a24c03178b09, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -53965,7 +54047,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1762731933
 GameObject:
@@ -64893,7 +64975,7 @@ Transform:
   - {fileID: 1545676475}
   - {fileID: 981789169}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 359.2619, z: 0}
 --- !u!143 &1879004869
 CharacterController:
@@ -65071,6 +65153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Black: {fileID: 1818106774}
+  manager: {fileID: 780893474}
   peepMaterial: {fileID: 1883920504}
   useAllow: 0
 --- !u!1 &1883920502
@@ -65102,7 +65185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1883920504
 MonoBehaviour:
@@ -73689,7 +73772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147506937879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.6849, y: -50.12378, z: -22.0459}
+  m_LocalPosition: {x: -13.671303, y: -50.12378, z: -22.045893}
   m_LocalScale: {x: 0.70682067, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2016439183}
@@ -74502,6 +74585,7 @@ GameObject:
   - component: {fileID: 919132148301030080}
   - component: {fileID: 919132148301030081}
   - component: {fileID: 919132148301030082}
+  - component: {fileID: 919132148301030083}
   m_Layer: 0
   m_Name: 2-3_grille
   m_TagString: PushOnly
@@ -74586,7 +74670,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3897756, y: 0.099999994, z: 0.1}
-  m_Center: {x: -0.6998879, y: -0.19, z: 0.14}
+  m_Center: {x: -0.6998879, y: -0.18, z: 0.14}
 --- !u!114 &919132148301030081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74613,6 +74697,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3897756, y: 0.16, z: 0.01}
   m_Center: {x: -0.6998879, y: -0.08, z: 0.16}
+--- !u!65 &919132148301030083
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148301030076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3897756, y: 0.099999994, z: 0.1}
+  m_Center: {x: -0.6998879, y: -0.02, z: 0.14}
 --- !u!1 &919132149598161670
 GameObject:
   m_ObjectHideFlags: 0
@@ -74633,6 +74730,7 @@ GameObject:
   - component: {fileID: 919132149598161680}
   - component: {fileID: 919132149598161673}
   - component: {fileID: 919132149598161681}
+  - component: {fileID: 919132149598161682}
   m_Layer: 22
   m_Name: bear
   m_TagString: Untagged
@@ -74801,6 +74899,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 919132149598161671}
   Trigger: 0
+--- !u!114 &919132149598161682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149598161670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b913943a76b44ab4ab5365f729f8382f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 2b6bfb428238a8444b62a59c5c12573b, type: 2}
+  lines:
+  - I'm White bear. Nice to meet you.
+  - Thank for removing malicious code.
+  color:
+  - {r: 0, g: 0.78302, b: 1, a: 1}
+  - {r: 0.017799927, g: 0.754717, b: 0.31223056, a: 1}
+  ShaderGlow:
+  - 0.5
+  - 1
+  DistortSpeed:
+  - 0.08
+  - 0.1
+  Alpha:
+  - 0.7
+  - 1
 --- !u!1 &921391925702659380
 GameObject:
   m_ObjectHideFlags: 0

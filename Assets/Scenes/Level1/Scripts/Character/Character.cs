@@ -62,7 +62,6 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(LookState);
         EnergyUseFunction();
     }
 
@@ -302,10 +301,6 @@ public class Character : MonoBehaviour
 
                         TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.05f, collisionPoint, ForceMode.VelocityChange);
                     }
-                    else if (other.gameObject.layer == 18)
-                    {
-
-                    }
                     else
                     {
                         Vector3 Targetvelocity = move;
@@ -313,7 +308,7 @@ public class Character : MonoBehaviour
                         {
                             Targetvelocity.y = 0;
                         }
-                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.VelocityChange);
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.Force);
                         //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
                     }
                 }
@@ -327,11 +322,14 @@ public class Character : MonoBehaviour
         if (TouchedObjectRb != null)
         {
             Vector3 collisionPoint = other.ClosestPointOnBounds(transform.position);
+            Vector3 vectorA = move;
+            Vector3 vectorB = transform.position - collisionPoint;
+            float angle = Vector3.Angle(vectorA, vectorB);
             float TargetForce;
             CalculateCollisionVelocities(10, Vector3.Magnitude(controller.velocity), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity, Vector3.Normalize(controller.velocity))), out TargetForce);
             if (other.tag == "PushOnly" || other.tag == "Pushable")
             {
-                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.VelocityChange);
+                    TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.Force);
             }
             else if(other.tag == "Joint")
             {

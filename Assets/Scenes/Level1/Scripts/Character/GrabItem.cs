@@ -578,7 +578,6 @@ public class GrabItem : MonoBehaviour
                 Vector3 vel = PushedItemRb.velocity;
                 if (dis_to_target > 0.4f)
                 {
-                    Debug.Log("Pull");
                     Character.speed = 1;
                     Force = rotation_player * Vector3.back * PushForce * (1 + (dis_to_target - 0.05f) * 1f);
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
@@ -645,8 +644,8 @@ public class GrabItem : MonoBehaviour
                 {
                     Force = transform.rotation  * Vector3.forward * PushForce * 10f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
-                    int clip = Random.Range(3, 6);
-                    audioClip = audioCharacter.AudioClip[clip];
+                    PushTypeInfo.pushType type = PushedItem.gameObject.GetComponent<PushType>().pushType;
+                    audioClip = PushTypeInfo.GetAudioClip(type);
                     if(audioSource.isPlaying == false)
                     {
                         audioSource.PlayOneShot(audioClip);

@@ -19,4 +19,9 @@ public class AudioAsset : MonoBehaviour
     public AudioClip metal_land;
     public AudioClip carpet_land;
     public AudioClip wood_land;
+
+    public AudioClip box_push1;
+    public AudioClip box_push2;
+    public AudioClip box_push3;
+    public AudioClip door_metal_push;
 }
