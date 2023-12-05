@@ -29150,7 +29150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976904333}
   m_LocalRotation: {x: -0, y: -0.6962627, z: -0, w: 0.717787}
-  m_LocalPosition: {x: -5.4565296, y: 0.8510437, z: 0.44405365}
+  m_LocalPosition: {x: -5.46, y: 0.8510437, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1216668454}
@@ -53434,6 +53434,8 @@ MonoBehaviour:
   particle: {fileID: 281532377}
   textSpeed: 0.1
   DialogFrame: {fileID: 996547513}
+  Choose: 0
+  ExtendDialog: []
 --- !u!1 &1704348965
 GameObject:
   m_ObjectHideFlags: 0
@@ -75397,6 +75399,8 @@ MonoBehaviour:
   Alpha:
   - 0.7
   - 1
+  Choose: 0
+  ExtendDialog: []
 --- !u!1 &921391925702659380
 GameObject:
   m_ObjectHideFlags: 0

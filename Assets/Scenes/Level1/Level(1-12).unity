@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 968747641}
   - component: {fileID: 968747643}
   - component: {fileID: 968747642}
+  - component: {fileID: 968747644}
   m_Layer: 0
   m_Name: l2_light.003
   m_TagString: Untagged
@@ -800,6 +801,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968747640}
   m_Mesh: {fileID: 3222948948983103875, guid: 351e5bcce692a3a47b9ad4f020377885, type: 3}
+--- !u!114 &968747644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968747640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfa262d929fc3c4bbf89793486874e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spotlight: {fileID: 1730015363}
+  Pointlight: {fileID: 1441629078}
+  Light: {fileID: 968747642}
+  RandomTime_Max: 1
 --- !u!1 &981630435
 GameObject:
   m_ObjectHideFlags: 0

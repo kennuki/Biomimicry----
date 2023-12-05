@@ -18,7 +18,7 @@ public class DoorDrop : EventTriggerFunction
         playableDirector = GameObject.Find("Timeline").GetComponent<PlayableDirector>();
 
 
-        // 找到要移除的track
+        // 找��En移除的track
 
     }
     public override void Enter()

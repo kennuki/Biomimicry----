@@ -22,6 +22,8 @@ public class Dialog : MonoBehaviour
     private int index;
     private bool typing = false;
     private float rate = 1;
+    public bool Choose = false;
+    public DialogAsset[] ExtendDialog;
     void Start()
     {
         textComponent.text = string.Empty;
@@ -53,7 +55,7 @@ public class Dialog : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             StopAllCoroutines();
-            ShaderToDefault();
+            //ShaderToDefault();
             gameObject.SetActive(false);
             DialogFrame.SetActive(false);
         }
@@ -61,17 +63,17 @@ public class Dialog : MonoBehaviour
     public IEnumerator startDialog()
     {
         textComponent.text = string.Empty;
-        ShaderToDefault();
+        //ShaderToDefault();
         index = 0;
         yield return new WaitForSeconds(1);
         StartCoroutine(TypeLine());
     }
     private IEnumerator TypeLine()
     {
-        StartCoroutine(SpeedFadein(DistortSpeed[index]));
+        StartCoroutine(SpeedFadein(DistortSpeed[index],rate));
         StartCoroutine(ColorFadein(color[index]));
         StartCoroutine(AlphaFadein(Alpha[index]));
-        StartCoroutine(GlowPowerFadein(ShaderGlow[index]));
+        StartCoroutine(GlowPowerFadein(ShaderGlow[index],rate));
         foreach(char c in lines[index].ToCharArray())
         {
             typing = true;
@@ -92,7 +94,7 @@ public class Dialog : MonoBehaviour
         }
         else
         {
-            ShaderToDefault();
+            //ShaderToDefault();
             gameObject.SetActive(false);
             DialogFrame.SetActive(false);
         }
@@ -118,21 +120,21 @@ public class Dialog : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator SpeedFadein(float target)
+    private IEnumerator SpeedFadein(float target,float speed)
     {
-        float start_ = target_material.GetFloat("_Distort_Speed");
+        float start_ = target_material.GetFloat("_Distort_Speed")*speed;
         for (float i = start_; i < target; i += Time.deltaTime)
         {
-            target_material.SetFloat("_Distort_Speed", i*rate);
+            target_material.SetFloat("_Distort_Speed", i);
             yield return null;
         }
     }
-    private IEnumerator GlowPowerFadein(float target)
+    private IEnumerator GlowPowerFadein(float target,float speed)
     {
-        float start_ = target_material.GetFloat("_GlowPower");
+        float start_ = target_material.GetFloat("_GlowPower")*speed;
         for (float i = start_; i < target; i += Time.deltaTime)
         {
-            target_material.SetFloat("_GlowPower", i*rate);
+            target_material.SetFloat("_GlowPower", i);
             yield return null;
         }
     }

@@ -55,6 +55,8 @@ public class DialogManager : MonoBehaviour
             dialog.lines = dialogAsset.lines;
             dialog.ShaderGlow = dialogAsset.ShaderGlow;
             dialog.color = dialogAsset.color;
+            dialog.Choose = dialogAsset.Choose;
+            dialog.ExtendDialog = dialogAsset.ExtendDialog;
             StartCoroutine(dialog.startDialog()); 
         }
         else

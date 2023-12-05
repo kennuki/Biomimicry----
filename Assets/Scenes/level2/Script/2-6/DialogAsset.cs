@@ -10,6 +10,8 @@ public class DialogAsset : MonoBehaviour
     public float[] ShaderGlow;
     public float[] DistortSpeed;
     public float[] Alpha;
+    public bool Choose = false;
+    public DialogAsset[] ExtendDialog;
     private void Awake()
     {
         material.SetColor("_Color", new Color(1, 1, 1, 1));
