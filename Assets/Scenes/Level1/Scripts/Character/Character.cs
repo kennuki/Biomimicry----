@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Character : MonoBehaviour
     public GameObject Left_Hand;
     public Animator anim;
     public static bool ActionProhibit = false, GrabProhibit = false, AllProhibit = false, MoveOnly = false;    //ActionProhibt effect squat
+   
     void Start()
     {
         ActionProhibit = false;
@@ -60,10 +62,32 @@ public class Character : MonoBehaviour
         GravityFunction();
         controller.Move(move * Time.deltaTime);
     }
+    private bool start_active = false;
+    bool ScenesIsloading()
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            if (!SceneManager.GetSceneAt(i).isLoaded)
+                return true;
+        }
+        return false;
+    }
     private void Update()
     {
         EnergyUseFunction();
+        if (!start_active)
+        {
+            if (ScenesIsloading())
+                controller.enabled = false;
+            else if (!ScenesIsloading())
+            {
+                controller.enabled = true;
+                start_active = true;
+            }
+        }
+
     }
+
 
 
 
@@ -308,7 +332,7 @@ public class Character : MonoBehaviour
                         {
                             Targetvelocity.y = 0;
                         }
-                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.Force);
+                        TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(Targetvelocity) * 0.05f, collisionPoint, ForceMode.VelocityChange);
                         //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
                     }
                 }
@@ -329,7 +353,7 @@ public class Character : MonoBehaviour
             CalculateCollisionVelocities(10, Vector3.Magnitude(controller.velocity), TouchedObjectRb.mass, Vector3.Magnitude(Vector3.Project(TouchedObjectRb.velocity, Vector3.Normalize(controller.velocity))), out TargetForce);
             if (other.tag == "PushOnly" || other.tag == "Pushable")
             {
-                    TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.02f, collisionPoint, ForceMode.Force);
+                    TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.01f, collisionPoint, ForceMode.VelocityChange);
             }
             else if(other.tag == "Joint")
             {
@@ -341,8 +365,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.15f* other.material.bounciness, collisionPoint, ForceMode.VelocityChange);
-                //Debug.Log(TargetForce * Vector3.Normalize(controller.velocity) + " " + other.name);
+                TouchedObjectRb.AddForceAtPosition(TargetForce * Vector3.Normalize(controller.velocity) * 0.2f* other.material.bounciness, collisionPoint, ForceMode.VelocityChange);
             }
 
 

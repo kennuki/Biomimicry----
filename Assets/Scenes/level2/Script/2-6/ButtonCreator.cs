@@ -66,7 +66,7 @@ public class ButtonCreator : MonoBehaviour
         newClickFun.manager = manager; 
         return newClickFun;
     }
-    void RemoveObjectsWithSpecificName()
+    public void RemoveObjectsWithSpecificName()
     {
         Debug.Log("remove");
         for (int i = transform.childCount - 1; i >= 0; i--)

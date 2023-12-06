@@ -648,7 +648,7 @@ public class GrabItem : MonoBehaviour
 
                 }
             }
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
         Range.enabled = false;
         Hand_Anim.SetInteger("PushPull", 0);

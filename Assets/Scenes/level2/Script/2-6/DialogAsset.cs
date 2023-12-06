@@ -12,6 +12,7 @@ public class DialogAsset : MonoBehaviour
     public float[] Alpha;
     public bool Choose = false;
     public ChooseDialogAsset chooseDialog;
+    public Material dialog_frame;
     private void Awake()
     {
         material.SetColor("_Color", new Color(1, 1, 1, 1));

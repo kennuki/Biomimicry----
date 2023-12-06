@@ -14,7 +14,7 @@ public class Boss : MonoBehaviour
         public Transform[] Point;
         public int[] MaxTeleportTimes;
     }
-
+    public GameObject Camera2;
     public Animator anim;
     public Transform IdlePointList;
     public GameObject Light;
@@ -51,6 +51,7 @@ public class Boss : MonoBehaviour
     }
     private void Start()
     {
+        Camera2.SetActive(true);
         Light.SetActive(true);
         FindFunction();
         cinemachineBrain = Camera.main.transform.GetComponent<CinemachineBrain>();
@@ -160,7 +161,8 @@ public class Boss : MonoBehaviour
         }
         if (State == ChasingState.Chase)
         {
-            if(path_player.status == NavMeshPathStatus.PathPartial)
+            cd.enabled = true;
+            if (path_player.status == NavMeshPathStatus.PathPartial)
             {
                 State = ChasingState.Stop;
             }
@@ -567,6 +569,7 @@ public class Boss : MonoBehaviour
 
     public IEnumerator PlayerDead()
     {
+        cd.enabled = false;
         source.PlayOneShot(sing);
         flashlight.enabled = false;
         Dead = true;
@@ -647,6 +650,7 @@ public class Boss : MonoBehaviour
 
     private void RestartFunction()
     {
+        cd.enabled = true;
         render.SetFloat("_Alpha", 0);
         DeadPanel = GameObject.Find("UI").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
         Debug.Log(LoadScene.Instance.SceneWillChange);

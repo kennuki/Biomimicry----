@@ -20,6 +20,7 @@ public class SavePointSerial : MonoBehaviour
         {
             PrevioudSavePointIndex = CurrentSavePointIndex;
         }
+        Debug.Log(CurrentSavePointIndex);
     }
 
     

@@ -19,16 +19,21 @@ public class CardDrop : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         int index = Random.Range(0, collisionSound1.Length);
-        if (!audioSource1.isPlaying)
+        if(this.gameObject.transform.parent != null)
         {
-            audioSource1.clip = collisionSound1[index];
-            audioSource1.Play();
+            if (!audioSource1.isPlaying)
+            {
+                audioSource1.clip = collisionSound1[index];
+                audioSource1.Play();
+            }
+            else if (!audioSource2.isPlaying)
+            {
+                audioSource1.clip = collisionSound1[index];
+                audioSource2.Play();
+            }
+
         }
-        else if (!audioSource2.isPlaying)
-        {
-            audioSource1.clip = collisionSound1[index];
-            audioSource2.Play();
-        }
+
     }
 
     private void speed_to_volume()

@@ -81,6 +81,7 @@ public class Dialog : MonoBehaviour
         OnChoosing = false;
         DialogFrame.SetActive(false);
         gameObject.SetActive(false);
+        buttonCreator.RemoveObjectsWithSpecificName();
     }
     public IEnumerator startDialog()
     {
