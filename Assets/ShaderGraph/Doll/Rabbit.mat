@@ -62,7 +62,7 @@ Material:
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 1
     - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
-    - _Alpha: 0.009198367
+    - _Alpha: 0.012744531
     - _Distort_Speed: 0.12
     - _GlowPower: 0.8
     - _Resolution: 10
@@ -76,7 +76,7 @@ Material:
     - _degree: 0
     - fdfff: 1
     m_Colors:
-    - _Color: {r: 0.8136025, g: 0.29920852, b: 0.4797427, a: 0.8427505}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Distort_Tile: {r: 0.2, g: 0.2, b: 1, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _Random: {r: -1, g: 1, b: 0, a: 0}
