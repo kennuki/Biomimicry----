@@ -62,21 +62,21 @@ Material:
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 1
     - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
-    - _Alpha: 0.9943423
-    - _Distort_Speed: 0.12
-    - _GlowPower: 0.8
+    - _Alpha: 0.009198367
+    - _Distort_Speed: 0.1
+    - _GlowPower: 1
     - _Resolution: 10
     - _Sequence: 0
     - _Strength: 2
     - _accumulation: 0.0065209144
-    - _accumulation_x: -7.3229265
-    - _accumulation_y: -6.425957
+    - _accumulation_x: -1.5192621
+    - _accumulation_y: -2.6796095
     - _bright: 1
     - _deep: 0.954
     - _degree: 0
     - fdfff: 1
     m_Colors:
-    - _Color: {r: 0.955599, g: 0.6964158, b: 0.30807328, a: 0.9556048}
+    - _Color: {r: 0.84006214, g: 0.8400614, b: 0.8400595, a: 0.84008986}
     - _Distort_Tile: {r: 0.2, g: 0.2, b: 1, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _Random: {r: -1, g: 1, b: 0, a: 0}
