@@ -498,13 +498,13 @@ public class GrabItem : MonoBehaviour
         Vector3 Force;
         float dis_point_center = Distance2D(trigger_point, PushedItem.transform.position);
         dis_to_target = Distance2D(transform.position, PushedItem.transform.position) - dis_point_center;
-        for (float i = 0; i <= 0.25f; i += Time.deltaTime)
+        for (float i = 0; i <= 0.2f; i += Time.deltaTime)
         {
             if(dis_to_target < 1.0f)
             {
                 if (dis_to_target - 0.3f < i * 4)
                 {
-                    Force = transform.rotation * Vector3.forward * PushForce * 1f;
+                    Force = transform.rotation * Vector3.forward * PushForce * 0.8f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
             }
@@ -549,7 +549,7 @@ public class GrabItem : MonoBehaviour
                 if (dis_to_target < 1f)
                 {
                     Character.speed = 0.5f+dis_to_target;
-                    Force = rotation_player * Vector3.forward * PushForce * (1 + (-dis_to_target))*2f;   
+                    Force = rotation_player * Vector3.forward * PushForce * (1 + (-dis_to_target))*1.4f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
                 if (dis_to_target > 2.5f)
@@ -574,9 +574,8 @@ public class GrabItem : MonoBehaviour
                 Hand_Anim.SetLayerWeight(4, 0.8f);
                 Hand_Anim.SetInteger("PushPull", 2);
                 dis_to_target = Distance2D(transform.position, PushedItem.transform.position) - dis_point_center;
-                float maxSpeed = 1;
                 Vector3 vel = PushedItemRb.velocity;
-                if (dis_to_target > 0.4f)
+                if (dis_to_target >= 0.4f)
                 {
                     Character.speed = 1;
                     Force = rotation_player * Vector3.back * PushForce * (1 + (dis_to_target - 0.05f) * 1f);
@@ -601,10 +600,6 @@ public class GrabItem : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     //physicMaterialBox.dynamicFriction = 2f;
                     yield break;
-                }
-                if (PushedItemRb.velocity.magnitude > maxSpeed&& dis_to_target < 0.4f)
-                {
-                    //PushedItemRb.velocity = vel.normalized * maxSpeed;
                 }
                 Character.EnergyUse = true;
             }

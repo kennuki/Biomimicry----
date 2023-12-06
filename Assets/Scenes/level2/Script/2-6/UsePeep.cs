@@ -7,6 +7,7 @@ public class UsePeep : MonoBehaviour
     public GameObject Black;
     public DialogManager manager;
     private Material material;
+    public ParticleSystem particle;
     private float TargetAlpha = 0.85f;
     public PeepMaterial peepMaterial;
     public bool useAllow = false;
@@ -50,6 +51,8 @@ public class UsePeep : MonoBehaviour
     }
     private IEnumerator Fadein()
     {
+        var colorModule = particle.colorOverLifetime;
+        colorModule.color = new ParticleSystem.MinMaxGradient(new Color(1,1,1,0));
         isProcessing = true;
         for (float i = 0; i < TargetAlpha; i+=Time.deltaTime)
         {
@@ -73,9 +76,12 @@ public class UsePeep : MonoBehaviour
         for (float i = TargetAlpha; i > 0; i -= Time.deltaTime)
         {
             Color Target_color = Color.black;
+            Color Target_color2 = Color.white;
             Target_color.a = i;
+            Target_color2.a = i;
             material.SetColor("_BaseColor", Target_color);
-
+            var colorModule = particle.colorOverLifetime;
+            colorModule.color = new ParticleSystem.MinMaxGradient(Target_color2);
             foreach (Material material in peep_materials)
             {
                 material.SetFloat("_Alpha", i * (1 / TargetAlpha));

@@ -11,6 +11,7 @@ public class DialogManager : MonoBehaviour
     private DialogAsset dialogAsset;
     private Transform playerTransform; 
     private GameObject Target;
+    private ChooseDialogAsset choose_asset;
     private float DisMin=200;
     private void Start()
     {
@@ -56,14 +57,28 @@ public class DialogManager : MonoBehaviour
             dialog.ShaderGlow = dialogAsset.ShaderGlow;
             dialog.color = dialogAsset.color;
             dialog.Choose = dialogAsset.Choose;
-            dialog.ExtendDialog = dialogAsset.ExtendDialog;
+            dialog.chooseDialog = dialogAsset.chooseDialog;
             StartCoroutine(dialog.startDialog()); 
         }
         else
         {
             Debug.Log("null");
         }
-
-        
+    }
+    public void SetDialog2(DialogAsset dialogInfo)
+    {
+        dialogAsset = dialogInfo;
+        dialog_obj.SetActive(true);
+        dialogFrame.SetActive(true);
+        dialog = dialog_obj.GetComponent<Dialog>();
+        dialog.target_material = dialogAsset.material;
+        dialog.Alpha = dialogAsset.Alpha;
+        dialog.DistortSpeed = dialogAsset.DistortSpeed;
+        dialog.lines = dialogAsset.lines;
+        dialog.ShaderGlow = dialogAsset.ShaderGlow;
+        dialog.color = dialogAsset.color;
+        dialog.Choose = dialogAsset.Choose;
+        dialog.chooseDialog = dialogAsset.chooseDialog;
+        StartCoroutine(dialog.startDialog());
     }
 }
