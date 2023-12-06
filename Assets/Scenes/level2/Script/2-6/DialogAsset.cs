@@ -11,10 +11,11 @@ public class DialogAsset : MonoBehaviour
     public float[] DistortSpeed;
     public float[] Alpha;
     public bool Choose = false;
-    public DialogAsset[] ExtendDialog;
+    public ChooseDialogAsset chooseDialog;
     private void Awake()
     {
         material.SetColor("_Color", new Color(1, 1, 1, 1));
         material.SetFloat("_Alpha", 0);
     }
+
 }

@@ -14,16 +14,18 @@ public class Dialog : MonoBehaviour
     public Material target_material;
     public ParticleSystem particle;
     private Color default_color = new Color(1, 1, 1, 1);
-    private float default_ShaderGlow = 0.7f;
-    private float default_DistortSpeed = 0.02f;
-    private float default_Alpha = 0.95f;
     public float textSpeed;
     public GameObject DialogFrame;
     private int index;
     private bool typing = false;
     private float rate = 1;
     public bool Choose = false;
-    public DialogAsset[] ExtendDialog;
+    public ChooseDialogAsset chooseDialog;
+    private float magnitude = 0;
+    private Vector2 accumulation_dir;
+    private float degree = 360;
+    public ButtonCreator buttonCreator;
+    private bool OnChoosing = false;
     void Start()
     {
         textComponent.text = string.Empty;
@@ -31,6 +33,13 @@ public class Dialog : MonoBehaviour
 
     void Update()
     {
+        degree += Random.Range(-2, 2);
+        magnitude = DistortSpeed[index]*Time.deltaTime*rate;
+        accumulation_dir.x += Mathf.Cos(Mathf.Deg2Rad * degree) * magnitude - Time.deltaTime * 0.1f;
+        accumulation_dir.y += Mathf.Sin(Mathf.Deg2Rad * degree) * magnitude - Time.deltaTime * 0.1f;
+        target_material.SetFloat("_accumulation_x", accumulation_dir.x);
+        target_material.SetFloat("_accumulation_y", accumulation_dir.y);
+        //target_material.SetFloat("_accumulation_y", accumulation_dir.y);
         if (typing)
             rate = 1.5f;
         else
@@ -44,33 +53,47 @@ public class Dialog : MonoBehaviour
             {
                 SpeedSet(DistortSpeed[index]);
                 GlowSet(ShaderGlow[index]);
-                NextLine();
+                StopAllCoroutines();
+                if (!OnChoosing)
+                    NextLine();
             }
             else
             {
                 StopAllCoroutines();
+                StartCoroutine(DialogFrameFadeout(0.5f));
+                StartCoroutine(FpsFadein(1, -20));
+                ShaderToTarget();
                 textComponent.text = lines[index];
+                typing = false;
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
             StopAllCoroutines();
-            //ShaderToDefault();
-            gameObject.SetActive(false);
-            DialogFrame.SetActive(false);
+            Exit();
         }
+    }
+    public void Exit()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        CameraRotate.cameratotate = true;
+        OnChoosing = false;
+        DialogFrame.SetActive(false);
+        gameObject.SetActive(false);
     }
     public IEnumerator startDialog()
     {
         textComponent.text = string.Empty;
-        //ShaderToDefault();
         index = 0;
-        yield return new WaitForSeconds(1);
+        yield return null;
         StartCoroutine(TypeLine());
+        yield break;
     }
     private IEnumerator TypeLine()
     {
         StartCoroutine(SpeedFadein(DistortSpeed[index],rate));
+        StartCoroutine(FpsFadein(1,40));
         StartCoroutine(ColorFadein(color[index]));
         StartCoroutine(AlphaFadein(Alpha[index]));
         StartCoroutine(GlowPowerFadein(ShaderGlow[index],rate));
@@ -81,11 +104,17 @@ public class Dialog : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
         typing = false;
+        StartCoroutine(DialogFrameFadeout(0.5f));
+        StartCoroutine(FpsFadein(1, -20));
         SpeedSet(DistortSpeed[index]);
         GlowSet(ShaderGlow[index]);
+        if(Choose&&index == lines.Length)
+        {
+            StartChoose();
+        }
     }
     private void NextLine()
-    {
+    {    
         if (index < lines.Length - 1)
         {
             index++;
@@ -94,21 +123,37 @@ public class Dialog : MonoBehaviour
         }
         else
         {
-            //ShaderToDefault();
-            gameObject.SetActive(false);
-            DialogFrame.SetActive(false);
+            if (Choose)
+            {
+                StartChoose();
+            }
+            else if (!OnChoosing)
+                Exit();
         }
     }
     //_Distort_Speed  //GlowPower   //_Alpha
-    private void ShaderToDefault()
+    private void StartChoose()
     {
-        var main = particle.main;
-        main.startColor = new ParticleSystem.MinMaxGradient(default_color);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        CameraRotate.cameratotate = false;
+        buttonCreator.dialogAssets = chooseDialog.dialogAsset;
+        buttonCreator.option = chooseDialog.ChooseDialog;
+        buttonCreator.CreateButtonList();
+        OnChoosing = true;
+        Choose = false;
+    }
+    private void ShaderToTarget()
+    {
+        var colorModule = particle.colorOverLifetime;
+        colorModule.color = new ParticleSystem.MinMaxGradient(color[index]);
         textComponent.color = default_color;
-        target_material.SetFloat("_Distort_Speed", default_DistortSpeed);
-        target_material.SetColor("_Color", default_color);
-        target_material.SetFloat("_GlowPower", default_ShaderGlow);
-        StartCoroutine(AlphaFadein(default_Alpha));
+        target_material.SetFloat("_Distort_Speed", DistortSpeed[index]);
+        target_material.SetColor("_Color", color[index]);
+        target_material.SetFloat("_GlowPower", ShaderGlow[index]);
+        target_material.SetFloat("_Alpha", Alpha[index]);
+        textComponent.color = color[index];
+
     }
     private IEnumerator AlphaFadein(float target)
     {
@@ -122,11 +167,23 @@ public class Dialog : MonoBehaviour
     }
     private IEnumerator SpeedFadein(float target,float speed)
     {
+
         float start_ = target_material.GetFloat("_Distort_Speed")*speed;
         for (float i = start_; i < target; i += Time.deltaTime)
         {
             target_material.SetFloat("_Distort_Speed", i);
             yield return null;
+        }
+    }
+    private IEnumerator FpsFadein(float speed, int fps_rate)
+    {
+        var Module = particle.textureSheetAnimation;
+        float target_fps = 8 + Mathf.Abs(DistortSpeed[index]) * fps_rate;
+        float difference = target_fps - 8;
+        for (float i = 0; i < 1; i += 1 / target_fps * speed)
+        {
+            Module.fps = 8 + difference * i;
+            yield return new WaitForSeconds(1 / target_fps);
         }
     }
     private IEnumerator GlowPowerFadein(float target,float speed)
@@ -142,13 +199,54 @@ public class Dialog : MonoBehaviour
     {
         Color start_ = target_material.GetColor("_Color");
         Color difference = (target - start_);
-        for (float i = 0; i < 1; i += Time.deltaTime)
+        for (float i = 0; i < 1; i += Time.deltaTime*2)
         {
             Color target_color = start_ + difference * i;
+            Color target_color2 = target_color;
+            var colorModule = particle.colorOverLifetime;
+            if (index == 0)
+                target_color2.a = i;
+            else
+            {
+                target_color2.a = (i + 1) / 2f;
+                if (colorModule.color.color.a > (i + 1f) / 2f)
+                    target_color2.a = colorModule.color.color.a;
+            }
             target_material.SetColor("_Color", target_color);
-            var main = particle.main;
-            main.startColor = new ParticleSystem.MinMaxGradient(target_color);
+            colorModule.color = new ParticleSystem.MinMaxGradient(target_color2);
             textComponent.color = target_color;
+            yield return null;
+        }
+    }
+    private IEnumerator ColorFadein2(Color target,float speed)
+    {
+        Color start_ = target_material.GetColor("_Color");
+        Color difference = (target - start_);
+        for (float i = 0; i < 1; i += Time.deltaTime *speed)
+        {
+            Color target_color = start_ + difference * i;
+            Color target_color2 = target_color;
+            target_material.SetColor("_Color", target_color);
+            textComponent.color = target_color;
+            yield return null;
+        }
+    }
+    private IEnumerator DialogFrameFadeout(float target)
+    {
+        Color start_ = target_material.GetColor("_Color");
+        Color target_color = target_material.GetColor("_Color");
+        Color target_color2 = target_color;
+        target_color2 = (target_color + Color.white * 0.4f) * 0.6f;
+        target_color = (target_color + Color.white * 0.4f) * 0.1f;
+        Color difference = (target_color - start_);
+        float start_alpha = target_material.GetFloat("_Alpha");
+        StartCoroutine(ColorFadein2(target_color2, 0.8f)); ;
+        for (float i = start_alpha; i > target; i -= Time.deltaTime*0.6f)
+        {
+            target_color = start_ + difference * (start_alpha-i);
+            target_color.a = i;
+            var colorModule = particle.colorOverLifetime;
+            colorModule.color = new ParticleSystem.MinMaxGradient(target_color);
             yield return null;
         }
     }
