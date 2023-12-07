@@ -90975,7 +90975,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc5e15a1ca11c6b46b2dc8bf5d3979a2, type: 2}
+  - {fileID: 2100000, guid: 2f8bae5ec3036b64ea6c9a68a07d26da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98210,7 +98210,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc5e15a1ca11c6b46b2dc8bf5d3979a2, type: 2}
+  - {fileID: 2100000, guid: 897321126814548418711ac902540b68, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98975,6 +98975,8 @@ PlayableDirector:
     value: {fileID: 1481200534}
   - key: {fileID: 6289084792622912863, guid: 8124e486a0945594ebd0f29a1a36e136, type: 2}
     value: {fileID: 1156039601}
+  - key: {fileID: 2384261099795701419, guid: 8124e486a0945594ebd0f29a1a36e136, type: 2}
+    value: {fileID: 919132149533739296}
   m_ExposedReferences:
     m_References: []
 --- !u!33 &7571283104956503387
