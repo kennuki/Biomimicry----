@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: afd9692431256ab43ae373afbe510e01, type: 2}
+  m_LightingDataAsset: {fileID: 112000006, guid: b4af0af8e48ecf546b40c6c2f861f09f, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: ffc8cb91937a85a45a92c3ee408a04d4, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -303,7 +303,7 @@ PrefabInstance:
     - target: {fileID: -1405199143914941193, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d41d8fcc90aa0de4e9f93848bfad1c70, type: 2}
+      objectReference: {fileID: 2100000, guid: ece98f823186c314e8fda49ea4ebae11, type: 2}
     - target: {fileID: 919132149155446097, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Name
       value: toybox1 (2)
@@ -1268,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.537
+      value: -5.528
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1313,7 +1313,7 @@ PrefabInstance:
     - target: {fileID: -1405199143914941193, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d41d8fcc90aa0de4e9f93848bfad1c70, type: 2}
+      objectReference: {fileID: 2100000, guid: ece98f823186c314e8fda49ea4ebae11, type: 2}
     - target: {fileID: 919132149155446097, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Name
       value: toybox1 (4)
@@ -2409,7 +2409,7 @@ PrefabInstance:
     - target: {fileID: -1405199143914941193, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d48dc9799d867b140ba45ac92a65fdd7, type: 2}
+      objectReference: {fileID: 2100000, guid: ece98f823186c314e8fda49ea4ebae11, type: 2}
     - target: {fileID: 919132149155446097, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Name
       value: toybox1 (1)
@@ -2620,7 +2620,7 @@ PrefabInstance:
     - target: {fileID: -1405199143914941193, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d41d8fcc90aa0de4e9f93848bfad1c70, type: 2}
+      objectReference: {fileID: 2100000, guid: ece98f823186c314e8fda49ea4ebae11, type: 2}
     - target: {fileID: 919132149155446097, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Name
       value: toybox1 (3)
@@ -3035,7 +3035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2980013
+      value: 5.363
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3043,7 +3043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.723
+      value: 2.869
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3084,7 +3084,7 @@ PrefabInstance:
     - target: {fileID: -1405199143914941193, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d41d8fcc90aa0de4e9f93848bfad1c70, type: 2}
+      objectReference: {fileID: 2100000, guid: ece98f823186c314e8fda49ea4ebae11, type: 2}
     - target: {fileID: 919132149155446097, guid: c490d05841b46804bbd1d6bd3b2de56d, type: 3}
       propertyPath: m_Name
       value: toybox1 (5)
@@ -8322,7 +8322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 071f763d4e94bf749bff189eb81e4769, type: 2}
+  - {fileID: 2100000, guid: d41d8fcc90aa0de4e9f93848bfad1c70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
