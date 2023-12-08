@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: d81c52080b77c8d4086413a36173857f, type: 2}
+  m_LightingDataAsset: {fileID: 112000008, guid: 879929a49a46cfb42aadd43b17abdc52, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: b147ad7216f4b3e4b84910546dfeebc5, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2730,6 +2730,10 @@ MonoBehaviour:
   metal_land: {fileID: 8300000, guid: fad5e41838f93b840aa4afcc1867b8d4, type: 3}
   carpet_land: {fileID: 8300000, guid: c2fce5ca912ca3543b956ef4de740ce3, type: 3}
   wood_land: {fileID: 8300000, guid: 49eaaab0c9419014db2e5c86edb79d3a, type: 3}
+  box_push1: {fileID: 0}
+  box_push2: {fileID: 0}
+  box_push3: {fileID: 0}
+  door_metal_push: {fileID: 0}
 --- !u!4 &554858559
 Transform:
   m_ObjectHideFlags: 0
@@ -9172,6 +9176,8 @@ MonoBehaviour:
   cameraRotate: 1
   moveOnly: 0
   control: 0
+  control_by_other: 0
+  cancel_thirdview: 0
   CharacterPos: {x: -87.47, y: -1.58, z: -3.13}
   CharacterEulerAngle: {x: 0, y: 270, z: 0}
   character: {fileID: 418670967}
@@ -10078,8 +10084,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084397084}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -106.750595, y: -192.611, z: -12.125099}
+  m_LocalRotation: {x: -0, y: -0.64296657, z: -0, w: 0.7658943}
+  m_LocalPosition: {x: 38.915184, y: 1.3789998, z: 52.14778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 851994635}
