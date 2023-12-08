@@ -31537,6 +31537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082013507}
   - component: {fileID: 1082013508}
+  - component: {fileID: 1082013509}
   m_Layer: 22
   m_Name: BearDoll
   m_TagString: Untagged
@@ -31586,6 +31587,25 @@ MonoBehaviour:
   Choose: 0
   chooseDialog: {fileID: 0}
   dialog_frame: {fileID: 2100000, guid: c53b6403c0bce4f4ab1e998b01b0330d, type: 2}
+--- !u!95 &1082013509
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082013506}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1088046897
 GameObject:
   m_ObjectHideFlags: 0
@@ -83283,6 +83303,7 @@ MonoBehaviour:
   height: 0.15
   speed: 7
   offset: {x: 0, y: -0.5, z: 0.1}
+  render: []
 --- !u!1 &919132149358990993
 GameObject:
   m_ObjectHideFlags: 0
