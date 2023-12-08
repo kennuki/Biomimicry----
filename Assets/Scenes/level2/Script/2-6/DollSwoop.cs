@@ -21,7 +21,7 @@ public class DollSwoop : MonoBehaviour
         duration = dis / speed;
         foreach(Renderer render in render)
         {
-            render.material.EnableKeyword("_EmissionColor");
+            render.material.EnableKeyword("_EMISSION");
         }
         if (target == null)
         {
