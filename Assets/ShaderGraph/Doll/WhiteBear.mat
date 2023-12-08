@@ -64,13 +64,13 @@ Material:
     - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
     - _Alpha: 0
     - _Distort_Speed: 0.1
-    - _GlowPower: 0.6
+    - _GlowPower: 1
     - _Resolution: 10
     - _Sequence: 0
     - _Strength: 2
     - _accumulation: 0.0065209144
-    - _accumulation_x: -3.4619682
-    - _accumulation_y: -3.2324455
+    - _accumulation_x: -9.368681
+    - _accumulation_y: -9.380774
     - _bright: 1
     - _deep: 0.954
     - _degree: 0

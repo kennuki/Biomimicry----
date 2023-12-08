@@ -677,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22743295}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -88.2657, y: -203.03398, z: 55.62}
+  m_LocalPosition: {x: -69.7957, y: -203.03398, z: 55.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1049216888}
@@ -22922,7 +22922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866042416}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -87.874695, y: -203.03398, z: 55.62}
+  m_LocalPosition: {x: -69.40469, y: -203.03398, z: 55.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1119517491}
@@ -72287,7 +72287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879004867}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
-  m_LocalPosition: {x: -129, y: -202.913, z: 14.62}
+  m_LocalPosition: {x: -110.53, y: -202.913, z: 14.62}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 1410866153}
@@ -83228,6 +83228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653110030304}
   - component: {fileID: 919132148569707867}
+  - component: {fileID: 919132148569707868}
   m_Layer: 0
   m_Name: rabbit
   m_TagString: Untagged
@@ -83266,6 +83267,22 @@ MonoBehaviour:
   Choose: 0
   chooseDialog: {fileID: 0}
   dialog_frame: {fileID: 2100000, guid: c53b6403c0bce4f4ab1e998b01b0330d, type: 2}
+--- !u!114 &919132148569707868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148569707866}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8b33e478d96cf4ba74232a3b26820f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1567086263}
+  height: 0.15
+  speed: 7
+  offset: {x: 0, y: -0.5, z: 0.1}
 --- !u!1 &919132149358990993
 GameObject:
   m_ObjectHideFlags: 0
@@ -84184,7 +84201,7 @@ GameObject:
   - component: {fileID: 1069904013148631508}
   - component: {fileID: 1069904013148631507}
   - component: {fileID: 1069904013148631506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85508,7 +85525,7 @@ GameObject:
   - component: {fileID: 1124569293014875001}
   - component: {fileID: 1454576027995102438}
   - component: {fileID: 1454576027995102437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.076
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86064,6 +86081,7 @@ GameObject:
   - component: {fileID: 4524298506097817198}
   - component: {fileID: 3441275453515090516}
   - component: {fileID: 953134145531349839}
+  - component: {fileID: 1707942937217922153}
   m_Layer: 0
   m_Name: Cube.024
   m_TagString: Untagged
@@ -86071,6 +86089,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1707942937217922153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707942937217922152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002025147, y: 1.5229996, z: 2.8027534}
+  m_Center: {x: 0.0010125735, y: 0, z: 0}
 --- !u!1 &1710036295155666606
 GameObject:
   m_ObjectHideFlags: 0
@@ -99247,6 +99278,7 @@ GameObject:
   - component: {fileID: 8401952776412621640}
   - component: {fileID: 7416691523313447865}
   - component: {fileID: 7623545439584278262}
+  - component: {fileID: 7623545439584278263}
   m_Layer: 0
   m_Name: Cube.005
   m_TagString: Untagged
@@ -99267,6 +99299,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5176473, y: 0.10841591, z: 19.319902}
   m_Center: {x: 0.00000017881398, y: 0, z: 0}
+--- !u!114 &7623545439584278263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623545439584278261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 0
 --- !u!4 &7648370270127039084
 Transform:
   m_ObjectHideFlags: 0
