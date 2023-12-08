@@ -69,8 +69,8 @@ Material:
     - _Sequence: 0
     - _Strength: 2
     - _accumulation: 0.0065209144
-    - _accumulation_x: -9.7897835
-    - _accumulation_y: -9.875991
+    - _accumulation_x: -0.14260781
+    - _accumulation_y: -0.3935279
     - _bright: 1
     - _deep: 0.954
     - _degree: 0
