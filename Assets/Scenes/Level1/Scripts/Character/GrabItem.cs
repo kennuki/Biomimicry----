@@ -339,7 +339,6 @@ public class GrabItem : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(Hand_Anim.GetInteger("HandState"));
             if (GrabAction == true)
             {
                 if (Hand_Anim.GetInteger("HandState") == 0 && GrabAllow == true)
