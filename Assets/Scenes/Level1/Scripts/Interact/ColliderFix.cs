@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class ColliderFix : MonoBehaviour
 {
-    public float raycastDistance = 0.1f; 
-
+    private Vector3 Origin_Pos;
+    public float raycastDistance = 0.1f;
+    public float reverse_rate = 0.1f;
     private Vector3 previousPosition;
     private Vector3 currentPosition;
     private bool isColliding = false;
 
     private void Start()
     {
+        Origin_Pos = transform.position;
         previousPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
+        if (transform.position.y < Origin_Pos.y - 100)
+        {
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.position = Origin_Pos;
+        }
         currentPosition = transform.position;
 
         RaycastHit hit;
@@ -37,7 +44,7 @@ public class ColliderFix : MonoBehaviour
             {
                 if (isColliding && transform.parent == null)
                 {
-                    transform.position = previousPosition - (currentPosition - previousPosition).normalized * 0.1f;
+                    transform.position = previousPosition - (currentPosition - previousPosition).normalized * reverse_rate;
                 }
                 isColliding = false;
             }
@@ -46,7 +53,7 @@ public class ColliderFix : MonoBehaviour
         {
             if (isColliding&&transform.parent==null)
             {
-                transform.position = previousPosition - (currentPosition - previousPosition).normalized * 0.1f;
+                transform.position = previousPosition - (currentPosition - previousPosition).normalized * reverse_rate;
             }
             isColliding = false;
         }

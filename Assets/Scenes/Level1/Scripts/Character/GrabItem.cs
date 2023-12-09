@@ -293,6 +293,20 @@ public class GrabItem : MonoBehaviour
                         }
                         break;
                     }
+                case 6:
+                    {
+                        switch (Interacted_Item.gameObject.GetComponent<InteractiveObject>().index)
+                        {
+                            case 6:
+                                {
+                                    StartCoroutine(EventActive(Interacted_Item.gameObject, 1.4f, "Scan", 1.7f, 0.5f, false, false, false));
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
+                        break;
+                    }
                 default:
                     break;
 
@@ -478,7 +492,7 @@ public class GrabItem : MonoBehaviour
         }
         GrabbedItemRb.isKinematic = true;
         yield return new WaitForSeconds(Time.deltaTime);
-        GrabbedItem.transform.SetParent(LeftHand);
+        GrabbedItem.transform.SetParent(LeftHand,true);
         GrabbedItem.transform.position = LeftHand.position + LeftHand.transform.rotation * GrabOffset;
         GrabbedItem.transform.eulerAngles = LeftHand.eulerAngles;
         GrabbedItem.transform.Rotate(AngleOffset, Space.Self);

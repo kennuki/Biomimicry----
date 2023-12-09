@@ -13,7 +13,6 @@ public class RightTargetInRoom : MonoBehaviour
             inRoom = true;
             if (other.gameObject.GetComponent<ItemMission>() != null)
             {
-                Debug.Log("fef");
                 inRoom = other.gameObject.GetComponent<ItemMission>().item_mission;
             }
 

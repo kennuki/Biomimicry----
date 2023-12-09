@@ -14,6 +14,10 @@ public class FacePoint_Player : MonoBehaviour
     }
     private void Update()
     {
+        if(player == null)
+        {
+            player = GameObject.Find("Character").transform;
+        }
         if (AllArea.Instance.player_point != null)
         {
             nowPoint = AllArea.Instance.player_point;

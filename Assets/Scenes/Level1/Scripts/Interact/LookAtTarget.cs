@@ -18,6 +18,8 @@ public class LookAtTarget : MonoBehaviour
     float AngleDifference;
     void Update()
     {
+        if(target == null)
+            target = GameObject.Find("Character").transform;
         AngleDifference = (target.eulerAngles.y - lookat.eulerAngles.y)-90;
         if (AngleDifference > 180)
         {
