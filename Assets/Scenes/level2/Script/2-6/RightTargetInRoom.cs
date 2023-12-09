@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class RightTargetInRoom : MonoBehaviour
 {
-    public bool inRoom = false;
-    public GameObject target;
+    //public bool inRoom = false;
+    public GameObject[] target;
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.name == target.name)
+
+    }
+    private bool inRoom(Collider other)
+    {
+        foreach(GameObject gameObject in target)
         {
-            inRoom = true;
+            if (other.gameObject.name != gameObject.name)
+            {
+                return false;
+            }
         }
+        return true;
     }
 }

@@ -13,4 +13,5 @@ public class GrabbleItem : MonoBehaviour
             transform.SetParent(null);
         }
     }
+    public bool put = false;
 }
