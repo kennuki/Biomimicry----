@@ -6,7 +6,7 @@ public class Save : MonoBehaviour
     public int[] SaveSceneIndex;
     private void FixedUpdate()
     {
-        if (LoadScene.Instance.SceneWillChange)
+        if (LoadScene.SceneWillChange)
         {
             foreach (int index in SaveSceneIndex)
             {

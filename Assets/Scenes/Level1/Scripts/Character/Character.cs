@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(SceneManager.sceneCount);
         if (AllProhibit == true)
             EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
@@ -291,6 +292,7 @@ public class Character : MonoBehaviour
     public float Energy = 100;
     private float ChargeDelay = 1f;
     float ChargeCounter = 0;
+    public FlashLight flashLight;
     private void EnergyUseFunction()
     {
 
@@ -304,9 +306,10 @@ public class Character : MonoBehaviour
         {
             Energy += ChargeRate * Time.deltaTime;
         }
-        else if (Energy <= 0)
+        else if (Energy <= 0&&NoEnergy == false)
         {
             NoEnergy = true;
+            StartCoroutine(flashLight.LightWeak());
         }
         else
         {

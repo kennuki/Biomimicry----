@@ -3,32 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneTrigger : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
-    [SerializeField] private string[] _scenesToLoad;
-    [SerializeField] private string[] _scenesToUnload;
-    GameObject player;
-    private void Awake()
+    public string[] _scenesToLoad;
+    public string[] _scenesToUnload;
+    private void Update()
     {
-        player = GameObject.Find("Character");
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Character")
-        {
-            UnLoadScenes();
+        if (Input.GetKeyDown(KeyCode.Z))
             LoadScenes();
-        }
+        if (Input.GetKeyDown(KeyCode.M))
+            UnLoadScenes();
     }
     private void LoadScenes()
     {
-        for(int i = 0; i < _scenesToLoad.Length; i++)
+        for (int i = 0; i < _scenesToLoad.Length; i++)
         {
             bool isSceneLoaded = false;
-            for(int j = 0; j < SceneManager.sceneCount; j++)
+            for (int j = 0; j < SceneManager.sceneCount; j++)
             {
                 Scene loadedScene = SceneManager.GetSceneAt(j);
-                if(loadedScene.name == _scenesToLoad[i])
+                if (loadedScene.name == _scenesToLoad[i])
                 {
                     isSceneLoaded = true;
                     break;
@@ -53,11 +47,5 @@ public class LoadSceneTrigger : MonoBehaviour
                 }
             }
         }
-    }
-    IEnumerator LoadDelay()
-    {
-        LoadScenes();
-        yield return null;
-        UnLoadScenes();
     }
 }
