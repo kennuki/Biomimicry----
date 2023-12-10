@@ -37,7 +37,7 @@ public class LightShine : MonoBehaviour
                 RandomTime = Random.Range(0.01f, RandomTime_Max);
 
             }
-            if (Spotlight.intensity == 0.5f)
+            if (Spotlight.intensity == 0.1f)
             {
                 intensity = 1;
                 Spotlight.intensity = Spotlight_Origin_Intensity * Mathf.Clamp((RandomTime + 0.4f),0,1f)  / 1f;
@@ -53,7 +53,7 @@ public class LightShine : MonoBehaviour
             else
             {
 
-                Spotlight.intensity = 0.5f;
+                Spotlight.intensity = 0.1f;
                 Pointlight.intensity = 0f;
                 intensity = 0.4f;
                 Light.material.SetVector("_EmissionColor", Light_Origin_Emission * intensity);

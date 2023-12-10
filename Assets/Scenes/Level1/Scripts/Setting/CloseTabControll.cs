@@ -10,8 +10,10 @@ public class CloseTabControll : MonoBehaviour
     public CameraRotate CameraRotate;
     private bool isPanelOpen = false;
     public Button closeButton;
+    Canvas canvas;
     private void Start()
     {
+        canvas = this.GetComponent<Canvas>();
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(ClosePanel);
@@ -25,6 +27,10 @@ public class CloseTabControll : MonoBehaviour
 
     private void Update()
     {
+        if (panel.activeSelf)
+        {
+            canvas.sortingOrder = 10;
+        }
         if (Input.GetKeyDown(KeyCode.Escape) && panel != null)
         {
             isPanelOpen = !isPanelOpen;
@@ -38,6 +44,7 @@ public class CloseTabControll : MonoBehaviour
             }
             else 
             {
+                canvas.sortingOrder = -5;
                 Time.timeScale = 1;
                 CameraRotate.cameratotate = true;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -48,7 +55,6 @@ public class CloseTabControll : MonoBehaviour
 
     public void ClosePanel()
     {
-        Debug.Log("???");
         if (panel != null)
         {
             Time.timeScale = 1;
@@ -57,6 +63,7 @@ public class CloseTabControll : MonoBehaviour
             Cursor.visible = false;
             isPanelOpen = false;
             panel.SetActive(false);
+            canvas.sortingOrder = -5;
         }
     }
 }

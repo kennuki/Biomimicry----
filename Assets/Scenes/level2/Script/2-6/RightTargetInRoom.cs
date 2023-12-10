@@ -8,9 +8,20 @@ public class RightTargetInRoom : MonoBehaviour
     public GameObject target;
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.name == target.name)
+        if (other.gameObject.name == target.name)
         {
             inRoom = true;
+            if (other.gameObject.GetComponent<ItemMission>() != null)
+            {
+                inRoom = other.gameObject.GetComponent<ItemMission>().item_mission;
+            }
+
         }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == target.name)
+            inRoom = false;
     }
 }
