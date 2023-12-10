@@ -205,10 +205,10 @@ public class MoveToTarget : MonoBehaviour
             }
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / 3;
-            light1.intensity = Mathf.Lerp(4, 8, t);
-            light2.intensity = Mathf.Lerp(4, 8, t);
-            light6.intensity = Mathf.Lerp(1, 6f, t);
-            light7.intensity = Mathf.Lerp(1, 8f, t);
+            light1.intensity = Mathf.Lerp(4, 7, t);
+            light2.intensity = Mathf.Lerp(4, 7, t);
+            light6.intensity = Mathf.Lerp(1, 5f, t);
+            light7.intensity = Mathf.Lerp(1, 7f, t);
             yield return null;
         }
         FakeSpotlight1.SetActive(true);

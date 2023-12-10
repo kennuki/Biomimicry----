@@ -89,19 +89,20 @@ public class DollSwoop : MonoBehaviour
         Character.AllProhibit = true;
         Character.ActionProhibit = true;
         Character.MoveOnly = true;
-        source.PlayOneShot(clip[1]);
+        source.PlayOneShot(clip[1],0.6f);
         StartCoroutine(screenDistort.TransitionPostProcessing());
         StartCoroutine(screenDistort.DistortPingPong());
         StartCoroutine(PlayerSpeed());
         yield return new WaitForSeconds(1.5f);
         StartCoroutine(ChangeAudioPropertiesOverTime(2f, 0.8f, 1.55f));
-        source_door.PlayOneShot(clip[2],0.15f);
+        source_door.PlayOneShot(clip[2],0.08f);
         JointSpring jointSpring = joint.spring;
         jointSpring.spring = 1.5f;
         joint.spring = jointSpring;
         yield return new WaitForSeconds(2.5f);
         joint.useLimits = true;
-        source_door.PlayOneShot(clip[3],0.6f);
+        source_door.Stop();
+        source_door.PlayOneShot(clip[3],0.35f);
         yield return new WaitForSeconds(1f);
         StartCoroutine(playerDead(0.2f));
 

@@ -317,6 +317,7 @@ public class GrabItem : MonoBehaviour
 
     public static bool FlashGet = false;
     public FlashLight flash,flash2;
+    public GameObject LeftClick;
     private IEnumerator ChipGetFunction()
     {
         while (true)
@@ -329,6 +330,7 @@ public class GrabItem : MonoBehaviour
                         FlashGet = true;
                         flash.enabled = FlashGet;
                         flash2.enabled = FlashGet;
+                        LeftClick.SetActive(true);
                         ItemName = null;
                         yield return new WaitForSeconds(Time.deltaTime);
                         ThrowItem = false;

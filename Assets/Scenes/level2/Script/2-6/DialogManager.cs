@@ -47,7 +47,13 @@ public class DialogManager : MonoBehaviour
         yield return null;
         if (target != null)
         {
-            dialogAsset = target.GetComponent<DialogAsset>();
+            DialogList dialogList= target.GetComponent<DialogList>();
+            if(dialogList ==null)
+                dialogAsset = target.GetComponent<DialogAsset>();
+            else if (dialogList.rightTarget.inRoom == false)
+                dialogAsset = dialogList.dialogAssets[0];
+            else
+                dialogAsset = dialogList.dialogAssets[1];
             dialog_obj.SetActive(true);
             Renderer frame_material = dialogFrame_vfx.GetComponent<Renderer>();
             frame_material.material = dialogAsset.dialog_frame;
