@@ -439,7 +439,7 @@ public class GrabItem : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             if (GrabbedItemCd != null)
             {
-                GrabbedItem.GetComponent<Collider>().enabled = true;
+                GrabbedItem.GetComponent<Collider>().isTrigger = false;
             }
             GrabbedItemRb.isKinematic = false;
             if (grabbleItem.put)
@@ -488,7 +488,7 @@ public class GrabItem : MonoBehaviour
         yield return new WaitForSeconds(0.32f);
         if (GrabbedItemCd != null)
         {
-            GrabbedItem.GetComponent<Collider>().enabled = false;
+            GrabbedItem.GetComponent<Collider>().isTrigger = true;
         }
         GrabbedItemRb.isKinematic = true;
         yield return new WaitForSeconds(Time.deltaTime);
