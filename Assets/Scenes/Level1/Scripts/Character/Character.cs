@@ -33,6 +33,8 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (AllProhibit == true)
+            EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
         {
             if (LookState == 3)

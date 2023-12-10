@@ -14,6 +14,11 @@ public class AudioAsset : MonoBehaviour
     public AudioClip metal_walk;
     public AudioClip carpet_walk;
     public AudioClip wood_walk;
+    public AudioClip wood2_walk;
+    public AudioClip wood3_walk;
+    public AudioClip stone_walk;
+    public AudioClip tile2_walk;
+    public AudioClip metal2_walk;
 
     public AudioClip tile_land;
     public AudioClip metal_land;

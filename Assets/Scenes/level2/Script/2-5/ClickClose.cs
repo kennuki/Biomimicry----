@@ -6,13 +6,18 @@ public class ClickClose : MonoBehaviour
 {
     public GameObject obj_to_close;
     public bool closeSelf = true;
+    public int mouse_index = 1;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(mouse_index))
         {
-            obj_to_close.SetActive(false);
-            if (closeSelf)
-                this.enabled = false;
+            if (obj_to_close.activeSelf == true)
+            {
+                obj_to_close.SetActive(false);
+                if (closeSelf)
+                    this.enabled = false;
+            }
+
         }
     }
 }

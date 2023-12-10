@@ -20,7 +20,7 @@ public class FlashLight : MonoBehaviour
     public Transform PlayerCamera;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetMouseButtonDown(0) && UsePeep.DeviceUse == false)
         {
             if (!isFlashlightOn)
             {

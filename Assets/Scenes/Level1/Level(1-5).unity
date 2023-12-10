@@ -7299,6 +7299,7 @@ MonoBehaviour:
   State: 3
   RunTime: 2
   quick: 0
+  speed: 3
   NoiseMaxStrenth: 0.25
 --- !u!114 &854351758
 MonoBehaviour:
@@ -12389,6 +12390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 1
+  reverse_rate: 0.1
 --- !u!114 &945409219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12403,6 +12405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offset: {x: 0, y: 0.5, z: 0}
   Angle: {x: 0, y: 0, z: 90}
+  put: 0
 --- !u!114 &945409220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18594,6 +18597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 0.1
+  reverse_rate: 0.1
 --- !u!1 &1493822018
 GameObject:
   m_ObjectHideFlags: 0
@@ -24445,7 +24449,7 @@ MonoBehaviour:
   xRotationDuration: 1
   maxRotationAngle: 160
   maxRotationAngleX: -40
-  maxLightIntensity: 190
+  maxLightIntensity: 170
   minLightIntensity: 100
   lightFlickerRate: 1
   fakeLightFalloffValue: 0.06
@@ -32053,7 +32057,7 @@ MonoBehaviour:
   xRotationDuration: 1
   maxRotationAngle: -160
   maxRotationAngleX: 36
-  maxLightIntensity: 190
+  maxLightIntensity: 170
   minLightIntensity: 100
   lightFlickerRate: 1
   fakeLightFalloffValue: 0.05

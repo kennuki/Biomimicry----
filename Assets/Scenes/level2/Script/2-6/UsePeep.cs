@@ -14,6 +14,7 @@ public class UsePeep : MonoBehaviour
     private Material[] peep_materials;
     private bool isUsed = false;
     private bool isProcessing = false;
+    public static bool DeviceUse= false;
     private void Awake()
     {
         material = Black.GetComponent<Renderer>().material;
@@ -43,10 +44,12 @@ public class UsePeep : MonoBehaviour
     private void ActiveDevice()
     {
         Black.SetActive(true);
+        DeviceUse = true;
         StartCoroutine(Fadein());
     }
     private void InactiveDevice()
     {
+        DeviceUse = false;
         StartCoroutine(Fadeout());
     }
     private IEnumerator Fadein()

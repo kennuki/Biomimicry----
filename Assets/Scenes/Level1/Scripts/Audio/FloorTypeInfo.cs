@@ -9,7 +9,12 @@ public class FloorTypeInfo
         Tile,
         Metal,
         Wood,
-        Carpet
+        Carpet,
+        Wood2,
+        Wood3,
+        Metal2,
+        Tile2,
+        Stone
     }
     public static AudioClip GetAudioClipWalk(floorType type)
     {
@@ -23,6 +28,17 @@ public class FloorTypeInfo
                 return AudioAsset.Instance.wood_walk;
             case floorType.Carpet:
                 return AudioAsset.Instance.carpet_walk;
+            case floorType.Wood2:
+                return AudioAsset.Instance.wood2_walk;
+            case floorType.Wood3:
+                return AudioAsset.Instance.wood3_walk;
+            case floorType.Metal2:
+                return AudioAsset.Instance.metal2_walk;
+            case floorType.Tile2:
+                return AudioAsset.Instance.tile2_walk;
+            case floorType.Stone:
+                return AudioAsset.Instance.stone_walk;
+
             default:
                 return null;
         }

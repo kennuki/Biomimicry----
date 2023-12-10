@@ -11,7 +11,9 @@ public class LabDoor : MonoBehaviour
     {
         if (eventActive.Active)
         {
-            anim.Play(clip.name);
+            anim.SetTrigger("DoorOpen");
+            eventActive.Active = false;
         }
     }
+
 }

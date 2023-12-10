@@ -6,8 +6,9 @@ public class NeonOpen : MonoBehaviour
 {
     public GameObject[] gameObjects; 
     public int n; 
-    public float interval = 0.5f; 
-
+    public float interval = 0.5f;
+    public AudioSource source;
+    public AudioClip clip;
     void Start()
     {
         n = gameObjects.Length;
@@ -18,6 +19,7 @@ public class NeonOpen : MonoBehaviour
         if (other.gameObject.layer ==7)
         {
             StartCoroutine(OpenColumnsCoroutine());
+            this.GetComponent<Collider>().enabled = false;
         }
     }
 
@@ -35,6 +37,7 @@ public class NeonOpen : MonoBehaviour
                     }
                     i++;
                 }
+                source.PlayOneShot(clip);
                 yield return new WaitForSeconds(interval);
             }
             yield break;
