@@ -95,13 +95,13 @@ public class DollSwoop : MonoBehaviour
         StartCoroutine(PlayerSpeed());
         yield return new WaitForSeconds(1.5f);
         StartCoroutine(ChangeAudioPropertiesOverTime(2f, 0.8f, 1.55f));
-        source_door.PlayOneShot(clip[2],0.2f);
+        source_door.PlayOneShot(clip[2],0.15f);
         JointSpring jointSpring = joint.spring;
         jointSpring.spring = 1.5f;
         joint.spring = jointSpring;
         yield return new WaitForSeconds(2.5f);
         joint.useLimits = true;
-        source_door.PlayOneShot(clip[3],0.7f);
+        source_door.PlayOneShot(clip[3],0.6f);
         yield return new WaitForSeconds(1f);
         StartCoroutine(playerDead(0.2f));
 

@@ -23,11 +23,11 @@ public class DialogManager : MonoBehaviour
         DisMin = 200;
         Target = null;
         Vector3 playerForward = playerTransform.rotation * -Vector3.right;
+        Debug.DrawRay(playerTransform.position, playerForward);
         foreach (Transform target in TargetDoll)
         {
             Vector3 toTarget = (target.position - playerTransform.position).normalized;
             float angleInDegrees = Vector3.Angle(toTarget, playerForward);
-            Debug.Log(angleInDegrees+" "+target.name);
             if (angleInDegrees < 90)
             {
                 float Dis = Vector3.Distance(playerTransform.position, target.position);

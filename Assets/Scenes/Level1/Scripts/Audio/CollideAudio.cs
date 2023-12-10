@@ -83,29 +83,34 @@ public class CollideAudio : MonoBehaviour
             {
                 source.clip = collisionSound1[index];
                 source.volume = value;
-                source.PlayOneShot(source.clip);
-                break;
+                if (!source.isPlaying)
+                {
+                    source.Play();
+                    break;
+                }
             }
             else if (!source.isPlaying)
             {
 
                 source.clip = collisionSound1[index];
                 source.volume = value;
-                source.PlayOneShot(source.clip);
+                source.Play();
                 break;
             }
         }
     }
+    public float threshold_angular = 0.3f;
+    public float threshold_velocity = 0.4f;
     private void Update()
     {
         CalculateAngularForce();
         CalculateForced();
         speed_to_volume();
-        if (Acceleration < -0.3f)
+        if (Acceleration < -threshold_angular)
         {            
             AudioPlay();
         }
-        if (VelocityChangeDiffirence > 0.4f)
+        if (VelocityChangeDiffirence > threshold_velocity)
         {
             AudioPlay();
         }

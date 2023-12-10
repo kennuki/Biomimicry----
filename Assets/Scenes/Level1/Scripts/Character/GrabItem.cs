@@ -70,10 +70,7 @@ public class GrabItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody)
-        {
             triggerPoint = other.bounds.ClosestPoint(transform.position);
-        }
         float Dis = Vector3.Distance(other.transform.position, transform.position);
         Vector3 Dir = other.transform.position - transform.position;
         Ray ray = new Ray(transform.position, Dir);
@@ -81,26 +78,30 @@ public class GrabItem : MonoBehaviour
         LayerMask layerMask = 1 << 6 | 1 << 12;
         if (Physics.Raycast(ray, out hit, 6, layerMask))
         {
-            if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(other.transform.position, transform.position))
+            if (Vector3.Distance(hit.point, transform.position) > Vector3.Distance(triggerPoint, transform.position))
             {
                 if (other.tag != "PostProcess")
                     NoObstacle = true;
-
+                if (other.name == "Cake")
+                {
+                    Debug.Log(hit.transform.gameObject.name);
+                    Debug.Log(Vector3.Distance(hit.point, transform.position));
+                    Debug.Log(Vector3.Distance(triggerPoint, transform.position));
+                }
             }
             else
             {
-                if(other.name == "Board")
+                if(other.name == "Cake")
                 {
                     Debug.Log(hit.transform.gameObject.name);
                     Debug.Log(Vector3.Distance(hit.point, transform.position));
                     Debug.Log(Vector3.Distance(other.transform.position, transform.position));
                 }
-
                 NoObstacle = false;
             }
         }
         else
-            NoObstacle = true;
+            NoObstacle = true;     
         if (ThrowItem == false)
         {
             if (other.tag == "BrushOff" && GrabAllow == true)
