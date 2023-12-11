@@ -16,8 +16,8 @@ public class LoadSceneTrigger : MonoBehaviour
     {
         if(other.name == "Character")
         {
-            LoadScenes();
             UnLoadScenes();
+            LoadScenes();
         }
     }
     private void LoadScenes()
@@ -53,5 +53,11 @@ public class LoadSceneTrigger : MonoBehaviour
                 }
             }
         }
+    }
+    IEnumerator LoadDelay()
+    {
+        LoadScenes();
+        yield return null;
+        UnLoadScenes();
     }
 }

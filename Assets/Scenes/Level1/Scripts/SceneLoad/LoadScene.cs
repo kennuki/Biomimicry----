@@ -9,11 +9,12 @@ public class LoadScene : MonoBehaviour
     public static LoadScene Instance;
     public static int ActiveScene_index;
     public static bool ScenesIsLoading = false;
-    public bool SceneWillChange = false;
+    public static bool SceneWillChange = false;
     public int SceneChangeIndex = 0;
     public List<string> sceneList = new List<string>();
-    private void Awake()
+    private void Awake()    
     {
+        SceneChangeIndex = SceneManager.GetActiveScene().buildIndex;
         if (Instance != null)
         {
             Debug.Log("Destroy");

@@ -67,4 +67,19 @@ public class FlashLight : MonoBehaviour
         flashlightLight.enabled = false;
         flashlightLight.intensity = originalIntensity;
     }
+    public IEnumerator LightWeak()
+    {
+        flashlightLight.intensity = maxIntensity;
+        for (int i = 0; i < 2; i++)
+        {
+            yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
+            flashlightLight.intensity = 0.1f;
+            yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
+            flashlightLight.intensity = maxIntensity / 3;
+        }
+
+        flashlightLight.intensity = maxIntensity/3;
+        yield return new WaitForSeconds(1f);
+        flashlightLight.enabled = false;
+    }
 }
