@@ -89,7 +89,7 @@ public class Character : MonoBehaviour
                 start_active = true;
             }
         }
-
+        Debug.Log(SavePointSerial.CurrentSavePointIndex);
     }
 
 

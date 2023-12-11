@@ -17,6 +17,10 @@ public class DoorOpenUp2 : MonoBehaviour
     }
     private void Update()
     {
+        if (LoadScene.SceneWillChange)
+        {
+            director = GameObject.Find("Timeline").GetComponent<PlayableDirector>();
+        }
         if (Event.Active)
         {
             StartCoroutine(DoorOpen());

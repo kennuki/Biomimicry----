@@ -22,6 +22,15 @@ public class RotateAdjust : MonoBehaviour
         character = GameObject.Find("Character").GetComponent<Transform>();
         LeftArm = character.GetComponent<Character>().Left_Hand.transform;
     }
+    private void Update()
+    {
+        if (LoadScene.SceneWillChange)
+        {
+            character = GameObject.Find("Character").GetComponent<Transform>();
+            LeftArm = character.GetComponent<Character>().Left_Hand.transform;
+        }
+
+    }
     public void adjust()
     {
         StartCoroutine(Arm_Adjust2());
