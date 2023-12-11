@@ -62,7 +62,7 @@ public class FloorTypeInfo
             case floorType.Wood3:
                 return AudioAsset.Instance.wood_land;
             case floorType.Metal2:
-                return AudioAsset.Instance.metal_land;
+                return AudioAsset.Instance.metal2_land;
             case floorType.Tile2:
                 return AudioAsset.Instance.tile_land;
             case floorType.Stone:

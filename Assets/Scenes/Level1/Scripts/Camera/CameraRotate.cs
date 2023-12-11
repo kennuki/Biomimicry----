@@ -9,6 +9,7 @@ public class CameraRotate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OringinPos = LookPoint.transform.localPosition;
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -26,6 +27,11 @@ public class CameraRotate : MonoBehaviour
         {
             CameraRotateFunction();
         }
+        if (shake)
+        {
+            CameraShake2();
+        }
+        else LookPoint.transform.localPosition = OringinPos;
         //Debug.LogFormat("{0:F4}, {1:F4}", va2.x, va2.y);
     }
 
@@ -147,10 +153,10 @@ public class CameraRotate : MonoBehaviour
     }
 
     public AnimationCurve Curve;
+    public AnimationCurve Curve2;
     float ShakeDuration = 1.4f;
     public IEnumerator CameraShake()
     {
-        Vector3 OringinPos = LookPoint.transform.localPosition;
         float ShakeTime = 0;
         while (ShakeTime < ShakeDuration)
         {
@@ -160,5 +166,24 @@ public class CameraRotate : MonoBehaviour
             yield return null;
         }
         LookPoint.transform.localPosition = OringinPos;
+    }
+    public bool shake = false;
+    public float Amplitude = 1;
+    float ShakeTime2 = 0;
+    Vector3 OringinPos;
+    public void CameraShake2()
+    {
+        if(ShakeTime2 < ShakeDuration)
+        {
+            ShakeTime2 += Time.deltaTime;
+            float strength = Curve2.Evaluate(ShakeTime2 / ShakeDuration);
+            LookPoint.transform.localPosition = OringinPos + Random.insideUnitSphere * strength* Amplitude;
+        }
+        else
+        {
+            ShakeTime2 = 0;
+            LookPoint.transform.localPosition = OringinPos;
+        }
+
     }
 }

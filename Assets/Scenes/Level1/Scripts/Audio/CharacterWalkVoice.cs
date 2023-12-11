@@ -26,6 +26,7 @@ public class CharacterWalkVoice : MonoBehaviour
     private void Update()
     {
         AudioControl();
+        Debug.Log(DetectAllow());
         DetectAllow();
         DetectFloor();
     }
@@ -77,11 +78,13 @@ public class CharacterWalkVoice : MonoBehaviour
             audioSource.clip = clip;
             if (!audioSource.isPlaying)
             {
+                Debug.Log("fef");
                 audioSource.Play();
             }
         }
         else
         {
+            Debug.Log("fef");
             StartCoroutine(FadeVolume());
         }
     }

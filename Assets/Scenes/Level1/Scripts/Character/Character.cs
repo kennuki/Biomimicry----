@@ -33,7 +33,6 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(LoadScene.SceneWillChange);
         if (AllProhibit == true)
             EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
