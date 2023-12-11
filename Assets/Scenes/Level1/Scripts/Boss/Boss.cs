@@ -19,6 +19,7 @@ public class Boss : MonoBehaviour
     public Transform IdlePointList;
     public GameObject Light;
     public TelePortPoint telePort;
+    public AudioSource background;
     private Transform target; 
 
     private List<Transform> IdlePoint = new List<Transform>();
@@ -51,6 +52,8 @@ public class Boss : MonoBehaviour
     }
     private void Start()
     {
+        background = GameObject.Find("horrorBackground").GetComponent<AudioSource>();
+        background.Play();
         Camera2.SetActive(true);
         Light.SetActive(true);
         FindFunction();
@@ -570,6 +573,7 @@ public class Boss : MonoBehaviour
 
     public IEnumerator PlayerDead()
     {
+        background.Stop();
         cd.enabled = false;
         source.PlayOneShot(sing);
         flashlight.enabled = false;
@@ -651,6 +655,8 @@ public class Boss : MonoBehaviour
 
     private void RestartFunction()
     {
+        background = GameObject.Find("horrorBackground").GetComponent<AudioSource>();
+        background.Play();
         cd.enabled = true;
         render.SetFloat("_Alpha", 0);
         DeadPanel = GameObject.Find("UI").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;

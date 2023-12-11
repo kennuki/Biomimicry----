@@ -10,15 +10,15 @@ public class DoorDrop : EventTriggerFunction
     public PlayableDirector playableDirector;
     public PlayableAsset yourTimelineAsset;
     public string targetTrackName1, targetTrackName2;
-    private GameObject elevatorDoor,redLight;
+    private GameObject Door,redLight;
     //public TrackAsset trackToRemove;
     private void Awake()
     {
-        elevatorDoor = GameObject.Find("Gate").transform.Find("LiftGate").gameObject;
+        Door = GameObject.Find("Gate").transform.Find("LiftGate").gameObject;
+        redLight = GameObject.Find("Warning Light");
         playableDirector = GameObject.Find("Timeline").GetComponent<PlayableDirector>();
 
 
-        // ß‰®ÅEn≤æ∞£™∫track
 
     }
     public override void Enter()
@@ -32,7 +32,7 @@ public class DoorDrop : EventTriggerFunction
             {
                 if (track.name == targetTrackName1)
                 {
-                    playableDirector.SetGenericBinding(track, elevatorDoor);
+                    playableDirector.SetGenericBinding(track, Door);
                     break;
                 }
             }

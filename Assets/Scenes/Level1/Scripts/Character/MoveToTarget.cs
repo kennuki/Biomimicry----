@@ -12,6 +12,7 @@ public class MoveToTarget : MonoBehaviour
     private Transform LookPoint;
     public Character character;
     public Transform target;
+    public GameObject Limit;
     private Vector3 OriginPos;
     public float movementSpeed = 5f;
 
@@ -21,6 +22,8 @@ public class MoveToTarget : MonoBehaviour
     private Vector3 currentPosition;
     private void Awake()
     {
+        Limit = GameObject.Find("Limit");
+        Limit.SetActive(false);
         character = GameObject.Find("Character").GetComponent<Character>();
         controller = character.GetComponent<CharacterController>();
         LookPoint = character.transform.Find("CameraLookPoint");
@@ -121,6 +124,7 @@ public class MoveToTarget : MonoBehaviour
     private AudioSource source;
     public AudioSource stage;
     public AudioClip stage_light;
+    public AudioClip curtain_pull;
     private Animator Anim_Move;
     public GameObject AllLight;
     public GameObject DynamicLight1;
@@ -145,7 +149,7 @@ public class MoveToTarget : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     private float initialExposure;
     private IEnumerator StageLightSet()
-    {       
+    {
         float elapsedTime = 0f;
         float OriginIntensity1 = light1.intensity;
         float OriginIntensity2 = light2.intensity;
@@ -175,7 +179,6 @@ public class MoveToTarget : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
 
-
         elapsedTime = 0f;
         while (elapsedTime < 3.5f)
         {
@@ -191,6 +194,9 @@ public class MoveToTarget : MonoBehaviour
             {
                 Curtain1.enabled = true;
                 Curtain2.enabled = true;
+                stage.clip = curtain_pull;
+                stage.volume = 0.23f;
+                stage.Play();
                 foreach (DynamicSpotLightRoutine1 routine1 in dynamicSpotLights)
                 {
                     routine1.enabled = true;

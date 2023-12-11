@@ -7,7 +7,7 @@ public class LightShine : MonoBehaviour
     public Light Spotlight;
     public Light Pointlight;
     public Renderer Light;
-
+    public AudioSource source;
     void Start()
     {
         Spotlight_Origin_Intensity = Spotlight.intensity;
@@ -28,6 +28,7 @@ public class LightShine : MonoBehaviour
         Counter += Time.deltaTime;
         if (Counter > RandomTime)
         {
+            source.Play();
             if (RandomTime < RandomTime_Max/5)
             {
                 RandomTime = Random.Range(0.01f, RandomTime_Max/4);
