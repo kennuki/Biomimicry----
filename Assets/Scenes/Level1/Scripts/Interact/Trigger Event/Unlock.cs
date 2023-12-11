@@ -9,7 +9,6 @@ public class Unlock : MonoBehaviour
     public PosRotAdjust adjust;
     public StageRoutine routine;
     public AudioSource source;
-    public AudioSource source2;
     public AudioClip[] clip;
     private void Update()
     {
@@ -42,7 +41,6 @@ public class Unlock : MonoBehaviour
         StartCoroutine(smoothsound());
         source.Play();
         yield return new WaitForSeconds(0.5f);
-        source2.PlayOneShot(clip[2], 1f);
     }
     private IEnumerator smoothsound()
     {

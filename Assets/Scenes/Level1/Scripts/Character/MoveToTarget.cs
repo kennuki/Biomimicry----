@@ -23,7 +23,6 @@ public class MoveToTarget : MonoBehaviour
     private void Awake()
     {
         Limit = GameObject.Find("Limit");
-        Limit.SetActive(false);
         character = GameObject.Find("Character").GetComponent<Character>();
         controller = character.GetComponent<CharacterController>();
         LookPoint = character.transform.Find("CameraLookPoint");
@@ -52,16 +51,6 @@ public class MoveToTarget : MonoBehaviour
     bool finish = false;
     private void FixedUpdate()
     {
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            postProcessProfile = postProcessVolume.profile;
-            clonedProfile = Instantiate(postProcessProfile);
-            if (clonedProfile.TryGet(out colorAdjustments))
-            {
-                initialExposure = colorAdjustments.postExposure.value;
-            }
-        }
         c += Time.deltaTime;
         currentPosition = character.transform.position;
         if (Vector3.Distance(currentPosition, previousPosition) < 0.02f  && finish == false && c > 1)
@@ -94,7 +83,7 @@ public class MoveToTarget : MonoBehaviour
     }
     private IEnumerator RotateToStage()
     {
-
+        Limit.SetActive(false);
         Vector3 targetRotation = new Vector3(character.transform.eulerAngles.x, 0, character.transform.eulerAngles.z);
         Vector3 CurrentEulerAngles = character.transform.eulerAngles;
         while (true)

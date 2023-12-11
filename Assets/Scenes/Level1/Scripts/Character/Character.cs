@@ -304,16 +304,13 @@ public class Character : MonoBehaviour
         }
         else if (EnergyUse == false && ChargeCounter > ChargeDelay && Energy <= MaxEnergy)
         {
+            NoEnergy = false;
             Energy += ChargeRate * Time.deltaTime;
         }
         else if (Energy <= 0&&NoEnergy == false)
         {
             NoEnergy = true;
             StartCoroutine(flashLight.LightWeak());
-        }
-        else
-        {
-            NoEnergy = false;
         }
     }
 
