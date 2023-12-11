@@ -10,7 +10,7 @@ public class Save : MonoBehaviour
         {
             foreach (int index in SaveSceneIndex)
             {
-                if (index == LoadScene.Instance.SceneChangeIndex)
+                if (index == LoadScene.SceneChangeIndex)
                 {
                     if (index != SceneManager.GetActiveScene().buildIndex)
                         DontDestroyOnLoad(gameObject);

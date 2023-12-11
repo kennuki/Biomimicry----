@@ -64,6 +64,7 @@ public class CopyDetect : MonoBehaviour
 
             if (name == gameObject.name.ToString())
             {
+                Debug.Log(this.gameObject.name + "1234 ");
                 Destroy(gameObject);
                 CanDestroy = true;
             }
@@ -81,6 +82,7 @@ public class CopyDetect : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != SaveSceneIndex)
         {
+            Debug.Log(this.gameObject.name+"123 ");
             Destroy(this.gameObject);
         }
     }

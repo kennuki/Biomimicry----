@@ -2268,7 +2268,7 @@ Transform:
   - {fileID: 4005393331247286290}
   - {fileID: 3441818838792296556}
   m_Father: {fileID: 1101862156022691832}
-  m_RootOrder: 127
+  m_RootOrder: 125
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484512597
 GameObject:
@@ -2374,9 +2374,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517571206}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -12.551477, y: -50.990387, z: -80.42602}
-  m_LocalScale: {x: 0.0100302715, y: 0.010030273, z: 0.010030265}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 80.42804, y: -51.002388, z: -12.576477}
+  m_LocalScale: {x: 0.0100302715, y: 0.010030274, z: 0.010030266}
   m_Children:
   - {fileID: 4935161072414218401}
   - {fileID: 8580034064709145191}
@@ -2384,8 +2384,8 @@ Transform:
   - {fileID: 1096177812296618959}
   - {fileID: 5174813217827753854}
   - {fileID: 1885717112526783520}
-  m_Father: {fileID: 1101862156022691832}
-  m_RootOrder: 124
+  m_Father: {fileID: 5083747588477608092}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &528453548
 GameObject:
@@ -2570,7 +2570,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 90c35554b1360104784fe3fe9b4f6908, type: 3}
       propertyPath: m_RootOrder
-      value: 126
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 90c35554b1360104784fe3fe9b4f6908, type: 3}
       propertyPath: m_LocalScale.y
@@ -4141,6 +4141,7 @@ MonoBehaviour:
   - lighter
   flash: {fileID: 748557249}
   flash2: {fileID: 748557249}
+  LeftClick: {fileID: 0}
   cm1: {fileID: 0}
   character: {fileID: 1879004868}
   ThrowForce: {x: -30, y: 80, z: -80}
@@ -4862,7 +4863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044443042
 GameObject:
@@ -5232,7 +5233,7 @@ GameObject:
   - component: {fileID: 1236326286}
   - component: {fileID: 1236326287}
   m_Layer: 22
-  m_Name: BearDoll (1)
+  m_Name: BearDoll_anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5252,7 +5253,7 @@ Transform:
   - {fileID: 1641344763}
   - {fileID: 98896375}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -88.946, z: 0}
 --- !u!114 &1236326286
 MonoBehaviour:
@@ -7582,6 +7583,7 @@ MonoBehaviour:
   OriginV1: 5
   MaxEnergy: 100
   Energy: 100
+  flashLight: {fileID: 0}
 --- !u!95 &1879004871
 Animator:
   serializedVersion: 3
@@ -9955,8 +9957,6 @@ Transform:
   - {fileID: 543450653186970533}
   - {fileID: 1855629658}
   - {fileID: 1599342772}
-  - {fileID: 517571207}
-  - {fileID: 5083747588477608092}
   - {fileID: 580861250}
   - {fileID: 462538392}
   m_Father: {fileID: 0}
@@ -12646,7 +12646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3438092698825877540
 GameObject:
   m_ObjectHideFlags: 0
@@ -13315,7 +13315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3883771996373731180
 Transform:
   m_ObjectHideFlags: 0
@@ -14997,8 +14997,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5604388697207519782}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.02500153, y: 0.012, z: 0.0019988976}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -161.502, y: -151.578, z: 27.905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1061392940985743416}
@@ -15012,8 +15012,9 @@ Transform:
   - {fileID: 4134861978019730002}
   - {fileID: 5927005457546075412}
   - {fileID: 6679817826531133983}
-  m_Father: {fileID: 1101862156022691832}
-  m_RootOrder: 125
+  - {fileID: 517571207}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5174813217827753854
 Transform:
@@ -15142,7 +15143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5254626971255014382
 Transform:
   m_ObjectHideFlags: 0
@@ -18472,7 +18473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &7910798759410002396
 MeshFilter:
   m_ObjectHideFlags: 0

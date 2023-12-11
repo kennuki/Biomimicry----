@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Reload : MonoBehaviour
 {
-    private void Start()
-    {
-        //Debug.Log(this.gameObject.name);
-        loadScene = LoadScene.Instance;
-    }
-    private LoadScene loadScene;
+    public LoadScene loadScene;
     public void ReloadScene()
     {
         Debug.Log("Click");
