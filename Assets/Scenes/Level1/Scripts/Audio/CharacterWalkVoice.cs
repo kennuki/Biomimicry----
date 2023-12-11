@@ -66,6 +66,8 @@ public class CharacterWalkVoice : MonoBehaviour
             return false;
         if (mouse_input_x == 0 && mouse_input_y == 0)
             return false;
+        if (controller.enabled == false)
+            return false;
         return true;
     }
     private void PlayAudio()

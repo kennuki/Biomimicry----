@@ -9,19 +9,24 @@ public class WallGrow : EventTriggerFunction
     public GameObject[] Wall_disappear;
     public override void Enter()
     {
-        Trigger = false;
-        foreach(GameObject trigger in OtherTrigger)
+        if (Trigger)
         {
-            trigger.SetActive(false);
+            foreach (GameObject trigger in OtherTrigger)
+            {
+                trigger.SetActive(false);
+            }
+            foreach (GameObject wall in Wall_appear)
+            {
+                wall.SetActive(true);
+            }
+            foreach (GameObject wall in Wall_disappear)
+            {
+                wall.SetActive(false);
+            }
+            this.enabled = false;
+
         }
-        foreach (GameObject wall in Wall_appear)
-        {
-            wall.SetActive(true);
-        }
-        foreach (GameObject wall in Wall_disappear)
-        {
-            wall.SetActive(false);
-        }
-        this.enabled = false;
+
+
     }
 }

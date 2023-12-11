@@ -55,6 +55,16 @@ public class FloorTypeInfo
                 return AudioAsset.Instance.wood_land;
             case floorType.Carpet:
                 return AudioAsset.Instance.carpet_land;
+            case floorType.Wood2:
+                return AudioAsset.Instance.wood_land;
+            case floorType.Wood3:
+                return AudioAsset.Instance.wood_land;
+            case floorType.Metal2:
+                return AudioAsset.Instance.metal_land;
+            case floorType.Tile2:
+                return AudioAsset.Instance.tile_land;
+            case floorType.Stone:
+                return AudioAsset.Instance.tile_land;
             default:
                 return null;
         }

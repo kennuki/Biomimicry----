@@ -29,6 +29,7 @@ public class MoveToTarget : MonoBehaviour
         OriginPos = LookPoint.localPosition;
         GameObject.Find("Reactive").GetComponent<Reactive>().Active();
         Boss = GameObject.Find("Boss");
+        BossLight = Boss.GetComponent<BossItem>().light;
         Anim_Move = Boss.GetComponent<Animator>();
         Boss.SetActive(false);
         previousPosition = character.transform.position+Vector3.forward;
@@ -122,7 +123,8 @@ public class MoveToTarget : MonoBehaviour
     public GameObject AllLight;
     public GameObject DynamicLight1;
     public GameObject DynamicLight2;
-    private GameObject Boss;
+    public GameObject Boss;
+    public GameObject BossLight;
     public Light light1;
     public Light light2;
     public Light light3;
@@ -247,6 +249,7 @@ public class MoveToTarget : MonoBehaviour
         Anim_Move.SetTrigger("Action2");
         LookPoint.localPosition = OriginPos;
         yield return new WaitForSeconds(0.5f);
+        BossLight.SetActive(true);
         panic.State = 0;
         AllLight.SetActive(true);
         DynamicLight1.SetActive(true);

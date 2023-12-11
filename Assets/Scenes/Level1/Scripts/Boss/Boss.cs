@@ -62,6 +62,7 @@ public class Boss : MonoBehaviour
         render = Camera.main.transform.Find("Plane_boss").GetComponent<Renderer>().sharedMaterial;
         render.SetFloat("_Alpha", 0);
         cd = GetComponent<Collider>();
+        SavePointSerial.CurrentSavePointIndex = 1;
     }
 
     private void FindFunction()

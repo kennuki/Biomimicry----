@@ -28,6 +28,7 @@ public class GrabItem : MonoBehaviour
     AudioClip audioClip;
     void Start()
     {
+        ThrowItem = false;
         audioSource = audioCharacter.AudioSources[0];
         Range = GetComponent<BoxCollider>();
         StartCoroutine(GrabThrowfunction());
@@ -270,6 +271,7 @@ public class GrabItem : MonoBehaviour
                                     dis_to_target = Vector3.Distance(transform.position, Interacted_Item.transform.position);
                                     if (dis_to_target < 4f && PlayerToScan_Y < 0.8f && dis_to_target > 1f)
                                     {
+                                        GrabbedItemCd.enabled = false;
                                         Range.enabled = false;
                                         StartCoroutine(ElectricityRecover(Interacted_Item.gameObject));
                                     }
@@ -330,7 +332,7 @@ public class GrabItem : MonoBehaviour
                         FlashGet = true;
                         flash.enabled = FlashGet;
                         flash2.enabled = FlashGet;
-                        LeftClick.SetActive(true);
+                        LeftClick.SetActive(true);      
                         ItemName = null;
                         yield return new WaitForSeconds(Time.deltaTime);
                         ThrowItem = false;

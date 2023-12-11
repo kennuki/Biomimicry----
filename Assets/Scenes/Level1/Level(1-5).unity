@@ -21178,6 +21178,7 @@ GameObject:
   - component: {fileID: 223070229100334011}
   - component: {fileID: 223070229100334009}
   - component: {fileID: 223070229100334010}
+  - component: {fileID: 223070229100334012}
   m_Layer: 0
   m_Name: Chair
   m_TagString: Untagged
@@ -21252,6 +21253,8 @@ MonoBehaviour:
   AllLight: {fileID: 1919694727}
   DynamicLight1: {fileID: 7058411553620980359}
   DynamicLight2: {fileID: 1873378984471790362}
+  Boss: {fileID: 0}
+  BossLight: {fileID: 0}
   light1: {fileID: 680749796}
   light2: {fileID: 1551530058}
   light3: {fileID: 1561143491}
@@ -21313,6 +21316,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: {fileID: 223070229100334010}
   move: {fileID: 223070229100334009}
+--- !u!114 &223070229100334012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223070229100334005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 2
 --- !u!23 &224878016858286409
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34429,6 +34445,7 @@ GameObject:
   - component: {fileID: 5957958249986769071}
   - component: {fileID: 6769854729045958259}
   - component: {fileID: 8657408472521554771}
+  - component: {fileID: 8657408472521554772}
   m_Layer: 0
   m_Name: Floor01
   m_TagString: Untagged
@@ -34449,6 +34466,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 19.476418, y: 0.37446594, z: 20.406788}
   m_Center: {x: 1.919271, y: -0.017020874, z: 0.6304264}
+--- !u!114 &8657408472521554772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657408472521554770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 3
 --- !u!4 &8661835434260040032
 Transform:
   m_ObjectHideFlags: 0
