@@ -14,7 +14,8 @@ public class FloorTypeInfo
         Wood3,
         Metal2,
         Tile2,
-        Stone
+        Stone,
+        paper
     }
     public static AudioClip GetAudioClipWalk(floorType type)
     {
@@ -38,7 +39,8 @@ public class FloorTypeInfo
                 return AudioAsset.Instance.tile2_walk;
             case floorType.Stone:
                 return AudioAsset.Instance.stone_walk;
-
+            case floorType.paper:
+                return AudioAsset.Instance.paper_walk;
             default:
                 return null;
         }
@@ -65,6 +67,8 @@ public class FloorTypeInfo
                 return AudioAsset.Instance.tile_land;
             case floorType.Stone:
                 return AudioAsset.Instance.tile_land;
+            case floorType.paper:
+                return AudioAsset.Instance.paper_land;
             default:
                 return null;
         }

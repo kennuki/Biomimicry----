@@ -415,6 +415,7 @@ public class GrabItem : MonoBehaviour
 
     public Transform character;
     public Vector3 ThrowForce = new Vector3(50, 80, 160);
+    public AudioSource throw_item;
     private IEnumerator Throw()
     {
         float ForceAdjust = cm1.transform.eulerAngles.x;
@@ -464,6 +465,8 @@ public class GrabItem : MonoBehaviour
                 yield break;
             }
             yield return new WaitForSeconds(0.4f);
+            if (!grabbleItem.put)
+                throw_item.Play();
             if (GrabbedItemRb.gameObject.transform.parent != null)
                 GrabbedItem.transform.SetParent(null);
             GrabbedItem.transform.localScale = GrabbedItemScale;
@@ -483,6 +486,7 @@ public class GrabItem : MonoBehaviour
         yield return new WaitForSeconds(Time.deltaTime);
     }
 
+    public AudioSource pickup;
     private GrabbleItem grabbleItem;
     private Vector3 GrabOffset = new Vector3(0.2f, -0.01f, 0.1f);
     private Vector3 AngleOffset = new Vector3(0, 90, 180);
@@ -490,7 +494,9 @@ public class GrabItem : MonoBehaviour
     {
         AngleOffset = grabbleItem.Angle;
         GrabOffset = grabbleItem.Offset;
-        yield return new WaitForSeconds(0.32f);
+        yield return new WaitForSeconds(0.2f);
+        pickup.Play();
+        yield return new WaitForSeconds(0.12f);
         if (GrabbedItemCd != null)
         {
             GrabbedItem.GetComponent<Collider>().isTrigger = true;

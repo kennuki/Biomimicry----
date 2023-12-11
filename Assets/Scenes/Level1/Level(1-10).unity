@@ -10080,6 +10080,7 @@ GameObject:
   - component: {fileID: 9153137591849970817}
   - component: {fileID: 5695584145625064422}
   - component: {fileID: 4932957152512469314}
+  - component: {fileID: 3528772440456261584}
   m_Layer: 0
   m_Name: Flag
   m_TagString: Untagged
@@ -10087,6 +10088,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3528772440456261584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528772440456261583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 9
 --- !u!33 &3530654749241055020
 MeshFilter:
   m_ObjectHideFlags: 0
