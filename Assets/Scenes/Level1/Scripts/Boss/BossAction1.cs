@@ -10,6 +10,7 @@ public class BossAction1 : MonoBehaviour
     public AudioClip music;
     public PanicRed_PP panic;
     public Animator anim_body;
+    public AudioSource background;
     private void Start()
     {
         boss = this.GetComponent<Boss>();
@@ -36,6 +37,6 @@ public class BossAction1 : MonoBehaviour
         Character.AllProhibit = false;
         Character.ActionProhibit = false;
         Character.MoveOnly = false;
-
+        background.Play();
     }
 }

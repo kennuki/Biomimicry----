@@ -119,6 +119,8 @@ public class MoveToTarget : MonoBehaviour
 
     private AudioCharacter characteraudio;
     private AudioSource source;
+    public AudioSource stage;
+    public AudioClip stage_light;
     private Animator Anim_Move;
     public GameObject AllLight;
     public GameObject DynamicLight1;
@@ -214,8 +216,10 @@ public class MoveToTarget : MonoBehaviour
             yield return null;
         }
         FakeSpotlight1.SetActive(true);
+        stage.PlayOneShot(stage_light);
         yield return new WaitForSeconds(0.3f);
         FakeSpotlight2.SetActive(true);
+        stage.PlayOneShot(stage_light);
         yield return new WaitForSeconds(11f);
 
         Color Origin1 = light1.color;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StageRoutine : MonoBehaviour
 {
+    public AudioSource light_audio;
+    public AudioClip clip;
     public GameObject[] objectsToEnable;
     public GameObject[] objectsToEnable2;
     public float[] intensity;
@@ -64,6 +66,7 @@ public class StageRoutine : MonoBehaviour
 
 
             currentIndex++;
+            light_audio.PlayOneShot(clip);
             yield return null;
         }
     }
@@ -125,7 +128,7 @@ public class StageRoutine : MonoBehaviour
 
     private IEnumerator DynamoLightSet()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         GreenLight_Dark.SetActive(false);
         GreenLight.SetActive(true);
         BlueLight_Dark.SetActive(true);
