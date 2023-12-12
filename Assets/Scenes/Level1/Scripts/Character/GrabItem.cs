@@ -589,6 +589,7 @@ public class GrabItem : MonoBehaviour
                 Character.push = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Character.speed = OriginSpeed;
+                Debug.Log("dw3");
                 Character.EnergyUse = false;
                 Character.push = false;
                 yield return new WaitForSeconds(0.2f);
@@ -602,7 +603,7 @@ public class GrabItem : MonoBehaviour
 
                 if (dis_to_target < 1f)
                 {
-                    Character.speed = 0.5f+dis_to_target;
+                    Character.speed = dis_to_target;
                     Force = rotation_player * Vector3.forward * PushForce * (1 + (-dis_to_target))*1.4f;   
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                 }
@@ -614,6 +615,7 @@ public class GrabItem : MonoBehaviour
                     Character.push = false;
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
+                    Debug.Log("dw4");
                     Character.EnergyUse = false;
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
@@ -638,7 +640,7 @@ public class GrabItem : MonoBehaviour
                 }
                 else if (dis_to_target < 0.4f)
                 {
-                    Character.speed = 1 +1f - dis_to_target;
+                    Character.speed = 1f - dis_to_target;
                 }
                 if (dis_to_target > 1f)
                 {
@@ -648,6 +650,7 @@ public class GrabItem : MonoBehaviour
                     Character.push = false;
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
+                    Debug.Log("dw2");
                     Character.EnergyUse = false;
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
@@ -659,6 +662,7 @@ public class GrabItem : MonoBehaviour
             }
             else
             {
+                Debug.Log("dw");
                 Character.EnergyUse = false;
             }
             yield return null;

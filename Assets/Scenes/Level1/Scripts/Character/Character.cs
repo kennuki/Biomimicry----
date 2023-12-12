@@ -34,7 +34,8 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (AllProhibit == true)
+        Debug.Log(EnergyUse);
+        if (AllProhibit == true&&ActionProhibit ==true&&MoveOnly ==false)
             EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
         {
@@ -138,7 +139,7 @@ public class Character : MonoBehaviour
         {
             anim.SetInteger("Run", 0);
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Energy > 0 && dir.magnitude>0 && MoveOnly == false && SquatState == 0)
+        if (Input.GetKey(KeyCode.LeftShift) && Energy > 0 && dir.magnitude>0 && SquatState == 0)
         {
             EnergyUse = true;
             speed = Origin_speed + 1.5f;
@@ -156,8 +157,8 @@ public class Character : MonoBehaviour
         }
         else if (MoveOnly)
         {
-            EnergyUse = false;
-            speed = Origin_speed;
+            if (!push)
+                speed = Origin_speed;
         }
 
         move = dir * speed;

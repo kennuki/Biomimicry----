@@ -14,6 +14,7 @@ public class GameStart2_5 : EventTriggerFunction
             thirdView.enabled = true;
             friend.enabled = true;
             Character.LookState = 3;
+            this.enabled = false;
         }
     }
 }
