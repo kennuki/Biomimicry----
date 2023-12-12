@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    public static bool beAttacked = false;
     public static bool push = false;
     CharacterController controller;
     public GameObject LookPoint;
@@ -88,7 +89,6 @@ public class Character : MonoBehaviour
                 start_active = true;
             }
         }
-        Debug.Log(SavePointSerial.CurrentSavePointIndex);
     }
 
 

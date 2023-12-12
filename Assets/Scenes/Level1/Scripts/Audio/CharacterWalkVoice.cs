@@ -26,7 +26,6 @@ public class CharacterWalkVoice : MonoBehaviour
     private void Update()
     {
         AudioControl();
-        Debug.Log(DetectAllow());
         DetectAllow();
         DetectFloor();
     }
@@ -49,7 +48,7 @@ public class CharacterWalkVoice : MonoBehaviour
         Vector3 OriginPos = transform.position;
         RaycastHit hit;
         FloorType floor;
-        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2))
+        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2,7))
         {
             floor = hit.transform.GetComponent<FloorType>();
             if (floor != null)
@@ -78,13 +77,11 @@ public class CharacterWalkVoice : MonoBehaviour
             audioSource.clip = clip;
             if (!audioSource.isPlaying)
             {
-                Debug.Log("fef");
                 audioSource.Play();
             }
         }
         else
         {
-            Debug.Log("fef");
             StartCoroutine(FadeVolume());
         }
     }
