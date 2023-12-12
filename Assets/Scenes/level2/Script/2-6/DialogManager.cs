@@ -67,6 +67,8 @@ public class DialogManager : MonoBehaviour
             dialog.color = dialogAsset.color;
             dialog.Choose = dialogAsset.Choose;
             dialog.chooseDialog = dialogAsset.chooseDialog;
+            dialog.source = dialogAsset.source;
+            dialog.clip = dialogAsset.clip;
             StartCoroutine(dialog.startDialog()); 
         }
         else
@@ -90,6 +92,8 @@ public class DialogManager : MonoBehaviour
         dialog.color = dialogAsset.color;
         dialog.Choose = dialogAsset.Choose;
         dialog.chooseDialog = dialogAsset.chooseDialog;
+        dialog.source = dialogAsset.source;
+        dialog.clip = dialogAsset.clip;
         StartCoroutine(dialog.startDialog());
     }
 }

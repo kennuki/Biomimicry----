@@ -13,6 +13,8 @@ public class DialogAsset : MonoBehaviour
     public bool Choose = false;
     public ChooseDialogAsset chooseDialog;
     public Material dialog_frame;
+    public AudioSource source;
+    public AudioClip[] clip;
     private void Awake()
     {
         material.SetColor("_Color", new Color(1, 1, 1, 1));

@@ -62,15 +62,15 @@ Material:
     - Vector1_7ef4b019977444208157de6da19ca6d4: 0.3
     - Vector1_e1164f8979b84d18951dc3dc90d62ec8: 1
     - Vector1_e3693328ad7f4adcbb3ed1cbe1e5b6bf: 0.38
-    - _Alpha: 0.006784055
-    - _Distort_Speed: 0.06
-    - _GlowPower: 0.6
+    - _Alpha: 0
+    - _Distort_Speed: 0.12
+    - _GlowPower: 1
     - _Resolution: 10
     - _Sequence: 0
     - _Strength: 2
     - _accumulation: 0.0065209144
-    - _accumulation_x: -1.3069308
-    - _accumulation_y: -1.373461
+    - _accumulation_x: -0.9422649
+    - _accumulation_y: -0.9880883
     - _bright: 1
     - _deep: 0.954
     - _degree: 0
