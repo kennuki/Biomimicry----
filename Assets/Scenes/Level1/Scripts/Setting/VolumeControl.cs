@@ -7,10 +7,10 @@ using UnityEngine.Audio;
 public class VolumeControl : MonoBehaviour
 {
     public AudioMixer audioMixer; 
-    public Slider volumeSlider; 
-
+    public Slider volumeSlider;
     private void Start()
     {
+        volumeSlider.value = Setting.Volume;
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
 
 
@@ -21,5 +21,6 @@ public class VolumeControl : MonoBehaviour
         float mappedValue = Mathf.Lerp(-80f, 20f, value);
 
         audioMixer.SetFloat("Volume", mappedValue);
+         Setting.Volume = volumeSlider.value;
     }
 }

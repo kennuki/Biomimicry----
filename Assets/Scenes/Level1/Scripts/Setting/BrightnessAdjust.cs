@@ -18,9 +18,9 @@ public class BrightnessAdjust : MonoBehaviour
 
     private void Start()
     {
+        adjustmentSlider.value = Setting.Brightness;
         postProcessProfile = postProcessVolume.profile;
         clonedProfile = Instantiate(postProcessProfile);
-
         if (clonedProfile.TryGet(out colorAdjustments))
         {
             initialExposure = colorAdjustments.postExposure.value;
@@ -30,7 +30,6 @@ public class BrightnessAdjust : MonoBehaviour
             adjustmentSlider.onValueChanged.AddListener(AdjustPostProcessingProperties);
         }
     }
-
     private void AdjustPostProcessingProperties(float value)
     {
         colorAdjustments.postExposure.Override(initialExposure + value);
@@ -40,5 +39,6 @@ public class BrightnessAdjust : MonoBehaviour
         colorAdjustments.saturation.Override(initialSaturation - value);
 
         postProcessVolume.profile = clonedProfile;
+        Setting.Brightness = adjustmentSlider.value;
     }
 }

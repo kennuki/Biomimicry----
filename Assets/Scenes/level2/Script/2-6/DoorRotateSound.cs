@@ -25,8 +25,6 @@ public class DoorRotateSound : MonoBehaviour
             float volume = Mathf.Lerp(minVolume, maxVolume, mappedVolume);
             audioSource.volume = volume;
 
-            // 在控制台输出旋转力量（用于调试）
-            Debug.Log("Rotation Force: " + rotationForce);
 
             // 在这里添加其他处理音效的逻辑，比如播放音效
             if (!audioSource.isPlaying)

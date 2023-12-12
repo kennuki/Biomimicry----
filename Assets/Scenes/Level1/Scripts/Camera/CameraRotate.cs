@@ -9,12 +9,14 @@ public class CameraRotate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sensitivitySlider.value = Setting.Sensitive;
         OringinPos = LookPoint.transform.localPosition;
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cameratotate = true;
         StartCoroutine(LockCursorToMiddle());
+        sensitivitySlider.value = Setting.Sensitive;
         sensitivity = sensitivitySlider.value;  
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
     }
@@ -150,6 +152,7 @@ public class CameraRotate : MonoBehaviour
     void OnSensitivityChanged(float value)
     {
         sensitivity = value;
+        Setting.Sensitive = sensitivitySlider.value;
     }
 
     public AnimationCurve Curve;
