@@ -1524,7 +1524,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.1, z: 28.91132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8123408516827454990}
+  - {fileID: 1818393277}
   - {fileID: 42225893}
   - {fileID: 1698050037}
   - {fileID: 751924919}
@@ -4099,7 +4099,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &229159546
 MonoBehaviour:
@@ -6985,7 +6985,7 @@ Transform:
   - {fileID: 1366104251}
   - {fileID: 747145651}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &421097172
 GameObject:
@@ -8602,6 +8602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 568349316}
+  - component: {fileID: 568349317}
   m_Layer: 0
   m_Name: Wire
   m_TagString: Untagged
@@ -8617,8 +8618,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568349315}
   m_LocalRotation: {x: 0.00000008146036, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -53.723625, y: 190.1374, z: 422.2738}
-  m_LocalScale: {x: 4.8364825, y: 4.836485, z: 4.8364825}
+  m_LocalPosition: {x: -53.723625, y: 164.4974, z: 422.27383}
+  m_LocalScale: {x: 4.8364816, y: 4.836485, z: 4.8364816}
   m_Children:
   - {fileID: 2115872714}
   - {fileID: 23857240}
@@ -8627,9 +8628,25 @@ Transform:
   - {fileID: 927327277}
   - {fileID: 103123183}
   - {fileID: 473627079}
-  m_Father: {fileID: 8123408516827454990}
+  m_Father: {fileID: 1664140643}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &568349317
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568349315}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &582255373
 GameObject:
   m_ObjectHideFlags: 0
@@ -20949,6 +20966,37 @@ Transform:
   m_Father: {fileID: 2016051465}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664140642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664140643}
+  m_Layer: 0
+  m_Name: Rotate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664140643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664140642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 25.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 568349316}
+  m_Father: {fileID: 1818393277}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1671608452
 GameObject:
   m_ObjectHideFlags: 0
@@ -22636,6 +22684,38 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1818393276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818393277}
+  m_Layer: 0
+  m_Name: brain_main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1818393277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818393276}
+  m_LocalRotation: {x: -0.00000008146036, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.107999, y: -39.31315, z: -87.310104}
+  m_LocalScale: {x: 0.20676184, y: 0.20676173, z: 0.20676184}
+  m_Children:
+  - {fileID: 1664140643}
+  - {fileID: 8123408516827454990}
+  m_Father: {fileID: 72508806}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829787354
 GameObject:
   m_ObjectHideFlags: 0
@@ -26370,6 +26450,9 @@ GameObject:
   - component: {fileID: 3583455344259790776}
   - component: {fileID: 6867457676181000071}
   - component: {fileID: 8117807402321242820}
+  - component: {fileID: 186778151684505954}
+  - component: {fileID: 186778151684505955}
+  - component: {fileID: 186778151684505953}
   m_Layer: 0
   m_Name: BezierCurve.025
   m_TagString: Untagged
@@ -26377,6 +26460,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &186778151684505953
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186778151684505952}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.61, y: 7.89, z: 1.08}
+  m_Axis: {x: -11.8, y: 0, z: -22.41}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -6.4210916, y: 4.39834, z: 4.307419}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &186778151684505954
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186778151684505952}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &186778151684505955
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186778151684505952}
+  m_ConnectedBody: {fileID: 3836291661533707417}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -2.57, y: 9.35, z: 1.67}
+  m_Axis: {x: 1, y: 0, z: 0.87}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -2.5699952, y: 9.35001, z: 1.6699814}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &200957613832385777
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -28672,6 +28843,8 @@ GameObject:
   - component: {fileID: 847885159929510220}
   - component: {fileID: 5439381059620274975}
   - component: {fileID: 8315649126955510720}
+  - component: {fileID: 1065210101070814428}
+  - component: {fileID: 1065210101070814429}
   m_Layer: 0
   m_Name: BezierCurve.011
   m_TagString: Untagged
@@ -28679,6 +28852,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &1065210101070814428
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065210101070814426}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1065210101070814429
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065210101070814426}
+  m_ConnectedBody: {fileID: 3727955872905424069}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 2.5, y: 11.95, z: 0.92}
+  m_Axis: {x: 1, y: -3.25, z: 14.93}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 2.500006, y: 11.949994, z: 0.9199947}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &1076043942306758435
 GameObject:
   m_ObjectHideFlags: 0
@@ -28805,6 +29030,8 @@ GameObject:
   - component: {fileID: 8996529903194677213}
   - component: {fileID: 8915318925305484999}
   - component: {fileID: 3433628772288699309}
+  - component: {fileID: 1132450840643825089}
+  - component: {fileID: 1132450840643825090}
   m_Layer: 0
   m_Name: BezierCurve.020
   m_TagString: Untagged
@@ -28812,6 +29039,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &1132450840643825089
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132450840643825087}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1132450840643825090
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132450840643825087}
+  m_ConnectedBody: {fileID: 2672067680865814347}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.4, y: 11.3031, z: 1.34}
+  m_Axis: {x: 1, y: 0.42, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.39999938, y: 11.303111, z: 1.3399807}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!4 &1143743006435137701
 Transform:
   m_ObjectHideFlags: 0
@@ -30163,6 +30442,9 @@ GameObject:
   - component: {fileID: 4890384693037595621}
   - component: {fileID: 2458386746089044035}
   - component: {fileID: 8397895799809626701}
+  - component: {fileID: 1659885326220136522}
+  - component: {fileID: 1659885326220136523}
+  - component: {fileID: 1659885326220136521}
   m_Layer: 0
   m_Name: BezierCurve.021
   m_TagString: Untagged
@@ -30170,6 +30452,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &1659885326220136521
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659885326220136520}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.21, y: 8.39, z: 1.02}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.8375433, y: 6.3924603, z: 4.06809}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &1659885326220136522
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659885326220136520}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1659885326220136523
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659885326220136520}
+  m_ConnectedBody: {fileID: 1132450840643825089}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.03, y: 9.982804, z: 1.41}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.02999735, y: 9.982811, z: 1.4099811}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &1661170923281069688
 GameObject:
   m_ObjectHideFlags: 0
@@ -30181,6 +30551,8 @@ GameObject:
   - component: {fileID: 744499715181492679}
   - component: {fileID: 1097026437466957741}
   - component: {fileID: 3526963738086034516}
+  - component: {fileID: 1661170923281069690}
+  - component: {fileID: 1661170923281069691}
   m_Layer: 0
   m_Name: BezierCurve.008
   m_TagString: Untagged
@@ -30188,6 +30560,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &1661170923281069690
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661170923281069688}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1661170923281069691
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661170923281069688}
+  m_ConnectedBody: {fileID: 4610642496473618680}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.7, y: 11.41, z: -1.42}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.70000064, y: 11.410005, z: -1.4200069}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &1661605468416371233
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -30382,6 +30806,8 @@ GameObject:
   - component: {fileID: 8776265930845230170}
   - component: {fileID: 2694093391372766243}
   - component: {fileID: 4022012862890182587}
+  - component: {fileID: 1737312221785136737}
+  - component: {fileID: 1737312221785136738}
   m_Layer: 0
   m_Name: BezierCurve.028
   m_TagString: Untagged
@@ -30389,6 +30815,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &1737312221785136737
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737312221785136735}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1737312221785136738
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737312221785136735}
+  m_ConnectedBody: {fileID: 7469557582745633290}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.75, y: 11.28, z: -1.25}
+  m_Axis: {x: 1, y: 0.75, z: -4.57}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -1.7499981, y: 11.279995, z: -1.2500288}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &1740866454016878081
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -30914,6 +31392,8 @@ GameObject:
   - component: {fileID: 3206531445955355782}
   - component: {fileID: 6025328709021502983}
   - component: {fileID: 4812700029766423862}
+  - component: {fileID: 1931246462510367128}
+  - component: {fileID: 1931246462510367129}
   m_Layer: 0
   m_Name: BezierCurve.012
   m_TagString: Untagged
@@ -30921,6 +31401,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &1931246462510367128
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931246462510367126}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1931246462510367129
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931246462510367126}
+  m_ConnectedBody: {fileID: 1065210101070814428}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 2.84, y: 10.7, z: 0.71}
+  m_Axis: {x: 1, y: 0, z: 4.4}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 2.8400025, y: 10.700005, z: 0.70999223}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &1934474024650202525
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -32571,9 +33103,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8361251085752802097}
-  m_LocalRotation: {x: -0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.107995, y: -44.90999, z: -87.31008}
-  m_LocalScale: {x: 0.8246196, y: 0.82461923, z: 0.8246196}
+  m_LocalScale: {x: 0.8246197, y: 0.82461923, z: 0.8246197}
   m_Children: []
   m_Father: {fileID: 2115872714}
   m_RootOrder: 2
@@ -32646,6 +33178,8 @@ GameObject:
   - component: {fileID: 2994545830519977909}
   - component: {fileID: 7139218515945035111}
   - component: {fileID: 6394372925177701987}
+  - component: {fileID: 2672067680865814347}
+  - component: {fileID: 2672067680865814348}
   m_Layer: 0
   m_Name: BezierCurve.019
   m_TagString: Untagged
@@ -32653,6 +33187,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &2672067680865814347
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2672067680865814345}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &2672067680865814348
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2672067680865814345}
+  m_ConnectedBody: {fileID: 6365222894548505076}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.63, y: 12.175246, z: 1.35}
+  m_Axis: {x: 1, y: 0.12, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.6299999, y: 12.175243, z: 1.3499731}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &2672778406327127671
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -33446,6 +34032,8 @@ GameObject:
   - component: {fileID: 8313884652527310902}
   - component: {fileID: 1355687941301022485}
   - component: {fileID: 8766110876689069162}
+  - component: {fileID: 2898223279549705251}
+  - component: {fileID: 2898223279549705252}
   m_Layer: 0
   m_Name: BezierCurve.016
   m_TagString: Untagged
@@ -33453,6 +34041,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &2898223279549705251
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898223279549705249}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &2898223279549705252
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898223279549705249}
+  m_ConnectedBody: {fileID: 5166279140068019253}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.78, y: 11.286961, z: 1.71}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.78000283, y: 11.286957, z: 1.7099689}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!4 &2900045997953809029
 Transform:
   m_ObjectHideFlags: 0
@@ -33646,6 +34286,7 @@ GameObject:
   - component: {fileID: 2749212597649660137}
   - component: {fileID: 1182960968121691220}
   - component: {fileID: 4407288957151847030}
+  - component: {fileID: 3062391327728589980}
   m_Layer: 0
   m_Name: BezierCurve.022
   m_TagString: Untagged
@@ -33653,6 +34294,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &3062391327728589980
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062391327728589978}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!33 &3065797223876939508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -33735,6 +34392,7 @@ GameObject:
   - component: {fileID: 7075219540863344216}
   - component: {fileID: 8645584088282322992}
   - component: {fileID: 1149503058726453688}
+  - component: {fileID: 3131674174770228365}
   m_Layer: 0
   m_Name: BezierCurve.002
   m_TagString: Untagged
@@ -33742,6 +34400,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &3131674174770228365
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131674174770228364}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3147625839090288155
 GameObject:
   m_ObjectHideFlags: 0
@@ -35560,6 +36234,7 @@ GameObject:
   - component: {fileID: 7929974355414959635}
   - component: {fileID: 6894450481626964623}
   - component: {fileID: 5877592116416217717}
+  - component: {fileID: 3727955872905424069}
   m_Layer: 0
   m_Name: BezierCurve.010
   m_TagString: Untagged
@@ -35567,6 +36242,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &3727955872905424069
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727955872905424067}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &3735166737851802651
 Transform:
   m_ObjectHideFlags: 0
@@ -35687,6 +36378,9 @@ GameObject:
   - component: {fileID: 1132308861035447688}
   - component: {fileID: 1733077125207938060}
   - component: {fileID: 5756680641603149121}
+  - component: {fileID: 3816155527692575259}
+  - component: {fileID: 3816155527692575260}
+  - component: {fileID: 3816155527692575258}
   m_Layer: 0
   m_Name: BezierCurve.017
   m_TagString: Untagged
@@ -35694,6 +36388,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &3816155527692575258
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816155527692575257}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.64, y: 9.35, z: 0.97}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 2.5524814, y: 10.221221, z: 3.868686}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &3816155527692575259
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816155527692575257}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &3816155527692575260
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816155527692575257}
+  m_ConnectedBody: {fileID: 2898223279549705251}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.74, y: 10.38, z: 1.61}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.74000174, y: 10.38, z: 1.609973}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!23 &3818869603983923880
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35787,6 +36569,8 @@ GameObject:
   - component: {fileID: 741901495890711112}
   - component: {fileID: 802145743396059242}
   - component: {fileID: 2024942729409458740}
+  - component: {fileID: 3836291661533707417}
+  - component: {fileID: 3836291661533707418}
   m_Layer: 0
   m_Name: BezierCurve.024
   m_TagString: Untagged
@@ -35794,6 +36578,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &3836291661533707417
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3836291661533707415}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &3836291661533707418
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3836291661533707415}
+  m_ConnectedBody: {fileID: 5442683862736775460}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -2.07, y: 11.06, z: 1.43}
+  m_Axis: {x: 2.7, y: 0, z: 3.07}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -2.0699975, y: 11.060005, z: 1.4299842}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &3838219064886435989
 GameObject:
   m_ObjectHideFlags: 0
@@ -36337,9 +37173,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5932630345262368579}
-  m_LocalRotation: {x: -0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.107995, y: -44.90999, z: -87.31008}
-  m_LocalScale: {x: 0.8246196, y: 0.82461923, z: 0.8246196}
+  m_LocalScale: {x: 0.8246197, y: 0.82461923, z: 0.8246197}
   m_Children: []
   m_Father: {fileID: 2115872714}
   m_RootOrder: 3
@@ -37333,6 +38169,9 @@ GameObject:
   - component: {fileID: 8445905905045645570}
   - component: {fileID: 2370145603047749413}
   - component: {fileID: 7653432924243734627}
+  - component: {fileID: 4475960516739043375}
+  - component: {fileID: 4475960516739043376}
+  - component: {fileID: 4475960516739043374}
   m_Layer: 0
   m_Name: BezierCurve.009
   m_TagString: Untagged
@@ -37340,6 +38179,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &4475960516739043374
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475960516739043373}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.68, y: 9.66, z: -0.99}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 2.712016, y: 11.457576, z: -3.9482377}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &4475960516739043375
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475960516739043373}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &4475960516739043376
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475960516739043373}
+  m_ConnectedBody: {fileID: 1661170923281069690}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.67, y: 10.584582, z: -1.27}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.670001, y: 10.584576, z: -1.2700318}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &4482674943493168536
 GameObject:
   m_ObjectHideFlags: 0
@@ -37630,6 +38557,8 @@ GameObject:
   - component: {fileID: 9052753105103955844}
   - component: {fileID: 4161711149207708643}
   - component: {fileID: 2715601631631516618}
+  - component: {fileID: 4610642496473618680}
+  - component: {fileID: 4610642496473618681}
   m_Layer: 0
   m_Name: BezierCurve.007
   m_TagString: Untagged
@@ -37637,6 +38566,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &4610642496473618680
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610642496473618678}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &4610642496473618681
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610642496473618678}
+  m_ConnectedBody: {fileID: 4671698226123224658}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.7, y: 12.33, z: -1.5}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.70000064, y: 12.330007, z: -1.5000182}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!23 &4610741538467239337
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -37799,6 +38780,7 @@ GameObject:
   - component: {fileID: 7513646799890860920}
   - component: {fileID: 1546393555623416707}
   - component: {fileID: 6785360141324857301}
+  - component: {fileID: 4671698226123224658}
   m_Layer: 0
   m_Name: BezierCurve.006
   m_TagString: Untagged
@@ -37806,6 +38788,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &4671698226123224658
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671698226123224656}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4676281041700127583
 GameObject:
   m_ObjectHideFlags: 0
@@ -38006,6 +39004,8 @@ GameObject:
   - component: {fileID: 7786554164257593879}
   - component: {fileID: 8980594896163426289}
   - component: {fileID: 3971357111776062219}
+  - component: {fileID: 4769925093741189971}
+  - component: {fileID: 4769925093741189973}
   m_Layer: 0
   m_Name: BezierCurve.003
   m_TagString: Untagged
@@ -38013,6 +39013,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &4769925093741189971
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769925093741189970}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &4769925093741189973
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769925093741189970}
+  m_ConnectedBody: {fileID: 3131674174770228365}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.9, y: 12.33, z: -2.22}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.8999969, y: 12.330007, z: -2.22001}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!4 &4772825992370859038
 Transform:
   m_ObjectHideFlags: 0
@@ -38096,6 +39148,7 @@ GameObject:
   - component: {fileID: 4070276412670336378}
   - component: {fileID: 7165760034782774998}
   - component: {fileID: 2431993063228438601}
+  - component: {fileID: 4800307064401454007}
   m_Layer: 0
   m_Name: BezierCurve.014
   m_TagString: Untagged
@@ -38103,6 +39156,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &4800307064401454007
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800307064401454005}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!23 &4812700029766423862
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -38829,6 +39898,8 @@ GameObject:
   - component: {fileID: 3353677368454811870}
   - component: {fileID: 5051532005894462669}
   - component: {fileID: 2188833357005417784}
+  - component: {fileID: 5166279140068019253}
+  - component: {fileID: 5166279140068019254}
   m_Layer: 0
   m_Name: BezierCurve.015
   m_TagString: Untagged
@@ -38836,6 +39907,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &5166279140068019253
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5166279140068019251}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &5166279140068019254
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5166279140068019251}
+  m_ConnectedBody: {fileID: 4800307064401454007}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0.8, y: 12.29, z: 1.81}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.8000011, y: 12.290006, z: 1.8099834}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &5193667027851081333
 GameObject:
   m_ObjectHideFlags: 0
@@ -39214,6 +40337,8 @@ GameObject:
   - component: {fileID: 8682658084830103348}
   - component: {fileID: 7861570762878716032}
   - component: {fileID: 8109524312026948677}
+  - component: {fileID: 5442683862736775460}
+  - component: {fileID: 5442683862736775461}
   m_Layer: 0
   m_Name: BezierCurve.023
   m_TagString: Untagged
@@ -39221,6 +40346,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &5442683862736775460
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442683862736775458}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &5442683862736775461
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442683862736775458}
+  m_ConnectedBody: {fileID: 3062391327728589980}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.8, y: 12.13, z: 1.24}
+  m_Axis: {x: 1, y: 0, z: 1.53}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -1.799996, y: 12.130001, z: 1.2399851}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!4 &5442887991064381066
 Transform:
   m_ObjectHideFlags: 0
@@ -39359,6 +40536,7 @@ GameObject:
   - component: {fileID: 7609484353250425806}
   - component: {fileID: 234489884423931785}
   - component: {fileID: 5795102249453469877}
+  - component: {fileID: 5484521354308770107}
   m_Layer: 0
   m_Name: BezierCurve.026
   m_TagString: Untagged
@@ -39366,6 +40544,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &5484521354308770107
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484521354308770105}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5492338261731676604
 GameObject:
   m_ObjectHideFlags: 0
@@ -40438,6 +41632,9 @@ GameObject:
   - component: {fileID: 4062951656893779835}
   - component: {fileID: 4787721911213415926}
   - component: {fileID: 3855133063556633273}
+  - component: {fileID: 5932630345262368581}
+  - component: {fileID: 5932630345262368582}
+  - component: {fileID: 5932630345262368580}
   m_Layer: 0
   m_Name: BezierCurve.005
   m_TagString: Untagged
@@ -40445,6 +41642,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &5932630345262368580
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932630345262368579}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.63, y: 9.42, z: -1.56}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -2.5126116, y: 10.500404, z: -6.2216115}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &5932630345262368581
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932630345262368579}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &5932630345262368582
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932630345262368579}
+  m_ConnectedBody: {fileID: 8361251085752802098}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.9, y: 10.34, z: -1.84}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.89999676, y: 10.340008, z: -1.8400131}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &5943715973872795814
 GameObject:
   m_ObjectHideFlags: 0
@@ -40456,6 +41741,9 @@ GameObject:
   - component: {fileID: 7742003037030373734}
   - component: {fileID: 1753341391684057941}
   - component: {fileID: 4537706755250296802}
+  - component: {fileID: 5943715973872795816}
+  - component: {fileID: 5943715973872795817}
+  - component: {fileID: 5943715973872795815}
   m_Layer: 0
   m_Name: BezierCurve.029
   m_TagString: Untagged
@@ -40463,6 +41751,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &5943715973872795815
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943715973872795814}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.17, y: 9.11, z: -0.85}
+  m_Axis: {x: 20.6, y: 0, z: -32.5}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -4.6662655, y: 9.263977, z: -3.3899496}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &5943715973872795816
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943715973872795814}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &5943715973872795817
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943715973872795814}
+  m_ConnectedBody: {fileID: 1737312221785136737}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.86, y: 10.45, z: -1.25}
+  m_Axis: {x: 3.14, y: 0, z: -4.59}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -1.8599954, y: 10.450015, z: -1.250029}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!1 &5954189954206783245
 GameObject:
   m_ObjectHideFlags: 0
@@ -41521,6 +42897,7 @@ GameObject:
   - component: {fileID: 5798923406527058948}
   - component: {fileID: 1297184101984097262}
   - component: {fileID: 4303038725613506627}
+  - component: {fileID: 6365222894548505076}
   m_Layer: 0
   m_Name: BezierCurve.018
   m_TagString: Untagged
@@ -41528,6 +42905,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &6365222894548505076
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365222894548505074}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!23 &6394372925177701987
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43507,6 +44900,8 @@ GameObject:
   - component: {fileID: 4232371996291668601}
   - component: {fileID: 7512283189656530819}
   - component: {fileID: 1976825139063037573}
+  - component: {fileID: 7469557582745633290}
+  - component: {fileID: 7469557582745633291}
   m_Layer: 0
   m_Name: BezierCurve.027
   m_TagString: Untagged
@@ -43514,6 +44909,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &7469557582745633290
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7469557582745633288}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &7469557582745633291
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7469557582745633288}
+  m_ConnectedBody: {fileID: 5484521354308770107}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -1.58, y: 11.969665, z: -1.12}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -1.579997, y: 11.969678, z: -1.1200194}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &7470099955829949173
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -43860,6 +45307,9 @@ GameObject:
   - component: {fileID: 2781041519875729467}
   - component: {fileID: 236857943983129284}
   - component: {fileID: 8700562575161587443}
+  - component: {fileID: 7591614373596037579}
+  - component: {fileID: 7591614373596037580}
+  - component: {fileID: 7591614373596037578}
   m_Layer: 0
   m_Name: BezierCurve.013
   m_TagString: Untagged
@@ -43867,6 +45317,94 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!59 &7591614373596037578
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591614373596037577}
+  m_ConnectedBody: {fileID: 8357811870372578276}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 1.21, y: 8.83, z: 0.74}
+  m_Axis: {x: 1.36, y: 5.91, z: -49.68}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 4.825786, y: 8.147325, z: 2.9512918}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.2
+  m_ConnectedMassScale: 0.2
+--- !u!54 &7591614373596037579
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591614373596037577}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &7591614373596037580
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591614373596037577}
+  m_ConnectedBody: {fileID: 1931246462510367128}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 2.49, y: 9.33, z: 0.58}
+  m_Axis: {x: 1, y: 0, z: 15.82}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 2.4900033, y: 9.330007, z: 0.5799827}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!23 &7597729288828929155
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -44254,7 +45792,7 @@ Transform:
   m_GameObject: {fileID: 5943715973872795814}
   m_LocalRotation: {x: -0.00000008146034, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.107995, y: -44.90999, z: -87.31008}
-  m_LocalScale: {x: 0.8246196, y: 0.82461923, z: 0.8246196}
+  m_LocalScale: {x: 0.8246197, y: 0.82461923, z: 0.8246197}
   m_Children: []
   m_Father: {fileID: 473627079}
   m_RootOrder: 3
@@ -45173,13 +46711,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8357811870372578274}
-  m_LocalRotation: {x: -0.00000008146036, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.107995, y: -39.313156, z: -87.31008}
-  m_LocalScale: {x: 0.20676182, y: 0.20676173, z: 0.20676182}
-  m_Children:
-  - {fileID: 568349316}
-  m_Father: {fileID: 72508806}
-  m_RootOrder: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1818393277}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8125953193931161045
 MeshFilter:
@@ -45702,6 +47239,8 @@ GameObject:
   - component: {fileID: 8123408516827454990}
   - component: {fileID: 3445852032437695139}
   - component: {fileID: 2511580262191977119}
+  - component: {fileID: 8357811870372578276}
+  - component: {fileID: 8357811870372578275}
   m_Layer: 0
   m_Name: brain-big
   m_TagString: Untagged
@@ -45709,6 +47248,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8357811870372578275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357811870372578274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c0c6b49fbb4f346b056e1e08d7c953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 20
+  maxForce: 30
+  forceDuration: 1
+--- !u!54 &8357811870372578276
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357811870372578274}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8358762270813357448
 GameObject:
   m_ObjectHideFlags: 0
@@ -45754,6 +47324,8 @@ GameObject:
   - component: {fileID: 2643728123062190048}
   - component: {fileID: 5853809614093054670}
   - component: {fileID: 718657085418029719}
+  - component: {fileID: 8361251085752802098}
+  - component: {fileID: 8361251085752802100}
   m_Layer: 0
   m_Name: BezierCurve.004
   m_TagString: Untagged
@@ -45761,6 +47333,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &8361251085752802098
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8361251085752802097}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &8361251085752802100
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8361251085752802097}
+  m_ConnectedBody: {fileID: 4769925093741189971}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: -0.9, y: 11.27, z: -2.05}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.8999969, y: 11.270002, z: -2.0500138}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 0.05
+  m_ConnectedMassScale: 0.05
 --- !u!33 &8372822911635828884
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class FlashLight : MonoBehaviour
         flashlightLight.intensity = maxIntensity;
     }
 
-    void TurnOffFlashlight()
+    public void TurnOffFlashlight()
     {
         isFlashlightOn = false;
         flashlightLight.enabled = false;

@@ -26,6 +26,8 @@ public class Dialog : MonoBehaviour
     private float degree = 360;
     public ButtonCreator buttonCreator;
     private bool OnChoosing = false;
+    public AudioSource source;
+    public AudioClip[] clip;
     void Start()
     {
         textComponent.text = string.Empty;
@@ -51,6 +53,7 @@ public class Dialog : MonoBehaviour
         {
             if(textComponent.text == lines[index])
             {
+                source.clip = clip[Random.Range(0, clip.Length)];
                 SpeedSet(DistortSpeed[index]);
                 GlowSet(ShaderGlow[index]);
                 StopAllCoroutines();
@@ -59,12 +62,14 @@ public class Dialog : MonoBehaviour
             }
             else
             {
+                source.clip = clip[Random.Range(0, clip.Length)];
                 StopAllCoroutines();
                 StartCoroutine(DialogFrameFadeout(0.5f));
                 StartCoroutine(FpsFadein(1, -20));
                 ShaderToTarget();
                 textComponent.text = lines[index];
                 typing = false;
+                source.Stop();
             }
         }
         if (Input.GetMouseButtonDown(1))
@@ -78,6 +83,9 @@ public class Dialog : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         CameraRotate.cameratotate = true;
+        Character.AllProhibit = false;
+        Character.ActionProhibit = false;
+        source.Stop();
         OnChoosing = false;
         DialogFrame.SetActive(false);
         gameObject.SetActive(false);
@@ -98,12 +106,18 @@ public class Dialog : MonoBehaviour
         StartCoroutine(ColorFadein(color[index]));
         StartCoroutine(AlphaFadein(Alpha[index]));
         StartCoroutine(GlowPowerFadein(ShaderGlow[index],rate));
+        source.clip = clip[Random.Range(0, clip.Length)];
         foreach(char c in lines[index].ToCharArray())
         {
+            if (!source.isPlaying)
+            {
+                source.Play();
+            }
             typing = true;
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        source.Stop();
         typing = false;
         StartCoroutine(DialogFrameFadeout(0.5f));
         StartCoroutine(FpsFadein(1, -20));
@@ -138,6 +152,8 @@ public class Dialog : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
+        Character.AllProhibit = true;
+        Character.ActionProhibit = true;
         buttonCreator.dialogAssets = chooseDialog.dialogAsset;
         buttonCreator.option = chooseDialog.ChooseDialog;
         buttonCreator.CreateButtonList();

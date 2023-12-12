@@ -15,6 +15,7 @@ public class UsePeep : MonoBehaviour
     private bool isUsed = false;
     private bool isProcessing = false;
     public static bool DeviceUse= false;
+    public FlashLight flashLight;
     private void Awake()
     {
         material = Black.GetComponent<Renderer>().material;
@@ -43,6 +44,7 @@ public class UsePeep : MonoBehaviour
     }
     private void ActiveDevice()
     {
+        flashLight.TurnOffFlashlight();
         Black.SetActive(true);
         DeviceUse = true;
         StartCoroutine(Fadein());

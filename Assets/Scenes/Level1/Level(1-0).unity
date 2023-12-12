@@ -592,7 +592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45122435}
   m_LocalRotation: {x: 0, y: -0.9785661, z: 0, w: 0.20593296}
-  m_LocalPosition: {x: -46, y: 0, z: -43}
+  m_LocalPosition: {x: -6.39, y: 0.68, z: 30.908}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 561635711}
@@ -24082,8 +24082,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: 0.83761543, z: -0, w: 0.5462605}
-  m_LocalPosition: {x: -5.269474, y: -0.12100005, z: -2.018032}
+  m_LocalRotation: {x: -0, y: 0.8375623, z: -0, w: 0.5463419}
+  m_LocalPosition: {x: 34.340492, y: 0.5589999, z: 71.8899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 307967160}
@@ -27340,6 +27340,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  Curve2:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shake: 0
+  Amplitude: 1
 --- !u!114 &1358561009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27382,8 +27390,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358561007}
-  m_LocalRotation: {x: -0, y: 0.83761543, z: -0, w: 0.5462605}
-  m_LocalPosition: {x: -4.911667, y: -0.12100005, z: -2.175682}
+  m_LocalRotation: {x: -0, y: 0.8375623, z: -0, w: 0.5463419}
+  m_LocalPosition: {x: 34.698334, y: 0.5589999, z: 71.732315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1557896487}
@@ -34923,6 +34931,7 @@ MonoBehaviour:
   paper_walk: {fileID: 8300000, guid: e4cfd0ccabbc0c04381a1c78e5a044b8, type: 3}
   tile_land: {fileID: 8300000, guid: 44f23f16f11fb4748ae98a380bb47fc8, type: 3}
   metal_land: {fileID: 8300000, guid: fad5e41838f93b840aa4afcc1867b8d4, type: 3}
+  metal2_land: {fileID: 0}
   carpet_land: {fileID: 8300000, guid: c2fce5ca912ca3543b956ef4de740ce3, type: 3}
   wood_land: {fileID: 8300000, guid: 49eaaab0c9419014db2e5c86edb79d3a, type: 3}
   paper_land: {fileID: 8300000, guid: a1d49e98bbf1a83408e7a88ccf7f3e0f, type: 3}
