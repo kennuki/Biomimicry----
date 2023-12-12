@@ -16,6 +16,8 @@ public class UsePeep : MonoBehaviour
     private bool isProcessing = false;
     public static bool DeviceUse= false;
     public FlashLight flashLight;
+    public AudioSource source;
+    public AudioClip[] clip;
     private void Awake()
     {
         material = Black.GetComponent<Renderer>().material;
@@ -44,6 +46,8 @@ public class UsePeep : MonoBehaviour
     }
     private void ActiveDevice()
     {
+        source.clip = clip[0];
+        source.Play();
         flashLight.TurnOffFlashlight();
         Black.SetActive(true);
         DeviceUse = true;
@@ -74,9 +78,13 @@ public class UsePeep : MonoBehaviour
         isUsed = true;
         isProcessing = false;
         StartCoroutine(manager.SetDialog());
+        source.clip = clip[1];
+        source.Play();
     }
     private IEnumerator Fadeout()
     {
+        source.clip = clip[2];
+        source.Play();
         isProcessing = true;
         for (float i = TargetAlpha; i > 0; i -= Time.deltaTime)
         {
