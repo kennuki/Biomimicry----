@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CloseTabControll : MonoBehaviour
 {
     public GameObject panel;
+    public GameObject dead_panel;
     public CameraRotate CameraRotate;
     private bool isPanelOpen = false;
     public Button closeButton;
@@ -27,9 +28,13 @@ public class CloseTabControll : MonoBehaviour
 
     private void Update()
     {
-        if (panel.activeSelf)
+        if (panelActive())
         {
             canvas.sortingOrder = 10;
+        }
+        else
+        {
+            canvas.sortingOrder = -5;
         }
         if (Input.GetKeyDown(KeyCode.Escape) && panel != null)
         {
@@ -44,7 +49,7 @@ public class CloseTabControll : MonoBehaviour
             }
             else 
             {
-                canvas.sortingOrder = -5;
+                Debug.Log("ed");
                 Time.timeScale = 1;
                 CameraRotate.cameratotate = true;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -52,7 +57,14 @@ public class CloseTabControll : MonoBehaviour
             }
         }
     }
-
+    private bool panelActive()
+    {
+        if (panel.activeSelf)
+            return true;
+        if (dead_panel.activeSelf)
+            return true;
+        return false;
+    }
     public void ClosePanel()
     {
         if (panel != null)
