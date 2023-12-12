@@ -15175,7 +15175,7 @@ MonoBehaviour:
     - {fileID: 1095763868}
     MaxTeleportTimes: 
   background: {fileID: 1297896832}
-  DeadPanel: {fileID: 0}
+  DeadPanel: {fileID: 1662447532}
   Hand: {fileID: 1186225613}
   Hand_L: {fileID: 302881517}
   Dead_Camera: {fileID: 97575513}

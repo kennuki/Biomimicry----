@@ -62,6 +62,7 @@ public class DollSwoop : MonoBehaviour
             yield return null;
         }
         black.color = new Color(0, 0, 0, 1);
+        deadPanel.SetActive(true);
         yield break;
     }
     private IEnumerator playerDead(float time)
