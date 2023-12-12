@@ -36,6 +36,5 @@ public class BossAction1 : MonoBehaviour
         Character.AllProhibit = false;
         Character.ActionProhibit = false;
         Character.MoveOnly = false;
-
     }
 }

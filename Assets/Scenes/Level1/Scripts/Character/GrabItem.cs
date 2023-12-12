@@ -796,8 +796,12 @@ public class GrabItem : MonoBehaviour
     }
     private void ReloadScene()
     {
-        flash.enabled = FlashGet;
-        flash2.enabled = FlashGet;
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            flash.enabled = FlashGet;
+            flash2.enabled = FlashGet;
+        }
+
     }
     private IEnumerator PushLookAngleAdjust()
     {

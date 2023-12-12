@@ -9,13 +9,23 @@ public class LandSound : MonoBehaviour
     public AudioSource audioSource;
     public CharacterController controller;
     private AudioClip clip;
-
+    float initialVolume;
     float c = 0;
     int playstate = 0;
+    float maxspeed;
     private void Update()
     {
+        if (!controller.isGrounded)
+        {
+            if (controller.velocity.y > maxspeed)
+                maxspeed = controller.velocity.y;
+        }
         UngroundTime();
         landsound();
+    }
+    private void Start()
+    {
+        initialVolume = audioSource.volume;
     }
     private void UngroundTime()
     {
@@ -70,6 +80,8 @@ public class LandSound : MonoBehaviour
         {
             if (!audioSource.isPlaying)
             {
+                audioSource.volume = 0.02f+initialVolume * maxspeed * 0.2f;
+                maxspeed = 0;
                 audioSource.clip = clip;
                 audioSource.Play();
                 playstate = 2;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    public AudioSource source;
     [SerializeField]
     SoldierAttack soldierAttack;
     [SerializeField]
@@ -27,6 +28,7 @@ public class Soldier : MonoBehaviour
     }
     private void Awake()
     {
+        source = GetComponent<AudioSource>();
         OriginSpeed = speedRate;
         soldierAttack.speedchange += onSpeedChange;
         soldierStop.speedchange += onSpeedChange;
@@ -40,7 +42,7 @@ public class Soldier : MonoBehaviour
     {
         TargetPos();
         Move();
-        anim.SetFloat("Anim_Speed", Anim_Speed);
+        anim.SetFloat("Anim_Speed", Anim_Speed* FloorControll.WorldSpeed);
     }
 
     int state = 0;
@@ -92,7 +94,12 @@ public class Soldier : MonoBehaviour
         else
             speedRate = e.Speed;
     }
+    public void walkVoice()
+    {
+        source.Play();
+    }
 }
+
 public class StatuEventArgs : System.EventArgs
 {
     public float Speed;

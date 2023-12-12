@@ -26,15 +26,17 @@ public class SoldierAttack : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        Debug.Log("00");
-        Character.ActionProhibit = true;
-        Character.AllProhibit = true;
-        CameraRotate.cameratotate = false;
+        AudioSoldier.instance.source.PlayOneShot(AudioSoldier.instance.lockPlayer,0.6f);
+        StartCoroutine(CharacterLimit());
         Stop();
         yield return null;
         anim.enabled = false;
         this.transform.LookAt(player);
-        StartCoroutine(CharacterLookBoss(3));
+        this.transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        if (Character.beAttacked == false)
+        {
+            StartCoroutine(CharacterLookBoss(3));
+        }
         yield return new WaitForSeconds(0.5f);
         anim.enabled = true;
         anim.SetInteger("Attack", 1);
@@ -42,22 +44,41 @@ public class SoldierAttack : MonoBehaviour
         Third_Camera.Priority = 11;
         int layerIndex = LayerMask.NameToLayer("Character");
         Camera.main.cullingMask |= 1 << layerIndex;
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(0.4f);
+        AudioSoldier.instance.source.PlayOneShot(AudioSoldier.instance.walk, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        AudioSoldier.instance.source.PlayOneShot(AudioSoldier.instance.walk, 0.3f);
+        yield return new WaitForSeconds(1f);
+        AudioSoldier.instance.source.PlayOneShot(AudioSoldier.instance.swing, 1f);
+        yield return new WaitForSeconds(0.2f);
+        AudioSoldier.instance.source.PlayOneShot(AudioSoldier.instance.kill, 0.7f);
         dismember.dismember();
         yield return new WaitForSeconds(1f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CameraRotate.cameratotate = false;
+        Character.beAttacked = false;
         DeadPanel.ActivePanel = true;
         Third_Camera.Priority = 9;
         Camera.main.cullingMask &= ~(1 << layerIndex);
         Time.timeScale = 0;
     }
 
-
+    private IEnumerator CharacterLimit()
+    {
+        while (true)
+        {
+            Character.ActionProhibit = true;
+            Character.AllProhibit = true;
+            Character.MoveOnly = false;
+            CameraRotate.cameratotate = false;
+            yield return null;
+        }
+    }
    
     private IEnumerator CharacterLookBoss(float time)
     {
+        Character.beAttacked = true;
         Vector3 AngleDifference = new Vector3(0, transform.eulerAngles.y - player.eulerAngles.y, 0);
         Quaternion TargetRotation = player.rotation * Quaternion.Euler(0, DeadAngle.y + AngleDifference.y, DeadAngle.z);
         //Cm1.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.y = 0;
@@ -79,6 +100,7 @@ public class SoldierAttack : MonoBehaviour
             if(anim.enabled == true)
             {
                 StartCoroutine(Attack());
+                other.enabled = false;
                 Destroy(cd);
             }
 

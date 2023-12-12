@@ -48,7 +48,7 @@ public class CharacterWalkVoice : MonoBehaviour
         Vector3 OriginPos = transform.position;
         RaycastHit hit;
         FloorType floor;
-        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2))
+        if (Physics.Raycast(OriginPos, Vector3.down, out hit, 2,7))
         {
             floor = hit.transform.GetComponent<FloorType>();
             if (floor != null)

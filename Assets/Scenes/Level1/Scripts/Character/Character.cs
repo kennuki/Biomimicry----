@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    public static bool beAttacked = false;
     public static bool push = false;
     CharacterController controller;
     public GameObject LookPoint;
@@ -33,7 +34,6 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(LoadScene.SceneWillChange);
         if (AllProhibit == true)
             EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
@@ -89,7 +89,6 @@ public class Character : MonoBehaviour
                 start_active = true;
             }
         }
-        Debug.Log(SavePointSerial.CurrentSavePointIndex);
     }
 
 
@@ -304,16 +303,13 @@ public class Character : MonoBehaviour
         }
         else if (EnergyUse == false && ChargeCounter > ChargeDelay && Energy <= MaxEnergy)
         {
+            NoEnergy = false;
             Energy += ChargeRate * Time.deltaTime;
         }
         else if (Energy <= 0&&NoEnergy == false)
         {
             NoEnergy = true;
             StartCoroutine(flashLight.LightWeak());
-        }
-        else
-        {
-            NoEnergy = false;
         }
     }
 

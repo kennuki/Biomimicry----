@@ -5,6 +5,7 @@ using UnityEngine;
 public class FloorControll : MonoBehaviour
 {
     public static FloorControll Instance;
+    public static float WorldSpeed = 1;
     public enum FloorColor
     {
         red,green,blue,white

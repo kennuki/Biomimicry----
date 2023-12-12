@@ -48,6 +48,7 @@ public class FloorShine : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log(other.name);
         if (other.name == "Run")
         {
             floorControll.floor = floorColor;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ElevatorDoorOpen : MonoBehaviour
 {
+    public AudioClip[] clip;
     public AudioSource source;
     private EventActive Event;
     private void Start()
@@ -14,6 +15,8 @@ public class ElevatorDoorOpen : MonoBehaviour
     {
         if (Event.Active)
         {
+            source.clip = clip[0];
+            source.Play();
             StartCoroutine(DoorOpen());
             Event.Active = false;
         }
@@ -21,6 +24,7 @@ public class ElevatorDoorOpen : MonoBehaviour
     public Animator anim;
     private IEnumerator DoorOpen()
     {
+        source.clip = clip[1];
         source.Play();
         yield return new WaitForSeconds(0.2f);
         anim.enabled = true;

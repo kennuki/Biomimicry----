@@ -23,6 +23,7 @@ public class AudioAsset : MonoBehaviour
 
     public AudioClip tile_land;
     public AudioClip metal_land;
+    public AudioClip metal2_land;
     public AudioClip carpet_land;
     public AudioClip wood_land;
     public AudioClip paper_land;

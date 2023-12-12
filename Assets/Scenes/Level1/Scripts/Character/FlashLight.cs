@@ -8,7 +8,8 @@ public class FlashLight : MonoBehaviour
     public float maxIntensity = 1f;
     public float flickerTime = 0.2f;
     public int flashtimes = 1;
-
+    public AudioSource source;
+    public AudioClip[] clip;
     private bool isFlashlightOn = false;
     private float originalIntensity;
 
@@ -24,10 +25,12 @@ public class FlashLight : MonoBehaviour
         {
             if (!isFlashlightOn)
             {
+                source.PlayOneShot(clip[0]);
                 StartCoroutine(TurnOnFlashlight(flashtimes));
             }
             else
             {
+                source.PlayOneShot(clip[1]);
                 TurnOffFlashlight();
             }       
         }
@@ -69,13 +72,18 @@ public class FlashLight : MonoBehaviour
     }
     public IEnumerator LightWeak()
     {
+        if (!isFlashlightOn)
+            yield break;
+        source.clip = clip[2];
+        Debug.Log(Character.NoEnergy);
+        source.PlayOneShot(clip[2]);
         flashlightLight.intensity = maxIntensity;
         for (int i = 0; i < 2; i++)
         {
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
             flashlightLight.intensity = 0.1f;
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
-            flashlightLight.intensity = maxIntensity / 3;
+            flashlightLight.intensity = maxIntensity / 2;
         }
 
         flashlightLight.intensity = maxIntensity/3;

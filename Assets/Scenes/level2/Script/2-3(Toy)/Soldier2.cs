@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Soldier2 : MonoBehaviour
 {
+    public AudioSource source;
     [SerializeField]
     SoldierAttack soldierAttack;
     [SerializeField]
@@ -19,6 +20,7 @@ public class Soldier2 : MonoBehaviour
     private Transform player;
     private void Awake()
     {
+        source = GetComponent<AudioSource>();
         OriginSpeed = speed;
         player = GameObject.Find("Character").transform;
         soldierAttack.speedchange += onSpeedChange;
@@ -30,14 +32,13 @@ public class Soldier2 : MonoBehaviour
     {
         if (target != null)
         {
-            Soldier.transform.RotateAround(target.position, Vector3.up, speed*orbitSpeed * Time.deltaTime);
+            Soldier.transform.RotateAround(target.position, Vector3.up, speed*orbitSpeed * Time.deltaTime*FloorControll.WorldSpeed);
         }
         Vector3 moveDirection = PosCache - Soldier.transform.position;
         if (moveDirection != Vector3.zero)
         {
             if(speed == 0)
             {
-                Soldier.transform.LookAt(player);
             }
             else
             {
@@ -46,7 +47,11 @@ public class Soldier2 : MonoBehaviour
             }
 
         }
-        anim.SetFloat("Anim_Speed", Anim_Speed);
+        anim.SetFloat("Anim_Speed", Anim_Speed* FloorControll.WorldSpeed);
+    }
+    public void walkVoice()
+    {
+        source.Play();
     }
     public void onSpeedChange(object sender, StatuEventArgs e)
     {
