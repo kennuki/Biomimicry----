@@ -589,7 +589,6 @@ public class GrabItem : MonoBehaviour
                 Character.push = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Character.speed = OriginSpeed;
-                Debug.Log("dw3");
                 Character.EnergyUse = false;
                 Character.push = false;
                 yield return new WaitForSeconds(0.2f);
@@ -615,7 +614,6 @@ public class GrabItem : MonoBehaviour
                     Character.push = false;
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
-                    Debug.Log("dw4");
                     Character.EnergyUse = false;
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;
@@ -650,7 +648,7 @@ public class GrabItem : MonoBehaviour
                     Character.push = false;
                     Character.AllProhibit = false;
                     Character.MoveOnly = false;
-                    Debug.Log("dw2");
+
                     Character.EnergyUse = false;
                     Character.speed = OriginSpeed;
                     CameraRotate.cameratotate = true;

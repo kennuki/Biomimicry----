@@ -62,7 +62,10 @@ public class DollSwoop : MonoBehaviour
             yield return null;
         }
         black.color = new Color(0, 0, 0, 1);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         deadPanel.SetActive(true);
+        yield return null;
         yield break;
     }
     private IEnumerator playerDead(float time)
@@ -96,6 +99,7 @@ public class DollSwoop : MonoBehaviour
         StartCoroutine(PlayerSpeed());
         yield return new WaitForSeconds(1.5f);
         StartCoroutine(ChangeAudioPropertiesOverTime(2f, 0.8f, 1.55f));
+        source_door.Stop();
         source_door.PlayOneShot(clip[2],0.08f);
         JointSpring jointSpring = joint.spring;
         jointSpring.spring = 1.5f;
@@ -105,6 +109,7 @@ public class DollSwoop : MonoBehaviour
         source_door.Stop();
         source_door.PlayOneShot(clip[3],0.35f);
         yield return new WaitForSeconds(1f);
+        
         StartCoroutine(playerDead(0.2f));
 
     }
