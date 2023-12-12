@@ -7,7 +7,7 @@ public class CloseGame : MonoBehaviour
     public void Quit()
     {
 
-
+        Debug.Log("de");
         Application.Quit();
 
     }

@@ -104,6 +104,7 @@ public class UsePeep : MonoBehaviour
         isUsed = false;
         isProcessing = false;
         Black.SetActive(false);
+        source.Stop();
     }
     private bool UseDevice()
     {
