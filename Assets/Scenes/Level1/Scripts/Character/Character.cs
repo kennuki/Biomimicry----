@@ -79,6 +79,7 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(SquatState);
         EnergyUseFunction();
         if (!start_active)
         {

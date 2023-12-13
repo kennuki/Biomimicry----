@@ -8512,7 +8512,7 @@ MonoBehaviour:
   CM1: {fileID: 759798383}
   LookPoint: {fileID: 1539935516}
   PlayerRotate: {fileID: 418670966}
-  sensitivitySlider: {fileID: 0}
+  sensitivitySlider: {fileID: 1823840316}
   CmRotateRate: 1
   va2: {x: 0, y: 0}
   Curve:
@@ -8744,7 +8744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8803f6bb15b99544fa3a3ca526bb43dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadScene: {fileID: 0}
+  loadScene: {fileID: 388940326}
 --- !u!114 &837452901
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,9 +12,13 @@ public class panelFade : MonoBehaviour
     {
         if (panel.activeSelf == true && targetActive == false)
         {
+            foreach (Image image in image)
+            {
+                image.color = new Color(1, 1, 1, 0);
+            }
             StartCoroutine(Fadein());
         }
-        if (panel.activeSelf == false&&targetActive == true)
+        else if (panel.activeSelf == false&&targetActive == true)
         {
             StopAllCoroutines();
             foreach(Image image in image)
@@ -26,12 +30,13 @@ public class panelFade : MonoBehaviour
     }
     private IEnumerator Fadein()
     {
+        yield return null;
         targetActive = true;
         for(float i = 0; i <= 2; i+=Time.deltaTime)
         {
             foreach (Image image in image)
             {
-                image.color = new Color(1, 1, 1, i);
+                image.color = new Color(1, 1, 1, i/2);
             }
             yield return null;
         }

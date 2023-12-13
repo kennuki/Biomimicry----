@@ -1170,6 +1170,10 @@ MonoBehaviour:
   yourTimelineAsset: {fileID: 11400000, guid: 9a0dad9c24cc260489a551b249d827a6, type: 2}
   targetTrackName1: Animation Track_door
   targetTrackName2: Animation Track_light
+  TrackName1: BossActive
+  TrackName2: BossActive2
+  TrackName3: BossAnime
+  TrackName4: BossAnime2
 --- !u!65 &287665428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2736,7 +2740,6 @@ GameObject:
   - component: {fileID: 1125385734}
   - component: {fileID: 1125385736}
   - component: {fileID: 1125385735}
-  - component: {fileID: 1125385737}
   m_Layer: 0
   m_Name: l2_light.003 (1)
   m_TagString: Untagged
@@ -2810,22 +2813,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125385733}
   m_Mesh: {fileID: 3222948948983103875, guid: 351e5bcce692a3a47b9ad4f020377885, type: 3}
---- !u!114 &1125385737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125385733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfa262d929fc3c4bbf89793486874e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spotlight: {fileID: 955448033}
-  Pointlight: {fileID: 1172140812}
-  Light: {fileID: 1125385735}
-  RandomTime_Max: 4
 --- !u!1 &1135274971
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,7 +3534,6 @@ GameObject:
   - component: {fileID: 1351175164}
   - component: {fileID: 1351175166}
   - component: {fileID: 1351175165}
-  - component: {fileID: 1351175167}
   m_Layer: 0
   m_Name: l2_light.003 (2)
   m_TagString: Untagged
@@ -3621,22 +3607,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351175163}
   m_Mesh: {fileID: 3222948948983103875, guid: 351e5bcce692a3a47b9ad4f020377885, type: 3}
---- !u!114 &1351175167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351175163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfa262d929fc3c4bbf89793486874e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spotlight: {fileID: 1253724490}
-  Pointlight: {fileID: 986568156}
-  Light: {fileID: 1351175165}
-  RandomTime_Max: 4
 --- !u!1 &1354166528
 GameObject:
   m_ObjectHideFlags: 0
@@ -4473,7 +4443,6 @@ GameObject:
   - component: {fileID: 1629819506}
   - component: {fileID: 1629819508}
   - component: {fileID: 1629819507}
-  - component: {fileID: 1629819509}
   m_Layer: 0
   m_Name: l2_light.003
   m_TagString: Untagged
@@ -4547,22 +4516,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629819505}
   m_Mesh: {fileID: 3222948948983103875, guid: 351e5bcce692a3a47b9ad4f020377885, type: 3}
---- !u!114 &1629819509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629819505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfa262d929fc3c4bbf89793486874e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spotlight: {fileID: 1524509268}
-  Pointlight: {fileID: 1091057136}
-  Light: {fileID: 1629819507}
-  RandomTime_Max: 4
 --- !u!1 &1675800763
 GameObject:
   m_ObjectHideFlags: 0

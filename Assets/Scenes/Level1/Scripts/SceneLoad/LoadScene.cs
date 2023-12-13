@@ -27,10 +27,14 @@ public class LoadScene : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            SavePointSerial.CurrentSavePointIndex = 5;
-            StartCoroutine(ReLoadSceneDelay(2));
+            transform.Find("LoadNext").gameObject.SetActive(true);
         }
-        
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SavePointSerial.CurrentSavePointIndex = 6;
+            StartCoroutine(ReLoadSceneDelay2(13));
+        }
+
     }
     public IEnumerator ReLoadSceneDelay(int scene)
     {

@@ -693,7 +693,7 @@ public class GrabItem : MonoBehaviour
             {
                 if (dis_to_target - 0.3f < i * 4)
                 {
-                    Force = transform.rotation  * Vector3.forward * PushForce * 10f;
+                    Force = transform.rotation  * Vector3.forward * PushForce * 15f;
                     PushedItemRb.AddForce(new Vector3(Force.x, 0, Force.z));
                     PushTypeInfo.pushType type = PushedItem.gameObject.GetComponent<PushType>().pushType;
                     audioClip = PushTypeInfo.GetAudioClip(type);

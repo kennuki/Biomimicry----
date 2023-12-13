@@ -33,7 +33,6 @@ public class CameraRotate : MonoBehaviour
         {
             CameraShake2();
         }
-        else LookPoint.transform.localPosition = OringinPos;
         //Debug.LogFormat("{0:F4}, {1:F4}", va2.x, va2.y);
     }
 

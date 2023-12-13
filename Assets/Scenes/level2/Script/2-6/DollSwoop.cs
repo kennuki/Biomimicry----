@@ -64,6 +64,7 @@ public class DollSwoop : MonoBehaviour
         black.color = new Color(0, 0, 0, 1);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        CameraRotate.cameratotate = false;
         deadPanel.SetActive(true);
         yield return null;
         yield break;
@@ -84,7 +85,6 @@ public class DollSwoop : MonoBehaviour
         panic.quick = false;
         panic.State = 0;
         panic.speed = 1;
-        yield return new WaitForSeconds(0.2f);
         StartCoroutine(dollswoop());
         //source.PlayOneShot(clip[1],0.1f);
     }
