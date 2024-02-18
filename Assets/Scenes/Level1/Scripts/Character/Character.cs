@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
         CdHeight = controller.height;
         OffsetLookpointToCharacterY = LookPoint.transform.localPosition.y;
         OffsetLookpointToCharacterX = LookPoint.transform.localPosition.x;
+        Origin_speed = Originspeed;
         speed = Origin_speed;
         CenterOrigin = controller.center.y;
         float a;
@@ -32,6 +33,9 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(LoadScene.SceneWillChange);
+        if (AllProhibit == true)
+            EnergyUse = false;
         if (Input.GetKeyDown(KeyCode.Y))
         {
             if (LookState == 3)
@@ -94,7 +98,8 @@ public class Character : MonoBehaviour
     #region MoveFunction
     public static int LookState = 1;
     public static float speed = 3f;
-    public static float Origin_speed = 3f;
+    public float Origin_speed = 3f;
+    public static float Originspeed = 3f;
     public static float imaangle;
     Vector3 move;
     private Vector3 dir;
@@ -150,6 +155,12 @@ public class Character : MonoBehaviour
             else
                 speed = Origin_speed;
         }
+        else if (MoveOnly)
+        {
+            EnergyUse = false;
+            speed = Origin_speed;
+        }
+
         move = dir * speed;
     }
     #endregion
@@ -281,6 +292,7 @@ public class Character : MonoBehaviour
     public float Energy = 100;
     private float ChargeDelay = 1f;
     float ChargeCounter = 0;
+    public FlashLight flashLight;
     private void EnergyUseFunction()
     {
 
@@ -294,9 +306,10 @@ public class Character : MonoBehaviour
         {
             Energy += ChargeRate * Time.deltaTime;
         }
-        else if (Energy <= 0)
+        else if (Energy <= 0&&NoEnergy == false)
         {
             NoEnergy = true;
+            StartCoroutine(flashLight.LightWeak());
         }
         else
         {

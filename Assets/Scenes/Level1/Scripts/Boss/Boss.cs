@@ -62,6 +62,7 @@ public class Boss : MonoBehaviour
         render = Camera.main.transform.Find("Plane_boss").GetComponent<Renderer>().sharedMaterial;
         render.SetFloat("_Alpha", 0);
         cd = GetComponent<Collider>();
+        SavePointSerial.CurrentSavePointIndex = 1;
     }
 
     private void FindFunction()
@@ -137,11 +138,11 @@ public class Boss : MonoBehaviour
                 //Debug.Log(A);
 
         }
-        if (LoadScene.Instance.SceneWillChange)
+        if (LoadScene.SceneWillChange)
         {
             SceneChange = true;
         }
-        if(!LoadScene.Instance.SceneWillChange&& SceneChange)
+        if(!LoadScene.SceneWillChange&& SceneChange)
         {
             RestartFunction();
             SceneChange = false;
@@ -653,7 +654,7 @@ public class Boss : MonoBehaviour
         cd.enabled = true;
         render.SetFloat("_Alpha", 0);
         DeadPanel = GameObject.Find("UI").transform.Find("CanvasSetting").transform.Find("DeadPanel").gameObject;
-        Debug.Log(LoadScene.Instance.SceneWillChange);
+        Debug.Log(LoadScene.SceneWillChange);
         Dead_Camera.Priority = 0;
         target = GameObject.Find("Character").transform;
         LastPos = target.position;

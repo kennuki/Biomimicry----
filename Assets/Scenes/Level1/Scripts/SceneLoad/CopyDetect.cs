@@ -21,12 +21,13 @@ public class CopyDetect : MonoBehaviour
     private void Awake()
     {
         _NoDestroyList = GameObject.Find("NoDestroyList").GetComponent<NoDestroyList>();
-        DestoryCheck();
+        if (LoadScene.SceneWillChange == true)
+            DestoryCheck();
     }
     private void Update()
     {      
         Save();
-        if(LoadScene.Instance.SceneWillChange == true)
+        if(LoadScene.SceneWillChange == true)
         {
             if(Register == true)
             {
@@ -45,7 +46,7 @@ public class CopyDetect : MonoBehaviour
                 DontDestroyOnLoad(gameObject);
             }
         }
-        if(SavePointIndex <= SavePointSerial.CurrentSavePointIndex && Register == false)
+        if(SavePointIndex <= SavePointSerial.CurrentSavePointIndex && Register == false&& LoadScene.SceneWillChange == true)
         {
             Register = true;
             StartCoroutine(DelaySaveRegister());
@@ -63,6 +64,7 @@ public class CopyDetect : MonoBehaviour
 
             if (name == gameObject.name.ToString())
             {
+                Debug.Log(this.gameObject.name + "1234 ");
                 Destroy(gameObject);
                 CanDestroy = true;
             }
@@ -80,6 +82,7 @@ public class CopyDetect : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != SaveSceneIndex)
         {
+            Debug.Log(this.gameObject.name+"123 ");
             Destroy(this.gameObject);
         }
     }
@@ -99,6 +102,7 @@ public class CopyDetect : MonoBehaviour
 
             if (name == gameObject.name.ToString())
             {
+                Debug.Log(this.gameObject.name);
                 Destroy(gameObject);
             }
         }

@@ -24,6 +24,7 @@ public class PanicRed_PP : MonoBehaviour
     public int State = 3;
     public float RunTime = 2f;
     public bool quick = false;
+    public float speed = 3;
     private float counter = 0;
 
     private Vignette vignette;
@@ -37,7 +38,7 @@ public class PanicRed_PP : MonoBehaviour
         OriginVolume = CharacterAudioSourse.volume;
         OriginVolumeLoop = CharacterAudioSourseLoop.volume;
 
-        NoiseAffect = Camera.main.gameObject.transform.Find("Plane").gameObject;
+        NoiseAffect = Camera.main.gameObject.transform.Find("Plane").gameObject;    
         render = NoiseAffect.GetComponent<Renderer>();
 
         postProcessVolume = gameObject.GetComponent<Volume>();
@@ -88,11 +89,11 @@ public class PanicRed_PP : MonoBehaviour
             vignette.active = true;
             if (quick)
             {
-                counter += Time.deltaTime*1;
+                counter += Time.deltaTime;
             }
             else
             {
-                counter += Time.deltaTime;
+                counter += Time.deltaTime * speed;
             }
             NoiseAffect.SetActive(true);
             if (render.material.GetFloat("_Strength") < NoiseMaxStrenth)
@@ -168,7 +169,6 @@ public class PanicRed_PP : MonoBehaviour
             {
                 if (NoiseDelayCount <= 0)
                 {
-                    
                     PlayAudioClip(Random.Range(0.1f, 0.5f), 0);
                     NoiseDelayCount = Random.Range(0, 1.5f);
                 }

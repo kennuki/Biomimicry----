@@ -23,11 +23,11 @@ public class DialogManager : MonoBehaviour
         DisMin = 200;
         Target = null;
         Vector3 playerForward = playerTransform.rotation * -Vector3.right;
+        Debug.DrawRay(playerTransform.position, playerForward);
         foreach (Transform target in TargetDoll)
         {
             Vector3 toTarget = (target.position - playerTransform.position).normalized;
             float angleInDegrees = Vector3.Angle(toTarget, playerForward);
-            Debug.Log(angleInDegrees+" "+target.name);
             if (angleInDegrees < 90)
             {
                 float Dis = Vector3.Distance(playerTransform.position, target.position);
@@ -47,7 +47,13 @@ public class DialogManager : MonoBehaviour
         yield return null;
         if (target != null)
         {
-            dialogAsset = target.GetComponent<DialogAsset>();
+            DialogList dialogList= target.GetComponent<DialogList>();
+            if(dialogList ==null)
+                dialogAsset = target.GetComponent<DialogAsset>();
+            else if (dialogList.rightTarget.inRoom == false)
+                dialogAsset = dialogList.dialogAssets[0];
+            else
+                dialogAsset = dialogList.dialogAssets[1];
             dialog_obj.SetActive(true);
             Renderer frame_material = dialogFrame_vfx.GetComponent<Renderer>();
             frame_material.material = dialogAsset.dialog_frame;

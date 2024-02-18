@@ -6,11 +6,11 @@ public class Save : MonoBehaviour
     public int[] SaveSceneIndex;
     private void FixedUpdate()
     {
-        if (LoadScene.Instance.SceneWillChange)
+        if (LoadScene.SceneWillChange)
         {
             foreach (int index in SaveSceneIndex)
             {
-                if (index == LoadScene.Instance.SceneChangeIndex)
+                if (index == LoadScene.SceneChangeIndex)
                 {
                     if (index != SceneManager.GetActiveScene().buildIndex)
                         DontDestroyOnLoad(gameObject);

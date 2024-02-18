@@ -70,7 +70,7 @@ public class ScanScreen : MonoBehaviour
                     source.Play();
                 }
             }
-            if (counter_Scan < 1.2f && counter_Scan > 1.1f)
+            if (counter_Scan < 1f && counter_Scan > 0.9f)
             {
                 source.volume = 0.1f;
                 source.clip = BB;

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: 02e4910d1af22ce45a3dfe74ac047ef1, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 77068ac67157a51468aca7b63863376e, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: ffc8cb91937a85a45a92c3ee408a04d4, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -397,6 +397,8 @@ MonoBehaviour:
   min_volume: 0
   speed_to_volume_rate: 0.08
   augularSpeed_to_volume_rate: 0.2
+  threshold_angular: 0.3
+  threshold_velocity: 0.4
 --- !u!1 &74901110
 GameObject:
   m_ObjectHideFlags: 0
@@ -7396,7 +7398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661164197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.82}
+  m_LocalPosition: {x: 6.86, y: 0, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490114848}
@@ -7414,7 +7416,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3ffec0e3504d77a43b73e0b7d82859bc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.67
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -20098,7 +20100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorType: 0
+  floorType: 8
 --- !u!222 &2018213679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23872,6 +23874,7 @@ GameObject:
   - component: {fileID: 2305761182294604819}
   - component: {fileID: 6769372326643466601}
   - component: {fileID: 2630037773417128491}
+  - component: {fileID: 2630037773417128492}
   m_Layer: 0
   m_Name: Handwheel
   m_TagString: Untagged
@@ -23893,6 +23896,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6433741507972571908, guid: 78b2f85e8c210a040aecb6fe00cb755b, type: 3}
+--- !u!114 &2630037773417128492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630037773417128490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 1
 --- !u!4 &2651157375988581316
 Transform:
   m_ObjectHideFlags: 0
@@ -25021,7 +25037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorType: 0
+  floorType: 7
 --- !u!222 &3847117811720647392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25111,7 +25127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorType: 0
+  floorType: 8
 --- !u!222 &3981487344458835247
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25193,6 +25209,7 @@ GameObject:
   - component: {fileID: 6014998245184849214}
   - component: {fileID: 4094836188588779875}
   - component: {fileID: 4094836188588779874}
+  - component: {fileID: 4094836188588779876}
   m_Layer: 0
   m_Name: Pipe10
   m_TagString: Untagged
@@ -25228,6 +25245,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4243742986961067775, guid: 78b2f85e8c210a040aecb6fe00cb755b, type: 3}
+--- !u!114 &4094836188588779876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094836188588779873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 6
 --- !u!23 &4110413761692945468
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26483,7 +26513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorType: 0
+  floorType: 8
 --- !u!222 &5038265794961089362
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27150,7 +27180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorType: 0
+  floorType: 8
 --- !u!222 &5619020403229515968
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27189,6 +27219,7 @@ GameObject:
   - component: {fileID: 3036071173503353027}
   - component: {fileID: 5087523610324743176}
   - component: {fileID: 5638328845681622435}
+  - component: {fileID: 5638328845681622436}
   m_Layer: 0
   m_Name: Pipe05
   m_TagString: Untagged
@@ -27210,6 +27241,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5025416199348364094, guid: 78b2f85e8c210a040aecb6fe00cb755b, type: 3}
+--- !u!114 &5638328845681622436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638328845681622434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 6
 --- !u!23 &5705067819329558289
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28816,6 +28860,7 @@ GameObject:
   - component: {fileID: 5337760363082579892}
   - component: {fileID: 7007965583141212104}
   - component: {fileID: 7391566402407094899}
+  - component: {fileID: 7391566402407094900}
   m_Layer: 0
   m_Name: Pipe03
   m_TagString: Untagged
@@ -28837,6 +28882,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5176727766772202193, guid: 78b2f85e8c210a040aecb6fe00cb755b, type: 3}
+--- !u!114 &7391566402407094900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391566402407094898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 6
 --- !u!4 &7403526565901302574
 Transform:
   m_ObjectHideFlags: 0
@@ -29850,6 +29908,7 @@ GameObject:
   - component: {fileID: 2518476331368439606}
   - component: {fileID: 8407460704048461945}
   - component: {fileID: 8318351177974967180}
+  - component: {fileID: 8318351177974967181}
   m_Layer: 0
   m_Name: Pipe09
   m_TagString: Untagged
@@ -29871,6 +29930,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5294902858953467439, guid: 78b2f85e8c210a040aecb6fe00cb755b, type: 3}
+--- !u!114 &8318351177974967181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318351177974967179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84ccb48f4ce364f98d22ac27588bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorType: 6
 --- !u!33 &8330852947383546698
 MeshFilter:
   m_ObjectHideFlags: 0

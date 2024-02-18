@@ -29,6 +29,7 @@ public class MoveToTarget : MonoBehaviour
         OriginPos = LookPoint.localPosition;
         GameObject.Find("Reactive").GetComponent<Reactive>().Active();
         Boss = GameObject.Find("Boss");
+        BossLight = Boss.GetComponent<BossItem>().light;
         Anim_Move = Boss.GetComponent<Animator>();
         Boss.SetActive(false);
         previousPosition = character.transform.position+Vector3.forward;
@@ -122,7 +123,8 @@ public class MoveToTarget : MonoBehaviour
     public GameObject AllLight;
     public GameObject DynamicLight1;
     public GameObject DynamicLight2;
-    private GameObject Boss;
+    public GameObject Boss;
+    public GameObject BossLight;
     public Light light1;
     public Light light2;
     public Light light3;
@@ -205,10 +207,10 @@ public class MoveToTarget : MonoBehaviour
             }
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / 3;
-            light1.intensity = Mathf.Lerp(4, 8, t);
-            light2.intensity = Mathf.Lerp(4, 8, t);
-            light6.intensity = Mathf.Lerp(1, 6f, t);
-            light7.intensity = Mathf.Lerp(1, 8f, t);
+            light1.intensity = Mathf.Lerp(4, 7, t);
+            light2.intensity = Mathf.Lerp(4, 7, t);
+            light6.intensity = Mathf.Lerp(1, 5f, t);
+            light7.intensity = Mathf.Lerp(1, 7f, t);
             yield return null;
         }
         FakeSpotlight1.SetActive(true);
@@ -247,6 +249,7 @@ public class MoveToTarget : MonoBehaviour
         Anim_Move.SetTrigger("Action2");
         LookPoint.localPosition = OriginPos;
         yield return new WaitForSeconds(0.5f);
+        BossLight.SetActive(true);
         panic.State = 0;
         AllLight.SetActive(true);
         DynamicLight1.SetActive(true);

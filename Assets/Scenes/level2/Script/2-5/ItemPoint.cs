@@ -17,6 +17,15 @@ public class ItemPoint : MonoBehaviour
     }
     private void Update()
     {
+        if (itemType == AllArea.ItemType.player)
+        {
+            if (item == null)
+            {
+                item = GameObject.Find("Character").transform;
+                Get_Min_Point();
+            }
+
+        }
         GetNearPoint();
         Calculate_NowPoint();
         Output_NowPoint();

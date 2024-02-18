@@ -6,23 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public static LoadScene Instance;
     public static int ActiveScene_index;
     public static bool ScenesIsLoading = false;
-    public bool SceneWillChange = false;
-    public int SceneChangeIndex = 0;
+    public static bool SceneWillChange = true;
+    public static int SceneChangeIndex = 0;
     public List<string> sceneList = new List<string>();
-    private void Awake()
+    private void Awake()    
     {
-        if (Instance != null)
+        if (SceneWillChange)
         {
-            Debug.Log("Destroy");
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-            SceneWillChange = false;
+            StartCoroutine(ScenesChangeDone());
         }
     }
     void Update()
@@ -91,5 +84,10 @@ public class LoadScene : MonoBehaviour
             if (sceneName == SceneManager.GetActiveScene().name)
                 sceneList.Remove(sceneName);
         }
+    }
+    private IEnumerator ScenesChangeDone()
+    {
+        yield return new WaitForSeconds(1);
+        SceneWillChange = false;
     }
 }
