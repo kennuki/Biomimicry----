@@ -6,6 +6,7 @@ public class FlashLight : MonoBehaviour
 {
     public Light flashlightLight;
     public float maxIntensity = 1f;
+    public float scrollSpeed = 0.5f;
     public float flickerTime = 0.2f;
     public int flashtimes = 1;
     public AudioSource source;
@@ -45,30 +46,38 @@ public class FlashLight : MonoBehaviour
             OriginRotation.x -= 360;
         }
         transform.eulerAngles = Vector3.Lerp(OriginRotation, TargetRotation, 0.2f);
+        if (Mathf.Abs(Input.mouseScrollDelta.y) > 0)
+            Scroll();
     }
 
-    
+    private float lightPercent = 0.7f;
+    private void Scroll()
+    {
+        lightPercent += Input.mouseScrollDelta.y * scrollSpeed;
+        lightPercent = Mathf.Clamp(lightPercent, 0.13f, 1);
+        flashlightLight.intensity = maxIntensity * lightPercent;
+    }
     IEnumerator TurnOnFlashlight(int times)
     {
         isFlashlightOn = true;
         flashlightLight.enabled = true;
-        flashlightLight.intensity = maxIntensity;
+        flashlightLight.intensity = maxIntensity* lightPercent;
         for(int i =0; i < flashtimes; i++)
         {
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
-            flashlightLight.intensity = 0.2f;
+            flashlightLight.intensity = 0.2f* lightPercent;
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
-            flashlightLight.intensity = maxIntensity;
+            flashlightLight.intensity = maxIntensity* lightPercent;
         }
              
-        flashlightLight.intensity = maxIntensity;
+        flashlightLight.intensity = maxIntensity* lightPercent;
     }
 
     public void TurnOffFlashlight()
     {
         isFlashlightOn = false;
         flashlightLight.enabled = false;
-        flashlightLight.intensity = originalIntensity;
+        flashlightLight.intensity = originalIntensity* lightPercent;
     }
     public IEnumerator LightWeak()
     {
@@ -77,16 +86,16 @@ public class FlashLight : MonoBehaviour
         source.clip = clip[2];
         Debug.Log(Character.NoEnergy);
         source.PlayOneShot(clip[2]);
-        flashlightLight.intensity = maxIntensity;
+        flashlightLight.intensity = maxIntensity* lightPercent;
         for (int i = 0; i < 2; i++)
         {
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
-            flashlightLight.intensity = 0.1f;
+            flashlightLight.intensity = 0.1f* lightPercent;
             yield return new WaitForSeconds(Random.Range(flickerTime - 0.01f, flickerTime + 0.01f));
-            flashlightLight.intensity = maxIntensity / 2;
+            flashlightLight.intensity = maxIntensity / 2* lightPercent;
         }
 
-        flashlightLight.intensity = maxIntensity/3;
+        flashlightLight.intensity = maxIntensity/3* lightPercent;
         yield return new WaitForSeconds(1f);
         flashlightLight.enabled = false;
     }

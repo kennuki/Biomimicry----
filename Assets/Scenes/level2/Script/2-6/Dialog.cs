@@ -163,7 +163,7 @@ public class Dialog : MonoBehaviour
     private void ShaderToTarget()
     {
         var colorModule = particle.colorOverLifetime;
-        colorModule.color = new ParticleSystem.MinMaxGradient(color[index]);
+        colorModule.color = new ParticleSystem.MinMaxGradient(new Color(1,1,1,1));
         textComponent.color = default_color;
         target_material.SetFloat("_Distort_Speed", DistortSpeed[index]);
         target_material.SetColor("_Color", color[index]);
@@ -219,7 +219,8 @@ public class Dialog : MonoBehaviour
         for (float i = 0; i < 1; i += Time.deltaTime*2)
         {
             Color target_color = start_ + difference * i;
-            Color target_color2 = target_color;
+            //Color target_color2 = target_color;
+            Color target_color2 = new Color(1,1, 1, 0.95f);
             var colorModule = particle.colorOverLifetime;
             if (index == 0)
                 target_color2.a = i;
@@ -263,7 +264,7 @@ public class Dialog : MonoBehaviour
             target_color = start_ + difference * (start_alpha-i);
             target_color.a = i;
             var colorModule = particle.colorOverLifetime;
-            colorModule.color = new ParticleSystem.MinMaxGradient(target_color);
+            colorModule.color = new ParticleSystem.MinMaxGradient(new Color(1, 1, 1, i));
             yield return null;
         }
     }
