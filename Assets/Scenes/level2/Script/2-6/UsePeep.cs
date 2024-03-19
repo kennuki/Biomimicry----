@@ -11,6 +11,7 @@ public class UsePeep : MonoBehaviour
     private float TargetAlpha = 0.85f;
     public PeepMaterial peepMaterial;
     public bool useAllow = false;
+    public int deviceUseAllowIndex = 7;
     private Material[] peep_materials;
     private bool isUsed = false;
     private bool isProcessing = false;
@@ -26,9 +27,14 @@ public class UsePeep : MonoBehaviour
         {
             renderer.SetFloat("_Alpha", 0);
         }
+        if(SavePointSerial.CurrentSavePointIndex == deviceUseAllowIndex)
+        {
+            useAllow = true;
+        }
     }
     private void Update()
     {
+
         if (UseDevice() && !isProcessing)
         {
             if (!isUsed)

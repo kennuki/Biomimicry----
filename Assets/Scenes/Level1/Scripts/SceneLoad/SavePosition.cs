@@ -20,6 +20,10 @@ public class SavePosition : MonoBehaviour
     {
         LoadPostion();       
     }
+    private void Update()
+    {
+        Debug.Log(SavePointSerial.CurrentSavePointIndex);
+    }
     private void LoadPostion()
     {
         controller = this.GetComponent<CharacterController>();
