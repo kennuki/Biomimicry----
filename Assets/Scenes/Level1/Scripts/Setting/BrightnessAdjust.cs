@@ -29,10 +29,11 @@ public class BrightnessAdjust : MonoBehaviour
 
             adjustmentSlider.onValueChanged.AddListener(AdjustPostProcessingProperties);
         }
+        AdjustPostProcessingProperties(adjustmentSlider.value);
     }
     private void AdjustPostProcessingProperties(float value)
     {
-        colorAdjustments.postExposure.Override(initialExposure + value);
+        colorAdjustments.postExposure.Override(initialExposure + value*1.5f);
 
         colorAdjustments.contrast.Override(initialContrast - value*1.5f);
 

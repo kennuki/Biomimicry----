@@ -83,21 +83,9 @@ public class GrabItem : MonoBehaviour
             {
                 if (other.tag != "PostProcess")
                     NoObstacle = true;
-                if (other.name == "Cake")
-                {
-                    Debug.Log(hit.transform.gameObject.name);
-                    Debug.Log(Vector3.Distance(hit.point, transform.position));
-                    Debug.Log(Vector3.Distance(triggerPoint, transform.position));
-                }
             }
             else
             {
-                if(other.name == "Cake")
-                {
-                    Debug.Log(hit.transform.gameObject.name);
-                    Debug.Log(Vector3.Distance(hit.point, transform.position));
-                    Debug.Log(Vector3.Distance(other.transform.position, transform.position));
-                }
                 NoObstacle = false;
             }
         }
@@ -197,6 +185,11 @@ public class GrabItem : MonoBehaviour
                             StartCoroutine(EventActive(other.gameObject,1.5f,"Press", 1.5f, 0.5f, true,true,true));
 
                         }
+                    }
+                    else if (other.tag == "Poster")
+                    {
+                        Debug.Log(">>");
+                        other.GetComponent<EventActive>().Active = true;
                     }
                 }
 

@@ -17,6 +17,7 @@ TagManager:
   - BrushOff
   - PostProcess
   - Boss
+  - Poster
   layers:
   - Default
   - TransparentFX

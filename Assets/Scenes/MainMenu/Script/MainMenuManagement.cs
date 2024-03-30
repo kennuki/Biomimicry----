@@ -20,10 +20,31 @@ public class MainMenuManagement : MonoBehaviour
     private void Awake()
     {
         _loading_bar_gameobject.SetActive(false);
+        if (closeButton != null)
+        {
+            closeButton.onClick.AddListener(ClosePanel);
+        }
+        if (panel != null)
+        {
+
+            panel.SetActive(isPanelOpen);
+        }
     }
     private void Update()
     {
-        
+        if (panelActive())
+        {
+            settingCanvas.sortingOrder = 10;
+        }
+        else
+        {
+            settingCanvas.sortingOrder = -5;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && panel != null)
+        {
+            isPanelOpen = !isPanelOpen;
+            panel.SetActive(isPanelOpen);
+        }
     }
     public void StarGame()
     {
@@ -57,5 +78,37 @@ public class MainMenuManagement : MonoBehaviour
                 yield return null;
             }
         }
+    }
+    public GameObject panel;
+    private bool isPanelOpen = false;
+    public Canvas settingCanvas;
+    public Button closeButton;
+    private bool panelActive()
+    {
+        if (panel.activeSelf)
+            return true;
+        return false;
+    }
+    public void ClosePanel()
+    {
+        if (panel != null)
+        {
+            isPanelOpen = false;
+            panel.SetActive(false);
+            settingCanvas.sortingOrder = -5;
+        }
+    }
+    public void OpenPanel()
+    {
+        if (panel != null)
+        {
+            isPanelOpen = true;
+            panel.SetActive(true);
+            settingCanvas.sortingOrder = 10;
+        }
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
