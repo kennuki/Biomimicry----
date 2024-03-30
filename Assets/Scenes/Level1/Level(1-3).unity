@@ -81324,6 +81324,7 @@ GameObject:
   - component: {fileID: 1450258051}
   - component: {fileID: 1450258052}
   - component: {fileID: 1450258050}
+  - component: {fileID: 1450258053}
   m_Layer: 0
   m_Name: Room_S
   m_TagString: Untagged
@@ -81349,13 +81350,13 @@ Light:
   m_InnerSpotAngle: 80.20308
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.97
+    m_NormalBias: 1.1
+    m_NearPlane: 1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -81422,6 +81423,19 @@ MonoBehaviour:
   OffDistance: 20
   DecreasingRate: 1
   Off_On: 1
+--- !u!114 &1450258053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450258049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1 &1453937758
 GameObject:
   m_ObjectHideFlags: 0
@@ -110704,7 +110718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993724004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: -0.191, z: 29.708}
+  m_LocalPosition: {x: 0.74, y: 0.215, z: 30.057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1314413989}
