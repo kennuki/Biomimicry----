@@ -15,16 +15,16 @@ public class BoxVoice : MonoBehaviour
     float Volume = 1;
     private void Update()
     {
-        Volume = Mathf.Clamp(rb.velocity.magnitude / 20,0f,1f);
+        Volume = Mathf.Clamp(rb.velocity.magnitude / 10f,0f,1f);
     }
     private void OnCollisionStay(Collision collision)
     {
         int clip = Random.Range(0, 3);
-
         if (rb.velocity.magnitude > 0.3f)
         {
             if (!audioSource.isPlaying)
             {
+                Debug.Log(Volume);
                 audioSource.PlayOneShot(audioClips[clip], Volume);
             }
         }

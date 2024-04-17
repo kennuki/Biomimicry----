@@ -737,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &239455681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 780da3b001e56d640901c3f88ffc4131, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52982edaa6282064dafb80d7ee76e3c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3011,7 +3011,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.0498047, y: -63.800003}
   m_SizeDelta: {x: 86.90003, y: 479.09988}
   m_Pivot: {x: 0.5, y: 0}
@@ -11443,7 +11443,7 @@ MonoBehaviour:
   isGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 0.738
+  weight: 0.5
   sharedProfile: {fileID: 11400000, guid: 3d17e6d3a501ec545896eca1ab3cc46e, type: 2}
 --- !u!1 &1327881767
 GameObject:
@@ -11678,7 +11678,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -64.28, y: -0.0000038146973}
   m_SizeDelta: {x: 20, y: -0.0000044107437}
   m_Pivot: {x: 0, y: 0.18}
@@ -12129,6 +12129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlightLight: {fileID: 1556179822}
   maxIntensity: 18
+  scrollSpeed: 0.5
   flickerTime: 0.02
   flashtimes: 2
   source: {fileID: 1556179824}
@@ -20450,7 +20451,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.01
+  m_Intensity: 0.05
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

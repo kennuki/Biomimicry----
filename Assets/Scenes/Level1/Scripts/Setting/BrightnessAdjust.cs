@@ -33,9 +33,9 @@ public class BrightnessAdjust : MonoBehaviour
     }
     private void AdjustPostProcessingProperties(float value)
     {
-        colorAdjustments.postExposure.Override(initialExposure + value*1.5f);
+        colorAdjustments.postExposure.Override(initialExposure + value*2.5f);
 
-        colorAdjustments.contrast.Override(initialContrast - value*1.5f);
+        colorAdjustments.contrast.Override(initialContrast - value*2.5f);
 
         colorAdjustments.saturation.Override(initialSaturation - value);
 

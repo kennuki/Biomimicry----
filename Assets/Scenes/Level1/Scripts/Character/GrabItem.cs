@@ -692,7 +692,7 @@ public class GrabItem : MonoBehaviour
                     audioClip = PushTypeInfo.GetAudioClip(type);
                     if(audioSource.isPlaying == false)
                     {
-                        audioSource.PlayOneShot(audioClip);
+                        audioSource.PlayOneShot(audioClip,0.3f);
                     }
 
                 }
